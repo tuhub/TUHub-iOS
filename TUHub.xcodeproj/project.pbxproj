@@ -34,7 +34,6 @@
 		7D6D6D901E70CBDA00BF121A /* UILabel+NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D8F1E70CBDA00BF121A /* UILabel+NSAttributedString.swift */; };
 		7D6D6D921E70CDD900BF121A /* NewsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D911E70CDD900BF121A /* NewsHeaderTableViewCell.swift */; };
 		7D6D6D941E70CDE500BF121A /* NewsBodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D931E70CDE500BF121A /* NewsBodyTableViewCell.swift */; };
-		7D6D6D961E70EDBC00BF121A /* ScaleAspectFitImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D951E70EDBC00BF121A /* ScaleAspectFitImageView.swift */; };
 		941AB645B5C3E0E6A95DACF2 /* Pods_TUHubUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCC307919AD5A4C9159AAE0 /* Pods_TUHubUITests.framework */; };
 		A1D62E3F439C1C254F6FC729 /* Pods_TUHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9048A865C973948E6821D8E5 /* Pods_TUHub.framework */; };
 /* End PBXBuildFile section */
@@ -92,7 +91,6 @@
 		7D6D6D8F1E70CBDA00BF121A /* UILabel+NSAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+NSAttributedString.swift"; sourceTree = "<group>"; };
 		7D6D6D911E70CDD900BF121A /* NewsHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		7D6D6D931E70CDE500BF121A /* NewsBodyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsBodyTableViewCell.swift; sourceTree = "<group>"; };
-		7D6D6D951E70EDBC00BF121A /* ScaleAspectFitImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleAspectFitImageView.swift; sourceTree = "<group>"; };
 		806A184B82A477E750A74ED6 /* Pods-TUHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHub.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHub/Pods-TUHub.release.xcconfig"; sourceTree = "<group>"; };
 		9048A865C973948E6821D8E5 /* Pods_TUHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TUHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCC307919AD5A4C9159AAE0 /* Pods_TUHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TUHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -240,7 +238,6 @@
 				7D6D6D871E70B33F00BF121A /* NewsItemTableViewCell.swift */,
 				7D6D6D911E70CDD900BF121A /* NewsHeaderTableViewCell.swift */,
 				7D6D6D931E70CDE500BF121A /* NewsBodyTableViewCell.swift */,
-				7D6D6D951E70EDBC00BF121A /* ScaleAspectFitImageView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -566,7 +563,6 @@
 				7D6D6D8D1E70C77700BF121A /* NewsDetailTableViewController.swift in Sources */,
 				7D6D6D7E1E6FD6CB00BF121A /* UIColor+Cherry.swift in Sources */,
 				7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */,
-				7D6D6D961E70EDBC00BF121A /* ScaleAspectFitImageView.swift in Sources */,
 				7D043A971E5FB8080003A853 /* CourseMeeting.swift in Sources */,
 				7D6D6D921E70CDD900BF121A /* NewsHeaderTableViewCell.swift in Sources */,
 				7D6D6D821E708EE400BF121A /* NewsTableViewController.swift in Sources */,

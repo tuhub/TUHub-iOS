@@ -10,21 +10,21 @@ import UIKit
 
 class NewsBodyTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var newsImageView: ScaleAspectFitImageView!
+    weak var tableView: UITableView?
+    
+    @IBOutlet weak var newsImageView: UIImageView!
     @IBOutlet weak var contentLabel: UILabel!
     
-    func setUp(from newsItem: NewsItem) {
-        if let image = newsItem.image {
-            newsImageView.image = image
-        } else {
-//            newsItem.downloadImage({ (_, image, error) in
-//                DispatchQueue.main.async {
-//                    self.newsImageView.image
-//                }
-//            })
-        }
-        
+    func updateImageView(with image: UIImage?) {
+        newsImageView.image = image
+        tableView?.beginUpdates()
+        tableView?.endUpdates()
+    }
+    
+    func setUp(with newsItem: NewsItem, from tableView: UITableView) {
+        newsImageView.image = newsItem.image
         contentLabel.setAttrbitedText(fromHTMLString: newsItem.contentHTML)
+        self.tableView = tableView
     }
     
 }

@@ -11,6 +11,7 @@ import UIKit
 class NewsTableViewController: UITableViewController {
 
     fileprivate var newsItems: [NewsItem]?
+    fileprivate weak var newsDetailVC: NewsDetailTableViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +28,9 @@ class NewsTableViewController: UITableViewController {
                 self.newsItems = newsItems
                 self.tableView.reloadData()
             }
-            if let error = error {
-                // TODO: Handle error
-            }
+//            if let error = error {
+//                // TODO: Handle error
+//            }
         }
     }
 
@@ -74,10 +75,16 @@ class NewsTableViewController: UITableViewController {
                                 cell.thumbnailImageView.image = image
                             }
                         }
+                        
+                        // If showing the news detail view controller, tell it to update to show image
+                        if self.newsDetailVC?.newsItem?.entryID == entryID {
+                            self.newsDetailVC?.newsBodyCell?.updateImageView(with: image)
+                        }
+                        
                     }
-                    if let error = error {
-                        // TODO: Handle error
-                    }
+//                    if let error = error {
+//                        // TODO: Handle error
+//                    }
                 }
                 
             }
@@ -94,6 +101,7 @@ class NewsTableViewController: UITableViewController {
             else { return }
         
         newsDetailVC.newsItem = newsItems?[indexPath.row]
+        self.newsDetailVC = newsDetailVC
         
     }
 

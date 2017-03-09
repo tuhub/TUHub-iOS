@@ -17,6 +17,8 @@ class NewsDetailTableViewController: UITableViewController {
         }
     }
     
+    weak var newsBodyCell: NewsBodyTableViewCell?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,7 +39,6 @@ class NewsDetailTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return newsItem == nil ? 0 : 2
     }
 
@@ -50,17 +51,12 @@ class NewsDetailTableViewController: UITableViewController {
         var cell: UITableViewCell!
         
         if indexPath.row == 0 {
-            if let headerCell = tableView.dequeueReusableCell(withIdentifier: "newsHeaderCell", for: indexPath) as? NewsHeaderTableViewCell {
-                headerCell.setUp(from: newsItem)
-                cell = headerCell
-            }
-            
+            cell = tableView.dequeueReusableCell(withIdentifier: "newsHeaderCell", for: indexPath)
+            (cell as? NewsHeaderTableViewCell)?.setUp(from: newsItem)
         } else if indexPath.row == 1 {
-            if let bodyCell = tableView.dequeueReusableCell(withIdentifier: "newsBodyCell", for: indexPath) as? NewsBodyTableViewCell {
-                bodyCell.setUp(from: newsItem)
-                cell = bodyCell
-            }
-            
+            cell = tableView.dequeueReusableCell(withIdentifier: "newsBodyCell", for: indexPath)
+            (cell as? NewsBodyTableViewCell)?.setUp(with: newsItem, from: tableView)
+            newsBodyCell = cell as? NewsBodyTableViewCell
         }
 
         return cell

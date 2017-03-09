@@ -136,7 +136,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="COD-W5-v2D">
                                             <rect key="frame" x="15" y="11" width="252" height="113"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0J-p1-lgL">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0J-p1-lgL">
                                                     <rect key="frame" x="0.0" y="0.0" width="252" height="20.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <nil key="textColor"/>
@@ -486,7 +486,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h7B-7C-e0E" id="fmv-GQ-xpL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                                 <connections>
@@ -530,11 +530,6 @@
                             <constraint firstItem="OOG-um-hgs" firstAttribute="height" secondItem="4eE-PY-ia4" secondAttribute="height" id="vlH-eY-wIz"/>
                             <constraint firstItem="OOG-um-hgs" firstAttribute="width" secondItem="4eE-PY-ia4" secondAttribute="width" id="wml-PV-6I5"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="teA-E7-NwI"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="4ig-np-mMv">
                         <nil key="title"/>
@@ -643,7 +638,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="NWx-30-HXq" kind="relationship" relationship="rootViewController" id="5f5-eP-Nsf"/>
+                        <segue destination="NWx-30-HXq" kind="relationship" relationship="rootViewController" id="zwL-Es-uOV"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LFc-sk-2nQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -675,7 +670,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Author | Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIh-xL-Jbd">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIh-xL-Jbd">
                                                     <rect key="frame" x="0.0" y="63.5" width="345" height="14.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -707,20 +702,23 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yJn-Fa-Fgk">
                                             <rect key="frame" x="15" y="11.5" width="345" height="237.5"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" verticalHuggingPriority="750" verticalCompressionResistancePriority="250" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="250" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GpN-ad-bdJ" customClass="ScaleAspectFitImageView" customModule="SKPhotoBrowser">
-                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="209"/>
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="250" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="195" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GpN-ad-bdJ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="195"/>
                                                     <gestureRecognizers/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="195" id="HZc-ue-RZf"/>
+                                                    </constraints>
                                                     <connections>
                                                         <outletCollection property="gestureRecognizers" destination="rnp-uN-fqv" appends="YES" id="ldR-iA-Pvh"/>
                                                     </connections>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ca-PZ-UaG">
-                                                    <rect key="frame" x="0.0" y="217" width="345" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="215" width="345" height="22.5"/>
                                                     <attributedString key="attributedText">
-                                                        <fragment content="Article text">
+                                                        <fragment content="Content">
                                                             <attributes>
-                                                                <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                <font key="NSFont" metaFont="system" size="17"/>
+                                                                <font key="NSFont" size="19" name=".SFNSText"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
                                                     </attributedString>
@@ -738,7 +736,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="contentLabel" destination="6ca-PZ-UaG" id="Ssd-f3-PEv"/>
-                                    <outlet property="newsImageView" destination="GpN-ad-bdJ" id="o9i-my-deV"/>
+                                    <outlet property="newsImageView" destination="GpN-ad-bdJ" id="Vcu-fp-ALz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -756,7 +754,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3701.5999999999999" y="1132.9835082458771"/>
+            <point key="canvasLocation" x="3702" y="1134"/>
         </scene>
     </scenes>
     <resources>
