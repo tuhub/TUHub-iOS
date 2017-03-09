@@ -15,7 +15,7 @@ class NewsHeaderTableViewCell: UITableViewCell {
     
     func setUp(from newsItem: NewsItem) {
         titleLabel.text = newsItem.title
-        //detailLabel.text = newsItem.date.timeIntervalSinceNow // TODO: Figure out how to do this
+        detailLabel.text = newsItem.date.datetime
     }
     
 }

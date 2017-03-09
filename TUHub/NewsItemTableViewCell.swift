@@ -19,7 +19,7 @@ class NewsItemTableViewCell: UITableViewCell {
         titleLabel.text = newsItem.title
         descriptionLabel.text = newsItem.description
         thumbnailImageView.image = newsItem.image
-//        ageLabel = newsItem.date.timeIntervalSinceNow //TODO: Figure out elapsed time
+        ageLabel.text = newsItem.date.age
     }
 
 }
