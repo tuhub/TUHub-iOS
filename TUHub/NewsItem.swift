@@ -10,10 +10,6 @@ import SwiftyJSON
 
 class NewsItem {
     
-    enum Feed: String {
-        case all = "feed1357134273663,feed1358196258785,feed1358197717016,feed1360620171888,feed1362405229000,feed1362406369942,feed1362405688434,feed1362405586009,feed1383143213597,feed1383143223191,feed1383143236812,feed1383143243155,feed1383143253860,feed1383143263909,feed1383143274415,feed1383143285101,feed1383143312318,feed1383143507786"
-    }
-    
     let entryID: String
     let feedName: String
     let date: Date
@@ -98,7 +94,7 @@ extension NewsItem {
         // Generate argument based on feeds selected
         var arg = "namekeys="
         for (count, feed) in feeds.enumerated() {
-            arg.append(feed.rawValue)
+            arg.append(feed.namekey)
             if count < feeds.count - 1 {
                 arg.append(",")
             }
@@ -130,6 +126,112 @@ extension NewsItem {
             
             responseHandler?(newsItems, error)
             
+        }
+    }
+    
+}
+
+extension NewsItem {
+    
+    enum Feed {
+        case arts,
+        athletics,
+        campus,
+        community,
+        global,
+        research,
+        staff,
+        students,
+        sustainability,
+        twentyTwenty
+
+        // These feeds don't play well with our parser... maybe add later?
+//        labs,
+//        system
+        
+        static var allValues: [Feed] {
+            var all: [Feed] = [arts,
+                               athletics,
+                               campus,
+                               community,
+                               global,
+                               research,
+                               staff,
+                               students,
+                               sustainability,
+                               twentyTwenty]
+            
+            all.sort { return $0.name < $1.name }
+            return all
+        }
+        
+        static var allNames: [String] {
+            var names = [String]()
+            for feed in allValues {
+                names.append(feed.name)
+            }
+            names.sort()
+            return names
+        }
+        
+        var name: String {
+            
+            switch self {
+            case .arts:
+                return "Arts & Culture"
+            case .athletics:
+                return "Athletics"
+            case .campus:
+                return "Campus News"
+            case .community:
+                return "Community Engagement"
+            case .global:
+                return "Global Temple"
+            case.research:
+                return "Research"
+            case .staff:
+                return "Staff & Faculty"
+            case .students:
+                return "Student Success"
+            case .sustainability:
+                return "Sustainability"
+            case .twentyTwenty:
+                return "Temple 20/20"
+//            case .labs:
+//                return "Computer Labs"
+//            case .system:
+//                return "System Status"
+            }
+            
+        }
+        
+        var namekey: String {
+            switch self {
+            case .arts:
+                return "feed1383143213597"
+            case .athletics:
+                return "feed1383143223191"
+            case .campus:
+                return "feed1383143236812"
+            case .community:
+                return "feed1383143243155"
+            case .global:
+                return "feed1383143253860"
+            case.research:
+                return "feed1383143263909"
+            case .staff:
+                return "feed1383143274415"
+            case .students:
+                return "feed1383143285101"
+            case .sustainability:
+                return "feed1383143312318"
+            case .twentyTwenty:
+                return "feed1383143507786"
+//            case .labs:
+//                return "feed1416259989888"
+//            case .system:
+//                return "feed1416259888303"
+            }
         }
     }
     

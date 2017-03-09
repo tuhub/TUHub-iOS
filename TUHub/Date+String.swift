@@ -34,22 +34,22 @@ extension Date {
                 if components.day == 0 {
                     if components.hour == 0 {
                         // Print minutes if less than an hour
-                        return "\(components.minute!)m ago"
+                        return "\(components.minute!) min ago"
                     } else {
                         // Print hours if less than a day
-                        return "\(components.hour!)h ago"
+                        return "\(components.hour!) hr ago"
                     }
                 } else {
                     // Print days if less than a month
-                    return "\(components.day!)d ago"
+                    return "\(components.day!) day ago"
                 }
             } else {
                 // Print months if less than a year
-                return "\(components.month!)mo ago"
+                return "\(components.month!) mon ago"
             }
         }
         // Print years if greater than 0
-        return "\(components.year!)yr ago"
+        return "\(components.year!) yr ago"
     }
     
 }

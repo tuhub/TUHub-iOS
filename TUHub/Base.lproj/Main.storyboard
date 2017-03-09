@@ -182,11 +182,90 @@
                             <outlet property="delegate" destination="MbH-H0-7jv" id="iZx-iq-MPR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="News" id="dL7-JV-Drf"/>
+                    <navigationItem key="navigationItem" title="News" id="dL7-JV-Drf">
+                        <barButtonItem key="rightBarButtonItem" image="FilterIcon" id="dsi-kc-O79">
+                            <connections>
+                                <segue destination="aXa-sB-zDS" kind="popoverPresentation" identifier="showNewsFilter" popoverAnchorBarButtonItem="dsi-kc-O79" id="w9i-GJ-JVS">
+                                    <popoverArrowDirection key="popoverArrowDirection" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="filterButton" destination="dsi-kc-O79" id="FgP-nT-pqT"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B7I-s9-4eU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3702" y="376"/>
+        </scene>
+        <!--Feeds-->
+        <scene sceneID="qLa-sc-dr0">
+            <objects>
+                <tableViewController id="7lr-pK-8DS" customClass="NewsFilterTableViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="7iw-GM-2iC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="newsFilterCell" textLabel="mwd-G7-lgR" style="IBUITableViewCellStyleDefault" id="fIU-Kl-el4">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fIU-Kl-el4" id="ZaU-Dk-DCI">
+                                    <rect key="frame" x="0.0" y="0.0" width="336" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mwd-G7-lgR">
+                                            <rect key="frame" x="15" y="0.0" width="321" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="7lr-pK-8DS" id="g88-IX-bQK"/>
+                            <outlet property="delegate" destination="7lr-pK-8DS" id="Lqp-GZ-cRN"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Feeds" prompt="Select which newsfeeds you would like to view" id="4yz-GX-Trf">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="PFW-X0-W18">
+                            <connections>
+                                <action selector="didPressCancel:" destination="7lr-pK-8DS" id="Yu2-hy-pdw"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="a1s-Cg-37r">
+                            <connections>
+                                <action selector="didPressDone:" destination="7lr-pK-8DS" id="IzX-H7-JAN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="doneButton" destination="a1s-Cg-37r" id="Npg-2d-ZHo"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OnK-I4-PVu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5622" y="376"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3Mo-4o-qPa">
+            <objects>
+                <navigationController id="aXa-sB-zDS" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wy9-h2-Res">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="7lr-pK-8DS" kind="relationship" relationship="rootViewController" id="QVw-Ek-6Xr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DuB-Zx-DQp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4670" y="376"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kra-bx-d8f">
@@ -760,6 +839,7 @@
     <resources>
         <image name="CourseIcon" width="40" height="25"/>
         <image name="CourseIcon-Filled" width="40" height="25"/>
+        <image name="FilterIcon" width="25" height="25"/>
         <image name="MapsIcon" width="25" height="25"/>
         <image name="MapsIcon-Filled" width="25" height="25"/>
         <image name="MarketplaceIcon" width="21" height="25"/>

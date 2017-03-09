@@ -35,6 +35,7 @@
 		7D6D6D921E70CDD900BF121A /* NewsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D911E70CDD900BF121A /* NewsHeaderTableViewCell.swift */; };
 		7D6D6D941E70CDE500BF121A /* NewsBodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D931E70CDE500BF121A /* NewsBodyTableViewCell.swift */; };
 		7DED63F71E7200560023A0AA /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DED63F61E7200560023A0AA /* Date+String.swift */; };
+		7DED63F91E72098A0023A0AA /* NewsFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DED63F81E72098A0023A0AA /* NewsFilterTableViewController.swift */; };
 		941AB645B5C3E0E6A95DACF2 /* Pods_TUHubUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCC307919AD5A4C9159AAE0 /* Pods_TUHubUITests.framework */; };
 		A1D62E3F439C1C254F6FC729 /* Pods_TUHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9048A865C973948E6821D8E5 /* Pods_TUHub.framework */; };
 /* End PBXBuildFile section */
@@ -93,6 +94,7 @@
 		7D6D6D911E70CDD900BF121A /* NewsHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		7D6D6D931E70CDE500BF121A /* NewsBodyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsBodyTableViewCell.swift; sourceTree = "<group>"; };
 		7DED63F61E7200560023A0AA /* Date+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
+		7DED63F81E72098A0023A0AA /* NewsFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFilterTableViewController.swift; sourceTree = "<group>"; };
 		806A184B82A477E750A74ED6 /* Pods-TUHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHub.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHub/Pods-TUHub.release.xcconfig"; sourceTree = "<group>"; };
 		9048A865C973948E6821D8E5 /* Pods_TUHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TUHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCC307919AD5A4C9159AAE0 /* Pods_TUHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TUHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -219,6 +221,7 @@
 				7D6D6D7F1E707ED900BF121A /* CoursesViewController.swift */,
 				7D6D6D811E708EE400BF121A /* NewsTableViewController.swift */,
 				7D6D6D8C1E70C77700BF121A /* NewsDetailTableViewController.swift */,
+				7DED63F81E72098A0023A0AA /* NewsFilterTableViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 			files = (
 				7D043A991E5FBE100003A853 /* Instructor.swift in Sources */,
 				7D6D6D861E709B6600BF121A /* NewsItem.swift in Sources */,
+				7DED63F91E72098A0023A0AA /* NewsFilterTableViewController.swift in Sources */,
 				7D043A911E5F871E0003A853 /* Course.swift in Sources */,
 				7D043A931E5FA9800003A853 /* Credential.swift in Sources */,
 				7D6D6D801E707ED900BF121A /* CoursesViewController.swift in Sources */,
