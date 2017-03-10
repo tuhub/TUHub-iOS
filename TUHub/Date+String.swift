@@ -27,6 +27,10 @@ extension Date {
         let date = self
         let calendar = Calendar.current
         
+        func addSIfNeeded(_ unit: Int) -> String {
+            return unit > 1 ? "s" : ""
+        }
+        
         // Determine minutes and hours since date
         let components = calendar.dateComponents([.minute, .hour, .day, .month, .year], from: date, to: Date())
         if components.year == 0 {
@@ -34,22 +38,27 @@ extension Date {
                 if components.day == 0 {
                     if components.hour == 0 {
                         // Print minutes if less than an hour
-                        return "\(components.minute!) min ago"
+                        let minutes = components.minute!
+                        return "\(minutes) minute" + addSIfNeeded(minutes) + " ago"
                     } else {
                         // Print hours if less than a day
-                        return "\(components.hour!) hr ago"
+                        let hours = components.hour!
+                        return "\(hours) hour" + addSIfNeeded(hours) + " ago"
                     }
                 } else {
                     // Print days if less than a month
-                    return "\(components.day!) day ago"
+                    let days = components.day!
+                    return "\(days) day" + addSIfNeeded(days) + " ago"
                 }
             } else {
                 // Print months if less than a year
-                return "\(components.month!) mon ago"
+                let months = components.month!
+                return "\(months) month" + addSIfNeeded(months) + " ago"
             }
         }
         // Print years if greater than 0
-        return "\(components.year!) yr ago"
+        let years = components.year!
+        return "\(years) year" + addSIfNeeded(years) + " ago"
     }
     
 }

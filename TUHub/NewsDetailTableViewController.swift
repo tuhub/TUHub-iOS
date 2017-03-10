@@ -8,6 +8,7 @@
 
 import UIKit
 import SKPhotoBrowser
+import SafariServices
 
 class NewsDetailTableViewController: UITableViewController {
 
@@ -25,11 +26,15 @@ class NewsDetailTableViewController: UITableViewController {
         // Allow table view to automatically determine cell height based on contents
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
-
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         // Add button to switch display mode for split view controller
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         navigationItem.leftItemsSupplementBackButton = true
-        
     }
     
     // MARK: - Table view data source
@@ -55,8 +60,9 @@ class NewsDetailTableViewController: UITableViewController {
             (cell as? NewsHeaderTableViewCell)?.setUp(from: newsItem)
         } else if indexPath.row == 1 {
             cell = tableView.dequeueReusableCell(withIdentifier: "newsBodyCell", for: indexPath)
-            (cell as? NewsBodyTableViewCell)?.setUp(with: newsItem, from: tableView)
             newsBodyCell = cell as? NewsBodyTableViewCell
+            newsBodyCell?.setUp(with: newsItem, from: tableView)
+            newsBodyCell?.contentTextView.delegate = self
         }
 
         return cell
@@ -77,6 +83,25 @@ class NewsDetailTableViewController: UITableViewController {
             present(browser, animated: true, completion: {})
         }
         
+    }
+    
+    @IBAction func didPressShare(_ sender: UIBarButtonItem) {
+        if let url = newsItem?.url {
+            let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            let barButtonItem = self.navigationItem.rightBarButtonItem
+            let buttonItemView = barButtonItem?.value(forKey: "view") as? UIView
+            activityVC.popoverPresentationController?.sourceView = buttonItemView
+            present(activityVC, animated: true, completion: nil)
+        }
+    }
+}
+
+extension NewsDetailTableViewController: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        let svc = SFSafariViewController(url: URL)
+        present(svc, animated: true, completion: nil)
+        return false
     }
     
 }

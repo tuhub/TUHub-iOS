@@ -21,6 +21,22 @@ class NewsFilterTableViewController: UITableViewController {
     var delegate: NewsFilterDelegate?
     var selectedFeeds: Set<NewsItem.Feed>!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Allow table view to automatically determine cell height based on contents
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        preferredContentSize = tableView.contentSize
+//        let height = NewsItem.Feed.allValues.count * Int(tableView.rowHeight)
+//        navigationController?.preferredContentSize = CGSize(width: 300, height: height)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -58,7 +74,6 @@ class NewsFilterTableViewController: UITableViewController {
         tableView.reloadRows(at: [indexPath], with: .automatic)
         
     }
-    
     
 
     @IBAction func didPressCancel(_ sender: Any) {

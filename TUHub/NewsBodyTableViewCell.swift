@@ -13,7 +13,7 @@ class NewsBodyTableViewCell: UITableViewCell {
     weak var tableView: UITableView?
     
     @IBOutlet weak var newsImageView: UIImageView!
-    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var contentTextView: UITextView!
     
     func updateImageView(with image: UIImage?) {
         newsImageView.image = image
@@ -23,7 +23,7 @@ class NewsBodyTableViewCell: UITableViewCell {
     
     func setUp(with newsItem: NewsItem, from tableView: UITableView) {
         newsImageView.image = newsItem.image
-        contentLabel.setAttrbitedText(fromHTMLString: newsItem.contentHTML)
+        contentTextView.setAttrbitedText(fromHTMLString: newsItem.contentHTML)
         self.tableView = tableView
     }
     

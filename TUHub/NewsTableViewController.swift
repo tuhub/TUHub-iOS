@@ -28,6 +28,7 @@ class NewsTableViewController: UITableViewController {
         
         // Set the split view controller's delegate
         splitViewController?.delegate = self
+        splitViewController?.preferredDisplayMode = .allVisible
 
         // Allow table view to automatically determine cell height based on contents
         tableView.rowHeight = UITableViewAutomaticDimension
