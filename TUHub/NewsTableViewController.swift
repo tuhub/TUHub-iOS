@@ -36,6 +36,8 @@ class NewsTableViewController: UITableViewController {
         
         // Begin showing refresh indicator
         refreshControl?.beginRefreshing()
+        refreshControl?.backgroundColor = UIColor.cherry
+        refreshControl?.tintColor = UIColor.white
         
         load(feeds: nil)
     }
