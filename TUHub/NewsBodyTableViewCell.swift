@@ -23,7 +23,7 @@ class NewsBodyTableViewCell: UITableViewCell {
     
     func setUp(with newsItem: NewsItem, from tableView: UITableView) {
         newsImageView.image = newsItem.image
-        contentTextView.setAttrbitedText(fromHTMLString: newsItem.contentHTML)
+        contentTextView.attributedText = newsItem.content!
         self.tableView = tableView
     }
     

@@ -8,28 +8,35 @@
 
 import UIKit
 
+fileprivate let signInLabelCellID = "signInLabelCell"
+fileprivate let usernameFieldCellID = "usernameFieldCell"
+fileprivate let passwordFieldCellID = "passwordFieldCell"
+fileprivate let skipButtonCellID = "skipButtonCell"
+
 class SignInViewController: UIViewController {
 
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var bottomLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var bottomLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var signInButtonWidth: NSLayoutConstraint!
+    
+    weak var usernameField: UITextField?
+    weak var passwordField: UITextField?
     
     static private let segueIdentifier = "showTabBar"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Set text field delegates
-        usernameField.delegate = self
-        passwordField.delegate = self
+
+        tableView.dataSource = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 66
+        tableView.reloadData()
         
         // Hide the UI since we don't know if it needs to be displayed yet
         hideUI()
         
         // Attempt to sign in silently, show sign-in option if credentials are not stored
-        
         User.signInSilently { (user, error) in
             if user != nil {
                 self.performSegue(withIdentifier: SignInViewController.segueIdentifier, sender: self)
@@ -38,16 +45,14 @@ class SignInViewController: UIViewController {
                 self.showUI()
             }
             
-            if let error = error {
-                // TODO: Alert user of error
-            }
+//            if let error = error {
+//                // TODO: Alert user of error
+//            }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        determineSignInButtonState()
         
         // Observe keyboard show and hide
         let center = NotificationCenter.default
@@ -60,6 +65,18 @@ class SignInViewController: UIViewController {
                            selector: #selector(keyboardWillHide),
                            name: .UIKeyboardWillHide,
                            object: nil)
+        
+        center.addObserver(self,
+                           selector: #selector(updateSignInButtonWidth(notification:)),
+                           name: .UIDeviceOrientationDidChange,
+                           object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        determineSignInButtonState()
+        updateSignInButtonWidth(notification: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -70,13 +87,8 @@ class SignInViewController: UIViewController {
         center.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     
-    @IBAction func didPressSignIn(_ sender: UIButton) {
-        signIn()
-    }
-
-    
     fileprivate func signIn() {
-        if let username = usernameField.text, let password = passwordField.text {
+        if let username = usernameField?.text, let password = passwordField?.text {
             
             User.signIn(username: username, password: password, { (user, error) in
                 
@@ -96,12 +108,12 @@ class SignInViewController: UIViewController {
     }
     
     private func hideUI() {
-        scrollView.isHidden = true
+        tableView.isHidden = true
         signInButton.isHidden = true
     }
     
     private func showUI() {
-        scrollView.isHidden = false
+        tableView.isHidden = false
         signInButton.isHidden = false
     }
     
@@ -115,6 +127,12 @@ class SignInViewController: UIViewController {
     /// in which it moves the sign in button below the keyboard
     func keyboardWillHide(notification: Notification) {
         updateBottomLayoutConstraint(with: notification)
+    }
+    
+    func updateSignInButtonWidth(notification: Notification?) {
+        if let width = usernameField?.frame.width {
+            signInButtonWidth.constant = width
+        }
     }
     
     func updateBottomLayoutConstraint(with notification: Notification) {
@@ -137,8 +155,8 @@ class SignInViewController: UIViewController {
     }
     
     func determineSignInButtonState() {
-        if let usernameText = usernameField.text,
-            let passwordText = passwordField.text,
+        if let usernameText = usernameField?.text,
+            let passwordText = passwordField?.text,
             usernameText.characters.count > 0 && passwordText.characters.count > 0 {
             signInButton.isEnabled = true
             signInButton.backgroundColor = UIColor.cherry
@@ -147,14 +165,10 @@ class SignInViewController: UIViewController {
             signInButton.backgroundColor = UIColor.lightGray
         }
     }
-    
-    @IBAction func didPressSkip(_ sender: UIButton) {
-        performSegue(withIdentifier: SignInViewController.segueIdentifier, sender: self)
-    }
 
     @IBAction func unwindToSignInViewController(segue: UIStoryboardSegue) {
-        usernameField.text = ""
-        passwordField.text = ""
+        usernameField?.text = ""
+        passwordField?.text = ""
         User.signOut()
         showUI()
     }
@@ -167,6 +181,47 @@ class SignInViewController: UIViewController {
         determineSignInButtonState()
     }
     
+    @IBAction func didPressSkip(_ sender: UIButton) {
+        performSegue(withIdentifier: SignInViewController.segueIdentifier, sender: self)
+    }
+    
+    @IBAction func didPressSignIn(_ sender: UIButton) {
+        signIn()
+    }
+    
+}
+
+extension SignInViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.row {
+        case 0:
+            return tableView.dequeueReusableCell(withIdentifier: signInLabelCellID)!
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: usernameFieldCellID)!
+            usernameField = cell.contentView.viewWithTag(2) as? UITextField
+            usernameField?.delegate = self
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: passwordFieldCellID)!
+            passwordField = cell.contentView.viewWithTag(3) as? UITextField
+            passwordField?.delegate = self
+            return cell
+        case 3:
+            return tableView.dequeueReusableCell(withIdentifier: skipButtonCellID)!
+        default:
+            return UITableViewCell()
+        }
+    }
+    
 }
 
 extension SignInViewController: UITextFieldDelegate {
@@ -174,7 +229,7 @@ extension SignInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField === usernameField {
-            passwordField.becomeFirstResponder()
+            passwordField?.becomeFirstResponder()
         } else if textField === passwordField {
             textField.resignFirstResponder()
             signIn()

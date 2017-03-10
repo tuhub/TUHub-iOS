@@ -10,6 +10,9 @@ import UIKit
 import SKPhotoBrowser
 import SafariServices
 
+fileprivate let newsHeaderCellID = "newsHeaderCell"
+fileprivate let newsBodyCellID = "newsBodyCell"
+
 class NewsDetailTableViewController: UITableViewController {
 
     var newsItem: NewsItem? {
@@ -56,10 +59,10 @@ class NewsDetailTableViewController: UITableViewController {
         var cell: UITableViewCell!
         
         if indexPath.row == 0 {
-            cell = tableView.dequeueReusableCell(withIdentifier: "newsHeaderCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: newsHeaderCellID, for: indexPath)
             (cell as? NewsHeaderTableViewCell)?.setUp(from: newsItem)
         } else if indexPath.row == 1 {
-            cell = tableView.dequeueReusableCell(withIdentifier: "newsBodyCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: newsBodyCellID, for: indexPath)
             newsBodyCell = cell as? NewsBodyTableViewCell
             newsBodyCell?.setUp(with: newsItem, from: tableView)
             newsBodyCell?.contentTextView.delegate = self

@@ -34,6 +34,9 @@ class NewsTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         
+        // Begin showing refresh indicator
+        refreshControl?.beginRefreshing()
+        
         load(feeds: nil)
     }
     
@@ -48,6 +51,8 @@ class NewsTableViewController: UITableViewController {
                 self.newsItems = newsItems
                 self.tableView.reloadData()
             }
+            // End showing refresh indicator
+            self.refreshControl?.endRefreshing()
             //            if let error = error {
             //                // TODO: Handle error
             //            }
@@ -82,6 +87,10 @@ class NewsTableViewController: UITableViewController {
             break
         }
         
+    }
+    
+    @IBAction func didTriggerRefresh(_ sender: UIRefreshControl) {
+        load(feeds: selectedFeeds == nil ? nil : Array(selectedFeeds!))
     }
 
 }
@@ -145,6 +154,17 @@ extension NewsTableViewController {
                 
             }
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Try to asynchronously parse HTML before performing segue
+        if let newsItem = newsItems?[indexPath.row] {
+            newsItem.parseContent {
+                self.performSegue(withIdentifier: newsDetailSegueID, sender: tableView.cellForRow(at: indexPath))
+            }
+        }
+        
     }
     
 }
