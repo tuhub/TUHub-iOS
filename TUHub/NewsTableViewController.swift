@@ -37,10 +37,9 @@ class NewsTableViewController: UITableViewController {
         
         // Begin showing refresh indicator
         tableView.contentOffset = CGPoint(x: 0, y: -self.refreshControl!.frame.size.height) // Needed to fix refresh control bug
-        refreshControl?.tintColor = UIColor.cherry
-        refreshControl?.beginRefreshing()
-        refreshControl?.backgroundColor = UIColor.cherry
         refreshControl?.tintColor = UIColor.white
+        refreshControl?.backgroundColor = UIColor.cherry
+        refreshControl?.beginRefreshing()
         
         load(feeds: nil)
     }

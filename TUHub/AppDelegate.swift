@@ -21,9 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         let console = ConsoleDestination()  // log to Xcode Console
-        let file = FileDestination()  // log to default swiftybeaver.log file
+//        let file = FileDestination()  // log to default swiftybeaver.log file
         log.addDestination(console)
-        log.addDestination(file)
+//        log.addDestination(file)
         
         return true
     }
