@@ -22,6 +22,7 @@ class NewsTableViewController: UITableViewController {
     fileprivate var newsItems: [NewsItem]?
     fileprivate weak var newsDetailVC: NewsDetailTableViewController?
     fileprivate var selectedFeeds: Set<NewsItem.Feed>?
+    private var errorLabel: UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,8 @@ class NewsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 100
         
         // Begin showing refresh indicator
+        tableView.contentOffset = CGPoint(x: 0, y: -self.refreshControl!.frame.size.height) // Needed to fix refresh control bug
+        refreshControl?.tintColor = UIColor.cherry
         refreshControl?.beginRefreshing()
         
         load(feeds: nil)
@@ -47,15 +50,53 @@ class NewsTableViewController: UITableViewController {
 
     func load(feeds: [NewsItem.Feed]?) {
         NewsItem.retrieve(fromFeeds: feeds ?? NewsItem.Feed.allValues) { (newsItems, error) in
+            
+            // Remove old message from view
+            self.errorLabel?.removeFromSuperview()
+            
+            if let error = error {
+                
+                // Create label containing error message
+                let errorMessage = error.localizedDescription
+                let width = self.tableView.frame.width - self.tableView.contentInset.left * 2
+                let height = errorMessage.height(withConstrainedWidth: width, font: UIFont.preferredFont(forTextStyle: .body))
+                let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
+                label.textColor = .darkText
+                label.textAlignment = .center
+                label.text = errorMessage
+                
+                // Add to view
+                self.view.addSubview(label)
+                label.translatesAutoresizingMaskIntoConstraints = false
+                self.view.bringSubview(toFront: label)
+                self.view.addConstraint(
+                    NSLayoutConstraint(item: label,
+                                       attribute: NSLayoutAttribute.centerX,
+                                       relatedBy: NSLayoutRelation.equal,
+                                       toItem: self.tableView,
+                                       attribute: NSLayoutAttribute.centerX,
+                                       multiplier: 1,
+                                       constant: 0))
+                self.view.addConstraint(
+                    NSLayoutConstraint(item: label,
+                                       attribute: NSLayoutAttribute.centerY,
+                                       relatedBy: NSLayoutRelation.equal,
+                                       toItem: self.tableView,
+                                       attribute: NSLayoutAttribute.centerY,
+                                       multiplier: 0.75,
+                                       constant: 0))
+                
+                self.errorLabel = label
+            }
+            
+            self.tableView.tableHeaderView?.removeFromSuperview()
+            
             if let newsItems = newsItems {
                 self.newsItems = newsItems
                 self.tableView.reloadData()
             }
             // End showing refresh indicator
             self.refreshControl?.endRefreshing()
-            //            if let error = error {
-            //                // TODO: Handle error
-            //            }
         }
     }
     
@@ -147,9 +188,6 @@ extension NewsTableViewController {
                         }
                         
                     }
-                    //                    if let error = error {
-                    //                        // TODO: Handle error
-                    //                    }
                 }
                 
             }
@@ -160,7 +198,7 @@ extension NewsTableViewController {
         
         // Try to asynchronously parse HTML before performing segue
         if let newsItem = newsItems?[indexPath.row] {
-            newsItem.parseContent {
+            newsItem.parseContent() {
                 self.performSegue(withIdentifier: newsDetailSegueID, sender: tableView.cellForRow(at: indexPath))
             }
         }

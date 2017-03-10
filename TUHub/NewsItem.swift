@@ -197,15 +197,6 @@ extension NewsItem {
             return all
         }
         
-        static var allNames: [String] {
-            var names = [String]()
-            for feed in allValues {
-                names.append(feed.name)
-            }
-            names.sort()
-            return names
-        }
-        
         var name: String {
             
             switch self {

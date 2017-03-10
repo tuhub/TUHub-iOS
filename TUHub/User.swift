@@ -56,7 +56,7 @@ class User {
 // MARK: - Authentication
 extension User {
     
-    typealias UserResponseHandler = (User?, Error?) -> Void
+    typealias UserResponseHandler = (User?, AFError?) -> Void
     
     static func signIn(username: String, password: String, _ responseHandler: UserResponseHandler?) {
         
@@ -125,7 +125,7 @@ extension User {
 // MARK: - Grades
 extension User {
     
-    typealias GradesResponseHandler = ([Term]?, Error?) -> Void
+    typealias GradesResponseHandler = ([Term]?, AFError?) -> Void
     
     func retrieveGrades(_ responseHandler: GradesResponseHandler?) {
         
@@ -155,7 +155,7 @@ extension User {
 // Courses
 extension User {
     
-    typealias CoursesResponseHandler = ([Term]?, Error?) -> Void
+    typealias CoursesResponseHandler = ([Term]?, AFError?) -> Void
     
     func retrieveCourseOverview(_ responseHandler: CoursesResponseHandler?) {
         NetworkManager.request(fromEndpoint: .courseOverview, withTUID: tuID, authenticateWith: credential) { (json, error) in

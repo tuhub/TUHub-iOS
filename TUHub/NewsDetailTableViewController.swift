@@ -65,7 +65,6 @@ class NewsDetailTableViewController: UITableViewController {
             cell = tableView.dequeueReusableCell(withIdentifier: newsBodyCellID, for: indexPath)
             newsBodyCell = cell as? NewsBodyTableViewCell
             newsBodyCell?.setUp(with: newsItem, from: tableView)
-            newsBodyCell?.contentTextView.delegate = self
         }
 
         return cell

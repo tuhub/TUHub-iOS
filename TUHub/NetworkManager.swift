@@ -21,7 +21,7 @@ class NetworkManager: NSObject {
         case news = "https://prd-mobile.temple.edu/banner-mobileserver/rest/1.2/feed"
     }
     
-    typealias ResponseHandler = (JSON?, Error?) -> Void
+    typealias ResponseHandler = (JSON?, AFError?) -> Void
     
     static func request(fromEndpoint endpoint: Endpoint,
                         _ responseHandler: ResponseHandler?) {
@@ -108,23 +108,29 @@ class NetworkManager: NSObject {
         
         Alamofire.request(url, headers: headers)
             .responseJSON { (response) in
+                
                 // Log error if there is one
-                if let error = response.error {
-                    log.error(error)
-                }
+                let error: AFError? = {
+                    if let error = response.error as? AFError {
+                        log.error(error)
+                        return error
+                    }
+                    return nil
+                }()
                 
                 // Retrieve JSON if available
-                if let json = response.result.value {
-                    let json = JSON(json)
-                    responseHandler?(json, response.error)
-                    return
-                }
+                let json: JSON? = {
+                    if let json = response.result.value {
+                        return JSON(json)
+                    }
+                    return nil
+                }()
                 
-                responseHandler?(nil, response.error)
+                responseHandler?(json, error)
         }
     }
     
-    static func download(imageURL url: URL, _ responseHandler: ((UIImage?, Error?) -> Void)?) {
+    static func download(imageURL url: URL, _ responseHandler: ((UIImage?, AFError?) -> Void)?) {
         
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -136,16 +142,19 @@ class NetworkManager: NSObject {
         Alamofire.download(url, to: destination).responseData { response in
             
             var image: UIImage?
+            let error: AFError? = {
+                if let error = response.error as? AFError {
+                    log.error(error.errorDescription!)
+                    return error
+                }
+                return nil
+            }()
             
             if let data = response.result.value {
                 image = UIImage(data: data)
             }
             
-            if let error = response.error {
-                log.error(error)
-            }
-            
-            responseHandler?(image, response.error)
+            responseHandler?(image, error)
         }
         
     }

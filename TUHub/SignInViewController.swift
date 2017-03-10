@@ -38,6 +38,7 @@ class SignInViewController: UIViewController {
         
         // Attempt to sign in silently, show sign-in option if credentials are not stored
         User.signInSilently { (user, error) in
+            
             if user != nil {
                 self.performSegue(withIdentifier: SignInViewController.segueIdentifier, sender: self)
             } else {
@@ -45,9 +46,9 @@ class SignInViewController: UIViewController {
                 self.showUI()
             }
             
-//            if let error = error {
-//                // TODO: Alert user of error
-//            }
+            if let error = error {
+                
+            }
         }
     }
     
@@ -96,10 +97,7 @@ class SignInViewController: UIViewController {
                     self.performSegue(withIdentifier: SignInViewController.segueIdentifier, sender: self)
                 }
                 
-                if let error = error {
-                    // TODO: Alert user of error
-                }
-                
+                error?.displayAlertController(from: self)
             })
             
         } else {
