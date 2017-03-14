@@ -7,21 +7,36 @@
 //
 
 import UIKit
+import FSCalendar
 
 class CoursesViewController: UIViewController {
 
+    @IBOutlet weak var courseCalendarView: CourseCalendarView!
+    @IBOutlet weak var courseListView: CourseListView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    override func overrideTraitCollection(forChildViewController childViewController: UIViewController) -> UITraitCollection? {
+        if UI_USER_INTERFACE_IDIOM() == .pad &&
+            view.bounds.width > view.bounds.height {
+            
+            let collections = [UITraitCollection(horizontalSizeClass: .regular),
+                               UITraitCollection(verticalSizeClass: .compact)]
+            return UITraitCollection(traitsFrom: collections)
+            
+        }
+        
+        return super.overrideTraitCollection(forChildViewController: childViewController)
+    }
 
+    @IBAction func didToggleSegmentedControl(_ sender: UISegmentedControl) {
+        let selectedIndex = sender.selectedSegmentIndex
+        courseCalendarView.isHidden = selectedIndex == 1
+        courseListView.isHidden = selectedIndex == 0
+    }
     /*
     // MARK: - Navigation
 
