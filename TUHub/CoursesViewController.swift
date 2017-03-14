@@ -11,7 +11,7 @@ import FSCalendar
 
 class CoursesViewController: UIViewController {
 
-    fileprivate enum State {
+    enum State {
         case calendar, list
     }
     
@@ -19,8 +19,9 @@ class CoursesViewController: UIViewController {
     @IBOutlet weak var courseListView: CourseListView!
     @IBOutlet weak var leftBarButton: UIBarButtonItem!
     @IBOutlet weak var dummyTextField: UITextField!
+    weak var datePicker: UIDatePicker!
     
-    fileprivate var state = State.calendar
+    var state = State.calendar
     fileprivate var terms: [Term]?
     
     override func viewDidLoad() {
@@ -34,28 +35,51 @@ class CoursesViewController: UIViewController {
             
             if let terms = terms {
                 self.terms = terms
+                var courses = [Course]()
                 
                 for term in terms {
                     debugPrint("-----------------------------")
                     debugPrint(term.name)
-                    if let courses = term.courses {
+                    if let c = term.courses {
+                        courses.append(contentsOf: c)
                         for course in courses {
                             debugPrint(course.name)
                         }
                     }
                 }
+                
+                self.courseCalendarView.setUp(with: courses, from: self)
+                self.courseListView.setUp(with: terms, from: self)
             }
         })
 
         // Set left bar button's title to the current date
-        leftBarButton.title = getFormattedDate(from: Date())
+        setLeftButtonTitle(to: Date())
         
         // Set up date picker for the left bar button
-        let datePicker = UIDatePicker()
-        datePicker.target(forAction: #selector(didChangeDate(_:)), withSender: datePicker)
-        dummyTextField.inputView = datePicker
+        setUpDatePicker()
+        
+        courseCalendarView.calendarView.delegate = self
     }
     
+    func setUpDatePicker() {
+        // Set up date picker as input view
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        self.datePicker = datePicker
+        dummyTextField.inputView = datePicker
+        
+        // Set up toolbar with today button and done button as accessory view
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let todayButton = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector(didPressTodayButton(_:)))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didPressDatePickerDoneButton(_:)))
+        todayButton.tintColor = UIColor.cherry
+        doneButton.tintColor = UIColor.cherry
+        toolbar.setItems([todayButton, flexSpace, doneButton], animated: false)
+        toolbar.sizeToFit()
+        dummyTextField.inputAccessoryView = toolbar
+    }
     
     override func overrideTraitCollection(forChildViewController childViewController: UIViewController) -> UITraitCollection? {
         if UI_USER_INTERFACE_IDIOM() == .pad &&
@@ -70,10 +94,10 @@ class CoursesViewController: UIViewController {
         return super.overrideTraitCollection(forChildViewController: childViewController)
     }
     
-    func getFormattedDate(from date: Date) -> String {
+    func setLeftButtonTitle(to date: Date) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
-        return dateFormatter.string(from: date)
+        leftBarButton.title = dateFormatter.string(from: date)
     }
 
     @IBAction func didToggleSegmentedControl(_ sender: UISegmentedControl) {
@@ -88,8 +112,14 @@ class CoursesViewController: UIViewController {
         }
     }
     
-    func didChangeDate(_ sender: UIDatePicker) {
-        
+    func didPressTodayButton(_ sender: UIBarButtonItem) {
+        datePicker.setDate(Date(), animated: true)
+    }
+    
+    func didPressDatePickerDoneButton(_ sender: UIBarButtonItem) {
+        dummyTextField.resignFirstResponder()
+        courseCalendarView.calendarView.select(datePicker.date, scrollToDate: true)
+        setLeftButtonTitle(to: datePicker.date)
     }
     
     /*
@@ -102,4 +132,16 @@ class CoursesViewController: UIViewController {
     }
     */
 
+}
+
+// MARK: - FSCalendarDelegate
+extension CoursesViewController: FSCalendarDelegate {
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        if state == .calendar {
+            setLeftButtonTitle(to: date)
+            datePicker.setDate(date, animated: true)
+        }
+    }
+    
 }

@@ -14,27 +14,42 @@ struct CourseMeeting {
     let buildingID: String
     let buildingName: String
     let room: String
-    let startTime: String
-    let endTime: String
+    var startTime: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        return dateFormatter.string(from: startDate)
+    }
+    let startDate: Date
+    var endTime: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        return dateFormatter.string(from: endDate)
+    }
+    let endDate: Date
     
     init?(json: JSON) {
         guard let daysOfWeek = json["daysOfWeek"].arrayObject as? [Int],
             let buildingID = json["buildingId"].string,
             let buildingName = json["building"].string,
             let room = json["room"].string,
-            let startTime = json["startTime"].string,
-            let endTime = json["endTime"].string
+            let startTimeStr = json["startTime"].string,
+            let startDateStr = json["startDate"].string,
+            let endTimeStr = json["endTime"].string,
+            let endDateStr = json["endDate"].string,
+            let startDate = (startDateStr + "T" + startTimeStr).dateTime,
+            let endDate = (endDateStr + "T" + endTimeStr).dateTime
             else {
                 log.error("Invalid JSON while initializing CourseMeeting")
                 return nil
         }
-        
         self.daysOfWeek = daysOfWeek
         self.buildingID = buildingID
         self.buildingName = buildingName
         self.room = room
-        self.startTime = startTime
-        self.endTime = endTime
+        self.startDate = startDate
+        self.endDate = endDate
         
     }
 }

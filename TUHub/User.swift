@@ -162,7 +162,6 @@ extension User {
             var courses: [Term]?
             
             if let json = json {
-                debugPrint(json)
                 for (_, subJSON) in json["terms"] {
                     if let term = Term(json: subJSON) {
                         if courses == nil {
@@ -180,7 +179,6 @@ extension User {
             var courses: [Term]?
             
             if let json = json {
-                debugPrint(json)
                 for (_, subJSON) in json["terms"] {
                     if let term = Term(json: subJSON) {
                         if courses == nil {

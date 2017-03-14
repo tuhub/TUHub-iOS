@@ -15,20 +15,44 @@ class CourseCalendarView: UIView {
     @IBOutlet weak var tableView: UITableView!
     
     var courses: [Course]?
-    weak var viewController: UIViewController?
+    var selectedDate: Date?
+    weak var viewController: CoursesViewController?
     
-    func setUp(with courses: [Course], from viewController: UIViewController?) {
+    func setUp(with courses: [Course], from viewController: CoursesViewController?) {
         self.courses = courses
         self.viewController = viewController
+        self.calendarView.dataSource = self
+    }
+    
+    func numberOfCourses(for date: Date) -> Int {
+        
+        guard let selectedDate = selectedDate else {
+            return 0
+        }
+        
+        var numberOfCoursesForDate = 0
+        if let courses = courses {
+            for course in courses {
+                if let meetings = course.meetings {
+                    for meeting in meetings {
+                        if selectedDate > meeting.startDate && selectedDate < meeting.endDate {
+                            numberOfCoursesForDate += 1
+                        }
+                    }
+                }
+            }
+        }
+        return numberOfCoursesForDate
+        
     }
 
 }
 
-// MARK: - FSCalendarDelegate
-extension CourseCalendarView: FSCalendarDelegate {
+// MARK: - FSCalendarDataSource
+extension CourseCalendarView: FSCalendarDataSource {
     
-    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        // TODO: Handle selection
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        return numberOfCourses(for: date)
     }
     
 }
@@ -42,6 +66,9 @@ extension CourseCalendarView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let selectedDate = selectedDate {
+            return numberOfCourses(for: selectedDate)
+        }
         return 0
     }
     
@@ -56,7 +83,7 @@ extension CourseCalendarView: UITableViewDataSource {
 extension CourseCalendarView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: Handle selection
+        
     }
     
 }

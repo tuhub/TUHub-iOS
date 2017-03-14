@@ -43,7 +43,6 @@ struct Course {
         
         if let instructorsJSON = json["instructors"].array {
             for subJSON in instructorsJSON {
-                debugPrint(subJSON)
                 if let instructor = Instructor(json: subJSON) {
                     if instructors == nil {
                         instructors = [Instructor]()
@@ -84,7 +83,6 @@ extension Course {
             var roster: [String]?
             
             if let json = json {
-                debugPrint(json)
                 
                 var names = [String]()
                 if let values = json["activeStudents"].array {
