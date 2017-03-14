@@ -53,9 +53,14 @@ extension CourseListView: UITableViewDataSource {
         let term = terms?[4]
         termLabel.text = term?.name
         
-        // Get all the course for the term
+        // Get all the courses and course description for the term
         let courseName = term?.courses?[indexPath.row].name
+        let courseDescription = term?.courses?[indexPath.row].description
+        
+        // Set course name label
         cell.textLabel?.text = courseName
+        // Set course description label
+        cell.detailTextLabel?.text = courseDescription
         
         return cell
     }
