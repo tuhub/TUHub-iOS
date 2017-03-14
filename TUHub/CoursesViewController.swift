@@ -22,6 +22,8 @@ class CoursesViewController: UIViewController {
     
     fileprivate var state = State.calendar
     
+    fileprivate var terms:[Term]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +35,7 @@ class CoursesViewController: UIViewController {
         datePicker.target(forAction: #selector(didChangeDate(_:)), withSender: datePicker)
         dummyTextField.inputView = datePicker
     }
+    
     
     override func overrideTraitCollection(forChildViewController childViewController: UIViewController) -> UITraitCollection? {
         if UI_USER_INTERFACE_IDIOM() == .pad &&
