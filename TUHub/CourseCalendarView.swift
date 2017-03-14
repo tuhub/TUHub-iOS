@@ -17,7 +17,7 @@ class CourseCalendarView: UIView {
     var courses: [Course]?
     weak var viewController: UIViewController?
     
-    func setUp(withCourses courses: [Course], from viewController: UIViewController?) {
+    func setUp(with courses: [Course], from viewController: UIViewController?) {
         self.courses = courses
         self.viewController = viewController
     }
