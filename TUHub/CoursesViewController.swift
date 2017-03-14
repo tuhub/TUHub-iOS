@@ -21,12 +21,32 @@ class CoursesViewController: UIViewController {
     @IBOutlet weak var dummyTextField: UITextField!
     
     fileprivate var state = State.calendar
-    
-    fileprivate var terms:[Term]?
+    fileprivate var terms: [Term]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Load terms/courses
+        User.current?.retrieveCourseOverview({ (terms, error) in
+            if let error = error {
+                debugPrint(error)
+            }
+            
+            if let terms = terms {
+                self.terms = terms
+                
+                for term in terms {
+                    debugPrint("-----------------------------")
+                    debugPrint(term.name)
+                    if let courses = term.courses {
+                        for course in courses {
+                            debugPrint(course.name)
+                        }
+                    }
+                }
+            }
+        })
+
         // Set left bar button's title to the current date
         leftBarButton.title = getFormattedDate(from: Date())
         

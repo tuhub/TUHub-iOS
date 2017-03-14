@@ -14,10 +14,10 @@ class CourseListView: UIView {
     @IBOutlet weak var courseTableView: UITableView!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    var terms: [Term : [Course]]?
+    var terms: [Term]?
     weak var viewController: UIViewController?
     
-    func setUp(with terms: [Term : [Course]], from viewController: UIViewController?) {
+    func setUp(with terms: [Term], from viewController: UIViewController?) {
         self.terms = terms
         self.viewController = viewController
     }
