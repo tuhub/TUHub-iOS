@@ -26,7 +26,7 @@ class CoursesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Load terms/courses
         User.current?.retrieveCourseOverview({ (terms, error) in
             if let error = error {
@@ -34,10 +34,12 @@ class CoursesViewController: UIViewController {
             }
             
             if let terms = terms {
+                
                 self.terms = terms
                 var courses = [Course]()
                 
                 for term in terms {
+                    
                     debugPrint("-----------------------------")
                     debugPrint(term.name)
                     if let c = term.courses {
