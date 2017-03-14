@@ -14,10 +14,28 @@ class CoursesViewController: UIViewController {
     @IBOutlet weak var courseCalendarView: CourseCalendarView!
     @IBOutlet weak var courseListView: CourseListView!
     
+    fileprivate var terms:[Term]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        User.current?.retrieveCourseOverview({ (allTerms, error) in
+            if let error = error {
+                
+            }
+            
+            if let terms = allTerms {
+                self.terms = terms
+            }
+            
+            //print(self.terms!)
+            print("-----------------------------")
+            print(self.terms![0].name)
+            print(self.terms![0].courses![0].name)
+        })
 
     }
+    
     
     override func overrideTraitCollection(forChildViewController childViewController: UIViewController) -> UITraitCollection? {
         if UI_USER_INTERFACE_IDIOM() == .pad &&
