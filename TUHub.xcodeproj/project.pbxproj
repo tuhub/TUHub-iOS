@@ -25,7 +25,6 @@
 		7D043A971E5FB8080003A853 /* CourseMeeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A961E5FB8080003A853 /* CourseMeeting.swift */; };
 		7D043A991E5FBE100003A853 /* Instructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A981E5FBE100003A853 /* Instructor.swift */; };
 		7D4798351E73236700F969CD /* Error+UIAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4798341E73236700F969CD /* Error+UIAlertViewController.swift */; };
-		7D4798401E7848A700F969CD /* CourseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47983E1E7848A700F969CD /* CourseListView.swift */; };
 		7D4798411E7848A700F969CD /* CourseCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47983F1E7848A700F969CD /* CourseCalendarView.swift */; };
 		7D553BB51E78C76F00D46166 /* CoursePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D553BB41E78C76F00D46166 /* CoursePageViewController.swift */; };
 		7D553BB71E78C7A700D46166 /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D553BB61E78C7A700D46166 /* CourseListViewController.swift */; };
@@ -90,7 +89,6 @@
 		7D043A961E5FB8080003A853 /* CourseMeeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMeeting.swift; sourceTree = "<group>"; };
 		7D043A981E5FBE100003A853 /* Instructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instructor.swift; sourceTree = "<group>"; };
 		7D4798341E73236700F969CD /* Error+UIAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Error+UIAlertViewController.swift"; sourceTree = "<group>"; };
-		7D47983E1E7848A700F969CD /* CourseListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListView.swift; sourceTree = "<group>"; };
 		7D47983F1E7848A700F969CD /* CourseCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCalendarView.swift; sourceTree = "<group>"; };
 		7D553BB41E78C76F00D46166 /* CoursePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePageViewController.swift; sourceTree = "<group>"; };
 		7D553BB61E78C7A700D46166 /* CourseListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListViewController.swift; sourceTree = "<group>"; };
@@ -254,7 +252,6 @@
 		7D6D6D891E70B34300BF121A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7D47983E1E7848A700F969CD /* CourseListView.swift */,
 				7D47983F1E7848A700F969CD /* CourseCalendarView.swift */,
 				7D6D6D871E70B33F00BF121A /* NewsItemTableViewCell.swift */,
 				7D6D6D911E70CDD900BF121A /* NewsHeaderTableViewCell.swift */,
@@ -587,7 +584,6 @@
 				7D043A871E5BF8880003A853 /* Term.swift in Sources */,
 				7D043A8F1E5F73060003A853 /* JSON+Date.swift in Sources */,
 				7D6D6D941E70CDE500BF121A /* NewsBodyTableViewCell.swift in Sources */,
-				7D4798401E7848A700F969CD /* CourseListView.swift in Sources */,
 				7D6D6D8D1E70C77700BF121A /* NewsDetailTableViewController.swift in Sources */,
 				7D6D6D7E1E6FD6CB00BF121A /* UIColor+Cherry.swift in Sources */,
 				7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */,
