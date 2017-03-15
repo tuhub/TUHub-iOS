@@ -58,7 +58,7 @@ class NewsTableViewController: UITableViewController {
             if let error = error {
                 
                 // Create label containing error message
-                let errorMessage = error.localizedDescription
+                let errorMessage = "Something went wrong. ☹️"
                 let width = self.tableView.frame.width - self.tableView.contentInset.left * 2
                 let height = errorMessage.height(withConstrainedWidth: width, font: UIFont.preferredFont(forTextStyle: .body))
                 let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))

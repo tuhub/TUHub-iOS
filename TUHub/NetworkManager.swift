@@ -21,7 +21,7 @@ class NetworkManager: NSObject {
         case news = "https://prd-mobile.temple.edu/banner-mobileserver/rest/1.2/feed"
     }
     
-    typealias ResponseHandler = (JSON?, AFError?) -> Void
+    typealias ResponseHandler = (JSON?, Error?) -> Void
     
     static func request(fromEndpoint endpoint: Endpoint,
                         _ responseHandler: ResponseHandler?) {
@@ -110,12 +110,10 @@ class NetworkManager: NSObject {
             .responseJSON { (response) in
                 
                 // Log error if there is one
-                let error: AFError? = {
-                    if let error = response.error as? AFError {
-                        log.error(error)
-                        return error
-                    }
-                    return nil
+                let error: Error? = {
+                    guard case let .failure(error) = response.result else { return nil }
+                    log.error(error)
+                    return error
                 }()
                 
                 // Retrieve JSON if available
@@ -130,7 +128,7 @@ class NetworkManager: NSObject {
         }
     }
     
-    static func download(imageURL url: URL, _ responseHandler: ((UIImage?, AFError?) -> Void)?) {
+    static func download(imageURL url: URL, _ responseHandler: ((UIImage?, Error?) -> Void)?) {
         
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -142,12 +140,10 @@ class NetworkManager: NSObject {
         Alamofire.download(url, to: destination).responseData { response in
             
             var image: UIImage?
-            let error: AFError? = {
-                if let error = response.error as? AFError {
-                    log.error(error.errorDescription!)
-                    return error
-                }
-                return nil
+            let error: Error? = {
+                guard case let .failure(error) = response.result else { return nil }
+                log.error(error)
+                return error
             }()
             
             if let data = response.result.value {

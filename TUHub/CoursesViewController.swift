@@ -16,10 +16,12 @@ class CoursesViewController: UIViewController {
     }
     
     @IBOutlet weak var courseCalendarView: CourseCalendarView!
-    @IBOutlet weak var courseListView: CourseListView!
+    @IBOutlet weak var courseListView: UIView!
     @IBOutlet weak var leftBarButton: UIBarButtonItem!
     @IBOutlet weak var dummyTextField: UITextField!
+    
     weak var datePicker: UIDatePicker!
+    weak var coursePageVC: CoursePageViewController?
     
     var state = State.calendar
     fileprivate var terms: [Term]?
@@ -39,19 +41,13 @@ class CoursesViewController: UIViewController {
                 var courses = [Course]()
                 
                 for term in terms {
-                    
-                    debugPrint("-----------------------------")
-                    debugPrint(term.name)
                     if let c = term.courses {
                         courses.append(contentsOf: c)
-                        for course in courses {
-                            debugPrint(course.name)
-                        }
                     }
                 }
                 
                 self.courseCalendarView.setUp(with: courses, from: self)
-                self.courseListView.setUp(with: terms, from: self)
+                self.coursePageVC?.terms = terms
             }
         })
 
@@ -124,15 +120,17 @@ class CoursesViewController: UIViewController {
         setLeftButtonTitle(to: datePicker.date)
     }
     
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "embedCourseListView" {
+            if let coursePageVC = segue.destination as? CoursePageViewController {
+                coursePageVC.terms = terms
+                self.coursePageVC = coursePageVC
+            }
+        }
     }
-    */
 
 }
 

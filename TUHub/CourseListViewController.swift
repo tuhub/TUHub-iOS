@@ -1,5 +1,5 @@
 //
-//  CourseListView.swift
+//  CourseListViewController.swift
 //  TUHub
 //
 //  Created by Connor Crawford on 3/14/17.
@@ -8,47 +8,38 @@
 
 import UIKit
 
-class CourseListView: UIView {
+class CourseListViewController: UIViewController {
 
     @IBOutlet weak var termLabel: UILabel!
     @IBOutlet weak var courseTableView: UITableView!
-    @IBOutlet weak var pageControl: UIPageControl!
     
-    var terms: [Term]?
-    weak var viewController: UIViewController?
+    var term: Term?
     
-    
-    func setUp(with terms: [Term], from viewController: UIViewController?) {
-        self.terms = terms
-        self.viewController = viewController
-        
-        // Set up page control
-        pageControl.numberOfPages = terms.count
-        
-        // Setting tableView delegate
-        self.courseTableView.dataSource = self
-        
-        changeTerm(to: 0)
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
+        // Setting tableView delegate
+        courseTableView.dataSource = self
+        
+        // Set term label
+        termLabel.text = term?.name
     }
     
-    func changeTerm(to index: Int) {
-        if let terms = terms {
-            termLabel.text = terms[index].name
-            courseTableView.reloadData()
-        }
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
-    
-    @IBAction func didChangePage(_ sender: UIPageControl) {
-        changeTerm(to: sender.currentPage)
-    }
-    
+    */
+
 }
 
-// TODO: Implement UITableViewDataSource
-
 // MARK: - UITableViewDataSource
-extension CourseListView: UITableViewDataSource {
+extension CourseListViewController: UITableViewDataSource {
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -56,13 +47,13 @@ extension CourseListView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return terms?[pageControl.currentPage].courses?.count ?? 0
+        return term?.courses?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "courseListCell", for: indexPath)
         
-        guard let term = terms?[pageControl.currentPage], let courses = term.courses else {
+        guard let term = term, let courses = term.courses else {
             return cell
         }
         
@@ -81,7 +72,7 @@ extension CourseListView: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-extension CourseListView: UITableViewDelegate {
+extension CourseListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: Handle selection

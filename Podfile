@@ -7,6 +7,7 @@ target 'TUHub' do
 
   # Pods for TUHub
   pod 'Alamofire', '~> 4.3'
+  pod 'AlamofireNetworkActivityIndicator', '~> 2.1'
   pod 'SwiftyJSON', '~> 3.1'
   pod 'FSCalendar', '~> 2.7'
   pod 'SwiftyBeaver', '~> 1.1'

@@ -47,7 +47,7 @@ class SignInViewController: UIViewController {
             }
             
             if let error = error {
-                
+                error.displayAlertController(from: self)
             }
         }
     }
