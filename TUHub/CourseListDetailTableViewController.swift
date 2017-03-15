@@ -17,6 +17,8 @@ class CourseListDetailTableViewController: UIViewController, UITableViewDelegate
     
     var course: Course?
     
+    var gradeTerm: [Grade] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,17 +29,18 @@ class CourseListDetailTableViewController: UIViewController, UITableViewDelegate
         
         courseDescription.text = course?.title
         
-        let semester = course?.meetings
-        for met in semester! {
-            let startDate = met.startDate
-            let endDate = met.endDate
+        let mettings = course?.meetings
+        
+        for metting in mettings! {
+            let startDate = metting.startDate
+            let endDate = metting.endDate
             semesterDate.text = "\(startDate.date) to \(endDate.date)"
         }
         
         
         
     }
-    
+        
     
     // MARK: - Table view data source
     
