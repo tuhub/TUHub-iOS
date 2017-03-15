@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let pageControl: UIPageControl = UIPageControl.appearance(whenContainedInInstancesOf: [CoursePageViewController.self])
         pageControl.pageIndicatorTintColor = UIColor.lightGray
         pageControl.currentPageIndicatorTintColor = UIColor.black
+        pageControl.backgroundColor = UIColor.clear
         
         NetworkActivityIndicatorManager.shared.isEnabled = true
         

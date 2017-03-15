@@ -15,7 +15,7 @@ struct Term {
     private(set) var startDate: Date
     private(set) var endDate: Date
     private(set) var grades: [Grade]?
-    private(set) var courses: [Course]?
+    var courses: [Course]?
     
     init?(json: JSON) {
         

@@ -127,7 +127,7 @@ extension User {
     
     typealias GradesResponseHandler = ([Term]?, Error?) -> Void
     
-    func retrieveGrades(_ responseHandler: GradesResponseHandler?) {
+    fileprivate func retrieveGrades(_ responseHandler: GradesResponseHandler?) {
         
         NetworkManager.request(fromEndpoint: .grades, withTUID: tuID, authenticateWith: credential) { (json, error) in
             
@@ -159,38 +159,76 @@ extension User {
     
     func retrieveCourseOverview(_ responseHandler: CoursesResponseHandler?) {
         NetworkManager.request(fromEndpoint: .courseOverview, withTUID: tuID, authenticateWith: credential) { (json, error) in
-            var courses: [Term]?
             
-            if let json = json {
-                for (_, subJSON) in json["terms"] {
-                    if let term = Term(json: subJSON) {
-                        if courses == nil {
-                            courses = [Term]()
-                        }
-                        courses!.append(term)
-                    }
+            guard let json = json else {
+                responseHandler?(nil, error)
+                return
+            }
+            
+            var courseTerms = [Term]()
+            
+            // Parse JSON into terms
+            for (_, subJSON) in json["terms"] {
+                if let term = Term(json: subJSON) {
+                    courseTerms.append(term)
                 }
             }
-            responseHandler?(courses, error)
-        }
-    }
-    func retrieveCourseFullView(_ responseHandler: CoursesResponseHandler?) {
-        NetworkManager.request(fromEndpoint: .courseFullView, withTUID: tuID, authenticateWith: credential) { (json, error) in
-            var courses: [Term]?
             
-            if let json = json {
-                for (_, subJSON) in json["terms"] {
-                    if let term = Term(json: subJSON) {
-                        if courses == nil {
-                            courses = [Term]()
-                        }
-                        courses!.append(term)
-                    }
+            // Retrieve grades and associate with their corresponding course
+            self.retrieveGrades({ (gradeTerms, error) in
+                guard let gradeTerms = gradeTerms else {
+                        responseHandler?(courseTerms, error)
+                        return
                 }
-            }
-            responseHandler?(courses, error)
+                var courseTerms = courseTerms
+                
+                for gradeTerm in gradeTerms {
+                    
+                    // Get each corresponding term's courses
+                    guard let grades = gradeTerm.grades,
+                        let index = courseTerms.index(where: { $0.id == gradeTerm.id }),
+                        var courses = courseTerms[index].courses else { continue }
+                    
+                    // Find the corresponding course for the grade
+                    for grade in grades {
+                        guard let index = courses.index(where: {$0.sectionID == grade.sectionID}) else { continue }
+                        var course = courses[index]
+                        
+                        // Add the grade to the course's grades
+                        if course.grades == nil {
+                            course.grades = [grade]
+                        } else {
+                            course.grades!.append(grade)
+                        }
+                        courses[index] = course
+                    }
+                    
+                    courseTerms[index].courses = courses
+                    
+                }
+                
+                responseHandler?(courseTerms, error)
+            })
         }
     }
+    
+//    func retrieveCourseFullView(_ responseHandler: CoursesResponseHandler?) {
+//        NetworkManager.request(fromEndpoint: .courseFullView, withTUID: tuID, authenticateWith: credential) { (json, error) in
+//            var courses: [Term]?
+//            
+//            if let json = json {
+//                for (_, subJSON) in json["terms"] {
+//                    if let term = Term(json: subJSON) {
+//                        if courses == nil {
+//                            courses = [Term]()
+//                        }
+//                        courses!.append(term)
+//                    }
+//                }
+//            }
+//            responseHandler?(courses, error)
+//        }
+//    }
     
     // CourseCalendarView only provides data about the current week, which we are unlikely to need because we will be providing a full calendar
 //    func retrieveCourseCalendarView(_ responseHandler: CoursesResponseHandler?) {

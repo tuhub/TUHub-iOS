@@ -21,6 +21,7 @@ struct Course {
     private(set) var instructors: [Instructor]? // Not provided in fullview or calendar view
     let levels: [String]?
     var roster: [String]?
+    var grades: [Grade]?
     
     init?(json: JSON, termID: String) {
         guard let name = json["courseName"].string,

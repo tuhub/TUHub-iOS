@@ -57,14 +57,12 @@ extension CourseListViewController: UITableViewDataSource {
             return cell
         }
         
-        // Get all the courses and course description for the term
-        let courseName = courses[indexPath.row].name
-        let courseDescription = courses[indexPath.row].description
+        let course = courses[indexPath.row]
         
         // Set course name label
-        cell.textLabel?.text = courseName
+        cell.textLabel?.text = "\(course.name)-\(course.sectionNumber)"
         // Set course description label
-        cell.detailTextLabel?.text = courseDescription
+        cell.detailTextLabel?.text = courses[indexPath.row].description
         
         return cell
     }
