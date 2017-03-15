@@ -54,13 +54,14 @@ struct Course {
         
         if let meetingPatterns = json["meetingPatterns"].array {
             for subJSON in meetingPatterns {
-                if let meeting = CourseMeeting(json: subJSON) {
+                if let meeting = CourseMeeting(json: subJSON, course: self) {
                     if meetings == nil {
                         meetings = [CourseMeeting]()
                     }
                     meetings!.append(meeting)
                 }
             }
+            meetings?.sort { $0.startDate < $1.startDate }
         }
         
     }
