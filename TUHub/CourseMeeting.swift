@@ -28,8 +28,9 @@ struct CourseMeeting {
         return dateFormatter.string(from: endDate)
     }
     let endDate: Date
+    var course: Course
     
-    init?(json: JSON) {
+    init?(json: JSON, course: Course) {
         guard let daysOfWeek = json["daysOfWeek"].arrayObject as? [Int],
             let buildingID = json["buildingId"].string,
             let buildingName = json["building"].string,
@@ -50,6 +51,6 @@ struct CourseMeeting {
         self.room = room
         self.startDate = startDate
         self.endDate = endDate
-        
+        self.course = course
     }
 }

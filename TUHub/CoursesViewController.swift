@@ -32,6 +32,7 @@ class CoursesViewController: UIViewController {
         // Load terms/courses
         User.current?.retrieveCourseOverview({ (terms, error) in
             if let error = error {
+                // TODO: Handle error
                 debugPrint(error)
             }
             
@@ -46,7 +47,7 @@ class CoursesViewController: UIViewController {
                     }
                 }
                 
-                self.courseCalendarView.setUp(with: courses, from: self)
+                self.courseCalendarView.setUp(with: courses, delegate: self)
                 self.coursePageVC?.terms = terms
             }
         })
@@ -56,8 +57,6 @@ class CoursesViewController: UIViewController {
         
         // Set up date picker for the left bar button
         setUpDatePicker()
-        
-        courseCalendarView.calendarView.delegate = self
     }
     
     func setUpDatePicker() {
@@ -116,8 +115,11 @@ class CoursesViewController: UIViewController {
     
     func didPressDatePickerDoneButton(_ sender: UIBarButtonItem) {
         dummyTextField.resignFirstResponder()
-        courseCalendarView.calendarView.select(datePicker.date, scrollToDate: true)
         setLeftButtonTitle(to: datePicker.date)
+        courseCalendarView.calendarView.select(datePicker.date, scrollToDate: true)
+        
+        // Due to a bug(?), the calendar delegate isn't informed when we programmatically select date, so we must do it manually
+        courseCalendarView.calendar(courseCalendarView.calendarView, didSelect: datePicker.date, at: .notFound)
     }
     
     // MARK: - Navigation
@@ -134,10 +136,9 @@ class CoursesViewController: UIViewController {
 
 }
 
-// MARK: - FSCalendarDelegate
-extension CoursesViewController: FSCalendarDelegate {
+extension CoursesViewController: CourseCalendarViewDelegate {
     
-    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+    func didSelectDate(_ date: Date) {
         if state == .calendar {
             setLeftButtonTitle(to: date)
             datePicker.setDate(date, animated: true)
@@ -145,3 +146,4 @@ extension CoursesViewController: FSCalendarDelegate {
     }
     
 }
+

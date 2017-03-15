@@ -9,72 +9,126 @@
 import UIKit
 import FSCalendar
 
+fileprivate let courseCalendarCellID = "courseCalendarCell"
+
+protocol CourseCalendarViewDelegate {
+    func didSelectDate(_ date: Date)
+}
+
 class CourseCalendarView: UIView {
 
     @IBOutlet weak var calendarView: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     
     var courses: [Course]?
-    var selectedDate: Date?
-    weak var viewController: CoursesViewController?
+    var selectedDate: Date!
+    var selectedDateMeetings: [CourseMeeting]!
+    var delegate: CourseCalendarViewDelegate?
     
-    func setUp(with courses: [Course], from viewController: CoursesViewController?) {
+    func setUp(with courses: [Course], delegate: CourseCalendarViewDelegate?) {
+        // Init values
         self.courses = courses
-        self.viewController = viewController
-        self.calendarView.dataSource = self
+        self.delegate = delegate
+        
+        // Set up calendar view
+        calendarView.dataSource = self
+        calendarView.delegate = self
+        calendarView.reloadData()
+        
+        // Get meetings for the current date
+        selectedDate = Date()
+        selectedDateMeetings = meetings(on: selectedDate)
+        
+        // Set up table view
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 60
     }
     
-    func numberOfCourses(for date: Date) -> Int {
+    func meetings(on date: Date) -> [CourseMeeting]? {
         
-        guard let selectedDate = selectedDate else {
-            return 0
-        }
-        
-        var numberOfCoursesForDate = 0
+        var meetingsForDate = [CourseMeeting]()
+
         if let courses = courses {
             for course in courses {
-                if let meetings = course.meetings {
-                    for meeting in meetings {
-                        if selectedDate > meeting.startDate && selectedDate < meeting.endDate {
-                            numberOfCoursesForDate += 1
-                        }
-                    }
+                if let meetings = meetings(forCourse: course, on: date) {
+                    meetingsForDate.append(contentsOf: meetings)
                 }
             }
         }
-        return numberOfCoursesForDate
         
+        if meetingsForDate.count == 0 {
+            return nil
+        }
+        
+        meetingsForDate.sort { $0.startDate < $1.startDate }
+        
+        return meetingsForDate
     }
 
+    func meetings(forCourse course: Course, on date: Date) -> [CourseMeeting]? {
+        
+        guard let meetings = course.meetings else { return nil }
+        
+        // Get the date's day of the week
+        let calendar = Calendar.current
+        let dayOfWeek = calendar.component(.weekday, from: date)
+        
+        var meetingsForDate = [CourseMeeting]()
+        for meeting in meetings {
+            if date > meeting.startDate && date < meeting.endDate && meeting.daysOfWeek.contains(dayOfWeek) {
+                meetingsForDate.append(meeting)
+            }
+        }
+        
+        if meetingsForDate.count == 0 {
+            return nil
+        }
+        
+        return meetingsForDate
+    }
+    
 }
 
 // MARK: - FSCalendarDataSource
 extension CourseCalendarView: FSCalendarDataSource {
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        return numberOfCourses(for: date)
+        return meetings(on: date)?.count ?? 0
     }
     
 }
 
-// TODO: Complete implementation
+// MARK: - FSCalendarDelegate
+extension CourseCalendarView: FSCalendarDelegate {
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        selectedDate = date
+        delegate?.didSelectDate(date)
+        selectedDateMeetings = meetings(on: date)
+        tableView.reloadData()
+    }
+    
+}
+
 // MARK: - UITableViewDataSource
 extension CourseCalendarView: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let selectedDate = selectedDate {
-            return numberOfCourses(for: selectedDate)
-        }
-        return 0
+        return selectedDateMeetings?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier")
-        return cell!
+        let cell = tableView.dequeueReusableCell(withIdentifier: courseCalendarCellID, for: indexPath)
+        if let cell = cell as? CourseCalendarTableViewCell, let selectedDateMeetings = selectedDateMeetings {
+            cell.setUp(from: selectedDateMeetings[indexPath.row])
+        }
+        return cell
     }
     
 }

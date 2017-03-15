@@ -29,6 +29,7 @@
 		7D4798411E7848A700F969CD /* CourseCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47983F1E7848A700F969CD /* CourseCalendarView.swift */; };
 		7D553BB51E78C76F00D46166 /* CoursePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D553BB41E78C76F00D46166 /* CoursePageViewController.swift */; };
 		7D553BB71E78C7A700D46166 /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D553BB61E78C7A700D46166 /* CourseListViewController.swift */; };
+		7D553BE91E78F65F00D46166 /* CourseCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D553BE81E78F65F00D46166 /* CourseCalendarTableViewCell.swift */; };
 		7D5E40611E78A69500D5C1CA /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E40601E78A69500D5C1CA /* String+Date.swift */; };
 		7D6D6D7E1E6FD6CB00BF121A /* UIColor+Cherry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D7D1E6FD6CB00BF121A /* UIColor+Cherry.swift */; };
 		7D6D6D821E708EE400BF121A /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D811E708EE400BF121A /* NewsTableViewController.swift */; };
@@ -94,6 +95,7 @@
 		7D47983F1E7848A700F969CD /* CourseCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCalendarView.swift; sourceTree = "<group>"; };
 		7D553BB41E78C76F00D46166 /* CoursePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePageViewController.swift; sourceTree = "<group>"; };
 		7D553BB61E78C7A700D46166 /* CourseListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListViewController.swift; sourceTree = "<group>"; };
+		7D553BE81E78F65F00D46166 /* CourseCalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCalendarTableViewCell.swift; sourceTree = "<group>"; };
 		7D5E40601E78A69500D5C1CA /* String+Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		7D6D6D7D1E6FD6CB00BF121A /* UIColor+Cherry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Cherry.swift"; sourceTree = "<group>"; };
 		7D6D6D7F1E707ED900BF121A /* CoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				7D47983F1E7848A700F969CD /* CourseCalendarView.swift */,
+				7D553BE81E78F65F00D46166 /* CourseCalendarTableViewCell.swift */,
 				7D6D6D871E70B33F00BF121A /* NewsItemTableViewCell.swift */,
 				7D6D6D911E70CDD900BF121A /* NewsHeaderTableViewCell.swift */,
 				7D6D6D931E70CDE500BF121A /* NewsBodyTableViewCell.swift */,
@@ -573,6 +576,7 @@
 			files = (
 				7D043A991E5FBE100003A853 /* Instructor.swift in Sources */,
 				7D6D6D861E709B6600BF121A /* NewsItem.swift in Sources */,
+				7D553BE91E78F65F00D46166 /* CourseCalendarTableViewCell.swift in Sources */,
 				7D5E40611E78A69500D5C1CA /* String+Date.swift in Sources */,
 				7DED63F91E72098A0023A0AA /* NewsFilterTableViewController.swift in Sources */,
 				7D043A911E5F871E0003A853 /* Course.swift in Sources */,
