@@ -10,22 +10,24 @@ import SwiftyJSON
 
 struct CourseMeeting {
 
+    private static var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        dateFormatter.timeZone = .autoupdatingCurrent
+        return dateFormatter
+    }()
+    
     let daysOfWeek: [Int]
     let buildingID: String
     let buildingName: String
     let room: String
     var startTime: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .none
-        dateFormatter.timeStyle = .short
-        return dateFormatter.string(from: startDate)
+        return CourseMeeting.dateFormatter.string(from: startDate)
     }
     let startDate: Date
     var endTime: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .none
-        dateFormatter.timeStyle = .short
-        return dateFormatter.string(from: endDate)
+        return CourseMeeting.dateFormatter.string(from: endDate)
     }
     let endDate: Date
     var course: Course
@@ -49,8 +51,12 @@ struct CourseMeeting {
         self.buildingID = buildingID
         self.buildingName = buildingName
         self.room = room
-        self.startDate = startDate
-        self.endDate = endDate
         self.course = course
+        
+        // Temple API assumes non-daylight savings time, so need to remove offset if there is one
+        let timezone = TimeZone.autoupdatingCurrent
+        self.startDate = startDate - timezone.daylightSavingTimeOffset(for: startDate)
+        self.endDate = endDate - timezone.daylightSavingTimeOffset(for: endDate)
+
     }
 }

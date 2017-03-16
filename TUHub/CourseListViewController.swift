@@ -17,21 +17,27 @@ class CourseListViewController: UIViewController {
     @IBOutlet weak var courseTableView: UITableView!
     
     var term: Term?
-    fileprivate weak var courseDetailVC: CourseListDetailTableViewController?
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Setting tableView dataSource and delegate
         courseTableView.dataSource = self
-        courseTableView.delegate = self
         
         // Set term label
         termLabel.text = term?.name
+        
+        self.title = term?.name
     }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Needed to prevent previously selected row from remaining selected
+        if let selectedRow = courseTableView.indexPathForSelectedRow {
+            courseTableView.deselectRow(at: selectedRow, animated: true)
+        }
+    }
 
     // MARK: - Navigation
 
@@ -46,11 +52,10 @@ class CourseListViewController: UIViewController {
             
             guard let cell = sender as? UITableViewCell,
                 let indexPath = courseTableView.indexPath(for: cell),
-                let courseDetailVC = segue.destination as? CourseListDetailTableViewController
+                let courseDetailVC = segue.destination as? CourseDetailTableViewController
                 else { break }
             
             courseDetailVC.course = term?.courses?[indexPath.row]
-            self.courseDetailVC = courseDetailVC
 
         default:
             break
@@ -84,18 +89,9 @@ extension CourseListViewController: UITableViewDataSource {
         // Set course name label
         cell.textLabel?.text = "\(course.name)-\(course.sectionNumber)"
         // Set course description label
-        cell.detailTextLabel?.text = courses[indexPath.row].description
+        cell.detailTextLabel?.text = course.description ?? course.title
         
         return cell
-    }
-    
-}
-
-// MARK: - UITableViewDelegate
-extension CourseListViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: courseDetailSegueID, sender: tableView.cellForRow(at: indexPath))
     }
     
 }

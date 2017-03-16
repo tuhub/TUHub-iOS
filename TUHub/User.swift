@@ -10,7 +10,7 @@ import Alamofire
 import SwiftyJSON
 
 // Fake values for protection space so URLSession does not actually use stored credential
-// If real values are used, a bug will occur that prevents the user from switching accounts for 10 seconds
+// If real values are used, a bug will occur that prevents the user from switching accounts for ~10 seconds
 fileprivate let protectionSpace = URLProtectionSpace(host: "prd-mobile.temple.edu",
                                                             port: 0,
                                                             protocol: nil,
@@ -157,7 +157,7 @@ extension User {
     
     typealias CoursesResponseHandler = ([Term]?, Error?) -> Void
     
-    func retrieveCourseOverview(_ responseHandler: CoursesResponseHandler?) {
+    func retrieveCourses(_ responseHandler: CoursesResponseHandler?) {
         NetworkManager.request(fromEndpoint: .courseOverview, withTUID: tuID, authenticateWith: credential) { (json, error) in
             
             guard let json = json else {
@@ -192,7 +192,7 @@ extension User {
                     // Find the corresponding course for the grade
                     for grade in grades {
                         guard let index = courses.index(where: {$0.sectionID == grade.sectionID}) else { continue }
-                        var course = courses[index]
+                        let course = courses[index]
                         
                         // Add the grade to the course's grades
                         if course.grades == nil {
@@ -211,35 +211,5 @@ extension User {
             })
         }
     }
-    
-//    func retrieveCourseFullView(_ responseHandler: CoursesResponseHandler?) {
-//        NetworkManager.request(fromEndpoint: .courseFullView, withTUID: tuID, authenticateWith: credential) { (json, error) in
-//            var courses: [Term]?
-//            
-//            if let json = json {
-//                for (_, subJSON) in json["terms"] {
-//                    if let term = Term(json: subJSON) {
-//                        if courses == nil {
-//                            courses = [Term]()
-//                        }
-//                        courses!.append(term)
-//                    }
-//                }
-//            }
-//            responseHandler?(courses, error)
-//        }
-//    }
-    
-    // CourseCalendarView only provides data about the current week, which we are unlikely to need because we will be providing a full calendar
-//    func retrieveCourseCalendarView(_ responseHandler: CoursesResponseHandler?) {
-//        NetworkManager.request(fromEndpoint: .courseCalendarView, withTUID: tuID, authenticateWith: credential) { (json, error) in
-//            var courses: [Course]?
-//            
-//            if let json = json {
-//                debugPrint(json)
-//            }
-//            
-//        }
-//    }
     
 }

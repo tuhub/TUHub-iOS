@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-struct Course {
+class Course {
     
     let name: String // Course code
     let description: String? // Longest name
@@ -22,12 +22,16 @@ struct Course {
     let levels: [String]?
     var roster: [String]?
     var grades: [Grade]?
+    let startDate: Date
+    let endDate: Date
     
     init?(json: JSON, termID: String) {
         guard let name = json["courseName"].string,
             let title = json["sectionTitle"].string,
             let sectionID = json["sectionId"].string,
-            let sectionNumber = json["courseSectionNumber"].string
+            let sectionNumber = json["courseSectionNumber"].string,
+            let startDate = json["firstMeetingDate"].date,
+            let endDate = json["lastMeetingDate"].date
             else {
                 log.error("Invalid JSON while initializing Course")
                 return nil
@@ -41,6 +45,8 @@ struct Course {
         self.sectionNumber = sectionNumber
         self.credits = json["credits"].uInt8
         self.levels = json["academicLevels"].arrayObject as? [String]
+        self.startDate = startDate
+        self.endDate = endDate
         
         if let instructorsJSON = json["instructors"].array {
             for subJSON in instructorsJSON {
@@ -100,6 +106,8 @@ extension Course {
                 }
                 
             }
+            
+            self.roster = roster
             
             responseHandler?(roster, error)
             

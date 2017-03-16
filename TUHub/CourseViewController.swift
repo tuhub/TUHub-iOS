@@ -1,5 +1,5 @@
 //
-//  CoursesViewController.swift
+//  CourseViewController.swift
 //  TUHub
 //
 //  Created by Connor Crawford on 3/8/17.
@@ -9,7 +9,10 @@
 import UIKit
 import FSCalendar
 
-class CoursesViewController: UIViewController {
+fileprivate let embedSegueID = "embedCourseListView"
+fileprivate let showCourseDetailSegueID = "showCourseDetail"
+
+class CourseViewController: UIViewController {
 
     enum State {
         case calendar, list
@@ -31,7 +34,7 @@ class CoursesViewController: UIViewController {
         super.viewDidLoad()
 
         // Load terms/courses
-        User.current?.retrieveCourseOverview({ (terms, error) in
+        User.current?.retrieveCourses() { (terms, error) in
             if let error = error {
                 // TODO: Handle error
                 debugPrint(error)
@@ -51,7 +54,7 @@ class CoursesViewController: UIViewController {
                 self.courseCalendarView.setUp(with: courses, delegate: self)
                 self.coursePageVC?.terms = terms
             }
-        })
+        }
 
         // Change calendar scroll direction
         courseCalendarView.calendarView.scrollDirection = .vertical
@@ -175,17 +178,30 @@ class CoursesViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "embedCourseListView" {
+        
+        switch segue.identifier! {
+        case embedSegueID:
             if let coursePageVC = segue.destination as? CoursePageViewController {
                 coursePageVC.terms = terms
                 self.coursePageVC = coursePageVC
+                
             }
+        case showCourseDetailSegueID:
+            if let courseDetailVC = segue.destination as? CourseDetailTableViewController,
+                let cell = sender as? UITableViewCell,
+                let indexPath = courseCalendarView.tableView.indexPath(for: cell),
+                let course = courseCalendarView.courses?[indexPath.row] {
+                
+                courseDetailVC.course = course
+            }
+        default:
+            break
         }
     }
 
 }
 
-extension CoursesViewController: CourseCalendarViewDelegate {
+extension CourseViewController: CourseCalendarViewDelegate {
     
     func didSelectDate(_ date: Date) {
         if state == .calendar {
@@ -196,7 +212,7 @@ extension CoursesViewController: CourseCalendarViewDelegate {
     
 }
 
-extension CoursesViewController: UIPickerViewDataSource {
+extension CourseViewController: UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -208,7 +224,7 @@ extension CoursesViewController: UIPickerViewDataSource {
     
 }
 
-extension CoursesViewController: UIPickerViewDelegate {
+extension CourseViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return terms?[row].name

@@ -10,6 +10,7 @@ import SwiftyJSON
 
 struct Grade {
     
+    private(set) var name: String
     private(set) var courseName: String
     private(set) var sectionID: String
     private(set) var sectionTitle: String
@@ -26,6 +27,7 @@ struct Grade {
             let creditHours = json["creditHours"].string,
             let courseSectionNumber = json["courseSectionNumber"].string,
             let grades = json["grades"].array?.first?.dictionary,
+            let name = grades["name"]?.string,
             let grade = grades["value"]?.string,
             let updated = grades["updated"]?.dateTime
             else {
@@ -33,6 +35,7 @@ struct Grade {
                 return nil
         }
         
+        self.name = name
         self.courseName = courseName
         self.sectionID = sectionID
         self.sectionTitle = sectionTitle
