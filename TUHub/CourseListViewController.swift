@@ -46,7 +46,7 @@ class CourseListViewController: UIViewController {
             
             guard let cell = sender as? UITableViewCell,
                 let indexPath = courseTableView.indexPath(for: cell),
-                let courseDetailVC = (segue.destination as? UINavigationController)?.childViewControllers.first as? CourseListDetailTableViewController
+                let courseDetailVC = segue.destination as? CourseListDetailTableViewController
                 else { break }
             
             courseDetailVC.course = term?.courses?[indexPath.row]
@@ -95,9 +95,7 @@ extension CourseListViewController: UITableViewDataSource {
 extension CourseListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-                self.performSegue(withIdentifier: courseDetailSegueID, sender: tableView.cellForRow(at: indexPath))
-        
+        self.performSegue(withIdentifier: courseDetailSegueID, sender: tableView.cellForRow(at: indexPath))
     }
     
 }
