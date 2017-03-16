@@ -40,6 +40,10 @@ class CourseListDetailTableViewController: UIViewController, UITableViewDelegate
         
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
         
     
     // MARK: - Table view data source
@@ -118,13 +122,16 @@ class CourseListDetailTableViewController: UIViewController, UITableViewDelegate
             
         // Grades
         case 2:
-            cell.textLabel?.text = "Final Grade"
-            cell.detailTextLabel?.text = "updated"
-//            for meeting in (term?.grades)! {
-//                cell.textLabel?.text = meeting.formattedName
-//                // TODO: Last updated
-//                cell.detailTextLabel?.text = nil
-//            }
+            
+            guard let grades = course?.grades else {
+                return cell
+            }
+            
+            for termGrade in grades {
+                cell.textLabel?.text = termGrade.grade
+                cell.detailTextLabel?.text = "updated"
+            }
+
             
         // Roster
         case 3:
