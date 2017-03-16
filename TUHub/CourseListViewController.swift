@@ -8,33 +8,55 @@
 
 import UIKit
 
+// Segue Identifiers
+fileprivate let courseDetailSegueID = "showCourseDetail"
+
 class CourseListViewController: UIViewController {
 
     @IBOutlet weak var termLabel: UILabel!
     @IBOutlet weak var courseTableView: UITableView!
     
     var term: Term?
+    fileprivate weak var courseDetailVC: CourseListDetailTableViewController?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Setting tableView delegate
+        // Setting tableView dataSource and delegate
         courseTableView.dataSource = self
+        courseTableView.delegate = self
         
         // Set term label
         termLabel.text = term?.name
     }
     
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        switch segue.identifier! {
+            
+        case courseDetailSegueID:
+            
+            guard let cell = sender as? UITableViewCell,
+                let indexPath = courseTableView.indexPath(for: cell),
+                let courseDetailVC = (segue.destination as? UINavigationController)?.childViewControllers.first as? CourseListDetailTableViewController
+                else { break }
+            
+            courseDetailVC.course = term?.courses?[indexPath.row]
+            self.courseDetailVC = courseDetailVC
+
+        default:
+            break
+        }
     }
-    */
+
 
 }
 
@@ -73,7 +95,9 @@ extension CourseListViewController: UITableViewDataSource {
 extension CourseListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: Handle selection
+
+                self.performSegue(withIdentifier: courseDetailSegueID, sender: tableView.cellForRow(at: indexPath))
+        
     }
     
 }

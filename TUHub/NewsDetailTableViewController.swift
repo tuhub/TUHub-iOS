@@ -31,14 +31,7 @@ class NewsDetailTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 100
         
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Add button to switch display mode for split view controller
-        navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-        navigationItem.leftItemsSupplementBackButton = true
-    }
+
     
     // MARK: - Table view data source
 
