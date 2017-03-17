@@ -185,7 +185,7 @@ extension NewsTableViewController {
                         
                         // If showing the news detail view controller, tell it to update to show image
                         if self.newsDetailVC?.newsItem?.entryID == entryID {
-                            self.newsDetailVC?.newsBodyCell?.updateImageView(with: image)
+                            self.newsDetailVC?.newsImageCell?.updateImageView(with: image)
                         }
                         
                     }
@@ -193,17 +193,6 @@ extension NewsTableViewController {
                 
             }
         }
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        // Try to asynchronously parse HTML before performing segue
-        if let newsItem = newsItems?[indexPath.row] {
-            newsItem.parseContent() {
-                self.performSegue(withIdentifier: newsDetailSegueID, sender: tableView.cellForRow(at: indexPath))
-            }
-        }
-        
     }
     
 }

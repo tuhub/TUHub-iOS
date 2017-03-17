@@ -11,6 +11,7 @@ import FSCalendar
 
 fileprivate let embedSegueID = "embedCourseListView"
 fileprivate let showCourseDetailSegueID = "showCourseDetail"
+fileprivate let formCourseDetailSegueID = "formCourseDetail"
 
 class CourseViewController: UIViewController {
 
@@ -86,6 +87,15 @@ class CourseViewController: UIViewController {
         toolbar.setItems([todayButton, flexSpace, doneButton], animated: false)
         toolbar.sizeToFit()
         dummyTextField.inputAccessoryView = toolbar
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Needed to prevent previously selected row from remaining selected
+        if let selectedRow = courseCalendarView.tableView.indexPathForSelectedRow {
+            courseCalendarView.tableView.deselectRow(at: selectedRow, animated: true)
+        }
     }
     
     func setUpTermPicker() {
@@ -186,11 +196,19 @@ class CourseViewController: UIViewController {
                 self.coursePageVC = coursePageVC
                 
             }
+        case formCourseDetailSegueID:
+            if let courseDetailVC = (segue.destination as? UINavigationController)?.viewControllers.first as? CourseDetailTableViewController,
+                let cell = sender as? UITableViewCell,
+                let indexPath = courseCalendarView.tableView.indexPath(for: cell),
+                let course = courseCalendarView.selectedDateMeetings?[indexPath.row].course {
+                
+                courseDetailVC.course = course
+            }
         case showCourseDetailSegueID:
             if let courseDetailVC = segue.destination as? CourseDetailTableViewController,
                 let cell = sender as? UITableViewCell,
                 let indexPath = courseCalendarView.tableView.indexPath(for: cell),
-                let course = courseCalendarView.courses?[indexPath.row] {
+                let course = courseCalendarView.selectedDateMeetings?[indexPath.row].course {
                 
                 courseDetailVC.course = course
             }
@@ -198,9 +216,21 @@ class CourseViewController: UIViewController {
             break
         }
     }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == showCourseDetailSegueID && traitCollection.horizontalSizeClass == .regular {
+            performSegue(withIdentifier: formCourseDetailSegueID, sender: sender)
+            return false
+        }
+        if identifier == formCourseDetailSegueID && traitCollection.horizontalSizeClass == .compact {
+            return false
+        }
+        return super.shouldPerformSegue(withIdentifier: identifier, sender: sender)
+    }
 
 }
 
+// MARK: - CourseCalendarViewDelegate
 extension CourseViewController: CourseCalendarViewDelegate {
     
     func didSelectDate(_ date: Date) {
@@ -212,6 +242,7 @@ extension CourseViewController: CourseCalendarViewDelegate {
     
 }
 
+// MARK: - UIPickerViewDataSource
 extension CourseViewController: UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -224,6 +255,7 @@ extension CourseViewController: UIPickerViewDataSource {
     
 }
 
+// MARK: - UIPickerViewDelegate
 extension CourseViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

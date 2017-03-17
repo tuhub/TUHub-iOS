@@ -10,21 +10,19 @@ import UIKit
 
 class NewsBodyTableViewCell: UITableViewCell {
 
-    weak var tableView: UITableView?
-    
-    @IBOutlet weak var newsImageView: UIImageView!
     @IBOutlet weak var contentTextView: UITextView!
-    
-    func updateImageView(with image: UIImage?) {
-        newsImageView.image = image
-        tableView?.beginUpdates()
-        tableView?.endUpdates()
-    }
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     func setUp(with newsItem: NewsItem, from tableView: UITableView) {
-        newsImageView.image = newsItem.image
-        contentTextView.attributedText = newsItem.content!
-        self.tableView = tableView
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        newsItem.parseContent() { text in
+            self.activityIndicator.stopAnimating()
+            self.contentTextView.attributedText = text
+            tableView.beginUpdates()
+            tableView.endUpdates()
+            self.contentTextView.isHidden = false
+        }
     }
     
 }

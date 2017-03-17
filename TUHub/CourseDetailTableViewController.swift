@@ -35,8 +35,17 @@ class CourseDetailTableViewController: UITableViewController {
             title = "\(course.name)-\(course.sectionNumber)"
         }
         
+        // Show a done button if being presented modally
+        if isBeingPresented || (navigationController?.isBeingPresented ?? false) {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismiss(_:)))
+        }
+        
     }
 
+    func dismiss(_ completion: (()->Void)?) {
+        dismiss(animated: true, completion: completion)
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -117,7 +126,7 @@ class CourseDetailTableViewController: UITableViewController {
                 let weekdaySymbols = Calendar.current.shortWeekdaySymbols
                 var str = ""
                 for (i, day) in daysOfWeek.enumerated() {
-                    str += weekdaySymbols[day]
+                    str += weekdaySymbols[day - 1]
                     if i != daysOfWeek.count - 1 {
                         str += ", "
                     }

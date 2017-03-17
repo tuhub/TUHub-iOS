@@ -11,17 +11,20 @@ import SKPhotoBrowser
 import SafariServices
 
 fileprivate let newsHeaderCellID = "newsHeaderCell"
+fileprivate let newsImageCellID = "newsImageCell"
 fileprivate let newsBodyCellID = "newsBodyCell"
 
 class NewsDetailTableViewController: UITableViewController {
 
+    weak var newsImageCell: NewsImageTableViewCell?
+    fileprivate var peekPopSourceRect: CGRect?
+    fileprivate var safariVC: SFSafariViewController?
+    
     var newsItem: NewsItem? {
         didSet {
             tableView.reloadData()
         }
     }
-    
-    weak var newsBodyCell: NewsBodyTableViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +42,7 @@ class NewsDetailTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsItem == nil ? 0 : 2
+        return newsItem == nil ? 0 : 3
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,22 +53,37 @@ class NewsDetailTableViewController: UITableViewController {
         
         var cell: UITableViewCell!
         
-        if indexPath.row == 0 {
+        switch indexPath.row {
+        case 0:
             cell = tableView.dequeueReusableCell(withIdentifier: newsHeaderCellID, for: indexPath)
             (cell as? NewsHeaderTableViewCell)?.setUp(from: newsItem)
-        } else if indexPath.row == 1 {
+        case 1:
+            cell = tableView.dequeueReusableCell(withIdentifier: newsImageCellID, for: indexPath)
+            newsImageCell = cell as? NewsImageTableViewCell
+            newsImageCell?.tableView = self.tableView
+            newsImageCell?.newsImageView.image = newsItem.image
+            
+            if let imageWidth = newsItem.image?.size.width, let imageHeight = newsItem.image?.size.height {
+                let imageViewWidth = newsImageCell!.newsImageView.bounds.width
+                newsImageCell?.imageHeightConstraint.constant = imageHeight * imageViewWidth / imageWidth
+            }
+            
+        case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: newsBodyCellID, for: indexPath)
-            newsBodyCell = cell as? NewsBodyTableViewCell
-            newsBodyCell?.setUp(with: newsItem, from: tableView)
+            let cell = cell as? NewsBodyTableViewCell
+            cell?.setUp(with: newsItem, from: tableView)
+            cell?.contentTextView.delegate = self
+        default:
+            cell = UITableViewCell()
         }
-
+        
         return cell
     }
     
     @IBAction func didTapImage(_ sender: UITapGestureRecognizer) {
         
         if let image = newsItem?.image,
-            let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? NewsBodyTableViewCell {
+            let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? NewsImageTableViewCell {
             // 1. create SKPhoto Array from UIImage
             var images = [SKPhoto]()
             let photo = SKPhoto.photoWithImage(image)
@@ -92,10 +110,27 @@ class NewsDetailTableViewController: UITableViewController {
 
 extension NewsDetailTableViewController: UITextViewDelegate {
     
+    @available(iOS 10.0, *)
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        if let scheme = URL.scheme, scheme == "http" || scheme == "https", interaction == .invokeDefaultAction {
+            let svc = SFSafariViewController(url: URL)
+            present(svc, animated: true, completion: nil)
+            return false
+        }
+        
+        return true
+    }
+    
+    
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        let svc = SFSafariViewController(url: URL)
-        present(svc, animated: true, completion: nil)
-        return false
+        
+        if let scheme = URL.scheme, scheme == "http" || scheme == "https" {
+            let svc = SFSafariViewController(url: URL)
+            present(svc, animated: true, completion: nil)
+            return false
+        }
+        
+        return true
     }
     
 }

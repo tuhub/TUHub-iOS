@@ -20,10 +20,21 @@ class CourseCalendarView: UIView {
     @IBOutlet weak var calendarView: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     
+    
+    var delegate: CourseCalendarViewDelegate?
     var courses: [Course]?
     var selectedDate: Date!
-    var selectedDateMeetings: [CourseMeeting]!
-    var delegate: CourseCalendarViewDelegate?
+    fileprivate var selectedDateCourses: [Course]!
+    var selectedDateMeetings: [CourseMeeting]! {
+        didSet {
+            var courses = [Course]()
+            for meeting in selectedDateMeetings {
+                courses.append(meeting.course)
+            }
+            selectedDateCourses = courses
+        }
+    }
+    
     
     func setUp(with courses: [Course], delegate: CourseCalendarViewDelegate?) {
         // Init values
@@ -126,7 +137,13 @@ extension CourseCalendarView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: courseCalendarCellID, for: indexPath)
         if let cell = cell as? CourseCalendarTableViewCell, let selectedDateMeetings = selectedDateMeetings {
-            cell.setUp(from: selectedDateMeetings[indexPath.row])
+            
+            let meeting = selectedDateMeetings[indexPath.row]
+            cell.setUp(from: meeting)
+            if let courseIndex = selectedDateCourses.index(where: {$0.name == meeting.course.name}) {
+                cell.separator.backgroundColor = UIColor.allColors[courseIndex % UIColor.allColors.count]
+            }
+            
         }
         return cell
     }

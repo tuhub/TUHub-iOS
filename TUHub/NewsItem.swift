@@ -135,7 +135,7 @@ extension NewsItem {
 extension NewsItem {
     
     /// Asynchronously parses a string containing HTML into an NSAttributed string matching the label's designated style
-    func parseContent(_ completionHandler: (()->Void)?) {
+    func parseContent(_ completionHandler: ((NSAttributedString?)->Void)?) {
         DispatchQueue.global(qos: .userInitiated).async {
             // Attempt to parse HTML to NSAttributedString
             do {
@@ -151,12 +151,12 @@ extension NewsItem {
                 debugPrint(attrStr)
                 DispatchQueue.main.async {
                     self.content = attrStr
-                    completionHandler?()
+                    completionHandler?(attrStr)
                 }
                 
             } catch {
                 log.error("Error: Unable to parse HTML to NSAttributedString.")
-                completionHandler?()
+                completionHandler?(nil)
             }
         }
     }
