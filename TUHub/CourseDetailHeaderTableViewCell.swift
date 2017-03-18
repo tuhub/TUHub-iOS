@@ -18,8 +18,8 @@ class CourseDetailHeaderTableViewCell: UITableViewCell {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .none
-        let startDateStr = dateFormatter.string(from: course.startDate)
-        let endDateStr = dateFormatter.string(from: course.endDate)
+        let startDateStr = dateFormatter.string(from: course.startDate!)
+        let endDateStr = dateFormatter.string(from: course.endDate!)
         
         titleLabel.text = course.description ?? course.title
         subtitleLabel.text = "\(startDateStr) to \(endDateStr)"

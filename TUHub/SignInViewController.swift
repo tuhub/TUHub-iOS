@@ -66,18 +66,11 @@ class SignInViewController: UIViewController {
                            selector: #selector(keyboardWillHide),
                            name: .UIKeyboardWillHide,
                            object: nil)
-        
-        center.addObserver(self,
-                           selector: #selector(updateSignInButtonWidth(notification:)),
-                           name: .UIDeviceOrientationDidChange,
-                           object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
         determineSignInButtonState()
-        updateSignInButtonWidth(notification: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -86,6 +79,11 @@ class SignInViewController: UIViewController {
         let center = NotificationCenter.default
         center.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         center.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        updateSignInButtonWidth()
     }
     
     fileprivate func signIn() {
@@ -127,8 +125,8 @@ class SignInViewController: UIViewController {
         updateBottomLayoutConstraint(with: notification)
     }
     
-    func updateSignInButtonWidth(notification: Notification?) {
-        if let width = usernameField?.frame.width {
+    func updateSignInButtonWidth() {
+        if let width = usernameField?.bounds.width {
             signInButtonWidth.constant = width
         }
     }

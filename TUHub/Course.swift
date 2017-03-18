@@ -22,54 +22,38 @@ class Course {
     let levels: [String]?
     var roster: [String]?
     var grades: [Grade]?
-    let startDate: Date
-    let endDate: Date
+    let startDate: Date?
+    let endDate: Date?
     
     init?(json: JSON, termID: String) {
         guard let name = json["courseName"].string,
             let title = json["sectionTitle"].string,
             let sectionID = json["sectionId"].string,
             let sectionNumber = json["courseSectionNumber"].string,
-            let startDate = json["firstMeetingDate"].date,
-            let endDate = json["lastMeetingDate"].date
+            let credits = json["credits"].uInt8 ?? UInt8(json["creditHours"].string ?? "")
             else {
                 log.error("Invalid JSON while initializing Course")
                 return nil
         }
         
+        // Assign mandatory properties
         self.termID = termID
         self.name = name
-        self.description = json["courseDescription"].string
         self.title = title
         self.sectionID = sectionID
         self.sectionNumber = sectionNumber
-        self.credits = json["credits"].uInt8
-        self.levels = json["academicLevels"].arrayObject as? [String]
-        self.startDate = startDate
-        self.endDate = endDate
+        self.credits = credits
         
-        if let instructorsJSON = json["instructors"].array {
-            for subJSON in instructorsJSON {
-                if let instructor = Instructor(json: subJSON) {
-                    if instructors == nil {
-                        instructors = [Instructor]()
-                    }
-                    instructors!.append(instructor)
-                }
-            }
-        }
-        
-        if let meetingPatterns = json["meetingPatterns"].array {
-            for subJSON in meetingPatterns {
-                if let meeting = CourseMeeting(json: subJSON, course: self) {
-                    if meetings == nil {
-                        meetings = [CourseMeeting]()
-                    }
-                    meetings!.append(meeting)
-                }
-            }
-            meetings?.sort { $0.startDate < $1.startDate }
-        }
+        // Attempt to assign optional properties
+        description = json["courseDescription"].string
+        levels = json["academicLevels"].arrayObject as? [String]
+        startDate = json["firstMeetingDate"].date
+        endDate = json["lastMeetingDate"].date
+
+        // Attempt to map JSON arrays
+        instructors = json["instructors"].array?.flatMap({ Instructor(json: $0) })
+        meetings = json["meetingPatterns"].array?.flatMap({ CourseMeeting(json: $0, course: self) }).sorted { $0.startDate < $1.startDate }
+        grades = json["grades"].array?.flatMap { Grade(json: $0, course: self) }
         
     }
     

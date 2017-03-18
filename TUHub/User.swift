@@ -30,9 +30,9 @@ class User {
     private(set) var username: String
     private(set) var tuID: String
     private(set) var roles: [String]
-    
     fileprivate(set) var credential: Credential
-
+    var terms: [Term]?
+    
     
     internal init?(json: JSON, credential: Credential) {
         
@@ -152,7 +152,7 @@ extension User {
     
 }
 
-// Courses
+// MARK: - Courses
 extension User {
     
     typealias CoursesResponseHandler = ([Term]?, Error?) -> Void
@@ -176,40 +176,99 @@ extension User {
             
             // Retrieve grades and associate with their corresponding course
             self.retrieveGrades({ (gradeTerms, error) in
-                guard let gradeTerms = gradeTerms else {
+                guard var gradeTerms = gradeTerms else {
                         responseHandler?(courseTerms, error)
                         return
                 }
-                var courseTerms = courseTerms
+                var courseTerms = courseTerms.sorted { $0.startDate > $1.startDate }
+                gradeTerms.sort(by: { $0.startDate > $1.startDate })
                 
-                for gradeTerm in gradeTerms {
+                for (index, gradeTerm) in gradeTerms.enumerated() {
                     
                     // Get each corresponding term's courses
-                    guard let grades = gradeTerm.grades,
-                        let index = courseTerms.index(where: { $0.id == gradeTerm.id }),
-                        var courses = courseTerms[index].courses else { continue }
                     
-                    // Find the corresponding course for the grade
-                    for grade in grades {
-                        guard let index = courses.index(where: {$0.sectionID == grade.sectionID}) else { continue }
-                        let course = courses[index]
-                        
-                        // Add the grade to the course's grades
-                        if course.grades == nil {
-                            course.grades = [grade]
-                        } else {
-                            course.grades!.append(grade)
-                        }
-                        courses[index] = course
+                    let courses = courseTerms[index].courses.sorted(by: { $0.sectionID < $1.sectionID })
+                    let gradeCourses = gradeTerm.courses.sorted(by: { $0.sectionID < $1.sectionID })
+                    for (i, gradeCourse) in gradeCourses.enumerated() {
+                        courses[i].grades = gradeCourse.grades
                     }
-                    
                     courseTerms[index].courses = courses
-                    
                 }
                 
+                self.terms = courseTerms
                 responseHandler?(courseTerms, error)
             })
         }
+    }
+    
+    func search(for searchTerm: String, _ responseHandler: @escaping ([Term]?) -> Void) {
+        guard var terms = terms else {
+            responseHandler(nil)
+            return
+        }
+        
+        struct SearchResult {
+            var course: Course
+            var index: String.Index
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            
+            var results = [Term]()
+            let searchTerm = searchTerm.capitalized
+            
+            // Sort the terms from most to least recent
+            terms.sort(by: { $0.startDate > $1.startDate })
+            
+            for term in terms {
+
+                // The term to hold the results
+                var term = term
+                
+                var courseResults = [SearchResult]()
+                for course in term.courses {
+                    
+                    // Find the lowest index at which the occurence of the search term appeared
+                    var minIndex: String.Index?
+                    if let index = course.name.capitalized.index(of: searchTerm) {
+                        minIndex = index
+                    }
+                    if let index = course.title.capitalized.index(of: searchTerm) {
+                        if minIndex == nil || index < minIndex! {
+                            minIndex = index
+                        }
+                    }
+                    if let index = course.description?.capitalized.index(of: searchTerm) {
+                        if minIndex == nil || index < minIndex! {
+                            minIndex = index
+                        }
+                    }
+                    
+                    // Append the result if the term appeared
+                    if let minIndex = minIndex {
+                        courseResults.append(SearchResult(course: course, index: minIndex))
+                    }
+                }
+                
+                // Sort the results by increasing index, as a lower index means a closer match
+                courseResults.sort(by: { $0.index < $1.index })
+                
+                // Replace term's courses with results
+                let courses: [Course] = courseResults.map { $0.course }
+                if courses.count > 0 {
+                    term.courses = courses
+                    results.append(term)
+                }
+                
+            }
+            
+            // Go back to main thread and return the results
+            DispatchQueue.main.async {
+                responseHandler(results)
+            }
+            
+        }
+        
     }
     
 }

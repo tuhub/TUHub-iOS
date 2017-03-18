@@ -14,6 +14,7 @@ fileprivate let courseDetailSubtitleCell = "courseDetailSubtitleCell"
 
 class CourseDetailTableViewController: UITableViewController {
 
+    static let storyboardID = "CourseDetailTableViewController"
     var course: Course?
     
     override func viewDidLoad() {
@@ -37,13 +38,15 @@ class CourseDetailTableViewController: UITableViewController {
         
         // Show a done button if being presented modally
         if isBeingPresented || (navigationController?.isBeingPresented ?? false) {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismiss(_:)))
+            let button = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissSelf))
+            button.tintColor = .cherry
+            navigationItem.rightBarButtonItem = button
         }
         
     }
 
-    func dismiss(_ completion: (()->Void)?) {
-        dismiss(animated: true, completion: completion)
+    func dismissSelf() {
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Table view data source

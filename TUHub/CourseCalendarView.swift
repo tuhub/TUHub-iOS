@@ -22,11 +22,13 @@ class CourseCalendarView: UIView {
     
     
     var delegate: CourseCalendarViewDelegate?
+    var performSegueDelegate: PerformCourseDetailSegueDelegate?
     var courses: [Course]?
     var selectedDate: Date!
-    fileprivate var selectedDateCourses: [Course]!
-    var selectedDateMeetings: [CourseMeeting]! {
+    fileprivate var selectedDateCourses: [Course]?
+    var selectedDateMeetings: [CourseMeeting]? {
         didSet {
+            guard let selectedDateMeetings = selectedDateMeetings else { return }
             var courses = [Course]()
             for meeting in selectedDateMeetings {
                 courses.append(meeting.course)
@@ -116,8 +118,8 @@ extension CourseCalendarView: FSCalendarDelegate {
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         selectedDate = date
-        delegate?.didSelectDate(date)
         selectedDateMeetings = meetings(on: date)
+        delegate?.didSelectDate(date)
         tableView.reloadData()
     }
     
@@ -140,7 +142,7 @@ extension CourseCalendarView: UITableViewDataSource {
             
             let meeting = selectedDateMeetings[indexPath.row]
             cell.setUp(from: meeting)
-            if let courseIndex = selectedDateCourses.index(where: {$0.name == meeting.course.name}) {
+            if let courseIndex = selectedDateCourses?.index(where: {$0.name == meeting.course.name}) {
                 cell.separator.backgroundColor = UIColor.allColors[courseIndex % UIColor.allColors.count]
             }
             
@@ -154,7 +156,9 @@ extension CourseCalendarView: UITableViewDataSource {
 extension CourseCalendarView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if let course = selectedDateMeetings?[indexPath.row].course {
+            performSegueDelegate?.performSegue(withCourse: course)
+        }
     }
     
 }

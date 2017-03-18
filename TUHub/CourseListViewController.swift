@@ -9,7 +9,7 @@
 import UIKit
 
 // Segue Identifiers
-fileprivate let courseDetailSegueID = "showCourseDetail"
+fileprivate let showCourseDetailSegueID = "showCourseDetail"
 
 class CourseListViewController: UIViewController {
 
@@ -17,6 +17,7 @@ class CourseListViewController: UIViewController {
     @IBOutlet weak var courseTableView: UITableView!
     
     var term: Term?
+    var performSegueDelegate: PerformCourseDetailSegueDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,23 +44,34 @@ class CourseListViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         
         switch segue.identifier! {
-            
-        case courseDetailSegueID:
-            
+        case showCourseDetailSegueID:
             guard let cell = sender as? UITableViewCell,
                 let indexPath = courseTableView.indexPath(for: cell),
                 let courseDetailVC = segue.destination as? CourseDetailTableViewController
                 else { break }
             
-            courseDetailVC.course = term?.courses?[indexPath.row]
-
+            courseDetailVC.course = term?.courses[indexPath.row]
         default:
             break
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == showCourseDetailSegueID && traitCollection.horizontalSizeClass == .regular {
+            
+            if let cell = sender as? UITableViewCell,
+                let indexPath = courseTableView.indexPath(for: cell),
+                let course = term?.courses[indexPath.row] {
+                performSegueDelegate?.performSegue(withCourse: course)
+            }
+            return false
+        }
+        if identifier == formCourseDetailSegueID && traitCollection.horizontalSizeClass == .compact {
+            return false
+        }
+        return super.shouldPerformSegue(withIdentifier: identifier, sender: sender)
     }
 
 
@@ -74,22 +86,18 @@ extension CourseListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return term?.courses?.count ?? 0
+        return term?.courses.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "courseListCell", for: indexPath)
         
-        guard let term = term, let courses = term.courses else {
-            return cell
+        if let course = term?.courses[indexPath.row] {
+            // Set course name label
+            cell.textLabel?.text = "\(course.name)-\(course.sectionNumber)"
+            // Set course description label
+            cell.detailTextLabel?.text = course.description ?? course.title
         }
-        
-        let course = courses[indexPath.row]
-        
-        // Set course name label
-        cell.textLabel?.text = "\(course.name)-\(course.sectionNumber)"
-        // Set course description label
-        cell.detailTextLabel?.text = course.description ?? course.title
         
         return cell
     }

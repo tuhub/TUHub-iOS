@@ -35,6 +35,18 @@ class NewsDetailTableViewController: UITableViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add button to switch display mode for split view controller
+        navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+        navigationItem.leftItemsSupplementBackButton = true
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -62,11 +74,6 @@ class NewsDetailTableViewController: UITableViewController {
             newsImageCell = cell as? NewsImageTableViewCell
             newsImageCell?.tableView = self.tableView
             newsImageCell?.newsImageView.image = newsItem.image
-            
-            if let imageWidth = newsItem.image?.size.width, let imageHeight = newsItem.image?.size.height {
-                let imageViewWidth = newsImageCell!.newsImageView.bounds.width
-                newsImageCell?.imageHeightConstraint.constant = imageHeight * imageViewWidth / imageWidth
-            }
             
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: newsBodyCellID, for: indexPath)

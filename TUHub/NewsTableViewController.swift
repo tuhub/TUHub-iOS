@@ -39,7 +39,6 @@ class NewsTableViewController: UITableViewController {
         tableView.contentOffset = CGPoint(x: 0, y: -self.refreshControl!.frame.size.height) // Needed to fix refresh control bug
         refreshControl?.tintColor = UIColor.white
         refreshControl?.backgroundColor = UIColor.cherry
-        refreshControl?.beginRefreshing()
         
         load(feeds: nil)
     }
@@ -50,55 +49,64 @@ class NewsTableViewController: UITableViewController {
     }
 
     func load(feeds: [NewsItem.Feed]?) {
+        if !refreshControl!.isRefreshing {
+            refreshControl?.beginRefreshing()
+        }
         NewsItem.retrieve(fromFeeds: feeds ?? NewsItem.Feed.allValues) { (newsItems, error) in
             
             // Remove old message from view
             self.errorLabel?.removeFromSuperview()
             
-            if let error = error {
-                
-                // Create label containing error message
-                let errorMessage = "Something went wrong. ☹️"
-                let width = self.tableView.frame.width - self.tableView.contentInset.left * 2
-                let height = errorMessage.height(withConstrainedWidth: width, font: UIFont.preferredFont(forTextStyle: .body))
-                let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
-                label.textColor = .darkText
-                label.textAlignment = .center
-                label.text = errorMessage
-                
-                // Add to view
-                self.view.addSubview(label)
-                label.translatesAutoresizingMaskIntoConstraints = false
-                self.view.bringSubview(toFront: label)
-                self.view.addConstraint(
-                    NSLayoutConstraint(item: label,
-                                       attribute: NSLayoutAttribute.centerX,
-                                       relatedBy: NSLayoutRelation.equal,
-                                       toItem: self.tableView,
-                                       attribute: NSLayoutAttribute.centerX,
-                                       multiplier: 1,
-                                       constant: 0))
-                self.view.addConstraint(
-                    NSLayoutConstraint(item: label,
-                                       attribute: NSLayoutAttribute.centerY,
-                                       relatedBy: NSLayoutRelation.equal,
-                                       toItem: self.tableView,
-                                       attribute: NSLayoutAttribute.centerY,
-                                       multiplier: 0.75,
-                                       constant: 0))
-                
-                self.errorLabel = label
-            }
-            
-            self.tableView.tableHeaderView?.removeFromSuperview()
-            
-            if let newsItems = newsItems {
-                self.newsItems = newsItems
-                self.tableView.reloadData()
-            }
+            self.newsItems = newsItems
+            self.tableView.reloadData()
             // End showing refresh indicator
             self.refreshControl?.endRefreshing()
+            
+            
+            if let _ = error {
+                // Create label containing error message
+                let errorMessage = "Something went wrong. ☹️"
+                self.showErrorLabel(with: errorMessage)
+            } else if newsItems == nil || newsItems!.isEmpty {
+                self.showErrorLabel(with: "Looks like there's nothing here.")
+            } else if let splitViewController = self.splitViewController, !splitViewController.isCollapsed {
+                let indexPath = IndexPath(row: 0, section: 0)
+//                self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+            }
         }
+    }
+    
+    fileprivate func showErrorLabel(with text: String) {
+        let width = tableView.contentSize.width
+        let height = text.height(withConstrainedWidth: width, font: UIFont.preferredFont(forTextStyle: .body))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        label.textColor = .darkText
+        label.textAlignment = .center
+        label.text = text
+        
+        // Add to view
+        self.view.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        self.view.bringSubview(toFront: label)
+        self.view.addConstraint(
+            NSLayoutConstraint(item: label,
+                               attribute: NSLayoutAttribute.centerX,
+                               relatedBy: NSLayoutRelation.equal,
+                               toItem: self.tableView,
+                               attribute: NSLayoutAttribute.centerX,
+                               multiplier: 1,
+                               constant: 0))
+        self.view.addConstraint(
+            NSLayoutConstraint(item: label,
+                               attribute: NSLayoutAttribute.centerY,
+                               relatedBy: NSLayoutRelation.equal,
+                               toItem: self.tableView,
+                               attribute: NSLayoutAttribute.centerY,
+                               multiplier: 0.75,
+                               constant: 0))
+        
+        self.errorLabel = label
+
     }
     
     // MARK: - Navigation

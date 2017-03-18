@@ -13,6 +13,7 @@ class CoursePageViewController: UIPageViewController {
     var pages: [UIViewController]!
     var current: CourseListViewController!
     var presentationIndex = 0
+    var performSegueDelegate: PerformCourseDetailSegueDelegate?
     var currentIndex: Int? {
         return pages.index(of: current)
     }
@@ -22,6 +23,7 @@ class CoursePageViewController: UIPageViewController {
                 for term in terms {
                     if let courseListVC = storyboard?.instantiateViewController(withIdentifier: "courseListVC") as? CourseListViewController {
                         courseListVC.term = term
+                        courseListVC.performSegueDelegate = performSegueDelegate
                         pages.append(courseListVC)
                     }
                 }
