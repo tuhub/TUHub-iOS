@@ -62,16 +62,14 @@ class TUHubTests: XCTestCase {
     
     func testCourseOverview() {
         let asyncExpectation = expectation(description: "testCourseOverview")
-        var kCourses: [Term]?
+        var kTerms: [Term]?
         var kUser: User?
         
         User.signInSilently { (user, error) in
             if let user = user {
                 kUser = user
-                user.retrieveCourseOverview({ (courses, error) in
-                    if let courses = courses {
-                        kCourses = courses
-                    }
+                user.retrieveCourses({ (terms, error) in
+                    kTerms = terms
                     asyncExpectation.fulfill()
                 })
             }
@@ -83,67 +81,10 @@ class TUHubTests: XCTestCase {
             }
             
             XCTAssertNotNil(kUser, "Failed to retrieve user.\nSign in if you have not already done so.")
-            XCTAssertNotNil(kCourses, "Failed to retrieve course overview for user.")
+            XCTAssertNotNil(kTerms, "Failed to retrieve course overview for user.")
         }
 
     }
-    
-    func testCourseFullView() {
-        let asyncExpectation = expectation(description: "testCourseFullView")
-        var kCourses: [Term]?
-        var kUser: User?
-        
-        User.signInSilently { (user, error) in
-            if let user = user {
-                kUser = user
-                user.retrieveCourseFullView({ (courses, error) in
-                    if let courses = courses {
-                        kCourses = courses
-                    }
-                    asyncExpectation.fulfill()
-                })
-            }
-        }
-        
-        waitForExpectations(timeout: 10) { (error) in
-            if let error = error {
-                log.error(error)
-            }
-            
-            XCTAssertNotNil(kUser, "Failed to retrieve user.\nSign in if you have not already done so.")
-            XCTAssertNotNil(kCourses, "Failed to retrieve course full view for user.")
-        }
-        
-    }
-
-    // CourseCalendarView only provides data about the current week, which we are unlikely to need because we will be providing a full calendar
-//    func testCourseCalendarView() {
-//        let asyncExpectation = expectation(description: "testCourseCalendarView")
-//        var kCourses: [Term]?
-//        var kUser: User?
-//        
-//        User.signInSilently { (user, error) in
-//            if let user = user {
-//                kUser = user
-//                user.retrieveCourseCalendarView({ (courses, error) in
-//                    if let courses = courses {
-//                        kCourses = courses
-//                    }
-//                    asyncExpectation.fulfill()
-//                })
-//            }
-//        }
-//        
-//        waitForExpectations(timeout: 10) { (error) in
-//            if let error = error {
-//                log.error(error)
-//            }
-//            
-//            XCTAssertNotNil(kUser, "Failed to retrieve user.\nSign in if you have not already done so.")
-//            XCTAssertNotNil(kCourses, "Failed to retrieve course calendar view for user.")
-//        }
-//        
-//    }
     
     func testCourseRoster() {
         let asyncExpectation = expectation(description: "testCourseCalendarView")
@@ -153,8 +94,8 @@ class TUHubTests: XCTestCase {
         User.signInSilently { (user, error) in
             if let user = user {
                 kUser = user
-                user.retrieveCourseOverview({ (terms, error) in
-                    if let course = terms?.first?.courses?.first {
+                user.retrieveCourses({ (terms, error) in
+                    if let course = terms?.first?.courses.first {
                         course.retrieveRoster({ (roster, error) in
                             kRoster = roster
                             asyncExpectation.fulfill()
@@ -171,6 +112,30 @@ class TUHubTests: XCTestCase {
             
             XCTAssertNotNil(kUser, "Failed to retrieve user.\nSign in if you have not already done so.")
             XCTAssertNotNil(kRoster, "Failed to retrieve course roster for user.")
+        }
+        
+    }
+    
+    func testCourseSearch() {
+        let asyncExpectation = expectation(description: "testCourseSearch")
+        
+        var kResults: [CourseSearchResult]?
+        
+        CourseSearchResult.search(for: "psych", pageNumber: 0) { (results, error) in
+            kResults = results
+            if let error = error {
+                log.error(error)
+            }
+            asyncExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 30) { (error) in
+            
+            XCTAssertNotNil(kResults, "Failed to retrieve course search results.")
+            
+            if let error = error {
+                log.error(error)
+            }
         }
         
     }

@@ -18,19 +18,19 @@ struct CourseMeeting {
         return dateFormatter
     }()
     
+    var course: Course
     let daysOfWeek: [Int]
     let buildingID: String
     let buildingName: String
     let room: String
-    var startTime: String {
-        return CourseMeeting.dateFormatter.string(from: startDate)
-    }
     let startDate: Date
+    let endDate: Date
     var endTime: String {
         return CourseMeeting.dateFormatter.string(from: endDate)
     }
-    let endDate: Date
-    var course: Course
+    var startTime: String {
+        return CourseMeeting.dateFormatter.string(from: startDate)
+    }
     
     init?(json: JSON, course: Course) {
         guard let daysOfWeek = json["daysOfWeek"].arrayObject as? [Int],

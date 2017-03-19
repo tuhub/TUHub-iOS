@@ -62,10 +62,15 @@ extension User {
         
         let credential = Credential(username: username, password: password)
         
-        NetworkManager.request(fromEndpoint: .getUserInfo, authenticateWith: credential) { (json, error) in
-            // Attempt to unwrap necessary attributes
-            if let json = json, let user = User(json: json, credential: credential) {
-                
+        NetworkManager.request(fromEndpoint: .getUserInfo, authenticateWith: credential) { (data, error) in
+            
+            defer { responseHandler?(User.current, error) }
+            
+            // Turn raw data into JSON
+            guard let data = data else { return }
+            let json = JSON(data)
+            
+            if let user = User(json: json, credential: credential) {
                 // Success, so store credential in keychain
                 let credential = URLCredential(user: username, password: password, persistence: .permanent)
                 URLCredentialStorage.shared.set(credential, for: protectionSpace)
@@ -75,7 +80,6 @@ extension User {
                 log.verbose("User signed in\nUsername: \(user.username)\nTUID: \(user.tuID)\n")
             }
             
-            responseHandler?(User.current, error)
         }
         
     }
@@ -91,16 +95,20 @@ extension User {
         }
         
         let credential = Credential(username: username, password: password)
-        NetworkManager.request(fromEndpoint: .getUserInfo, authenticateWith: credential) { (json, error) in
-            // Attempt to unwrap necessary attributes
-            if let json = json, let user = User(json: json, credential: credential) {
-                debugPrint(json)
+        NetworkManager.request(fromEndpoint: .getUserInfo, authenticateWith: credential) { (data, error) in
+            
+            // Respond with values when leaving scope
+            defer { responseHandler?(User.current, error) }
+            
+            // Turn raw data into JSON
+            guard let data = data else { return }
+            let json = JSON(data)
+            
+            if let user = User(json: json, credential: credential) {
                 User.current = user
-                
                 log.verbose("User signed in\nUsername: \(user.username)\nTUID: \(user.tuID)\n")
             }
             
-            responseHandler?(User.current, error)
         }
         
     }
@@ -127,14 +135,15 @@ extension User {
     
     typealias GradesResponseHandler = ([Term]?, Error?) -> Void
     
-    fileprivate func retrieveGrades(_ responseHandler: GradesResponseHandler?) {
+    func retrieveGrades(_ responseHandler: GradesResponseHandler?) {
         
-        NetworkManager.request(fromEndpoint: .grades, withTUID: tuID, authenticateWith: credential) { (json, error) in
+        NetworkManager.request(fromEndpoint: .grades, withTUID: tuID, authenticateWith: credential) { (data, error) in
             
             var grades: [Term]?
             
-            if let json = json {
-                debugPrint(json)
+            if let data = data {
+                let json = JSON(data)
+                
                 for (_, subJSON) in json["terms"] {
                     if let term = Term(json: subJSON) {
                         if grades == nil {
@@ -158,14 +167,15 @@ extension User {
     typealias CoursesResponseHandler = ([Term]?, Error?) -> Void
     
     func retrieveCourses(_ responseHandler: CoursesResponseHandler?) {
-        NetworkManager.request(fromEndpoint: .courseOverview, withTUID: tuID, authenticateWith: credential) { (json, error) in
-            
-            guard let json = json else {
-                responseHandler?(nil, error)
-                return
-            }
+        NetworkManager.request(fromEndpoint: .courseOverview, withTUID: tuID, authenticateWith: credential) { (data, error) in
             
             var courseTerms = [Term]()
+            
+            // Respond when leaving scope
+            defer { responseHandler?(courseTerms.count > 0 ? courseTerms : nil, error) }
+            
+            guard let data = data else { return }
+            let json = JSON(data)
             
             // Parse JSON into terms
             for (_, subJSON) in json["terms"] {
@@ -196,12 +206,11 @@ extension User {
                 }
                 
                 self.terms = courseTerms
-                responseHandler?(courseTerms, error)
             })
         }
     }
     
-    func search(for searchTerm: String, _ responseHandler: @escaping ([Term]?) -> Void) {
+    func search(for searchText: String, _ responseHandler: @escaping ([Term]?) -> Void) {
         guard var terms = terms else {
             responseHandler(nil)
             return
@@ -215,7 +224,7 @@ extension User {
         DispatchQueue.global(qos: .userInitiated).async {
             
             var results = [Term]()
-            let searchTerm = searchTerm.capitalized
+            let searchTerm = searchText.capitalized
             
             // Sort the terms from most to least recent
             terms.sort(by: { $0.startDate > $1.startDate })

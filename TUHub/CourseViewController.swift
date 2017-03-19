@@ -43,6 +43,7 @@ class CourseViewController: UIViewController {
         searchController.searchBar.scopeButtonTitles = ["My Courses", "All Courses"]
         searchController.searchResultsUpdater = resultsController
         searchController.searchBar.tintColor = .cherry
+        resultsController.searchController = searchController
         return searchController
     }()
     

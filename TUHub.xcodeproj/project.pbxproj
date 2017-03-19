@@ -27,6 +27,8 @@
 		7D3D95EE1E7C6B4800D03CA1 /* ScaleAspectFitImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D95ED1E7C6B4800D03CA1 /* ScaleAspectFitImageView.swift */; };
 		7D3D95F41E7C96FE00D03CA1 /* CourseSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D95F31E7C96FE00D03CA1 /* CourseSearchResultsTableViewController.swift */; };
 		7D3D95F61E7CC25A00D03CA1 /* String+Boyer-Moore-Horspool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D95F51E7CC25A00D03CA1 /* String+Boyer-Moore-Horspool.swift */; };
+		7D3D95FE1E7DE1E100D03CA1 /* CourseSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D95FD1E7DE1E100D03CA1 /* CourseSearchResult.swift */; };
+		7D3D96021E7E6BE100D03CA1 /* CourseSearchResultDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D96011E7E6BE100D03CA1 /* CourseSearchResultDetailTableViewController.swift */; };
 		7D4798351E73236700F969CD /* Error+UIAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4798341E73236700F969CD /* Error+UIAlertViewController.swift */; };
 		7D4798411E7848A700F969CD /* CourseCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47983F1E7848A700F969CD /* CourseCalendarView.swift */; };
 		7D553BB51E78C76F00D46166 /* CoursePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D553BB41E78C76F00D46166 /* CoursePageViewController.swift */; };
@@ -99,6 +101,8 @@
 		7D3D95ED1E7C6B4800D03CA1 /* ScaleAspectFitImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleAspectFitImageView.swift; sourceTree = "<group>"; };
 		7D3D95F31E7C96FE00D03CA1 /* CourseSearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		7D3D95F51E7CC25A00D03CA1 /* String+Boyer-Moore-Horspool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Boyer-Moore-Horspool.swift"; sourceTree = "<group>"; };
+		7D3D95FD1E7DE1E100D03CA1 /* CourseSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSearchResult.swift; sourceTree = "<group>"; };
+		7D3D96011E7E6BE100D03CA1 /* CourseSearchResultDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSearchResultDetailTableViewController.swift; sourceTree = "<group>"; };
 		7D4798341E73236700F969CD /* Error+UIAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Error+UIAlertViewController.swift"; sourceTree = "<group>"; };
 		7D47983F1E7848A700F969CD /* CourseCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCalendarView.swift; sourceTree = "<group>"; };
 		7D553BB41E78C76F00D46166 /* CoursePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePageViewController.swift; sourceTree = "<group>"; };
@@ -233,6 +237,7 @@
 				7D043A821E5BF8880003A853 /* Term.swift */,
 				7D043A811E5BF8880003A853 /* Grade.swift */,
 				7D043A901E5F871E0003A853 /* Course.swift */,
+				7D3D95FD1E7DE1E100D03CA1 /* CourseSearchResult.swift */,
 				7D043A961E5FB8080003A853 /* CourseMeeting.swift */,
 				7D043A981E5FBE100003A853 /* Instructor.swift */,
 				7D6D6D851E709B6600BF121A /* NewsItem.swift */,
@@ -279,6 +284,7 @@
 				7D553BB41E78C76F00D46166 /* CoursePageViewController.swift */,
 				7D553BB61E78C7A700D46166 /* CourseListViewController.swift */,
 				7D553BEC1E7B0A8900D46166 /* CourseDetailTableViewController.swift */,
+				7D3D96011E7E6BE100D03CA1 /* CourseSearchResultDetailTableViewController.swift */,
 			);
 			name = Courses;
 			sourceTree = "<group>";
@@ -652,7 +658,9 @@
 				7D043A931E5FA9800003A853 /* Credential.swift in Sources */,
 				7D3D95F41E7C96FE00D03CA1 /* CourseSearchResultsTableViewController.swift in Sources */,
 				7D4798351E73236700F969CD /* Error+UIAlertViewController.swift in Sources */,
+				7D3D96021E7E6BE100D03CA1 /* CourseSearchResultDetailTableViewController.swift in Sources */,
 				7D6D6D881E70B33F00BF121A /* NewsItemTableViewCell.swift in Sources */,
+				7D3D95FE1E7DE1E100D03CA1 /* CourseSearchResult.swift in Sources */,
 				7DBD855A1E72FE2500E73560 /* String+CGFloat.swift in Sources */,
 				7D043A881E5BF8880003A853 /* NetworkManager.swift in Sources */,
 				7D043A841E5BF8880003A853 /* SignInViewController.swift in Sources */,

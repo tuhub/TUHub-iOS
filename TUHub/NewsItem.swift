@@ -101,15 +101,15 @@ extension NewsItem {
             }
         }
         
-        NetworkManager.request(fromEndpoint: .news, arguments: [arg]) { (json, error) in
+        NetworkManager.request(fromEndpoint: .news, arguments: [arg]) { (data, error) in
             
             var newsItems: [NewsItem]?
             
-            if let error = error {
-                log.error(error)
-            }
+            defer { responseHandler?(newsItems, error) }
+            guard let data = data else { return }
+            let json = JSON(data)
             
-            if let entries = json?["entries"].array {
+            if let entries = json["entries"].array {
                 for subJSON in entries {
                     
                     // Initialize if first element
@@ -125,7 +125,9 @@ extension NewsItem {
                 
             }
             
-            responseHandler?(newsItems, error)
+            if let error = error {
+                log.error(error)
+            }
             
         }
     }

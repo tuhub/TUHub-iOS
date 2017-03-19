@@ -9,10 +9,12 @@
 import SwiftyJSON
 
 class Course {
-    
-    let name: String // Course code
-    let description: String? // Longest name
-    let title: String // Shorter than description
+    /// Course code
+    let name: String
+    /// Longest name
+    let description: String?
+    /// Shorter than description
+    let title: String
     let sectionID: String
     let sectionNumber: String
     let credits: UInt8?
@@ -25,8 +27,10 @@ class Course {
     let startDate: Date?
     let endDate: Date?
     
+    
     init?(json: JSON, termID: String) {
-        guard let name = json["courseName"].string,
+        guard
+            let name = json["courseName"].string,
             let title = json["sectionTitle"].string,
             let sectionID = json["sectionId"].string,
             let sectionNumber = json["courseSectionNumber"].string,
@@ -59,6 +63,7 @@ class Course {
     
 }
 
+// MARK: - Roster
 extension Course {
     
     typealias RosterResponseHandler = ([String]?, Error?) -> Void
@@ -70,30 +75,28 @@ extension Course {
         }
         
         let args = ["term=\(termID)", "section=\(sectionID)"]
-        NetworkManager.request(fromEndpoint: .courseRoster, withTUID: user.tuID, arguments: args, authenticateWith: user.credential) { (json, error) in
+        NetworkManager.request(fromEndpoint: .courseRoster, withTUID: user.tuID, arguments: args, authenticateWith: user.credential) { (data, error) in
             
             var roster: [String]?
             
-            if let json = json {
-                
-                var names = [String]()
-                if let values = json["activeStudents"].array {
-                    for value in values {
-                        if let name = value["name"].string {
-                            names.append(name)
-                        }
+            defer { responseHandler?(roster, error) }
+            guard let data = data else { return }
+            let json = JSON(data)
+            
+            var names = [String]()
+            if let values = json["activeStudents"].array {
+                for value in values {
+                    if let name = value["name"].string {
+                        names.append(name)
                     }
                 }
-                
-                if names.count > 0 {
-                    roster = names
-                }
-                
+            }
+            
+            if names.count > 0 {
+                roster = names
             }
             
             self.roster = roster
-            
-            responseHandler?(roster, error)
             
         }
     }

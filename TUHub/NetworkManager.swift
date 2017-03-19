@@ -19,9 +19,10 @@ class NetworkManager: NSObject {
         case courseRoster = "https://prd-mobile.temple.edu/banner-mobileserver/api/2.0/courses/roster"
         case getUserInfo = "https://prd-mobile.temple.edu/banner-mobileserver/api/2.0/security/getUserInfo"
         case news = "https://prd-mobile.temple.edu/banner-mobileserver/rest/1.2/feed"
+        case courseSearch = "https://prd-mobile.temple.edu/CourseSearch/searchCatalog.jsp"
     }
     
-    typealias ResponseHandler = (JSON?, Error?) -> Void
+    typealias ResponseHandler = (Data?, Error?) -> Void
     
     static func request(fromEndpoint endpoint: Endpoint,
                         _ responseHandler: ResponseHandler?) {
@@ -106,8 +107,7 @@ class NetworkManager: NSObject {
         
         let url = url + (tuID != nil ? "/\(tuID!)" : "") + args
         
-        Alamofire.request(url, headers: headers)
-            .responseJSON { (response) in
+        Alamofire.request(url, headers: headers).responseData { (response) in
                 
                 // Log error if there is one
                 let error: Error? = {
@@ -116,15 +116,9 @@ class NetworkManager: NSObject {
                     return error
                 }()
                 
-                // Retrieve JSON if available
-                let json: JSON? = {
-                    if let json = response.result.value {
-                        return JSON(json)
-                    }
-                    return nil
-                }()
+                let data = response.result.value
                 
-                responseHandler?(json, error)
+                responseHandler?(data, error)
         }
     }
     
