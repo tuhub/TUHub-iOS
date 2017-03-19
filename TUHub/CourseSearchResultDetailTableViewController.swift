@@ -41,6 +41,7 @@ class CourseSearchResultDetailTableViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.title = result?.name
+        tableView.allowsSelection = false
         
         // Automatically resize cells based on content height
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -63,7 +64,7 @@ class CourseSearchResultDetailTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         var numSections = 0
         if let result = result {
-            numSections += 1
+            numSections += 2
             if result.levels.count > 0 {
                 numSections += 1
             }

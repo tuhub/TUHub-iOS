@@ -51,6 +51,8 @@ class CourseSearchResultsTableViewController: UITableViewController {
         scope = Scope(searchController.searchBar.selectedScopeButtonIndex)
         searchController.searchBar.delegate = self
         
+        clearsSelectionOnViewWillAppear = true
+        
         // Auto-size cells
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44

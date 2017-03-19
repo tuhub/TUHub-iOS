@@ -44,6 +44,7 @@ struct CourseSearchResult {
         self.college = college
         self.department = department
         self.schedule = xml["schedule"].children.flatMap({ $0.value })
+        debugPrint(schedule)
     }
     
     static func search(for searchText: String, pageNumber: Int, _ responseHandler: @escaping ([CourseSearchResult]?, Error?)->Void) {
