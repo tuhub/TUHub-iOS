@@ -92,16 +92,17 @@ extension NewsItem {
             return
         }
         
-        // Generate argument based on feeds selected
-        var arg = "namekeys="
+        var feedsString = ""
         for (count, feed) in feeds.enumerated() {
-            arg.append(feed.namekey)
+            feedsString.append(feed.namekey)
             if count < feeds.count - 1 {
-                arg.append(",")
+                feedsString.append(",")
             }
         }
         
-        NetworkManager.request(fromEndpoint: .news, arguments: [arg]) { (data, error) in
+        let params: [String : Any] = ["namekeys" : feedsString]
+        
+        NetworkManager.request(fromEndpoint: .news, parameters: params) { (data, error) in
             
             var newsItems: [NewsItem]?
             

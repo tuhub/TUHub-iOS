@@ -44,7 +44,6 @@ struct CourseSearchResult {
         self.college = college
         self.department = department
         self.schedule = xml["schedule"].children.flatMap({ $0.value })
-        debugPrint(schedule)
     }
     
     static func search(for searchText: String, pageNumber: Int, _ responseHandler: @escaping ([CourseSearchResult]?, Error?)->Void) {
@@ -59,9 +58,13 @@ struct CourseSearchResult {
         let minRow = pageNumber * CourseSearchResult.searchPageSize + 1
         let maxRow = (pageNumber + 1) * CourseSearchResult.searchPageSize
         
-        let args = ["searchTerms=\(searchTerms)", "term=All", "division=All", "minRow=\(minRow)", "maxRow=\(maxRow)"]
+        let params: [String : Any] = ["searchTerms" : searchTerms,
+                                      "term" : "All",
+                                      "division" : "All",
+                                      "minRow" : minRow,
+                                      "maxRow" : maxRow]
         
-        NetworkManager.request(fromEndpoint: .courseSearch, arguments: args) { (data, error) in
+        NetworkManager.request(fromEndpoint: .courseSearch, parameters: params) { (data, error) in
             
             var results: [CourseSearchResult]?
             

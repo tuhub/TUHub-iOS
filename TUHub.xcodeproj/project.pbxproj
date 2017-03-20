@@ -14,43 +14,42 @@
 		7D043A5C1E5BF7EF0003A853 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D043A5A1E5BF7EF0003A853 /* LaunchScreen.storyboard */; };
 		7D043A671E5BF7EF0003A853 /* TUHubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A661E5BF7EF0003A853 /* TUHubTests.swift */; };
 		7D043A721E5BF7EF0003A853 /* TUHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A711E5BF7EF0003A853 /* TUHubUITests.swift */; };
-		7D043A841E5BF8880003A853 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A7F1E5BF8880003A853 /* SignInViewController.swift */; };
-		7D043A851E5BF8880003A853 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A801E5BF8880003A853 /* User.swift */; };
-		7D043A861E5BF8880003A853 /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A811E5BF8880003A853 /* Grade.swift */; };
-		7D043A871E5BF8880003A853 /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A821E5BF8880003A853 /* Term.swift */; };
-		7D043A881E5BF8880003A853 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A831E5BF8880003A853 /* NetworkManager.swift */; };
-		7D043A8F1E5F73060003A853 /* JSON+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A8E1E5F73060003A853 /* JSON+Date.swift */; };
-		7D043A911E5F871E0003A853 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A901E5F871E0003A853 /* Course.swift */; };
-		7D043A931E5FA9800003A853 /* Credential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A921E5FA9800003A853 /* Credential.swift */; };
-		7D043A971E5FB8080003A853 /* CourseMeeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A961E5FB8080003A853 /* CourseMeeting.swift */; };
-		7D043A991E5FBE100003A853 /* Instructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A981E5FBE100003A853 /* Instructor.swift */; };
-		7D3D95EE1E7C6B4800D03CA1 /* ScaleAspectFitImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D95ED1E7C6B4800D03CA1 /* ScaleAspectFitImageView.swift */; };
-		7D3D95F41E7C96FE00D03CA1 /* CourseSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D95F31E7C96FE00D03CA1 /* CourseSearchResultsTableViewController.swift */; };
-		7D3D95F61E7CC25A00D03CA1 /* String+Boyer-Moore-Horspool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D95F51E7CC25A00D03CA1 /* String+Boyer-Moore-Horspool.swift */; };
-		7D3D95FE1E7DE1E100D03CA1 /* CourseSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D95FD1E7DE1E100D03CA1 /* CourseSearchResult.swift */; };
-		7D3D96021E7E6BE100D03CA1 /* CourseSearchResultDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D96011E7E6BE100D03CA1 /* CourseSearchResultDetailTableViewController.swift */; };
-		7D4798351E73236700F969CD /* Error+UIAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4798341E73236700F969CD /* Error+UIAlertViewController.swift */; };
-		7D4798411E7848A700F969CD /* CourseCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47983F1E7848A700F969CD /* CourseCalendarView.swift */; };
-		7D553BB51E78C76F00D46166 /* CoursePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D553BB41E78C76F00D46166 /* CoursePageViewController.swift */; };
-		7D553BB71E78C7A700D46166 /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D553BB61E78C7A700D46166 /* CourseListViewController.swift */; };
-		7D553BE91E78F65F00D46166 /* CourseCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D553BE81E78F65F00D46166 /* CourseCalendarTableViewCell.swift */; };
-		7D553BEB1E79C69200D46166 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D553BEA1E79C69200D46166 /* ShadowView.swift */; };
-		7D553BED1E7B0A8900D46166 /* CourseDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D553BEC1E7B0A8900D46166 /* CourseDetailTableViewController.swift */; };
-		7D553BF11E7B174400D46166 /* CourseDetailHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D553BF01E7B174400D46166 /* CourseDetailHeaderTableViewCell.swift */; };
-		7D5E40611E78A69500D5C1CA /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E40601E78A69500D5C1CA /* String+Date.swift */; };
-		7D6D6D7E1E6FD6CB00BF121A /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D7D1E6FD6CB00BF121A /* UIColor.swift */; };
-		7D6D6D821E708EE400BF121A /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D811E708EE400BF121A /* NewsTableViewController.swift */; };
 		7D6D6D841E70939500BF121A /* CalendarCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6D6D831E70939500BF121A /* CalendarCellView.xib */; };
-		7D6D6D861E709B6600BF121A /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D851E709B6600BF121A /* NewsItem.swift */; };
-		7D6D6D881E70B33F00BF121A /* NewsItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D871E70B33F00BF121A /* NewsItemTableViewCell.swift */; };
-		7D6D6D8D1E70C77700BF121A /* NewsDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D8C1E70C77700BF121A /* NewsDetailTableViewController.swift */; };
-		7D6D6D921E70CDD900BF121A /* NewsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D911E70CDD900BF121A /* NewsHeaderTableViewCell.swift */; };
-		7D6D6D941E70CDE500BF121A /* NewsBodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D931E70CDE500BF121A /* NewsBodyTableViewCell.swift */; };
-		7DA787DD1E78615D00B9BB87 /* CourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6D6D7F1E707ED900BF121A /* CourseViewController.swift */; };
-		7DBD855A1E72FE2500E73560 /* String+CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBD85591E72FE2500E73560 /* String+CGFloat.swift */; };
-		7DED63F71E7200560023A0AA /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DED63F61E7200560023A0AA /* Date+String.swift */; };
-		7DED63F91E72098A0023A0AA /* NewsFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DED63F81E72098A0023A0AA /* NewsFilterTableViewController.swift */; };
-		7DF7E66C1E7B7C3700741492 /* NewsImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF7E66B1E7B7C3700741492 /* NewsImageTableViewCell.swift */; };
+		7DA6D92A1E7F6ECE00CD5D02 /* CourseSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9201E7F6ECE00CD5D02 /* CourseSearchResult.swift */; };
+		7DA6D92B1E7F6ECE00CD5D02 /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9211E7F6ECE00CD5D02 /* NewsItem.swift */; };
+		7DA6D92C1E7F6ECE00CD5D02 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9221E7F6ECE00CD5D02 /* Course.swift */; };
+		7DA6D92D1E7F6ECE00CD5D02 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9231E7F6ECE00CD5D02 /* User.swift */; };
+		7DA6D92E1E7F6ECE00CD5D02 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9241E7F6ECE00CD5D02 /* NetworkManager.swift */; };
+		7DA6D92F1E7F6ECE00CD5D02 /* CourseMeeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9251E7F6ECE00CD5D02 /* CourseMeeting.swift */; };
+		7DA6D9301E7F6ECE00CD5D02 /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9261E7F6ECE00CD5D02 /* Term.swift */; };
+		7DA6D9311E7F6ECE00CD5D02 /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9271E7F6ECE00CD5D02 /* Grade.swift */; };
+		7DA6D9321E7F6ECE00CD5D02 /* Credential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9281E7F6ECE00CD5D02 /* Credential.swift */; };
+		7DA6D9331E7F6ECE00CD5D02 /* Instructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9291E7F6ECE00CD5D02 /* Instructor.swift */; };
+		7DA6D9411E7F6F6800CD5D02 /* CourseDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9361E7F6F6800CD5D02 /* CourseDetailTableViewController.swift */; };
+		7DA6D9421E7F6F6800CD5D02 /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9371E7F6F6800CD5D02 /* CourseListViewController.swift */; };
+		7DA6D9431E7F6F6800CD5D02 /* CoursePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9381E7F6F6800CD5D02 /* CoursePageViewController.swift */; };
+		7DA6D9441E7F6F6800CD5D02 /* CourseSearchResultDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9391E7F6F6800CD5D02 /* CourseSearchResultDetailTableViewController.swift */; };
+		7DA6D9451E7F6F6800CD5D02 /* CourseSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D93A1E7F6F6800CD5D02 /* CourseSearchResultsTableViewController.swift */; };
+		7DA6D9461E7F6F6800CD5D02 /* CourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D93B1E7F6F6800CD5D02 /* CourseViewController.swift */; };
+		7DA6D9471E7F6F6800CD5D02 /* NewsDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D93D1E7F6F6800CD5D02 /* NewsDetailTableViewController.swift */; };
+		7DA6D9481E7F6F6800CD5D02 /* NewsFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D93E1E7F6F6800CD5D02 /* NewsFilterTableViewController.swift */; };
+		7DA6D9491E7F6F6800CD5D02 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D93F1E7F6F6800CD5D02 /* NewsTableViewController.swift */; };
+		7DA6D9551E7F6FC500CD5D02 /* CourseCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D94D1E7F6FC500CD5D02 /* CourseCalendarTableViewCell.swift */; };
+		7DA6D9561E7F6FC500CD5D02 /* CourseCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D94E1E7F6FC500CD5D02 /* CourseCalendarView.swift */; };
+		7DA6D9571E7F6FC500CD5D02 /* CourseDetailHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D94F1E7F6FC500CD5D02 /* CourseDetailHeaderTableViewCell.swift */; };
+		7DA6D9581E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9511E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift */; };
+		7DA6D9591E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9521E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift */; };
+		7DA6D95A1E7F6FC500CD5D02 /* NewsImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9531E7F6FC500CD5D02 /* NewsImageTableViewCell.swift */; };
+		7DA6D95B1E7F6FC500CD5D02 /* NewsItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9541E7F6FC500CD5D02 /* NewsItemTableViewCell.swift */; };
+		7DA6D9651E7F6FFF00CD5D02 /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D95D1E7F6FFF00CD5D02 /* Date+String.swift */; };
+		7DA6D9661E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D95E1E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift */; };
+		7DA6D9671E7F6FFF00CD5D02 /* JSON+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D95F1E7F6FFF00CD5D02 /* JSON+Date.swift */; };
+		7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9601E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift */; };
+		7DA6D9691E7F6FFF00CD5D02 /* String+Boyer-Moore-Horspool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9611E7F6FFF00CD5D02 /* String+Boyer-Moore-Horspool.swift */; };
+		7DA6D96A1E7F6FFF00CD5D02 /* String+CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9621E7F6FFF00CD5D02 /* String+CGFloat.swift */; };
+		7DA6D96B1E7F6FFF00CD5D02 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9631E7F6FFF00CD5D02 /* String+Date.swift */; };
+		7DA6D96C1E7F6FFF00CD5D02 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9641E7F6FFF00CD5D02 /* UIColor.swift */; };
+		7DA6D96E1E7F72B700CD5D02 /* SignInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D96D1E7F72B700CD5D02 /* SignInTableViewController.swift */; };
 		941AB645B5C3E0E6A95DACF2 /* Pods_TUHubUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCC307919AD5A4C9159AAE0 /* Pods_TUHubUITests.framework */; };
 		A1D62E3F439C1C254F6FC729 /* Pods_TUHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9048A865C973948E6821D8E5 /* Pods_TUHub.framework */; };
 /* End PBXBuildFile section */
@@ -88,43 +87,42 @@
 		7D043A6D1E5BF7EF0003A853 /* TUHubUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TUHubUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D043A711E5BF7EF0003A853 /* TUHubUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TUHubUITests.swift; sourceTree = "<group>"; };
 		7D043A731E5BF7EF0003A853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7D043A7F1E5BF8880003A853 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		7D043A801E5BF8880003A853 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		7D043A811E5BF8880003A853 /* Grade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grade.swift; sourceTree = "<group>"; };
-		7D043A821E5BF8880003A853 /* Term.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
-		7D043A831E5BF8880003A853 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		7D043A8E1E5F73060003A853 /* JSON+Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSON+Date.swift"; sourceTree = "<group>"; };
-		7D043A901E5F871E0003A853 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
-		7D043A921E5FA9800003A853 /* Credential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credential.swift; sourceTree = "<group>"; };
-		7D043A961E5FB8080003A853 /* CourseMeeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMeeting.swift; sourceTree = "<group>"; };
-		7D043A981E5FBE100003A853 /* Instructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instructor.swift; sourceTree = "<group>"; };
-		7D3D95ED1E7C6B4800D03CA1 /* ScaleAspectFitImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleAspectFitImageView.swift; sourceTree = "<group>"; };
-		7D3D95F31E7C96FE00D03CA1 /* CourseSearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSearchResultsTableViewController.swift; sourceTree = "<group>"; };
-		7D3D95F51E7CC25A00D03CA1 /* String+Boyer-Moore-Horspool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Boyer-Moore-Horspool.swift"; sourceTree = "<group>"; };
-		7D3D95FD1E7DE1E100D03CA1 /* CourseSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSearchResult.swift; sourceTree = "<group>"; };
-		7D3D96011E7E6BE100D03CA1 /* CourseSearchResultDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSearchResultDetailTableViewController.swift; sourceTree = "<group>"; };
-		7D4798341E73236700F969CD /* Error+UIAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Error+UIAlertViewController.swift"; sourceTree = "<group>"; };
-		7D47983F1E7848A700F969CD /* CourseCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCalendarView.swift; sourceTree = "<group>"; };
-		7D553BB41E78C76F00D46166 /* CoursePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePageViewController.swift; sourceTree = "<group>"; };
-		7D553BB61E78C7A700D46166 /* CourseListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListViewController.swift; sourceTree = "<group>"; };
-		7D553BE81E78F65F00D46166 /* CourseCalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCalendarTableViewCell.swift; sourceTree = "<group>"; };
-		7D553BEA1E79C69200D46166 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
-		7D553BEC1E7B0A8900D46166 /* CourseDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailTableViewController.swift; sourceTree = "<group>"; };
-		7D553BF01E7B174400D46166 /* CourseDetailHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailHeaderTableViewCell.swift; sourceTree = "<group>"; };
-		7D5E40601E78A69500D5C1CA /* String+Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
-		7D6D6D7D1E6FD6CB00BF121A /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		7D6D6D7F1E707ED900BF121A /* CourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseViewController.swift; sourceTree = "<group>"; };
-		7D6D6D811E708EE400BF121A /* NewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
 		7D6D6D831E70939500BF121A /* CalendarCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCellView.xib; sourceTree = "<group>"; };
-		7D6D6D851E709B6600BF121A /* NewsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsItem.swift; sourceTree = "<group>"; };
-		7D6D6D871E70B33F00BF121A /* NewsItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsItemTableViewCell.swift; sourceTree = "<group>"; };
-		7D6D6D8C1E70C77700BF121A /* NewsDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailTableViewController.swift; sourceTree = "<group>"; };
-		7D6D6D911E70CDD900BF121A /* NewsHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsHeaderTableViewCell.swift; sourceTree = "<group>"; };
-		7D6D6D931E70CDE500BF121A /* NewsBodyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsBodyTableViewCell.swift; sourceTree = "<group>"; };
-		7DBD85591E72FE2500E73560 /* String+CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+CGFloat.swift"; sourceTree = "<group>"; };
-		7DED63F61E7200560023A0AA /* Date+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
-		7DED63F81E72098A0023A0AA /* NewsFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFilterTableViewController.swift; sourceTree = "<group>"; };
-		7DF7E66B1E7B7C3700741492 /* NewsImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsImageTableViewCell.swift; sourceTree = "<group>"; };
+		7DA6D9201E7F6ECE00CD5D02 /* CourseSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CourseSearchResult.swift; path = Models/CourseSearchResult.swift; sourceTree = "<group>"; };
+		7DA6D9211E7F6ECE00CD5D02 /* NewsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsItem.swift; path = Models/NewsItem.swift; sourceTree = "<group>"; };
+		7DA6D9221E7F6ECE00CD5D02 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Course.swift; path = Models/Course.swift; sourceTree = "<group>"; };
+		7DA6D9231E7F6ECE00CD5D02 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
+		7DA6D9241E7F6ECE00CD5D02 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = Models/NetworkManager.swift; sourceTree = "<group>"; };
+		7DA6D9251E7F6ECE00CD5D02 /* CourseMeeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CourseMeeting.swift; path = Models/CourseMeeting.swift; sourceTree = "<group>"; };
+		7DA6D9261E7F6ECE00CD5D02 /* Term.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Term.swift; path = Models/Term.swift; sourceTree = "<group>"; };
+		7DA6D9271E7F6ECE00CD5D02 /* Grade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Grade.swift; path = Models/Grade.swift; sourceTree = "<group>"; };
+		7DA6D9281E7F6ECE00CD5D02 /* Credential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Credential.swift; path = Models/Credential.swift; sourceTree = "<group>"; };
+		7DA6D9291E7F6ECE00CD5D02 /* Instructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Instructor.swift; path = Models/Instructor.swift; sourceTree = "<group>"; };
+		7DA6D9361E7F6F6800CD5D02 /* CourseDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailTableViewController.swift; sourceTree = "<group>"; };
+		7DA6D9371E7F6F6800CD5D02 /* CourseListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListViewController.swift; sourceTree = "<group>"; };
+		7DA6D9381E7F6F6800CD5D02 /* CoursePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePageViewController.swift; sourceTree = "<group>"; };
+		7DA6D9391E7F6F6800CD5D02 /* CourseSearchResultDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSearchResultDetailTableViewController.swift; sourceTree = "<group>"; };
+		7DA6D93A1E7F6F6800CD5D02 /* CourseSearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSearchResultsTableViewController.swift; sourceTree = "<group>"; };
+		7DA6D93B1E7F6F6800CD5D02 /* CourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseViewController.swift; sourceTree = "<group>"; };
+		7DA6D93D1E7F6F6800CD5D02 /* NewsDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailTableViewController.swift; sourceTree = "<group>"; };
+		7DA6D93E1E7F6F6800CD5D02 /* NewsFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFilterTableViewController.swift; sourceTree = "<group>"; };
+		7DA6D93F1E7F6F6800CD5D02 /* NewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
+		7DA6D94D1E7F6FC500CD5D02 /* CourseCalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCalendarTableViewCell.swift; sourceTree = "<group>"; };
+		7DA6D94E1E7F6FC500CD5D02 /* CourseCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCalendarView.swift; sourceTree = "<group>"; };
+		7DA6D94F1E7F6FC500CD5D02 /* CourseDetailHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		7DA6D9511E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsBodyTableViewCell.swift; sourceTree = "<group>"; };
+		7DA6D9521E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		7DA6D9531E7F6FC500CD5D02 /* NewsImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsImageTableViewCell.swift; sourceTree = "<group>"; };
+		7DA6D9541E7F6FC500CD5D02 /* NewsItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsItemTableViewCell.swift; sourceTree = "<group>"; };
+		7DA6D95D1E7F6FFF00CD5D02 /* Date+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
+		7DA6D95E1E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Error+UIAlertViewController.swift"; sourceTree = "<group>"; };
+		7DA6D95F1E7F6FFF00CD5D02 /* JSON+Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSON+Date.swift"; sourceTree = "<group>"; };
+		7DA6D9601E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleAspectFitImageView.swift; sourceTree = "<group>"; };
+		7DA6D9611E7F6FFF00CD5D02 /* String+Boyer-Moore-Horspool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Boyer-Moore-Horspool.swift"; sourceTree = "<group>"; };
+		7DA6D9621E7F6FFF00CD5D02 /* String+CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+CGFloat.swift"; sourceTree = "<group>"; };
+		7DA6D9631E7F6FFF00CD5D02 /* String+Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
+		7DA6D9641E7F6FFF00CD5D02 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		7DA6D96D1E7F72B700CD5D02 /* SignInTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInTableViewController.swift; sourceTree = "<group>"; };
 		806A184B82A477E750A74ED6 /* Pods-TUHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHub.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHub/Pods-TUHub.release.xcconfig"; sourceTree = "<group>"; };
 		9048A865C973948E6821D8E5 /* Pods_TUHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TUHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCC307919AD5A4C9159AAE0 /* Pods_TUHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TUHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,12 +197,13 @@
 		7D043A4E1E5BF7EF0003A853 /* TUHub */ = {
 			isa = PBXGroup;
 			children = (
+				7D043A4F1E5BF7EF0003A853 /* AppDelegate.swift */,
 				7D043A891E5BF88F0003A853 /* Models */,
-				7D043A8A1E5BF8970003A853 /* View Controllers */,
-				7D6D6D891E70B34300BF121A /* Views */,
+				7DA6D9341E7F6F6800CD5D02 /* Controllers */,
+				7DA6D94B1E7F6FC500CD5D02 /* Views */,
+				7DA6D95C1E7F6FFF00CD5D02 /* Utilities */,
 				7D043A8B1E5BFC9E0003A853 /* UI */,
 				7D043A5D1E5BF7EF0003A853 /* Info.plist */,
-				7D6D6D8E1E70CBC000BF121A /* Extensions */,
 			);
 			path = TUHub;
 			sourceTree = "<group>";
@@ -230,29 +229,18 @@
 		7D043A891E5BF88F0003A853 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7D043A4F1E5BF7EF0003A853 /* AppDelegate.swift */,
-				7D043A921E5FA9800003A853 /* Credential.swift */,
-				7D043A831E5BF8880003A853 /* NetworkManager.swift */,
-				7D043A801E5BF8880003A853 /* User.swift */,
-				7D043A821E5BF8880003A853 /* Term.swift */,
-				7D043A811E5BF8880003A853 /* Grade.swift */,
-				7D043A901E5F871E0003A853 /* Course.swift */,
-				7D3D95FD1E7DE1E100D03CA1 /* CourseSearchResult.swift */,
-				7D043A961E5FB8080003A853 /* CourseMeeting.swift */,
-				7D043A981E5FBE100003A853 /* Instructor.swift */,
-				7D6D6D851E709B6600BF121A /* NewsItem.swift */,
+				7DA6D9221E7F6ECE00CD5D02 /* Course.swift */,
+				7DA6D9231E7F6ECE00CD5D02 /* User.swift */,
+				7DA6D9281E7F6ECE00CD5D02 /* Credential.swift */,
+				7DA6D9241E7F6ECE00CD5D02 /* NetworkManager.swift */,
+				7DA6D9251E7F6ECE00CD5D02 /* CourseMeeting.swift */,
+				7DA6D9261E7F6ECE00CD5D02 /* Term.swift */,
+				7DA6D9271E7F6ECE00CD5D02 /* Grade.swift */,
+				7DA6D9291E7F6ECE00CD5D02 /* Instructor.swift */,
+				7DA6D9201E7F6ECE00CD5D02 /* CourseSearchResult.swift */,
+				7DA6D9211E7F6ECE00CD5D02 /* NewsItem.swift */,
 			);
 			name = Models;
-			sourceTree = "<group>";
-		};
-		7D043A8A1E5BF8970003A853 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				7D3D95F91E7CC2B000D03CA1 /* Sign In */,
-				7D3D95F81E7CC29F00D03CA1 /* Courses */,
-				7D3D95F71E7CC29500D03CA1 /* News */,
-			);
-			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		7D043A8B1E5BFC9E0003A853 /* UI */ = {
@@ -266,89 +254,82 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
-		7D3D95F71E7CC29500D03CA1 /* News */ = {
+		7DA6D9341E7F6F6800CD5D02 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7D6D6D811E708EE400BF121A /* NewsTableViewController.swift */,
-				7D6D6D8C1E70C77700BF121A /* NewsDetailTableViewController.swift */,
-				7DED63F81E72098A0023A0AA /* NewsFilterTableViewController.swift */,
+				7DA6D96D1E7F72B700CD5D02 /* SignInTableViewController.swift */,
+				7DA6D9351E7F6F6800CD5D02 /* Course */,
+				7DA6D93C1E7F6F6800CD5D02 /* News */,
 			);
-			name = News;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		7D3D95F81E7CC29F00D03CA1 /* Courses */ = {
+		7DA6D9351E7F6F6800CD5D02 /* Course */ = {
 			isa = PBXGroup;
 			children = (
-				7D6D6D7F1E707ED900BF121A /* CourseViewController.swift */,
-				7D3D95F31E7C96FE00D03CA1 /* CourseSearchResultsTableViewController.swift */,
-				7D553BB41E78C76F00D46166 /* CoursePageViewController.swift */,
-				7D553BB61E78C7A700D46166 /* CourseListViewController.swift */,
-				7D553BEC1E7B0A8900D46166 /* CourseDetailTableViewController.swift */,
-				7D3D96011E7E6BE100D03CA1 /* CourseSearchResultDetailTableViewController.swift */,
+				7DA6D93B1E7F6F6800CD5D02 /* CourseViewController.swift */,
+				7DA6D9361E7F6F6800CD5D02 /* CourseDetailTableViewController.swift */,
+				7DA6D9381E7F6F6800CD5D02 /* CoursePageViewController.swift */,
+				7DA6D9371E7F6F6800CD5D02 /* CourseListViewController.swift */,
+				7DA6D93A1E7F6F6800CD5D02 /* CourseSearchResultsTableViewController.swift */,
+				7DA6D9391E7F6F6800CD5D02 /* CourseSearchResultDetailTableViewController.swift */,
 			);
-			name = Courses;
+			path = Course;
 			sourceTree = "<group>";
 		};
-		7D3D95F91E7CC2B000D03CA1 /* Sign In */ = {
+		7DA6D93C1E7F6F6800CD5D02 /* News */ = {
 			isa = PBXGroup;
 			children = (
-				7D043A7F1E5BF8880003A853 /* SignInViewController.swift */,
+				7DA6D93D1E7F6F6800CD5D02 /* NewsDetailTableViewController.swift */,
+				7DA6D93E1E7F6F6800CD5D02 /* NewsFilterTableViewController.swift */,
+				7DA6D93F1E7F6F6800CD5D02 /* NewsTableViewController.swift */,
 			);
-			name = "Sign In";
+			path = News;
 			sourceTree = "<group>";
 		};
-		7D3D95FA1E7CC2B900D03CA1 /* Courses */ = {
+		7DA6D94B1E7F6FC500CD5D02 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7D47983F1E7848A700F969CD /* CourseCalendarView.swift */,
-				7D553BE81E78F65F00D46166 /* CourseCalendarTableViewCell.swift */,
-				7D553BF01E7B174400D46166 /* CourseDetailHeaderTableViewCell.swift */,
+				7DA6D94C1E7F6FC500CD5D02 /* Course */,
+				7DA6D9501E7F6FC500CD5D02 /* News */,
 			);
-			name = Courses;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		7D3D95FB1E7CC2C100D03CA1 /* News */ = {
+		7DA6D94C1E7F6FC500CD5D02 /* Course */ = {
 			isa = PBXGroup;
 			children = (
-				7D6D6D871E70B33F00BF121A /* NewsItemTableViewCell.swift */,
-				7D6D6D911E70CDD900BF121A /* NewsHeaderTableViewCell.swift */,
-				7DF7E66B1E7B7C3700741492 /* NewsImageTableViewCell.swift */,
-				7D6D6D931E70CDE500BF121A /* NewsBodyTableViewCell.swift */,
+				7DA6D94D1E7F6FC500CD5D02 /* CourseCalendarTableViewCell.swift */,
+				7DA6D94E1E7F6FC500CD5D02 /* CourseCalendarView.swift */,
+				7DA6D94F1E7F6FC500CD5D02 /* CourseDetailHeaderTableViewCell.swift */,
 			);
-			name = News;
+			path = Course;
 			sourceTree = "<group>";
 		};
-		7D3D95FC1E7CC2CD00D03CA1 /* Other */ = {
+		7DA6D9501E7F6FC500CD5D02 /* News */ = {
 			isa = PBXGroup;
 			children = (
-				7D553BEA1E79C69200D46166 /* ShadowView.swift */,
+				7DA6D9511E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift */,
+				7DA6D9521E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift */,
+				7DA6D9531E7F6FC500CD5D02 /* NewsImageTableViewCell.swift */,
+				7DA6D9541E7F6FC500CD5D02 /* NewsItemTableViewCell.swift */,
 			);
-			name = Other;
+			path = News;
 			sourceTree = "<group>";
 		};
-		7D6D6D891E70B34300BF121A /* Views */ = {
+		7DA6D95C1E7F6FFF00CD5D02 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				7D3D95FA1E7CC2B900D03CA1 /* Courses */,
-				7D3D95FB1E7CC2C100D03CA1 /* News */,
-				7D3D95FC1E7CC2CD00D03CA1 /* Other */,
+				7DA6D95D1E7F6FFF00CD5D02 /* Date+String.swift */,
+				7DA6D95E1E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift */,
+				7DA6D95F1E7F6FFF00CD5D02 /* JSON+Date.swift */,
+				7DA6D9601E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift */,
+				7DA6D9611E7F6FFF00CD5D02 /* String+Boyer-Moore-Horspool.swift */,
+				7DA6D9621E7F6FFF00CD5D02 /* String+CGFloat.swift */,
+				7DA6D9631E7F6FFF00CD5D02 /* String+Date.swift */,
+				7DA6D9641E7F6FFF00CD5D02 /* UIColor.swift */,
 			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		7D6D6D8E1E70CBC000BF121A /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				7D6D6D7D1E6FD6CB00BF121A /* UIColor.swift */,
-				7D043A8E1E5F73060003A853 /* JSON+Date.swift */,
-				7DED63F61E7200560023A0AA /* Date+String.swift */,
-				7DBD85591E72FE2500E73560 /* String+CGFloat.swift */,
-				7D5E40601E78A69500D5C1CA /* String+Date.swift */,
-				7D3D95F51E7CC25A00D03CA1 /* String+Boyer-Moore-Horspool.swift */,
-				7D4798341E73236700F969CD /* Error+UIAlertViewController.swift */,
-				7D3D95ED1E7C6B4800D03CA1 /* ScaleAspectFitImageView.swift */,
-			);
-			name = Extensions;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		EF3D9015D8FBE0F6CB30F116 /* Frameworks */ = {
@@ -646,43 +627,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D043A991E5FBE100003A853 /* Instructor.swift in Sources */,
-				7D6D6D861E709B6600BF121A /* NewsItem.swift in Sources */,
-				7D553BE91E78F65F00D46166 /* CourseCalendarTableViewCell.swift in Sources */,
-				7D5E40611E78A69500D5C1CA /* String+Date.swift in Sources */,
-				7D3D95F61E7CC25A00D03CA1 /* String+Boyer-Moore-Horspool.swift in Sources */,
-				7D553BEB1E79C69200D46166 /* ShadowView.swift in Sources */,
-				7DED63F91E72098A0023A0AA /* NewsFilterTableViewController.swift in Sources */,
-				7D043A911E5F871E0003A853 /* Course.swift in Sources */,
-				7DA787DD1E78615D00B9BB87 /* CourseViewController.swift in Sources */,
-				7D043A931E5FA9800003A853 /* Credential.swift in Sources */,
-				7D3D95F41E7C96FE00D03CA1 /* CourseSearchResultsTableViewController.swift in Sources */,
-				7D4798351E73236700F969CD /* Error+UIAlertViewController.swift in Sources */,
-				7D3D96021E7E6BE100D03CA1 /* CourseSearchResultDetailTableViewController.swift in Sources */,
-				7D6D6D881E70B33F00BF121A /* NewsItemTableViewCell.swift in Sources */,
-				7D3D95FE1E7DE1E100D03CA1 /* CourseSearchResult.swift in Sources */,
-				7DBD855A1E72FE2500E73560 /* String+CGFloat.swift in Sources */,
-				7D043A881E5BF8880003A853 /* NetworkManager.swift in Sources */,
-				7D043A841E5BF8880003A853 /* SignInViewController.swift in Sources */,
-				7D043A861E5BF8880003A853 /* Grade.swift in Sources */,
-				7D043A871E5BF8880003A853 /* Term.swift in Sources */,
-				7D043A8F1E5F73060003A853 /* JSON+Date.swift in Sources */,
-				7D553BED1E7B0A8900D46166 /* CourseDetailTableViewController.swift in Sources */,
-				7D6D6D941E70CDE500BF121A /* NewsBodyTableViewCell.swift in Sources */,
-				7D6D6D8D1E70C77700BF121A /* NewsDetailTableViewController.swift in Sources */,
-				7D6D6D7E1E6FD6CB00BF121A /* UIColor.swift in Sources */,
-				7D553BF11E7B174400D46166 /* CourseDetailHeaderTableViewCell.swift in Sources */,
+				7DA6D96B1E7F6FFF00CD5D02 /* String+Date.swift in Sources */,
+				7DA6D9581E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift in Sources */,
+				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
+				7DA6D9301E7F6ECE00CD5D02 /* Term.swift in Sources */,
+				7DA6D9441E7F6F6800CD5D02 /* CourseSearchResultDetailTableViewController.swift in Sources */,
+				7DA6D9591E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift in Sources */,
+				7DA6D92A1E7F6ECE00CD5D02 /* CourseSearchResult.swift in Sources */,
+				7DA6D9561E7F6FC500CD5D02 /* CourseCalendarView.swift in Sources */,
+				7DA6D9421E7F6F6800CD5D02 /* CourseListViewController.swift in Sources */,
+				7DA6D9471E7F6F6800CD5D02 /* NewsDetailTableViewController.swift in Sources */,
+				7DA6D9671E7F6FFF00CD5D02 /* JSON+Date.swift in Sources */,
+				7DA6D9651E7F6FFF00CD5D02 /* Date+String.swift in Sources */,
+				7DA6D9481E7F6F6800CD5D02 /* NewsFilterTableViewController.swift in Sources */,
+				7DA6D96C1E7F6FFF00CD5D02 /* UIColor.swift in Sources */,
+				7DA6D92B1E7F6ECE00CD5D02 /* NewsItem.swift in Sources */,
+				7DA6D95B1E7F6FC500CD5D02 /* NewsItemTableViewCell.swift in Sources */,
+				7DA6D92D1E7F6ECE00CD5D02 /* User.swift in Sources */,
+				7DA6D96E1E7F72B700CD5D02 /* SignInTableViewController.swift in Sources */,
+				7DA6D95A1E7F6FC500CD5D02 /* NewsImageTableViewCell.swift in Sources */,
+				7DA6D92E1E7F6ECE00CD5D02 /* NetworkManager.swift in Sources */,
+				7DA6D9691E7F6FFF00CD5D02 /* String+Boyer-Moore-Horspool.swift in Sources */,
+				7DA6D9321E7F6ECE00CD5D02 /* Credential.swift in Sources */,
+				7DA6D9571E7F6FC500CD5D02 /* CourseDetailHeaderTableViewCell.swift in Sources */,
+				7DA6D9411E7F6F6800CD5D02 /* CourseDetailTableViewController.swift in Sources */,
+				7DA6D9661E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift in Sources */,
+				7DA6D9551E7F6FC500CD5D02 /* CourseCalendarTableViewCell.swift in Sources */,
 				7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */,
-				7D043A971E5FB8080003A853 /* CourseMeeting.swift in Sources */,
-				7DED63F71E7200560023A0AA /* Date+String.swift in Sources */,
-				7D553BB51E78C76F00D46166 /* CoursePageViewController.swift in Sources */,
-				7DF7E66C1E7B7C3700741492 /* NewsImageTableViewCell.swift in Sources */,
-				7D6D6D921E70CDD900BF121A /* NewsHeaderTableViewCell.swift in Sources */,
-				7D6D6D821E708EE400BF121A /* NewsTableViewController.swift in Sources */,
-				7D553BB71E78C7A700D46166 /* CourseListViewController.swift in Sources */,
-				7D043A851E5BF8880003A853 /* User.swift in Sources */,
-				7D3D95EE1E7C6B4800D03CA1 /* ScaleAspectFitImageView.swift in Sources */,
-				7D4798411E7848A700F969CD /* CourseCalendarView.swift in Sources */,
+				7DA6D9461E7F6F6800CD5D02 /* CourseViewController.swift in Sources */,
+				7DA6D92F1E7F6ECE00CD5D02 /* CourseMeeting.swift in Sources */,
+				7DA6D9431E7F6F6800CD5D02 /* CoursePageViewController.swift in Sources */,
+				7DA6D92C1E7F6ECE00CD5D02 /* Course.swift in Sources */,
+				7DA6D96A1E7F6FFF00CD5D02 /* String+CGFloat.swift in Sources */,
+				7DA6D9311E7F6ECE00CD5D02 /* Grade.swift in Sources */,
+				7DA6D9491E7F6F6800CD5D02 /* NewsTableViewController.swift in Sources */,
+				7DA6D9451E7F6F6800CD5D02 /* CourseSearchResultsTableViewController.swift in Sources */,
+				7DA6D9331E7F6ECE00CD5D02 /* Instructor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

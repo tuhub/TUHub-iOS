@@ -42,21 +42,12 @@ extension Error {
             case .responseSerializationFailed(let reason):
                 print("Response serialization failed: \(error.localizedDescription)")
                 print("Failure Reason: \(reason)")
-                
-                if viewController is SignInViewController {
-                    alertController = UIAlertController(title: "Unable to Sign In",
-                                                        message: "Invalid username/password. Please try again.",
-                                                        preferredStyle: UIAlertControllerStyle.alert)
-                    alertController?.addAction(UIAlertAction(title: "Dismiss",
-                                                             style: .default,
-                                                             handler: nil))
-                }
             }
             
             print("Underlying error: \(error.underlyingError)")
         } else if let error = self as? URLError {
             print("URLError occurred: \(error)")
-            if viewController is SignInViewController {
+            if viewController is SignInTableViewController {
                 alertController = UIAlertController(title: "Unable to Sign In",
                                                     message: "Unable to reach Temple's servers. ☹️ Please skip or try signing in again shortly.",
                                                     preferredStyle: UIAlertControllerStyle.alert)

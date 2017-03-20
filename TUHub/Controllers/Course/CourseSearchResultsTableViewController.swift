@@ -186,6 +186,13 @@ extension CourseSearchResultsTableViewController: UISearchResultsUpdating {
         // All Courses
         case .all:
             CourseSearchResult.search(for: searchText, pageNumber: 0) { (results, error) in
+                if let error = error as? URLError {
+                    if error.code == .timedOut {
+                        let alertController = UIAlertController(title: "Unable to Load Results", message: error.localizedDescription, preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                }
                 self.allResults = results
                 self.tableView.reloadData()
             }

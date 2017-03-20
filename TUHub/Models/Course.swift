@@ -74,8 +74,8 @@ extension Course {
             return
         }
         
-        let args = ["term=\(termID)", "section=\(sectionID)"]
-        NetworkManager.request(fromEndpoint: .courseRoster, withTUID: user.tuID, arguments: args, authenticateWith: user.credential) { (data, error) in
+        let params = ["term" : termID, "section" : sectionID]
+        NetworkManager.request(fromEndpoint: .courseRoster, withTUID: user.tuID, parameters: params, authenticateWith: user.credential) { (data, error) in
             
             var roster: [String]?
             

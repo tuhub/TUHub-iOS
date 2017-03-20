@@ -64,7 +64,9 @@ extension User {
         
         NetworkManager.request(fromEndpoint: .getUserInfo, authenticateWith: credential) { (data, error) in
             
-            defer { responseHandler?(User.current, error) }
+            defer {
+                responseHandler?(User.current, error)
+            }
             
             // Turn raw data into JSON
             guard let data = data else { return }
