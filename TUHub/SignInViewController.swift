@@ -81,8 +81,9 @@ class SignInViewController: UIViewController {
         center.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.layoutIfNeeded()
         updateSignInButtonWidth()
     }
     

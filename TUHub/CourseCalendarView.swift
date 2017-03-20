@@ -24,7 +24,7 @@ class CourseCalendarView: UIView {
     var delegate: CourseCalendarViewDelegate?
     var performSegueDelegate: PerformCourseDetailSegueDelegate?
     var courses: [Course]?
-    var selectedDate: Date!
+    lazy var selectedDate = Date()
     fileprivate var selectedDateCourses: [Course]?
     var selectedDateMeetings: [CourseMeeting]? {
         didSet {
@@ -49,7 +49,6 @@ class CourseCalendarView: UIView {
         calendarView.reloadData()
         
         // Get meetings for the current date
-        selectedDate = Date()
         selectedDateMeetings = meetings(on: selectedDate)
         
         // Set up table view
