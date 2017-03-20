@@ -20,6 +20,8 @@ class SignInTableViewController: UITableViewController {
     weak var usernameField: UITextField?
     weak var passwordField: UITextField?
     weak var signInButton: UIButton?
+    
+    var isHidden = true
 
     lazy var invalidCredentialsAlertController: UIAlertController = {
         let alertController = UIAlertController(title: "Unable to Sign In",
@@ -29,6 +31,12 @@ class SignInTableViewController: UITableViewController {
                                                 style: .default,
                                                 handler: nil))
         return alertController
+    }()
+    
+    lazy var mRefreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.translatesAutoresizingMaskIntoConstraints = false
+        return refreshControl
     }()
     
     override func viewDidLoad() {
@@ -80,14 +88,39 @@ class SignInTableViewController: UITableViewController {
         }
     }
     
+    private func addRefreshControl() {
+        view.addSubview(mRefreshControl)
+        view.addConstraint(
+            NSLayoutConstraint(item: mRefreshControl,
+                               attribute: .centerX,
+                               relatedBy: .equal,
+                               toItem: view,
+                               attribute: .centerX,
+                               multiplier: 1,
+                               constant: 0))
+        view.addConstraint(
+            NSLayoutConstraint(item: mRefreshControl,
+                               attribute: .centerY,
+                               relatedBy: .equal,
+                               toItem: view,
+                               attribute: .centerY,
+                               multiplier: 1,
+                               constant: 0))
+        view.bringSubview(toFront: mRefreshControl)
+        mRefreshControl.beginRefreshing()
+    }
+    
     private func hideUI() {
-        tableView.isHidden = true
-        signInButton?.isHidden = true
+        addRefreshControl()
+        isHidden = true
+        tableView.reloadData()
     }
     
     private func showUI() {
-        tableView.isHidden = false
-        signInButton?.isHidden = false
+        mRefreshControl.endRefreshing()
+        mRefreshControl.removeFromSuperview()
+        isHidden = false
+        tableView.reloadData()
     }
     
     private func presentInvalidCredentialsError() {
@@ -136,11 +169,11 @@ class SignInTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return isHidden ? 0 : 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return isHidden ? 0 : 5
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
