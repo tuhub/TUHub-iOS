@@ -156,7 +156,7 @@ extension CourseCalendarView: UITableViewDataSource {
 extension CourseCalendarView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let course = selectedDateMeetings?[indexPath.row].course {
+        if let course = selectedDateMeetings?[indexPath.row].course, traitCollection.horizontalSizeClass == .regular {
             performSegueDelegate?.performSegue(withCourse: course)
         }
     }
