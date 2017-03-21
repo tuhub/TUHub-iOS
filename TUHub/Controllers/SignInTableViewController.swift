@@ -87,7 +87,8 @@ class SignInTableViewController: UITableViewController {
     
     internal func rotated() {
         // Needed to fix bug where label is clipped (despite constraints)
-        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        tableView.reloadData()
+//        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
     }
     
     fileprivate func signIn() {
