@@ -37,15 +37,7 @@ class CourseViewController: UIViewController {
     var datePicker: UIDatePicker!
     var termPicker: UIPickerView!
     weak var coursePageVC: CoursePageViewController?
-    let searchController: UISearchController = {
-        let resultsController = CourseSearchResultsTableViewController()
-        let searchController = UISearchController(searchResultsController: resultsController)
-        searchController.searchBar.scopeButtonTitles = ["My Courses", "All Courses"]
-        searchController.searchResultsUpdater = resultsController
-        searchController.searchBar.tintColor = .cherry
-        resultsController.searchController = searchController
-        return searchController
-    }()
+    
     
     var state = State.calendar
     fileprivate var terms: [Term]?
@@ -86,7 +78,7 @@ class CourseViewController: UIViewController {
         // Set up date picker for the left bar button
         setUpDatePicker()
         
-        definesPresentationContext = true
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -238,7 +230,8 @@ class CourseViewController: UIViewController {
     }
 
     @IBAction func didPressSearch(_ sender: UIBarButtonItem) {
-        present(searchController, animated: true, completion: nil)
+//        navigationController?.present(searchController, animated: true, completion: nil)
+        performSegue(withIdentifier: "presentSearchController", sender: nil)
     }
 }
 
@@ -282,6 +275,5 @@ extension CourseViewController: PerformCourseDetailSegueDelegate {
     internal func performSegue(withCourse course: Course) {
         performSegue(withIdentifier: formCourseDetailSegueID, sender: course)
     }
-
     
 }

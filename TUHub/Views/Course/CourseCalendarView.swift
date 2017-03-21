@@ -37,7 +37,6 @@ class CourseCalendarView: UIView {
         }
     }
     
-    
     func setUp(with courses: [Course], delegate: CourseCalendarViewDelegate?) {
         // Init values
         self.courses = courses

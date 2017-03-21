@@ -10,7 +10,7 @@ import AEXML
 
 struct CourseSearchResult {
     
-    static let searchPageSize = 25
+    static let searchPageSize = 10
     
     let name: String
     let title: String

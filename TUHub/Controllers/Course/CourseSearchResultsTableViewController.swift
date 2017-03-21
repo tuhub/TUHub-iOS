@@ -174,6 +174,9 @@ extension CourseSearchResultsTableViewController: UISearchResultsUpdating {
         currentPage = 0
         allPagesLoaded = false
         
+        // Cancel any pending course search requests
+        NetworkManager.cancelAllRequests(for: .courseSearch)
+        
         switch self.scope! {
             
         // My Courses
@@ -216,6 +219,7 @@ extension CourseSearchResultsTableViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         scope = Scope(selectedScope)
+        tableView.reloadData()
         updateSearchResults(for: searchBar.text)
     }
     
