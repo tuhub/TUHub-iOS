@@ -67,7 +67,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UISearchControllerDelegate {
     
     func didDismissSearchController(_ searchController: UISearchController) {
-        NetworkManager.cancelAllRequests(for: .courseSearch)
+        NetworkManager.shared.cancelAllRequests(for: .courseSearch)
         navigationController?.dismiss(animated: false, completion: nil)
     }
     

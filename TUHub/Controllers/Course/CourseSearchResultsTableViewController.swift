@@ -175,7 +175,7 @@ extension CourseSearchResultsTableViewController: UISearchResultsUpdating {
         allPagesLoaded = false
         
         // Cancel any pending course search requests
-        NetworkManager.cancelAllRequests(for: .courseSearch)
+        NetworkManager.shared.cancelAllRequests(for: .courseSearch)
         
         switch self.scope! {
             

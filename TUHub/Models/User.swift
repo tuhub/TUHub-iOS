@@ -62,7 +62,7 @@ extension User {
         
         let credential = Credential(username: username, password: password)
         
-        NetworkManager.request(fromEndpoint: .getUserInfo, authenticateWith: credential) { (data, error) in
+        NetworkManager.shared.request(fromEndpoint: .getUserInfo, authenticateWith: credential) { (data, error) in
             
             defer {
                 responseHandler?(User.current, error)
@@ -97,7 +97,7 @@ extension User {
         }
         
         let credential = Credential(username: username, password: password)
-        NetworkManager.request(fromEndpoint: .getUserInfo, authenticateWith: credential) { (data, error) in
+        NetworkManager.shared.request(fromEndpoint: .getUserInfo, authenticateWith: credential) { (data, error) in
             
             // Respond with values when leaving scope
             defer { responseHandler?(User.current, error) }
@@ -139,7 +139,7 @@ extension User {
     
     func retrieveGrades(_ responseHandler: GradesResponseHandler?) {
         
-        NetworkManager.request(fromEndpoint: .grades, withTUID: tuID, authenticateWith: credential) { (data, error) in
+        NetworkManager.shared.request(fromEndpoint: .grades, withTUID: tuID, authenticateWith: credential) { (data, error) in
             
             var grades: [Term]?
             
@@ -169,7 +169,7 @@ extension User {
     typealias CoursesResponseHandler = ([Term]?, Error?) -> Void
     
     func retrieveCourses(_ responseHandler: CoursesResponseHandler?) {
-        NetworkManager.request(fromEndpoint: .courseOverview, withTUID: tuID, authenticateWith: credential) { (data, error) in
+        NetworkManager.shared.request(fromEndpoint: .courseOverview, withTUID: tuID, authenticateWith: credential) { (data, error) in
             
             var courseTerms = [Term]()
             

@@ -10,7 +10,7 @@ import AEXML
 
 struct CourseSearchResult {
     
-    static let searchPageSize = 10
+    static let searchPageSize = 15
     
     let name: String
     let title: String
@@ -64,7 +64,7 @@ struct CourseSearchResult {
                                       "minRow" : minRow,
                                       "maxRow" : maxRow]
         
-        NetworkManager.request(fromEndpoint: .courseSearch, parameters: params) { (data, error) in
+        NetworkManager.shared.request(fromEndpoint: .courseSearch, parameters: params) { (data, error) in
             
             var results: [CourseSearchResult]?
             

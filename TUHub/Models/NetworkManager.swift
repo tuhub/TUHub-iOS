@@ -20,54 +20,61 @@ class NetworkManager: NSObject {
         case courseSearch = "https://prd-mobile.temple.edu/CourseSearch/searchCatalog.jsp"
     }
     
+    static let shared = NetworkManager()
+    
+    fileprivate let alamofireManager: SessionManager = {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 180
+        return Alamofire.SessionManager(configuration: configuration)
+    }()
+    
     typealias ResponseHandler = (Data?, Error?) -> Void
     
-    static func request(fromEndpoint endpoint: Endpoint,
+    func request(fromEndpoint endpoint: Endpoint,
                         _ responseHandler: ResponseHandler?) {
         
-        NetworkManager.request(url: endpoint.rawValue, withTUID: nil, parameters: nil, authenticateWith: nil, responseHandler)
+        request(url: endpoint.rawValue, withTUID: nil, parameters: nil, authenticateWith: nil, responseHandler)
     }
     
-    static func request(fromEndpoint endpoint: Endpoint,
+    func request(fromEndpoint endpoint: Endpoint,
                         parameters: Parameters,
                         _ responseHandler: ResponseHandler?) {
         
-        NetworkManager.request(url: endpoint.rawValue, withTUID: nil, parameters: parameters, authenticateWith: nil, responseHandler)
+        request(url: endpoint.rawValue, withTUID: nil, parameters: parameters, authenticateWith: nil, responseHandler)
     }
     
-    static func request(fromEndpoint endpoint: Endpoint,
+    func request(fromEndpoint endpoint: Endpoint,
                         authenticateWith credential: Credential,
                         _ responseHandler: ResponseHandler?) {
         
-        NetworkManager.request(url: endpoint.rawValue, withTUID: nil, parameters: nil, authenticateWith: credential, responseHandler)
+        request(url: endpoint.rawValue, withTUID: nil, parameters: nil, authenticateWith: credential, responseHandler)
     }
     
-    static func request(fromEndpoint endpoint: Endpoint,
+    func request(fromEndpoint endpoint: Endpoint,
                         parameters: Parameters,
                         authenticateWith credential: Credential,
                         _ responseHandler: ResponseHandler?) {
         
-        NetworkManager.request(url: endpoint.rawValue, withTUID: nil, parameters: parameters, authenticateWith: credential, responseHandler)
+        request(url: endpoint.rawValue, withTUID: nil, parameters: parameters, authenticateWith: credential, responseHandler)
     }
     
-    static func request(fromEndpoint endpoint: Endpoint,
+    func request(fromEndpoint endpoint: Endpoint,
                         withTUID tuID: String,
                         authenticateWith credential: Credential,
                         _ responseHandler: ResponseHandler?) {
         
-        NetworkManager.request(url: endpoint.rawValue, withTUID: tuID, parameters: nil, authenticateWith: nil, responseHandler)
+        request(url: endpoint.rawValue, withTUID: tuID, parameters: nil, authenticateWith: nil, responseHandler)
     }
     
-    static func request(fromEndpoint endpoint: Endpoint,
+    func request(fromEndpoint endpoint: Endpoint,
                         withTUID tuID: String,
                         parameters: Parameters,
                         authenticateWith credential: Credential,
                         _ responseHandler: ResponseHandler?) {
-        
-        NetworkManager.request(url: endpoint.rawValue, withTUID: tuID, parameters: parameters, authenticateWith: nil, responseHandler)
+        request(url: endpoint.rawValue, withTUID: tuID, parameters: parameters, authenticateWith: nil, responseHandler)
     }
     
-    private static func request(url: String,
+    private func request(url: String,
                                 withTUID tuID: String?,
                                 parameters: Parameters?,
                                 authenticateWith credential: Credential?,
@@ -84,7 +91,7 @@ class NetworkManager: NSObject {
         
         let url = url + (tuID != nil ? "/\(tuID!)" : "")
         
-        Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseData { (response) in
+        alamofireManager.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseData { (response) in
             // Log error if there is one
             let error: Error? = {
                 guard case let .failure(error) = response.result else { return nil }
@@ -99,7 +106,7 @@ class NetworkManager: NSObject {
 
     }
     
-    static func download(imageURL url: URL, _ responseHandler: ((UIImage?, Error?) -> Void)?) {
+    func download(imageURL url: URL, _ responseHandler: ((UIImage?, Error?) -> Void)?) {
         
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -108,7 +115,7 @@ class NetworkManager: NSObject {
             return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
         }
         
-        Alamofire.download(url, to: destination).responseData { response in
+        alamofireManager.download(url, to: destination).responseData { response in
             
             var image: UIImage?
             let error: Error? = {
@@ -126,7 +133,7 @@ class NetworkManager: NSObject {
         
     }
     
-    static func cancelAllRequests(for endpoint: Endpoint) {
+    func cancelAllRequests(for endpoint: Endpoint) {
         Alamofire.SessionManager.default.session.getAllTasks { (tasks) in
             for task in tasks {
                 if let url = task.currentRequest?.url, url.absoluteString.hasPrefix(endpoint.rawValue) {

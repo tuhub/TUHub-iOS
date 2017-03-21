@@ -70,7 +70,7 @@ class NewsItem {
         
         isDownloadingImage = true
         // Attempt to download the associated image
-        NetworkManager.download(imageURL: imageURL) { (image, error) in
+        NetworkManager.shared.download(imageURL: imageURL) { (image, error) in
             self.isDownloadingImage = false
             self.image = image
             responseHandler?(self.entryID, image, error)
@@ -102,7 +102,7 @@ extension NewsItem {
         
         let params: [String : Any] = ["namekeys" : feedsString]
         
-        NetworkManager.request(fromEndpoint: .news, parameters: params) { (data, error) in
+        NetworkManager.shared.request(fromEndpoint: .news, parameters: params) { (data, error) in
             
             var newsItems: [NewsItem]?
             
