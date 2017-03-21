@@ -231,10 +231,10 @@
 		7D043A891E5BF88F0003A853 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7DA6D9221E7F6ECE00CD5D02 /* Course.swift */,
+				7DA6D9241E7F6ECE00CD5D02 /* NetworkManager.swift */,
 				7DA6D9231E7F6ECE00CD5D02 /* User.swift */,
 				7DA6D9281E7F6ECE00CD5D02 /* Credential.swift */,
-				7DA6D9241E7F6ECE00CD5D02 /* NetworkManager.swift */,
+				7DA6D9221E7F6ECE00CD5D02 /* Course.swift */,
 				7DA6D9251E7F6ECE00CD5D02 /* CourseMeeting.swift */,
 				7DA6D9261E7F6ECE00CD5D02 /* Term.swift */,
 				7DA6D9271E7F6ECE00CD5D02 /* Grade.swift */,

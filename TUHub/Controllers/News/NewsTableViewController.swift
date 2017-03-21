@@ -20,9 +20,18 @@ class NewsTableViewController: UITableViewController {
     @IBOutlet weak var filterButton: UIBarButtonItem!
     
     fileprivate var newsItems: [NewsItem]?
+    fileprivate var searchResults: [NewsItem]?
     fileprivate weak var newsDetailVC: NewsDetailTableViewController?
     fileprivate var selectedFeeds: Set<NewsItem.Feed>?
     private var errorLabel: UILabel?
+    
+    let searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.tintColor = .cherry
+        return searchController
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +48,11 @@ class NewsTableViewController: UITableViewController {
         tableView.contentOffset = CGPoint(x: 0, y: -self.refreshControl!.frame.size.height) // Needed to fix refresh control bug
         refreshControl?.tintColor = UIColor.white
         refreshControl?.backgroundColor = UIColor.cherry
+        
+        // Set search bar as the table view's header
+        searchController.searchResultsUpdater = self
+        tableView.tableHeaderView = searchController.searchBar
+        searchController.searchBar.sizeToFit()
         
         load(feeds: nil)
     }
@@ -70,8 +84,11 @@ class NewsTableViewController: UITableViewController {
             } else if newsItems == nil || newsItems!.isEmpty {
                 self.showErrorLabel(with: "Looks like there's nothing here.")
             } else if let splitViewController = self.splitViewController, !splitViewController.isCollapsed {
+                // Manually trigger segue to show first result so detail view controller is not empty
                 let indexPath = IndexPath(row: 0, section: 0)
-//                self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+                self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+                let cell = self.tableView.cellForRow(at: indexPath)
+                self.performSegue(withIdentifier: "newsDetailSegueID", sender: cell)
             }
         }
     }
@@ -123,7 +140,7 @@ class NewsTableViewController: UITableViewController {
                 let newsDetailVC = (segue.destination as? UINavigationController)?.childViewControllers.first as? NewsDetailTableViewController
                 else { break }
             
-            newsDetailVC.newsItem = newsItems?[indexPath.row]
+            newsDetailVC.newsItem = searchResults?[indexPath.row] ?? newsItems?[indexPath.row]
             self.newsDetailVC = newsDetailVC
             
         case newsFilterSegueID:
@@ -151,17 +168,17 @@ extension NewsTableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return (searchResults != nil || newsItems != nil) ? 1 : 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsItems?.count ?? 0
+        return searchResults?.count ?? newsItems?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: newsItemCellID, for: indexPath)
         
-        if let cell = cell as? NewsItemTableViewCell, let newsItem = newsItems?[indexPath.row] {
+        if let cell = cell as? NewsItemTableViewCell, let newsItem = searchResults?[indexPath.row] ?? newsItems?[indexPath.row] {
             cell.setUp(from: newsItem)
         }
         
@@ -227,6 +244,57 @@ extension NewsTableViewController: NewsFilterDelegate {
         } else {
             filterButton.image = #imageLiteral(resourceName: "FilterIcon")
         }
+    }
+    
+}
+
+// MARK: - UISearchResultsUpdating
+extension NewsTableViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text, let newsItems = newsItems, searchText.characters.count > 0 else {
+            searchResults = nil
+            tableView.reloadData()
+            return
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            struct Result {
+                var newsItem: NewsItem
+                var index: String.Index
+            }
+            
+            var results = [Result]()
+            
+            // Find matches
+            for item in newsItems {
+                var minIndex: String.Index? = item.title.index(of: searchText)
+                if let i = item.description.index(of: searchText) {
+                    if minIndex == nil || i < minIndex! {
+                        minIndex = i
+                    }
+                }
+                if let minIndex = minIndex {
+                    results.append(Result(newsItem: item, index: minIndex))
+                }
+            }
+            
+            // Sort by closeness then date
+            results.sort {
+                if $0.index == $1.index {
+                    return $0.newsItem.date > $1.newsItem.date
+                }
+                return $0.index < $1.index
+            }
+            
+            self.searchResults = results.map { $0.newsItem }
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            
+        }
+        
     }
     
 }

@@ -90,7 +90,7 @@
         <!--News-->
         <scene sceneID="39e-G5-tVw">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="MbH-H0-7jv" customClass="NewsTableViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController definesPresentationContext="YES" clearsSelectionOnViewWillAppear="NO" id="MbH-H0-7jv" customClass="NewsTableViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fe4-wF-3vX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -388,15 +388,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="signInLabelCell" rowHeight="153" id="BAc-E5-1N9">
-                                <rect key="frame" x="0.0" y="28" width="375" height="153"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="signInLabelCell" rowHeight="128" id="BAc-E5-1N9">
+                                <rect key="frame" x="0.0" y="28" width="375" height="128"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="BAc-E5-1N9" id="oXN-cA-Odz">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" text="Sign In" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qcj-vW-4EV">
-                                            <rect key="frame" x="15" y="77" width="345" height="65"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" verticalHuggingPriority="1" verticalCompressionResistancePriority="1000" text="Sign In" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qcj-vW-4EV">
+                                            <rect key="frame" x="15" y="77" width="345" height="40"/>
                                             <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="40"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -408,15 +408,14 @@
                                             <variation key="heightClass=regular" constant="0.0"/>
                                         </constraint>
                                         <constraint firstItem="Qcj-vW-4EV" firstAttribute="leading" secondItem="oXN-cA-Odz" secondAttribute="leadingMargin" id="mdG-6L-MfM"/>
-                                        <constraint firstItem="Qcj-vW-4EV" firstAttribute="top" secondItem="oXN-cA-Odz" secondAttribute="topMargin" id="y0D-em-j1a">
+                                        <constraint firstItem="Qcj-vW-4EV" firstAttribute="top" secondItem="oXN-cA-Odz" secondAttribute="topMargin" constant="66" id="y0D-em-j1a">
                                             <variation key="heightClass=compact" constant="22"/>
-                                            <variation key="heightClass=regular" constant="66"/>
                                         </constraint>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="usernameFieldCell" id="S6k-6c-aT7">
-                                <rect key="frame" x="0.0" y="181" width="375" height="66"/>
+                                <rect key="frame" x="0.0" y="156" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="S6k-6c-aT7" id="cX7-kU-DQ3">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
@@ -450,7 +449,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="passwordFieldCell" id="WrC-pH-b5e">
-                                <rect key="frame" x="0.0" y="247" width="375" height="66"/>
+                                <rect key="frame" x="0.0" y="222" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="WrC-pH-b5e" id="fLd-qF-T3S">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
@@ -484,7 +483,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="skipButtonCell" id="Wkw-80-CNa">
-                                <rect key="frame" x="0.0" y="313" width="375" height="66"/>
+                                <rect key="frame" x="0.0" y="288" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="Wkw-80-CNa" id="GCO-hb-Ajv">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
@@ -513,7 +512,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="signInButtonCell" id="6AO-zk-GkH">
-                                <rect key="frame" x="0.0" y="379" width="375" height="66"/>
+                                <rect key="frame" x="0.0" y="354" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="6AO-zk-GkH" id="r4c-9o-fOs">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
@@ -566,7 +565,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-860" y="-4"/>
+            <point key="canvasLocation" x="-860" y="-4.0479760119940034"/>
         </scene>
         <!--Course List View Controller-->
         <scene sceneID="3rN-4G-YdZ">

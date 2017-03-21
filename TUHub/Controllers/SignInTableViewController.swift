@@ -17,9 +17,22 @@ fileprivate let signInButtonCellID = "signInButtonCell"
 
 class SignInTableViewController: UITableViewController {
     
-    weak var usernameField: UITextField?
-    weak var passwordField: UITextField?
-    weak var signInButton: UIButton?
+    weak var usernameField: UITextField? {
+        didSet{
+            if let credential = credential {
+                usernameField?.text = credential.username
+            }
+        }
+    }
+    weak var passwordField: UITextField?{
+        didSet{
+            if let credential = credential {
+                passwordField?.text = credential.password
+            }
+        }
+    }
+    var signInButton: UIButton?
+    var credential: Credential?
     
     var isHidden = true
 
@@ -62,12 +75,19 @@ class SignInTableViewController: UITableViewController {
                 error.displayAlertController(from: self)
             }
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: .UIDeviceOrientationDidChange, object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         determineSignInButtonState()
+    }
+    
+    internal func rotated() {
+        // Needed to fix bug where label is clipped (despite constraints)
+        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
     }
     
     fileprivate func signIn() {
@@ -84,7 +104,7 @@ class SignInTableViewController: UITableViewController {
             })
             
         } else {
-            // TODO: Alert user that they have not provided both fields
+            self.presentInvalidCredentialsError()
         }
     }
     
@@ -104,7 +124,7 @@ class SignInTableViewController: UITableViewController {
                                relatedBy: .equal,
                                toItem: view,
                                attribute: .centerY,
-                               multiplier: 1,
+                               multiplier: 0.75,
                                constant: 0))
         view.bringSubview(toFront: mRefreshControl)
         mRefreshControl.beginRefreshing()
@@ -140,17 +160,18 @@ class SignInTableViewController: UITableViewController {
     }
     
     @IBAction func unwindToSignInViewController(segue: UIStoryboardSegue) {
-        usernameField?.text = ""
-        passwordField?.text = ""
-        User.signOut()
+        self.credential = User.current!.credential
         showUI()
+        User.signOut()
     }
     
     @IBAction func usernameTextFieldDidChange(_ sender: UITextField) {
+        credential = nil
         determineSignInButtonState()
     }
     
     @IBAction func passwordTextFieldDidChange(_ sender: UITextField) {
+        credential = nil
         determineSignInButtonState()
     }
     
@@ -184,11 +205,13 @@ class SignInTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: usernameFieldCellID)!
             usernameField = cell.contentView.viewWithTag(2) as? UITextField
             usernameField?.delegate = self
+            usernameField?.layer.borderColor = nil
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: passwordFieldCellID)!
             passwordField = cell.contentView.viewWithTag(3) as? UITextField
             passwordField?.delegate = self
+            passwordField?.layer.borderColor = nil
             return cell
         case 3:
             return tableView.dequeueReusableCell(withIdentifier: skipButtonCellID)!
