@@ -87,7 +87,8 @@ class SignInTableViewController: UITableViewController {
     
     internal func rotated() {
         // Needed to fix bug where label is clipped (despite constraints)
-        //tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     fileprivate func signIn() {
@@ -133,14 +134,14 @@ class SignInTableViewController: UITableViewController {
     private func hideUI() {
         addRefreshControl()
         isHidden = true
-        //tableView.reloadData()
+        tableView.reloadData()
     }
     
     private func showUI() {
         mRefreshControl.endRefreshing()
         mRefreshControl.removeFromSuperview()
         isHidden = false
-        //tableView.reloadData()
+        tableView.reloadData()
     }
     
     private func presentInvalidCredentialsError() {
