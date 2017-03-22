@@ -283,9 +283,9 @@
 		7DA6D93C1E7F6F6800CD5D02 /* News */ = {
 			isa = PBXGroup;
 			children = (
-				7DA6D93D1E7F6F6800CD5D02 /* NewsDetailTableViewController.swift */,
-				7DA6D93E1E7F6F6800CD5D02 /* NewsFilterTableViewController.swift */,
 				7DA6D93F1E7F6F6800CD5D02 /* NewsTableViewController.swift */,
+				7DA6D93E1E7F6F6800CD5D02 /* NewsFilterTableViewController.swift */,
+				7DA6D93D1E7F6F6800CD5D02 /* NewsDetailTableViewController.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";

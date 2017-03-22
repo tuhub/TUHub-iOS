@@ -7,15 +7,19 @@
 //
 
 import SwiftyJSON
+import Kanna
 
 class NewsItem {
+    
+    private static let maxDescriptionLength = 100
     
     let entryID: String
     let feedName: String
     let date: Date
     let url: URL
     let title: String
-    let description: String
+    private(set) var subtitle: String?
+    private(set) var description: String?
     let contentHTML: String
     var content: NSAttributedString?
     fileprivate let imageURL: URL?
@@ -42,31 +46,50 @@ class NewsItem {
         self.date = date
         self.url = url
         self.title = title
-        self.contentHTML = contentHTML
         self.imageURL = imageURL
+    
         
-        // To get the subtitle of the NewsItem
-        // This returns an array which we can use to get news, we can loop through array starting from index 1 to get all the text
-        if let firstLine = contentHTML.components(separatedBy: "\n").first {
-            // This get rids of almost all HTML tags
-            var formatedText = firstLine.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+        // Parse the HTML to retrieve and remove subtitle and date
+        guard let doc = Kanna.HTML(html: contentHTML, encoding: .utf8), let bodyNode = doc.body else { return nil }
+        
+        // Attempt to find the subtitle node and set the subtitle to its contents
+        if let subtitleNode = bodyNode.at_xpath("//div[@class='field field-name-field-subtitle field-type-text-long field-label-above']"), let text = subtitleNode.at_xpath("//div[@class='field-items']")?.text {
+            self.subtitle = text
             
-            // This deletes "Subtitle:&nbsp;" which is in front of the subtitle/news description
-            formatedText = formatedText.replacingOccurrences(of: "Subtitle:&nbsp;", with: "", options: .regularExpression, range: nil)
-            
-            self.description = formatedText
-            return
+            // Remove the subtitle from the HTML
+            bodyNode.removeChild(subtitleNode)
         }
         
-        return nil
+        // Attempt to find the article abstract node and set the abstract to its contents
+        if let abstract = bodyNode.at_xpath("//div[@class='field field-name-field-abstract field-type-text-long field-label-hidden']") {
+            self.description = abstract.text
+            
+            // Remove abstract from the HTML
+            bodyNode.removeChild(abstract)
+        }
+        // If unavailable, attempt to set description to the first line or 100 chars of text
+        else if let text = bodyNode.text {
+            self.description = NewsItem.getFirstLine(of: text)
+        }
+        
+        // Remove the date node if present
+        if let dateNode = bodyNode.at_xpath("//div[@class='field field-name-field-news-date field-type-date field-label-hidden']") {
+            bodyNode.removeChild(dateNode)
+        }
+        
+        // TODO: Get images and add to a gallery
+//        let imageNodes = bodyNode.css("img")
+//        for imageNode in imageNodes {
+//            print(imageNode.toHTML)
+//        }
+        
+        self.contentHTML = bodyNode.toHTML!
+        
     }
     
     func downloadImage(_ responseHandler: ((String, UIImage?, Error?) -> Void)?) {
         
-        guard let imageURL = imageURL else {
-            log.info("Attempting to download an image for a NewsItem that does not have an image URL associated with it.")
-            return
-        }
+        guard let imageURL = imageURL else { return }
         
         isDownloadingImage = true
         // Attempt to download the associated image
@@ -76,6 +99,29 @@ class NewsItem {
             responseHandler?(self.entryID, image, error)
         }
         
+    }
+    
+    private static func getFirstLine(of text: String) -> String {
+        if let index = text.characters.index(of: "\n") {
+            
+            // Get the position of this character, substract 1 to not add the \n to the title
+            let dist = text.distance(from: text.startIndex, to: index).advanced(by: -1)
+            let index = text.index(text.startIndex, offsetBy: dist)
+            
+            return text.substring(to: index)
+        } else {
+            
+            // If it's longer than max length, only get max length
+            if text.characters.count >= NewsItem.maxDescriptionLength {
+                let index = text.index(text.startIndex, offsetBy: NewsItem.maxDescriptionLength)
+                return text.substring(to: index)
+            }
+                
+            // If it's shorter, count the chars and get up to the last of this line
+            else{
+                return text
+            }
+        }
     }
     
 }
@@ -148,10 +194,10 @@ extension NewsItem {
                 //process collection values
                 let attrStr = try NSAttributedString(
                     data: modifiedFont.data(using: .unicode, allowLossyConversion: true)!,
-                    options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue],
+                    options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                              NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue],
                     documentAttributes: nil)
                 
-                debugPrint(attrStr)
                 DispatchQueue.main.async {
                     self.content = attrStr
                     completionHandler?(attrStr)

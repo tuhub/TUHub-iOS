@@ -13,6 +13,7 @@ target 'TUHub' do
   pod 'SwiftyBeaver', '~> 1.1'
   pod 'SKPhotoBrowser', '~> 4.0'
   pod 'AEXML', '~> 4.0'
+  pod 'Kanna', '~> 2.1.0'
   
   target 'TUHubTests' do
     inherit! :search_paths

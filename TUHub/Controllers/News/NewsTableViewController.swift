@@ -88,7 +88,7 @@ class NewsTableViewController: UITableViewController {
                 let indexPath = IndexPath(row: 0, section: 0)
                 self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
                 let cell = self.tableView.cellForRow(at: indexPath)
-                self.performSegue(withIdentifier: "newsDetailSegueID", sender: cell)
+//                self.performSegue(withIdentifier: "newsDetailSegueID", sender: cell)
             }
         }
     }
@@ -269,11 +269,17 @@ extension NewsTableViewController: UISearchResultsUpdating {
             // Find matches
             for item in newsItems {
                 var minIndex: String.Index? = item.title.index(of: searchText)
-                if let i = item.description.index(of: searchText) {
+                if let i = item.description?.index(of: searchText) {
                     if minIndex == nil || i < minIndex! {
                         minIndex = i
                     }
                 }
+                if let i = item.subtitle?.index(of: searchText) {
+                    if minIndex == nil || i < minIndex! {
+                        minIndex = i
+                    }
+                }
+                
                 if let minIndex = minIndex {
                     results.append(Result(newsItem: item, index: minIndex))
                 }

@@ -74,14 +74,14 @@ class NewsDetailTableViewController: UITableViewController {
             newsImageCell = cell as? NewsImageTableViewCell
             newsImageCell?.tableView = self.tableView
             newsImageCell?.newsImageView.image = newsItem.image
-            
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 10000, bottom: 0, right: 0)
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: newsBodyCellID, for: indexPath)
             let cell = cell as? NewsBodyTableViewCell
             cell?.setUp(with: newsItem, from: tableView)
             cell?.contentTextView.delegate = self
         default:
-            cell = UITableViewCell()
+            break
         }
         
         return cell
