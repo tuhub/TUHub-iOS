@@ -817,7 +817,7 @@
         <!--Search View Controller-->
         <scene sceneID="1M3-2z-Xmn">
             <objects>
-                <viewController definesPresentationContext="YES" id="JEx-S5-WlF" customClass="SearchViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController definesPresentationContext="YES" modalPresentationStyle="overFullScreen" id="JEx-S5-WlF" customClass="SearchViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="c7v-Y9-0Q4"/>
                         <viewControllerLayoutGuide type="bottom" id="BlZ-ey-46f"/>
@@ -1336,7 +1336,7 @@
         <!--Navigation Controller-->
         <scene sceneID="syT-t6-NA6">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="currentContext" navigationBarHidden="YES" id="Sa0-d9-S7q" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="overFullScreen" navigationBarHidden="YES" id="Sa0-d9-S7q" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ht9-rq-0c3">

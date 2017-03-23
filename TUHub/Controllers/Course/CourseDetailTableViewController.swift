@@ -44,7 +44,7 @@ class CourseDetailTableViewController: UITableViewController {
         }
         
     }
-
+    
     func dismissSelf() {
         dismiss(animated: true, completion: nil)
     }

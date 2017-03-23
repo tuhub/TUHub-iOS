@@ -27,9 +27,6 @@ class SearchViewController: UIViewController {
         
         searchController.searchBar.sizeToFit()
         searchController.delegate = self
-        searchController.searchBar.delegate = self
-        
-        navigationController?.navigationBar.backgroundColor = .clear
     }
         
     override func viewDidAppear(_ animated: Bool) {
@@ -43,18 +40,10 @@ class SearchViewController: UIViewController {
 }
 
 extension SearchViewController: UISearchControllerDelegate {
-    
-    func didDismissSearchController(_ searchController: UISearchController) {
-        NetworkManager.shared.cancelAllRequests(for: .courseSearch)
-        navigationController?.dismiss(animated: false, completion: nil)
-    }
-    
-}
 
-extension SearchViewController: UISearchBarDelegate {
-    
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        return .topAttached
+    func willDismissSearchController(_ searchController: UISearchController) {
+        NetworkManager.shared.cancelAllRequests(for: .courseSearch)
+        navigationController?.dismiss(animated: true, completion: nil)
     }
     
 }
