@@ -17,7 +17,7 @@ class SearchViewController: UIViewController {
         searchController.searchBar.scopeButtonTitles = ["My Courses", "All Courses"]
         searchController.searchResultsUpdater = resultsController
         searchController.searchBar.tintColor = .cherry
-        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = true
         resultsController.searchController = searchController
         return searchController
     }()
@@ -27,8 +27,11 @@ class SearchViewController: UIViewController {
         
         searchController.searchBar.sizeToFit()
         searchController.delegate = self
+        searchController.searchBar.delegate = self
+        
+        navigationController?.navigationBar.backgroundColor = .clear
     }
-    
+        
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -37,31 +40,6 @@ class SearchViewController: UIViewController {
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.isNavigationBarHidden = false
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension SearchViewController: UISearchControllerDelegate {
@@ -69,6 +47,14 @@ extension SearchViewController: UISearchControllerDelegate {
     func didDismissSearchController(_ searchController: UISearchController) {
         NetworkManager.shared.cancelAllRequests(for: .courseSearch)
         navigationController?.dismiss(animated: false, completion: nil)
+    }
+    
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
     }
     
 }
