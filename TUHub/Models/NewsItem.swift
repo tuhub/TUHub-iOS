@@ -8,10 +8,12 @@
 
 import SwiftyJSON
 import Kanna
+import AlamofireImage
 
 class NewsItem {
     
     private static let maxDescriptionLength = 100
+    private static let templeNewsURL = "http://news.temple.edu"
     
     let entryID: String
     let feedName: String
@@ -22,9 +24,7 @@ class NewsItem {
     private(set) var description: String?
     let contentHTML: String
     var content: NSAttributedString?
-    fileprivate let imageURL: URL?
-    fileprivate(set) var image: UIImage?
-    fileprivate(set) var isDownloadingImage = false
+    private(set) var imageURLs: [URL]
     
     init?(json: JSON) {
         guard
@@ -46,7 +46,7 @@ class NewsItem {
         self.date = date
         self.url = url
         self.title = title
-        self.imageURL = imageURL
+        self.imageURLs = [imageURL]
     
         
         // Parse the HTML to retrieve and remove subtitle and date
@@ -54,7 +54,7 @@ class NewsItem {
         
         // Attempt to find the subtitle node and set the subtitle to its contents
         if let subtitleNode = bodyNode.at_xpath("//div[@class='field field-name-field-subtitle field-type-text-long field-label-above']"), let text = subtitleNode.at_xpath("//div[@class='field-items']")?.text {
-            self.subtitle = text
+            self.subtitle = text.replacingOccurrences(of: "\n", with: "")
             
             // Remove the subtitle from the HTML
             bodyNode.removeChild(subtitleNode)
@@ -77,27 +77,14 @@ class NewsItem {
             bodyNode.removeChild(dateNode)
         }
         
-        // TODO: Get images and add to a gallery
-//        let imageNodes = bodyNode.css("img")
-//        for imageNode in imageNodes {
-//            print(imageNode.toHTML)
-//        }
+        let imageNodes = bodyNode.css("img")
+        for imageNode in imageNodes {
+            if let src = imageNode["src"], let url = URL(string: NewsItem.templeNewsURL + src) {
+                imageURLs.append(url)
+            }
+        }
         
         self.contentHTML = bodyNode.toHTML!
-        
-    }
-    
-    func downloadImage(_ responseHandler: ((String, UIImage?, Error?) -> Void)?) {
-        
-        guard let imageURL = imageURL else { return }
-        
-        isDownloadingImage = true
-        // Attempt to download the associated image
-        NetworkManager.shared.download(imageURL: imageURL) { (image, error) in
-            self.isDownloadingImage = false
-            self.image = image
-            responseHandler?(self.entryID, image, error)
-        }
         
     }
     

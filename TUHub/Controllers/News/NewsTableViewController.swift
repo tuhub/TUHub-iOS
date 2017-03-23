@@ -56,11 +56,6 @@ class NewsTableViewController: UITableViewController {
         
         load(feeds: nil)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     func load(feeds: [NewsItem.Feed]?) {
         if !refreshControl!.isRefreshing {
@@ -87,8 +82,9 @@ class NewsTableViewController: UITableViewController {
                 // Manually trigger segue to show first result so detail view controller is not empty
                 let indexPath = IndexPath(row: 0, section: 0)
                 self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+                
                 let cell = self.tableView.cellForRow(at: indexPath)
-//                self.performSegue(withIdentifier: "newsDetailSegueID", sender: cell)
+                self.performSegue(withIdentifier: newsDetailSegueID, sender: cell)
             }
         }
     }
@@ -183,41 +179,6 @@ extension NewsTableViewController {
         }
         
         return cell
-    }
-    
-}
-
-
-// MARK: - UITableViewDelegate
-extension NewsTableViewController {
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // Begin downloading the cell's corresponding NewsItem's image
-        if let newsItem = newsItems?[indexPath.row] {
-            if newsItem.image == nil && !newsItem.isDownloadingImage {
-                
-                // About to display cell that does not have an image, load the image and display in cell when ready
-                newsItem.downloadImage { (entryID, image, error) in
-                    if let image = image, let newsItems = self.newsItems {
-                        // Find the cell where the image should go
-                        let index = newsItems.index(where: { return $0.entryID == entryID })
-                        if let index = index {
-                            let indexPath = IndexPath(row: index, section: 0)
-                            if let cell = tableView.cellForRow(at: indexPath) as? NewsItemTableViewCell {
-                                cell.thumbnailImageView.image = image
-                            }
-                        }
-                        
-                        // If showing the news detail view controller, tell it to update to show image
-                        if self.newsDetailVC?.newsItem?.entryID == entryID {
-                            self.newsDetailVC?.newsImageCell?.updateImageView(with: image)
-                        }
-                        
-                    }
-                }
-                
-            }
-        }
     }
     
 }

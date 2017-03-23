@@ -71,7 +71,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0ct-ug-34O" id="Jeb-XI-hgj">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -105,7 +105,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="135"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="1Fh-qW-kNY" id="R4P-Lh-efj">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RdT-S0-Tco">
@@ -114,11 +114,6 @@
                                                 <constraint firstAttribute="width" secondItem="RdT-S0-Tco" secondAttribute="height" multiplier="1:1" id="dke-93-kU0"/>
                                                 <constraint firstAttribute="width" constant="85" id="uX3-Hg-H1c"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="4"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="COD-W5-v2D">
                                             <rect key="frame" x="15" y="11" width="252" height="113"/>
@@ -310,7 +305,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bSK-tR-HyU" id="i9k-wl-qMC">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNV-vx-Wta">
@@ -686,7 +681,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="77"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="RJ1-VN-HGe" id="OHJ-rD-l7w">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="p87-js-n7P">
@@ -898,7 +893,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="63"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="Dty-OO-QR7" id="IsY-3Q-MPZ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="342" height="63"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="342" height="62"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AV3-WB-Aar">
@@ -1143,9 +1138,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Y9i-sm-2Ox">
-                            <rect key="frame" x="0.0" y="295" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="460" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -1188,42 +1182,78 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="zNc-DW-30x" secondAttribute="bottom" id="rwI-co-FZT"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <connections>
                                     <outlet property="detailLabel" destination="dIh-xL-Jbd" id="YVn-Bp-7eS"/>
                                     <outlet property="subtitleLabel" destination="l7m-TR-SiU" id="gY5-AT-SMO"/>
                                     <outlet property="titleLabel" destination="uTy-aV-rkr" id="Uvx-1Q-Zvn"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsImageCell" id="A1J-zg-YKY" customClass="NewsImageTableViewCell" customModule="TUHub" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="151" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsImageGalleryCell" rowHeight="209" id="A1J-zg-YKY" customClass="NewsImageGalleryTableViewCell" customModule="TUHub" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="151" width="375" height="209"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="A1J-zg-YKY" id="Vhy-2m-Fep">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="22" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pSg-4Z-7cl" customClass="ScaleAspectFitImageView" customModule="TUHub" customModuleProvider="target">
-                                            <rect key="frame" x="15" y="11" width="345" height="22"/>
-                                            <gestureRecognizers/>
-                                            <connections>
-                                                <outletCollection property="gestureRecognizers" destination="26l-Sa-ia4" appends="YES" id="TK9-L2-Dz0"/>
-                                            </connections>
-                                        </imageView>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbp-qe-y8a">
+                                            <rect key="frame" x="0.0" y="11" width="375" height="187.5"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="mbp-qe-y8a" secondAttribute="height" multiplier="2:1" id="EOM-PI-S8d"/>
+                                            </constraints>
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yLt-Kf-nLJ" customClass="CarouselFlowLayout" customModule="TUHub" customModuleProvider="target">
+                                                <size key="itemSize" width="314" height="177.5"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="sideItemScale">
+                                                        <real key="value" value="0.84999999999999998"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="sideItemAlpha">
+                                                        <real key="value" value="0.80000000000000004"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </collectionViewFlowLayout>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="newsImageCell" id="Bjb-5Y-Ies">
+                                                    <rect key="frame" x="0.0" y="5" width="314" height="177.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                        <rect key="frame" x="0.0" y="0.0" width="314" height="177.5"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="33L-YS-F0a">
+                                                                <rect key="frame" x="0.0" y="0.0" width="314" height="177.5"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                    </view>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="33L-YS-F0a" firstAttribute="top" secondItem="Bjb-5Y-Ies" secondAttribute="top" id="A21-Tp-b2t"/>
+                                                        <constraint firstAttribute="trailing" secondItem="33L-YS-F0a" secondAttribute="trailing" id="Tnp-6N-uT4"/>
+                                                        <constraint firstItem="33L-YS-F0a" firstAttribute="leading" secondItem="Bjb-5Y-Ies" secondAttribute="leading" id="aoI-e3-9zZ"/>
+                                                        <constraint firstAttribute="bottom" secondItem="33L-YS-F0a" secondAttribute="bottom" id="db5-nE-gZ5"/>
+                                                    </constraints>
+                                                </collectionViewCell>
+                                            </cells>
+                                        </collectionView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="pSg-4Z-7cl" secondAttribute="trailing" id="4P7-Kc-l2W"/>
-                                        <constraint firstItem="pSg-4Z-7cl" firstAttribute="top" secondItem="Vhy-2m-Fep" secondAttribute="topMargin" id="hDL-4c-OVh"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="pSg-4Z-7cl" secondAttribute="bottom" id="hXa-t0-WdE"/>
-                                        <constraint firstItem="pSg-4Z-7cl" firstAttribute="leading" secondItem="Vhy-2m-Fep" secondAttribute="leadingMargin" id="o54-SF-oHb"/>
+                                        <constraint firstItem="mbp-qe-y8a" firstAttribute="leading" secondItem="Vhy-2m-Fep" secondAttribute="leading" id="Qua-tH-Cpj"/>
+                                        <constraint firstItem="mbp-qe-y8a" firstAttribute="top" secondItem="Vhy-2m-Fep" secondAttribute="topMargin" id="Ybe-Ng-JvV"/>
+                                        <constraint firstAttribute="trailing" secondItem="mbp-qe-y8a" secondAttribute="trailing" id="k2v-VP-DvY"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="mbp-qe-y8a" secondAttribute="bottom" id="zUw-KS-qfD"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                <inset key="separatorInset" minX="10000" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
-                                    <outlet property="newsImageView" destination="pSg-4Z-7cl" id="cAZ-bg-W1K"/>
+                                    <outlet property="imageCollectionView" destination="mbp-qe-y8a" id="sSq-yv-xJB"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsBodyCell" rowHeight="100" id="qvi-9h-mKe" customClass="NewsBodyTableViewCell" customModule="TUHub" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="195" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="360" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="qvi-9h-mKe" id="T6V-gH-894">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
@@ -1255,7 +1285,7 @@
                                         <constraint firstItem="S2B-G1-cUJ" firstAttribute="top" secondItem="T6V-gH-894" secondAttribute="topMargin" id="wpm-LB-Oq9"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                <inset key="separatorInset" minX="10000" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="activityIndicator" destination="jVb-Nt-1Q3" id="pUy-OI-H93"/>
                                     <outlet property="contentTextView" destination="S2B-G1-cUJ" id="7Y3-V2-sih"/>
@@ -1283,6 +1313,24 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3700" y="1133.8830584707648"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="9ND-RS-Ram">
+            <objects>
+                <viewController id="sfs-tX-e7F" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Vsi-5M-1Dw"/>
+                        <viewControllerLayoutGuide type="bottom" id="z02-u5-EHG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zlJ-Sw-8Ry">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RXb-N2-TNx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4672" y="1129"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="syT-t6-NA6">

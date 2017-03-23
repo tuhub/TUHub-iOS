@@ -16,6 +16,7 @@
 		7D043A721E5BF7EF0003A853 /* TUHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A711E5BF7EF0003A853 /* TUHubUITests.swift */; };
 		7D6D6D841E70939500BF121A /* CalendarCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6D6D831E70939500BF121A /* CalendarCellView.xib */; };
 		7D7CBB981E80CCBA002F7575 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7CBB971E80CCB9002F7575 /* SearchViewController.swift */; };
+		7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */; };
 		7DA6D92A1E7F6ECE00CD5D02 /* CourseSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9201E7F6ECE00CD5D02 /* CourseSearchResult.swift */; };
 		7DA6D92B1E7F6ECE00CD5D02 /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9211E7F6ECE00CD5D02 /* NewsItem.swift */; };
 		7DA6D92C1E7F6ECE00CD5D02 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9221E7F6ECE00CD5D02 /* Course.swift */; };
@@ -40,7 +41,7 @@
 		7DA6D9571E7F6FC500CD5D02 /* CourseDetailHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D94F1E7F6FC500CD5D02 /* CourseDetailHeaderTableViewCell.swift */; };
 		7DA6D9581E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9511E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift */; };
 		7DA6D9591E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9521E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift */; };
-		7DA6D95A1E7F6FC500CD5D02 /* NewsImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9531E7F6FC500CD5D02 /* NewsImageTableViewCell.swift */; };
+		7DA6D95A1E7F6FC500CD5D02 /* NewsImageGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9531E7F6FC500CD5D02 /* NewsImageGalleryTableViewCell.swift */; };
 		7DA6D95B1E7F6FC500CD5D02 /* NewsItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9541E7F6FC500CD5D02 /* NewsItemTableViewCell.swift */; };
 		7DA6D9651E7F6FFF00CD5D02 /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D95D1E7F6FFF00CD5D02 /* Date+String.swift */; };
 		7DA6D9661E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D95E1E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift */; };
@@ -90,6 +91,7 @@
 		7D043A731E5BF7EF0003A853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D6D6D831E70939500BF121A /* CalendarCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCellView.xib; sourceTree = "<group>"; };
 		7D7CBB971E80CCB9002F7575 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselFlowLayout.swift; sourceTree = "<group>"; };
 		7DA6D9201E7F6ECE00CD5D02 /* CourseSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CourseSearchResult.swift; path = Models/CourseSearchResult.swift; sourceTree = "<group>"; };
 		7DA6D9211E7F6ECE00CD5D02 /* NewsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsItem.swift; path = Models/NewsItem.swift; sourceTree = "<group>"; };
 		7DA6D9221E7F6ECE00CD5D02 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Course.swift; path = Models/Course.swift; sourceTree = "<group>"; };
@@ -114,7 +116,7 @@
 		7DA6D94F1E7F6FC500CD5D02 /* CourseDetailHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		7DA6D9511E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsBodyTableViewCell.swift; sourceTree = "<group>"; };
 		7DA6D9521E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsHeaderTableViewCell.swift; sourceTree = "<group>"; };
-		7DA6D9531E7F6FC500CD5D02 /* NewsImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsImageTableViewCell.swift; sourceTree = "<group>"; };
+		7DA6D9531E7F6FC500CD5D02 /* NewsImageGalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsImageGalleryTableViewCell.swift; sourceTree = "<group>"; };
 		7DA6D9541E7F6FC500CD5D02 /* NewsItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsItemTableViewCell.swift; sourceTree = "<group>"; };
 		7DA6D95D1E7F6FFF00CD5D02 /* Date+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
 		7DA6D95E1E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Error+UIAlertViewController.swift"; sourceTree = "<group>"; };
@@ -312,10 +314,10 @@
 		7DA6D9501E7F6FC500CD5D02 /* News */ = {
 			isa = PBXGroup;
 			children = (
-				7DA6D9511E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift */,
-				7DA6D9521E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift */,
-				7DA6D9531E7F6FC500CD5D02 /* NewsImageTableViewCell.swift */,
 				7DA6D9541E7F6FC500CD5D02 /* NewsItemTableViewCell.swift */,
+				7DA6D9521E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift */,
+				7DA6D9531E7F6FC500CD5D02 /* NewsImageGalleryTableViewCell.swift */,
+				7DA6D9511E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -331,6 +333,7 @@
 				7DA6D9621E7F6FFF00CD5D02 /* String+CGFloat.swift */,
 				7DA6D9631E7F6FFF00CD5D02 /* String+Date.swift */,
 				7DA6D9641E7F6FFF00CD5D02 /* UIColor.swift */,
+				7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -633,6 +636,7 @@
 				7DA6D96B1E7F6FFF00CD5D02 /* String+Date.swift in Sources */,
 				7DA6D9581E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift in Sources */,
 				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
+				7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */,
 				7DA6D9301E7F6ECE00CD5D02 /* Term.swift in Sources */,
 				7DA6D9441E7F6F6800CD5D02 /* CourseSearchResultDetailTableViewController.swift in Sources */,
 				7DA6D9591E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift in Sources */,
@@ -648,7 +652,7 @@
 				7DA6D95B1E7F6FC500CD5D02 /* NewsItemTableViewCell.swift in Sources */,
 				7DA6D92D1E7F6ECE00CD5D02 /* User.swift in Sources */,
 				7DA6D96E1E7F72B700CD5D02 /* SignInTableViewController.swift in Sources */,
-				7DA6D95A1E7F6FC500CD5D02 /* NewsImageTableViewCell.swift in Sources */,
+				7DA6D95A1E7F6FC500CD5D02 /* NewsImageGalleryTableViewCell.swift in Sources */,
 				7DA6D92E1E7F6ECE00CD5D02 /* NetworkManager.swift in Sources */,
 				7DA6D9691E7F6FFF00CD5D02 /* String+Boyer-Moore-Horspool.swift in Sources */,
 				7DA6D9321E7F6ECE00CD5D02 /* Credential.swift in Sources */,

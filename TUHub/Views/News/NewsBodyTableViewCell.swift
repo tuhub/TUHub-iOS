@@ -15,9 +15,7 @@ class NewsBodyTableViewCell: UITableViewCell {
     
     func setUp(with newsItem: NewsItem, from tableView: UITableView) {
         activityIndicator.hidesWhenStopped = true
-        
-        separatorInset = UIEdgeInsets(top: 0, left: 10000, bottom: 0, right: 0)
-        
+                
         if let text = newsItem.content {
             self.contentTextView.attributedText = text
             self.contentTextView.isHidden = false

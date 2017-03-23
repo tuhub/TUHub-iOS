@@ -8,12 +8,16 @@ target 'TUHub' do
   # Pods for TUHub
   pod 'Alamofire', '~> 4.3'
   pod 'AlamofireNetworkActivityIndicator', '~> 2.1'
+  pod 'AlamofireImage', '~> 3.1'
   pod 'SwiftyJSON', '~> 3.1'
   pod 'FSCalendar', '~> 2.7'
   pod 'SwiftyBeaver', '~> 1.1'
   pod 'SKPhotoBrowser', '~> 4.0'
   pod 'AEXML', '~> 4.0'
   pod 'Kanna', '~> 2.1.0'
+  pod 'UPCarouselFlowLayout', '~> 1.1'
+  pod 'TUSafariActivity', '~> 1.0'
+  pod 'CenteredCollectionView', '~> 0.9'
   
   target 'TUHubTests' do
     inherit! :search_paths
