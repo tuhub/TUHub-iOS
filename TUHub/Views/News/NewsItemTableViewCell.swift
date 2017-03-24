@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class NewsItemTableViewCell: UITableViewCell {
 
@@ -18,8 +19,13 @@ class NewsItemTableViewCell: UITableViewCell {
     func setUp(from newsItem: NewsItem) {
         titleLabel.text = newsItem.title
         descriptionLabel.text = newsItem.description
-        thumbnailImageView.image = newsItem.image
         ageLabel.text = newsItem.date.age
+        
+        // Asynchronously set image with a filter to downsize it 
+        let filter = AspectScaledToFillSizeWithRoundedCornersFilter(size: thumbnailImageView.frame.size, radius: 4)
+        thumbnailImageView.af_setImage(withURL: newsItem.imageURLs.first!,
+                                       placeholderImage: nil,
+                                       filter: filter)
     }
 
 }

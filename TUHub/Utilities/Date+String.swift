@@ -11,17 +11,28 @@ import Foundation
 extension Date {
     
     var date: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        return dateFormatter.string(from: self)
+        return Date.dateFormatter.string(from: self)
     }
     
     var datetime: String {
+        return Date.dateTimeFormatter.string(from: self)
+    }
+    
+    private static var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        dateFormatter.timeZone = .autoupdatingCurrent
+        return dateFormatter
+    }()
+    
+    private static var dateTimeFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .short
-        return dateFormatter.string(from: self)
-    }
+        dateFormatter.timeZone = .autoupdatingCurrent
+        return dateFormatter
+    }()
     
     var age: String {
         let date = self

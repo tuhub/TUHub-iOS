@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyBeaver
+import AlamofireNetworkActivityIndicator
 
 let log = SwiftyBeaver.self
 
@@ -24,6 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let file = FileDestination()  // log to default swiftybeaver.log file
         log.addDestination(console)
 //        log.addDestination(file)
+        
+        // Set the UIPageControl tint colors for CoursePageViewController (white by default, need to be darker)
+        let pageControl: UIPageControl = UIPageControl.appearance(whenContainedInInstancesOf: [CoursePageViewController.self])
+        pageControl.pageIndicatorTintColor = UIColor.lightGray
+        pageControl.currentPageIndicatorTintColor = UIColor.black
+        pageControl.backgroundColor = UIColor.clear
+        
+        NetworkActivityIndicatorManager.shared.isEnabled = true
         
         return true
     }
@@ -49,7 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
 }
 
