@@ -173,26 +173,33 @@ extension NewsItem {
     /// Asynchronously parses a string containing HTML into an NSAttributed string matching the label's designated style
     func parseContent(_ completionHandler: ((NSAttributedString?)->Void)?) {
         DispatchQueue.global(qos: .userInitiated).async {
+            
+            var attrStr: NSAttributedString?
+            
+            defer {
+                DispatchQueue.main.async {
+                    self.content = attrStr
+                    completionHandler?(attrStr)
+                }
+            }
+            
+            // Strip any node artifacts from HTML
+            guard let contentHTML = self.contentHTML.regexMatchesRemoved(pattern: "\\[(.*?)\\]") else { return }
+            
             // Attempt to parse HTML to NSAttributedString
             do {
                 let fontSize = UIFont.preferredFont(forTextStyle: .body).pointSize
-                let modifiedFont = NSString(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size: \(fontSize)\">%@</span>" as NSString, self.contentHTML) as String
+                let modifiedFont = NSString(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size: \(fontSize)\">%@</span>" as NSString, contentHTML) as String
                 
                 //process collection values
-                let attrStr = try NSAttributedString(
+                attrStr = try NSAttributedString(
                     data: modifiedFont.data(using: .unicode, allowLossyConversion: true)!,
                     options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                               NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue],
                     documentAttributes: nil)
                 
-                DispatchQueue.main.async {
-                    self.content = attrStr
-                    completionHandler?(attrStr)
-                }
-                
             } catch {
                 log.error("Error: Unable to parse HTML to NSAttributedString.")
-                completionHandler?(nil)
             }
         }
     }

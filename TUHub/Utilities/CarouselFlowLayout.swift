@@ -13,9 +13,7 @@ class CarouselFlowLayout: UPCarouselFlowLayout {
     
     override func invalidateLayout() {
         guard let collectionView = collectionView else { return }
-        let height = collectionView.bounds.height
-        let width = collectionView.bounds.width - 44
-        self.itemSize = CGSize(width: width, height: height)
+        self.itemSize = CGSize(width: collectionView.bounds.width - 44, height: collectionView.bounds.height)
         super.invalidateLayout()
     }
     

@@ -31,11 +31,7 @@ class NewsDetailTableViewController: UITableViewController {
         // Allow table view to automatically determine cell height based on contents
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
-        
-        // Make the right inset the same as the left
-        let leftInset = tableView.separatorInset.left
-        let newInset = UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: leftInset)
-        tableView.separatorInset = newInset
+        tableView.cellLayoutMarginsFollowReadableWidth = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
