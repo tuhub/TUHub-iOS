@@ -21,7 +21,6 @@ class Course {
     let termID: String
     private(set) var meetings: [CourseMeeting]? // Presumably, an online class has no meetings?
     private(set) var instructors: [Instructor]? // Not provided in fullview or calendar view
-    let levels: [String]?
     var roster: [String]?
     var grades: [Grade]?
     let startDate: Date?
@@ -50,7 +49,6 @@ class Course {
         
         // Attempt to assign optional properties
         description = json["courseDescription"].string
-        levels = json["academicLevels"].arrayObject as? [String]
         startDate = json["firstMeetingDate"].date
         endDate = json["lastMeetingDate"].date
 
@@ -82,6 +80,8 @@ extension Course {
             defer { responseHandler?(roster, error) }
             guard let data = data else { return }
             let json = JSON(data)
+            
+            debugPrint(json)
             
             var names = [String]()
             if let values = json["activeStudents"].array {

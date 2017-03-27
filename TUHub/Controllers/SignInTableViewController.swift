@@ -161,7 +161,7 @@ class SignInTableViewController: UITableViewController {
     }
     
     @IBAction func unwindToSignInViewController(segue: UIStoryboardSegue) {
-        self.credential = User.current!.credential
+        self.credential = User.current?.credential
         showUI()
         User.signOut()
     }
