@@ -81,8 +81,6 @@ extension Course {
             guard let data = data else { return }
             let json = JSON(data)
             
-            debugPrint(json)
-            
             var names = [String]()
             if let values = json["activeStudents"].array {
                 for value in values {

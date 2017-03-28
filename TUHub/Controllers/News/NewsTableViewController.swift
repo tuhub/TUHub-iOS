@@ -226,16 +226,17 @@ extension NewsTableViewController: UISearchResultsUpdating {
             }
             
             var results = [Result]()
+            let searchText = searchText.capitalized
             
             // Find matches
             for item in newsItems {
-                var minIndex: String.Index? = item.title.index(of: searchText)
+                var minIndex: String.Index? = item.title.capitalized.index(of: searchText)
                 if let i = item.description?.index(of: searchText) {
                     if minIndex == nil || i < minIndex! {
                         minIndex = i
                     }
                 }
-                if let i = item.subtitle?.index(of: searchText) {
+                if let i = item.subtitle?.capitalized.index(of: searchText) {
                     if minIndex == nil || i < minIndex! {
                         minIndex = i
                     }
