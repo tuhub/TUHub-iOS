@@ -17,6 +17,7 @@ target 'TUHub' do
   pod 'Kanna', '~> 2.1.0'
   pod 'UPCarouselFlowLayout', '~> 1.1'
   pod 'TUSafariActivity', '~> 1.0'
+  pod 'CHTCollectionViewWaterfallLayout', '~> 0.9'
   
   target 'TUHubTests' do
     inherit! :search_paths
