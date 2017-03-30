@@ -44,7 +44,7 @@ extension Error {
                 print("Failure Reason: \(reason)")
             }
             
-            print("Underlying error: \(error.underlyingError)")
+            print("Underlying error: \(String(describing: error.underlyingError))")
         } else if let error = self as? URLError {
             print("URLError occurred: \(error)")
             if viewController is SignInTableViewController {

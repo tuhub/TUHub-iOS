@@ -37,7 +37,7 @@ class CourseDetailTableViewController: UITableViewController {
         }
         
         // Show a done button if being presented modally
-        if isBeingPresented || (navigationController?.isBeingPresented ?? false) {
+        if navigationController?.isBeingPresented ?? false {
             let button = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissSelf))
             button.tintColor = .cherry
             navigationItem.rightBarButtonItem = button

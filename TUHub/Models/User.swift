@@ -187,7 +187,7 @@ extension User {
             }
             
             // Retrieve grades and associate with their corresponding course
-            self.retrieveGrades({ (gradeTerms, error) in
+            self.retrieveGrades() { (gradeTerms, error) in
                 guard var gradeTerms = gradeTerms else {
                         responseHandler?(courseTerms, error)
                         return
@@ -208,7 +208,7 @@ extension User {
                 }
                 
                 self.terms = courseTerms
-            })
+            }
         }
     }
     

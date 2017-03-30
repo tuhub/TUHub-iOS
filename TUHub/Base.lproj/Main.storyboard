@@ -58,35 +58,6 @@
             </objects>
             <point key="canvasLocation" x="6" y="0.0"/>
         </scene>
-        <!--Root View Controller-->
-        <scene sceneID="yJj-nL-Be7">
-            <objects>
-                <tableViewController id="RGW-Nk-j4o" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="8eb-1W-CAP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier=" " id="0ct-ug-34O">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0ct-ug-34O" id="Jeb-XI-hgj">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="RGW-Nk-j4o" id="LSu-ws-ac1"/>
-                            <outlet property="delegate" destination="RGW-Nk-j4o" id="Waw-n4-Yj5"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="2MO-Y6-XPO"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HKD-CY-Wb5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1799" y="-4"/>
-        </scene>
         <!--News-->
         <scene sceneID="39e-G5-tVw">
             <objects>
@@ -366,12 +337,42 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="RGW-Nk-j4o" kind="relationship" relationship="rootViewController" id="x57-p9-b2D"/>
+                        <segue destination="xXI-JV-g0b" kind="relationship" relationship="rootViewController" id="Q4K-PC-J0p"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S1L-wr-5XD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="863" y="-4"/>
+        </scene>
+        <!--Maps View Controller-->
+        <scene sceneID="gIx-UA-nyW">
+            <objects>
+                <viewController definesPresentationContext="YES" id="xXI-JV-g0b" customClass="MapsViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8AW-E4-dPb"/>
+                        <viewControllerLayoutGuide type="bottom" id="HNP-6o-PDY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4Po-gw-fXg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView verifyAmbiguity="ignoreSizes" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Vdi-Hz-OdO">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Vdi-Hz-OdO" firstAttribute="top" secondItem="4Po-gw-fXg" secondAttribute="topMargin" id="8C0-bU-Ugl"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Vdi-Hz-OdO" secondAttribute="bottom" id="J7p-sk-vy0"/>
+                            <constraint firstAttribute="trailing" secondItem="Vdi-Hz-OdO" secondAttribute="trailing" id="M8V-ew-8U1"/>
+                            <constraint firstItem="Vdi-Hz-OdO" firstAttribute="leading" secondItem="4Po-gw-fXg" secondAttribute="leading" id="dHf-hL-ZIY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="gdo-es-yl1"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="spZ-7M-RgC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1797.5999999999999" y="-0.44977511244377816"/>
         </scene>
         <!--Sign In-->
         <scene sceneID="0rq-GI-e1K">
@@ -1356,7 +1357,7 @@
         <image name="NewsIcon-Filled" width="30" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="B9B-65-0Zq"/>
+        <segue reference="aEs-ab-oft"/>
         <segue reference="vuw-nM-MSj"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>

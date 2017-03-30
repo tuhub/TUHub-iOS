@@ -69,15 +69,30 @@ class CoursePageViewController: UIPageViewController {
 extension CoursePageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        let currentIndex = pages.index(of: viewController)!
-        let previousIndex = abs((currentIndex - 1) % pages.count)
-        return pages[previousIndex]
+        var index = pages.index(of: viewController)!
+        
+        if index == 0 || index == NSNotFound {
+            index = pages.count
+        }
+        
+        index -= 1
+        return pages[index]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        let currentIndex = pages.index(of: viewController)!
-        let nextIndex = abs((currentIndex + 1) % pages.count)
-        return pages[nextIndex]
+        var index = pages.index(of: viewController)!
+        
+        if index == NSNotFound {
+            return nil
+        }
+        
+        index += 1
+        
+        if index == pages.count {
+            index = 0
+        }
+        
+        return pages[index]
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
