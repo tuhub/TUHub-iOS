@@ -16,6 +16,8 @@
 		7D043A721E5BF7EF0003A853 /* TUHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A711E5BF7EF0003A853 /* TUHubUITests.swift */; };
 		7D439E031E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D439E021E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift */; };
 		7D6D6D841E70939500BF121A /* CalendarCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6D6D831E70939500BF121A /* CalendarCellView.xib */; };
+		7D76EAAF1E8EDBE7006CC7BF /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76EAAE1E8EDBE7006CC7BF /* DatabaseManager.swift */; };
+		7D76EAB11E8EDD16006CC7BF /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76EAB01E8EDD16006CC7BF /* Listing.swift */; };
 		7D7CBB981E80CCBA002F7575 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7CBB971E80CCB9002F7575 /* SearchViewController.swift */; };
 		7D7FD0111E85922300CE769F /* String+NSRegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0101E85922300CE769F /* String+NSRegularExpression.swift */; };
 		7D7FD0131E85ADE800CE769F /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0121E85ADE800CE769F /* MapsViewController.swift */; };
@@ -96,6 +98,8 @@
 		7D043A731E5BF7EF0003A853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D439E021E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceCollectionViewController.swift; sourceTree = "<group>"; };
 		7D6D6D831E70939500BF121A /* CalendarCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCellView.xib; sourceTree = "<group>"; };
+		7D76EAAE1E8EDBE7006CC7BF /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		7D76EAB01E8EDD16006CC7BF /* Listing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
 		7D7CBB971E80CCB9002F7575 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7D7FD0101E85922300CE769F /* String+NSRegularExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NSRegularExpression.swift"; sourceTree = "<group>"; };
 		7D7FD0121E85ADE800CE769F /* MapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsViewController.swift; path = Maps/MapsViewController.swift; sourceTree = "<group>"; };
@@ -245,6 +249,8 @@
 			isa = PBXGroup;
 			children = (
 				7DA6D9241E7F6ECE00CD5D02 /* NetworkManager.swift */,
+				7D76EAAE1E8EDBE7006CC7BF /* DatabaseManager.swift */,
+				7D76EAB01E8EDD16006CC7BF /* Listing.swift */,
 				7DA6D9231E7F6ECE00CD5D02 /* User.swift */,
 				7DA6D9281E7F6ECE00CD5D02 /* Credential.swift */,
 				7DA6D9221E7F6ECE00CD5D02 /* Course.swift */,
@@ -671,12 +677,14 @@
 			files = (
 				7DA6D96B1E7F6FFF00CD5D02 /* String+Date.swift in Sources */,
 				7DA6D9581E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift in Sources */,
+				7D76EAB11E8EDD16006CC7BF /* Listing.swift in Sources */,
 				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
 				7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */,
 				7DA6D9301E7F6ECE00CD5D02 /* Term.swift in Sources */,
 				7DA6D9441E7F6F6800CD5D02 /* CourseSearchResultDetailTableViewController.swift in Sources */,
 				7DA6D9591E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift in Sources */,
 				7DA6D92A1E7F6ECE00CD5D02 /* CourseSearchResult.swift in Sources */,
+				7D76EAAF1E8EDBE7006CC7BF /* DatabaseManager.swift in Sources */,
 				7DA6D9561E7F6FC500CD5D02 /* CourseCalendarView.swift in Sources */,
 				7DA6D9421E7F6F6800CD5D02 /* CourseListViewController.swift in Sources */,
 				7DA6D9471E7F6F6800CD5D02 /* NewsDetailTableViewController.swift in Sources */,

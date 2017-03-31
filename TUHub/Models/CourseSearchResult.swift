@@ -8,14 +8,14 @@
 
 import AEXML
 
+private let searchPageSize = 15
+
 struct CourseSearchResult {
-    
-    static let searchPageSize = 15
     
     let name: String
     let title: String
     let description: String
-    let credits: Int
+    let credits: Int?
     let levels: [String]
     let division: String
     let college: String
@@ -55,8 +55,8 @@ struct CourseSearchResult {
         let searchTerms = searchText.replacingOccurrences(of: " ", with: ",").trimmingCharacters(in: setToRemove)
         
         // Determine min and max rows based on the desired page
-        let minRow = pageNumber * CourseSearchResult.searchPageSize + 1
-        let maxRow = (pageNumber + 1) * CourseSearchResult.searchPageSize
+        let minRow = pageNumber * searchPageSize + 1
+        let maxRow = (pageNumber + 1) * searchPageSize
         
         let params: [String : Any] = ["searchTerms" : searchTerms,
                                       "term" : "All",

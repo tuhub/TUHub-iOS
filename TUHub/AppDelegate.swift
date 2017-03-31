@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyBeaver
 import AlamofireNetworkActivityIndicator
+import AWSCore
 
 let log = SwiftyBeaver.self
 
@@ -21,10 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: "us-east-1_yEf2ObBXF")
+        let configuration = AWSServiceConfiguration(region: .USEast1 , credentialsProvider:credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        
         let console = ConsoleDestination()  // log to Xcode Console
-//        let file = FileDestination()  // log to default swiftybeaver.log file
         log.addDestination(console)
-//        log.addDestination(file)
         
         // Set the UIPageControl tint colors for CoursePageViewController (white by default, need to be darker)
         let pageControl: UIPageControl = UIPageControl.appearance(whenContainedInInstancesOf: [CoursePageViewController.self])

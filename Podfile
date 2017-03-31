@@ -13,11 +13,14 @@ target 'TUHub' do
   pod 'FSCalendar', '~> 2.7'
   pod 'SwiftyBeaver', '~> 1.1'
   pod 'SKPhotoBrowser', '~> 4.0'
-  pod 'AEXML', '~> 4.0'
+  pod 'AEXML', '~> 4.1'
   pod 'Kanna', '~> 2.1.0'
   pod 'UPCarouselFlowLayout', '~> 1.1'
   pod 'TUSafariActivity', '~> 1.0'
   pod 'CHTCollectionViewWaterfallLayout', '~> 0.9'
+  pod 'AWSS3', '~> 2.5.0'
+  pod 'AWSCognito', '~> 2.5.0'
+  pod 'AWSDynamoDB', '~> 2.5.0'
   
   target 'TUHubTests' do
     inherit! :search_paths
