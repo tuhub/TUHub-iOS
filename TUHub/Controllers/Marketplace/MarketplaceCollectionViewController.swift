@@ -96,6 +96,17 @@ extension MarketplaceCollectionViewController {
         
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "showItemDetail", sender: self)
+    }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "showItemDetail" {
+//            
+//        }
+//    }
+    
 }
 
 extension MarketplaceCollectionViewController: CHTCollectionViewDelegateWaterfallLayout {
