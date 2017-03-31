@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		225A66051E8EA7760063337A /* MarketplaceDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* MarketplaceDetailTableViewController.swift */; };
 		22CAE1C41E8DC445000BAE70 /* AddNewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CAE1C31E8DC445000BAE70 /* AddNewItemViewController.swift */; };
-		22CAE1C81E8DD97C000BAE70 /* MarketplaceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CAE1C71E8DD97C000BAE70 /* MarketplaceDetailViewController.swift */; };
 		37FD610AAB987235177A1533 /* Pods_TUHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C369AC415ABB8738F6351247 /* Pods_TUHubTests.framework */; };
 		7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A4F1E5BF7EF0003A853 /* AppDelegate.swift */; };
 		7D043A571E5BF7EF0003A853 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D043A551E5BF7EF0003A853 /* Main.storyboard */; };
@@ -81,8 +81,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		225A66041E8EA7760063337A /* MarketplaceDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceDetailTableViewController.swift; sourceTree = "<group>"; };
 		22CAE1C31E8DC445000BAE70 /* AddNewItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewItemViewController.swift; sourceTree = "<group>"; };
-		22CAE1C71E8DD97C000BAE70 /* MarketplaceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceDetailViewController.swift; sourceTree = "<group>"; };
 		3361CEFB73AA8E72E9E0B46D /* Pods-TUHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubTests/Pods-TUHubTests.release.xcconfig"; sourceTree = "<group>"; };
 		3BBBD4D5AE6A3197E62F3182 /* Pods-TUHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6DDB0DADD33842008B60C6C1 /* Pods-TUHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -278,7 +278,7 @@
 			children = (
 				7D439E021E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift */,
 				22CAE1C31E8DC445000BAE70 /* AddNewItemViewController.swift */,
-				22CAE1C71E8DD97C000BAE70 /* MarketplaceDetailViewController.swift */,
+				225A66041E8EA7760063337A /* MarketplaceDetailTableViewController.swift */,
 			);
 			path = Marketplace;
 			sourceTree = "<group>";
@@ -679,6 +679,7 @@
 				22CAE1C41E8DC445000BAE70 /* AddNewItemViewController.swift in Sources */,
 				7DA6D9581E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift in Sources */,
 				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
+				225A66051E8EA7760063337A /* MarketplaceDetailTableViewController.swift in Sources */,
 				7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */,
 				7DA6D9301E7F6ECE00CD5D02 /* Term.swift in Sources */,
 				7DA6D9441E7F6F6800CD5D02 /* CourseSearchResultDetailTableViewController.swift in Sources */,
@@ -706,7 +707,6 @@
 				7DA6D9551E7F6FC500CD5D02 /* CourseCalendarTableViewCell.swift in Sources */,
 				7D439E031E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift in Sources */,
 				7D7CBB981E80CCBA002F7575 /* SearchViewController.swift in Sources */,
-				22CAE1C81E8DD97C000BAE70 /* MarketplaceDetailViewController.swift in Sources */,
 				7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */,
 				7DA6D9461E7F6F6800CD5D02 /* CourseViewController.swift in Sources */,
 				7DA6D92F1E7F6ECE00CD5D02 /* CourseMeeting.swift in Sources */,

@@ -650,6 +650,46 @@
             </objects>
             <point key="canvasLocation" x="3576.1619190404799" y="-1622.4000000000001"/>
         </scene>
+        <!--Marketplace Detail Table View Controller-->
+        <scene sceneID="hjH-0I-Hr3">
+            <objects>
+                <tableViewController id="9t1-iY-Voy" customClass="MarketplaceDetailTableViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="FgI-JG-pqo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListingTitleCell" textLabel="uEo-4H-Zxb" style="IBUITableViewCellStyleDefault" id="rsO-yu-drY">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rsO-yu-drY" id="Fkr-7p-GN1">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uEo-4H-Zxb">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9t1-iY-Voy" id="8GH-3Z-D1R"/>
+                            <outlet property="delegate" destination="9t1-iY-Voy" id="b4M-yJ-maa"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="FVh-dt-Trr">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="MNU-74-aSW"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FXT-ni-igb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2685.5999999999999" y="-976.46176911544239"/>
+        </scene>
         <!--Course Detail Table View Controller-->
         <scene sceneID="tpU-xf-mWt">
             <objects>
@@ -1095,7 +1135,7 @@
             </objects>
             <point key="canvasLocation" x="860" y="-705"/>
         </scene>
-        <!--Marketplace Collection View Controller-->
+        <!--Marketplace-->
         <scene sceneID="3Vq-jA-cW1">
             <objects>
                 <collectionViewController id="6Kh-J2-ReX" customClass="MarketplaceCollectionViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
@@ -1141,7 +1181,7 @@
                             <outlet property="delegate" destination="6Kh-J2-ReX" id="zXc-Vd-jVu"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="Jpr-oF-7cw">
+                    <navigationItem key="navigationItem" title="Marketplace" id="Jpr-oF-7cw">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="MyT-Fz-0Qe">
                             <connections>
                                 <segue destination="yMP-CK-9HB" kind="showDetail" id="xG1-0H-R4i"/>
@@ -1150,39 +1190,12 @@
                         <barButtonItem key="rightBarButtonItem" image="FilterIcon" id="MNI-Wt-Gge"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="h3X-8p-3xg" kind="show" identifier="showItemDetail" id="vIl-Mb-spp"/>
+                        <segue destination="9t1-iY-Voy" kind="show" identifier="showItemDetail" id="Ds5-ln-DVM"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pvj-RN-gSR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1798" y="-706"/>
-        </scene>
-        <!--Marketplace Detail View Controller-->
-        <scene sceneID="l19-C5-rvB">
-            <objects>
-                <viewController id="h3X-8p-3xg" customClass="MarketplaceDetailViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qag-ve-dSs"/>
-                        <viewControllerLayoutGuide type="bottom" id="cmn-Iy-Emm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="DPs-yf-Mgl">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQQ-6B-5cg">
-                                <rect key="frame" x="16" y="97" width="343" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jXq-aW-F9z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3388" y="-987.25637181409309"/>
         </scene>
         <!--Add New Item View Controller-->
         <scene sceneID="NOq-Mb-zSS">
