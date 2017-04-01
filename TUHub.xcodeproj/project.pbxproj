@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221B07CB1E90386600921866 /* AddListingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B07CA1E90386600921866 /* AddListingTableViewController.swift */; };
 		225A66051E8EA7760063337A /* MarketplaceDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* MarketplaceDetailTableViewController.swift */; };
-		22CAE1C41E8DC445000BAE70 /* AddNewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CAE1C31E8DC445000BAE70 /* AddNewItemViewController.swift */; };
 		37FD610AAB987235177A1533 /* Pods_TUHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C369AC415ABB8738F6351247 /* Pods_TUHubTests.framework */; };
 		7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A4F1E5BF7EF0003A853 /* AppDelegate.swift */; };
 		7D043A571E5BF7EF0003A853 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D043A551E5BF7EF0003A853 /* Main.storyboard */; };
@@ -81,8 +81,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		221B07CA1E90386600921866 /* AddListingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListingTableViewController.swift; sourceTree = "<group>"; };
 		225A66041E8EA7760063337A /* MarketplaceDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceDetailTableViewController.swift; sourceTree = "<group>"; };
-		22CAE1C31E8DC445000BAE70 /* AddNewItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewItemViewController.swift; sourceTree = "<group>"; };
 		3361CEFB73AA8E72E9E0B46D /* Pods-TUHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubTests/Pods-TUHubTests.release.xcconfig"; sourceTree = "<group>"; };
 		3BBBD4D5AE6A3197E62F3182 /* Pods-TUHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6DDB0DADD33842008B60C6C1 /* Pods-TUHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -277,8 +277,8 @@
 			isa = PBXGroup;
 			children = (
 				7D439E021E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift */,
-				22CAE1C31E8DC445000BAE70 /* AddNewItemViewController.swift */,
 				225A66041E8EA7760063337A /* MarketplaceDetailTableViewController.swift */,
+				221B07CA1E90386600921866 /* AddListingTableViewController.swift */,
 			);
 			path = Marketplace;
 			sourceTree = "<group>";
@@ -676,7 +676,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DA6D96B1E7F6FFF00CD5D02 /* String+Date.swift in Sources */,
-				22CAE1C41E8DC445000BAE70 /* AddNewItemViewController.swift in Sources */,
 				7DA6D9581E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift in Sources */,
 				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
 				225A66051E8EA7760063337A /* MarketplaceDetailTableViewController.swift in Sources */,
@@ -684,6 +683,7 @@
 				7DA6D9301E7F6ECE00CD5D02 /* Term.swift in Sources */,
 				7DA6D9441E7F6F6800CD5D02 /* CourseSearchResultDetailTableViewController.swift in Sources */,
 				7DA6D9591E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift in Sources */,
+				221B07CB1E90386600921866 /* AddListingTableViewController.swift in Sources */,
 				7DA6D92A1E7F6ECE00CD5D02 /* CourseSearchResult.swift in Sources */,
 				7DA6D9561E7F6FC500CD5D02 /* CourseCalendarView.swift in Sources */,
 				7DA6D9421E7F6F6800CD5D02 /* CourseListViewController.swift in Sources */,
