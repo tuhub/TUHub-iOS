@@ -15,7 +15,7 @@ struct CourseSearchResult {
     let name: String
     let title: String
     let description: String
-    let credits: Int
+    let credits: Int?
     let levels: [String]
     let division: String
     let college: String

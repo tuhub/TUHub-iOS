@@ -124,7 +124,7 @@ class CourseSearchResultDetailTableViewController: UITableViewController {
             case 2:
                 cell = tableView.dequeueReusableCell(withIdentifier: rightDetailCellID) ?? rightDetailCell()
                 cell.textLabel?.text = "Credit Hours"
-                cell.detailTextLabel?.text = "\(result.credits)"
+                cell.detailTextLabel?.text = "\(String(describing: result.credits))"
             case 3:
                 cell = tableView.dequeueReusableCell(withIdentifier: rightDetailCellID) ?? rightDetailCell()
                 cell.textLabel?.text = "Division"
