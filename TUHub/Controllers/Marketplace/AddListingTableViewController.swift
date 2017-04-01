@@ -23,6 +23,9 @@ class AddListingTableViewController: UITableViewController {
         
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
     
     // MARK: - Table view data source
     

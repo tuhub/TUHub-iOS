@@ -19,6 +19,7 @@ class MarketplaceDetailTableViewController: UITableViewController {
         tableView.cellLayoutMarginsFollowReadableWidth = true
 
     }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
