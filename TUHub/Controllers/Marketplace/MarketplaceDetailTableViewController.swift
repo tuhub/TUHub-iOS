@@ -7,6 +7,16 @@
 //
 
 import UIKit
+import SafariServices
+import TUSafariActivity
+
+fileprivate let listingTitleCellID = "listingTitleCell"
+fileprivate let listingImageCellID = "listingImageCell"
+fileprivate let listingSellerCellID = "listingSellerCell"
+fileprivate let listingPriceCellID = "listingPriceCell"
+fileprivate let listingDescriptionCellID = "listingDescriptionCell"
+
+
 
 class MarketplaceDetailTableViewController: UITableViewController {
 
@@ -43,21 +53,21 @@ class MarketplaceDetailTableViewController: UITableViewController {
         switch indexPath.row {
             
         case 0:
-            cell = tableView.dequeueReusableCell(withIdentifier: "ListingTitleCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: listingTitleCellID, for: indexPath)
             cell.textLabel?.text = "iPhone 6s"
         case 1:
-            cell = tableView.dequeueReusableCell(withIdentifier: "ListingImageCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: listingImageCellID, for: indexPath)
             cell.textLabel?.text = "Add Image View Here"
         case 2:
-            cell = tableView.dequeueReusableCell(withIdentifier: "ListingSellerCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: listingSellerCellID, for: indexPath)
             cell.textLabel?.text = "Seller"
             cell.detailTextLabel?.text = "Brijesh Nayak"
         case 3:
-            cell = tableView.dequeueReusableCell(withIdentifier: "ListingPriceCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: listingPriceCellID, for: indexPath)
             cell.textLabel?.text = "Price"
             cell.detailTextLabel?.text = "$300"
         case 4:
-            cell = tableView.dequeueReusableCell(withIdentifier: "ListingDescriptionCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: listingDescriptionCellID, for: indexPath)
             cell.textLabel?.text = "Description"
             cell.detailTextLabel?.text = "Used iPhone 6s in good condition. Everything functions properly."
         default:
@@ -67,5 +77,16 @@ class MarketplaceDetailTableViewController: UITableViewController {
         return cell
     }
     
+    @IBAction func didPressShare(_ sender: UIBarButtonItem) {
+        let url:String? = "https://tuportal4.temple.edu/cp/home/displaylogin"
+        if let url = url {
+            let openSafariActivity = TUSafariActivity()
+            let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: [openSafariActivity])
+            let barButtonItem = self.navigationItem.rightBarButtonItem
+            let buttonItemView = barButtonItem?.value(forKey: "view") as? UIView
+            activityVC.popoverPresentationController?.sourceView = buttonItemView
+            present(activityVC, animated: true, completion: nil)
+        }
+    }
     
 }

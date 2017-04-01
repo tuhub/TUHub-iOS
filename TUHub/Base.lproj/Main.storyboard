@@ -659,7 +659,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListingTitleCell" textLabel="uEo-4H-Zxb" style="IBUITableViewCellStyleDefault" id="rsO-yu-drY">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listingTitleCell" textLabel="uEo-4H-Zxb" style="IBUITableViewCellStyleDefault" id="rsO-yu-drY">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rsO-yu-drY" id="Fkr-7p-GN1">
@@ -676,7 +676,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListingImageCell" textLabel="WuA-Ie-0Hi" style="IBUITableViewCellStyleDefault" id="mV8-Ks-mzv">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listingImageCell" textLabel="WuA-Ie-0Hi" style="IBUITableViewCellStyleDefault" id="mV8-Ks-mzv">
                                 <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mV8-Ks-mzv" id="VOE-uI-4xb">
@@ -693,7 +693,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListingSellerCell" textLabel="S7c-Ct-btI" detailTextLabel="9XQ-7d-UxU" style="IBUITableViewCellStyleValue1" id="oJB-rN-auP">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listingSellerCell" textLabel="S7c-Ct-btI" detailTextLabel="9XQ-7d-UxU" style="IBUITableViewCellStyleValue1" id="oJB-rN-auP">
                                 <rect key="frame" x="0.0" y="116" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oJB-rN-auP" id="P95-77-U85">
@@ -717,7 +717,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListingPriceCell" textLabel="CLQ-JV-kCN" detailTextLabel="DXe-iJ-wPG" style="IBUITableViewCellStyleValue1" id="Ngl-TL-vhz">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listingPriceCell" textLabel="CLQ-JV-kCN" detailTextLabel="DXe-iJ-wPG" style="IBUITableViewCellStyleValue1" id="Ngl-TL-vhz">
                                 <rect key="frame" x="0.0" y="160" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ngl-TL-vhz" id="N5y-0z-RaK">
@@ -741,7 +741,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListingDescriptionCell" textLabel="2ba-7h-PS1" detailTextLabel="rM0-bb-sdd" style="IBUITableViewCellStyleSubtitle" id="HUz-dC-Mfd">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listingDescriptionCell" textLabel="2ba-7h-PS1" detailTextLabel="rM0-bb-sdd" style="IBUITableViewCellStyleSubtitle" id="HUz-dC-Mfd">
                                 <rect key="frame" x="0.0" y="204" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HUz-dC-Mfd" id="nmL-dm-XhL">
@@ -772,7 +772,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="FVh-dt-Trr">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="MNU-74-aSW"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="MNU-74-aSW">
+                            <connections>
+                                <action selector="didPressShare:" destination="9t1-iY-Voy" id="OGX-aB-Xo1"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FXT-ni-igb" userLabel="First Responder" sceneMemberID="firstResponder"/>
