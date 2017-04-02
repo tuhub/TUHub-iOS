@@ -77,6 +77,10 @@ class MarketplaceDetailTableViewController: UITableViewController {
         return cell
     }
     
+    @IBAction func didPressContact(_ sender: Any) {
+        self.performSegue(withIdentifier: "showContactResponse", sender: self)
+    }
+    
     @IBAction func didPressShare(_ sender: UIBarButtonItem) {
         let url:String? = "https://tuportal4.temple.edu/cp/home/displaylogin"
         if let url = url {

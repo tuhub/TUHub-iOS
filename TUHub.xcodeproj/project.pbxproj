@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		220C27B21E9175E500C86A19 /* MarketplaceResponseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C27B11E9175E500C86A19 /* MarketplaceResponseTableViewController.swift */; };
 		221B07CB1E90386600921866 /* AddListingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B07CA1E90386600921866 /* AddListingTableViewController.swift */; };
 		225A66051E8EA7760063337A /* MarketplaceDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* MarketplaceDetailTableViewController.swift */; };
 		37FD610AAB987235177A1533 /* Pods_TUHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C369AC415ABB8738F6351247 /* Pods_TUHubTests.framework */; };
@@ -81,6 +82,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		220C27B11E9175E500C86A19 /* MarketplaceResponseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceResponseTableViewController.swift; sourceTree = "<group>"; };
 		221B07CA1E90386600921866 /* AddListingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListingTableViewController.swift; sourceTree = "<group>"; };
 		225A66041E8EA7760063337A /* MarketplaceDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceDetailTableViewController.swift; sourceTree = "<group>"; };
 		3361CEFB73AA8E72E9E0B46D /* Pods-TUHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubTests/Pods-TUHubTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				7D439E021E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift */,
 				225A66041E8EA7760063337A /* MarketplaceDetailTableViewController.swift */,
 				221B07CA1E90386600921866 /* AddListingTableViewController.swift */,
+				220C27B11E9175E500C86A19 /* MarketplaceResponseTableViewController.swift */,
 			);
 			path = Marketplace;
 			sourceTree = "<group>";
@@ -713,6 +716,7 @@
 				7DA6D9431E7F6F6800CD5D02 /* CoursePageViewController.swift in Sources */,
 				7DA6D92C1E7F6ECE00CD5D02 /* Course.swift in Sources */,
 				7DA6D96A1E7F6FFF00CD5D02 /* String+CGFloat.swift in Sources */,
+				220C27B21E9175E500C86A19 /* MarketplaceResponseTableViewController.swift in Sources */,
 				7DA6D9311E7F6ECE00CD5D02 /* Grade.swift in Sources */,
 				7D7FD0131E85ADE800CE769F /* MapsViewController.swift in Sources */,
 				7D7FD0111E85922300CE769F /* String+NSRegularExpression.swift in Sources */,
