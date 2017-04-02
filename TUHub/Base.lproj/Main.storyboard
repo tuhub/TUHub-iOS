@@ -695,11 +695,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="191"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rhp-Fk-S45">
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rhp-Fk-S45">
                                             <rect key="frame" x="16" y="10" width="343" height="172"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xzi-9M-9ul">
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xzi-9M-9ul">
                                                 <size key="itemSize" width="314" height="172"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -707,22 +706,35 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="listingImageCell" id="R6r-yY-UEi">
-                                                    <rect key="frame" x="15" y="0.0" width="314" height="172"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="314" height="172"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="314" height="172"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OXz-f0-vxh">
+                                                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OXz-f0-vxh">
                                                                 <rect key="frame" x="0.0" y="0.0" width="314" height="172"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="314" id="6bw-U2-tFe"/>
+                                                                    <constraint firstAttribute="width" secondItem="OXz-f0-vxh" secondAttribute="height" multiplier="157:86" id="ncE-je-2Yl"/>
+                                                                </constraints>
                                                             </imageView>
                                                         </subviews>
                                                     </view>
+                                                    <constraints>
+                                                        <constraint firstItem="OXz-f0-vxh" firstAttribute="top" secondItem="R6r-yY-UEi" secondAttribute="top" id="4l5-Xa-rbm"/>
+                                                        <constraint firstItem="OXz-f0-vxh" firstAttribute="leading" secondItem="R6r-yY-UEi" secondAttribute="leading" id="wEP-UG-4fP"/>
+                                                    </constraints>
                                                 </collectionViewCell>
                                             </cells>
                                         </collectionView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Rhp-Fk-S45" firstAttribute="top" secondItem="VOE-uI-4xb" secondAttribute="topMargin" constant="2" id="A8U-6N-vLf"/>
+                                        <constraint firstItem="Rhp-Fk-S45" firstAttribute="centerY" secondItem="VOE-uI-4xb" secondAttribute="centerY" id="Pt6-Rm-iF1"/>
+                                        <constraint firstItem="Rhp-Fk-S45" firstAttribute="leading" secondItem="VOE-uI-4xb" secondAttribute="leadingMargin" constant="8" id="hXD-eH-jAd"/>
+                                        <constraint firstItem="Rhp-Fk-S45" firstAttribute="centerX" secondItem="VOE-uI-4xb" secondAttribute="centerX" id="vZR-hF-TSJ"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="imageCollectionView" destination="Rhp-Fk-S45" id="vwW-jj-ZYT"/>
