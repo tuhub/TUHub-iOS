@@ -11,7 +11,7 @@ import SafariServices
 import TUSafariActivity
 
 fileprivate let listingTitleCellID = "listingTitleCell"
-fileprivate let listingImageCellID = "listingImageCell"
+fileprivate let listingImageCellID = "listingImageGalleryCell"
 fileprivate let listingSellerCellID = "listingSellerCell"
 fileprivate let listingPriceCellID = "listingPriceCell"
 fileprivate let listingDescriptionCellID = "listingDescriptionCell"
@@ -19,6 +19,12 @@ fileprivate let listingDescriptionCellID = "listingDescriptionCell"
 
 
 class MarketplaceDetailTableViewController: UITableViewController {
+    
+    var newsItem: NewsItem? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +54,7 @@ class MarketplaceDetailTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        let newsItem = self.newsItem!
         var cell: UITableViewCell!
         
         switch indexPath.row {
@@ -57,7 +64,7 @@ class MarketplaceDetailTableViewController: UITableViewController {
             cell.textLabel?.text = "iPhone 6s"
         case 1:
             cell = tableView.dequeueReusableCell(withIdentifier: listingImageCellID, for: indexPath)
-            cell.textLabel?.text = "Add Image View Here"
+            (cell as? MarketplaceImageGalleryTableViewCell)?.setUp(with: newsItem, delegate: self)
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: listingSellerCellID, for: indexPath)
             cell.textLabel?.text = "Seller"
@@ -93,4 +100,11 @@ class MarketplaceDetailTableViewController: UITableViewController {
         }
     }
     
+}
+
+// MARK: - MarketplaceImageGalleryTableViewCellDelegate
+extension MarketplaceDetailTableViewController: MarketplaceImageGalleryTableViewCellDelegate {
+    func present(_ viewController: UIViewController) {
+        present(viewController, animated: true, completion: nil)
+    }
 }

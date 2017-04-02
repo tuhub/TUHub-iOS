@@ -10,6 +10,7 @@
 		220C27B21E9175E500C86A19 /* MarketplaceResponseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C27B11E9175E500C86A19 /* MarketplaceResponseTableViewController.swift */; };
 		221B07CB1E90386600921866 /* AddListingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B07CA1E90386600921866 /* AddListingTableViewController.swift */; };
 		225A66051E8EA7760063337A /* MarketplaceDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* MarketplaceDetailTableViewController.swift */; };
+		229CD2C51E9195470039D88D /* MarketplaceImageGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229CD2C41E9195470039D88D /* MarketplaceImageGalleryTableViewCell.swift */; };
 		37FD610AAB987235177A1533 /* Pods_TUHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C369AC415ABB8738F6351247 /* Pods_TUHubTests.framework */; };
 		7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A4F1E5BF7EF0003A853 /* AppDelegate.swift */; };
 		7D043A571E5BF7EF0003A853 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D043A551E5BF7EF0003A853 /* Main.storyboard */; };
@@ -85,6 +86,7 @@
 		220C27B11E9175E500C86A19 /* MarketplaceResponseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceResponseTableViewController.swift; sourceTree = "<group>"; };
 		221B07CA1E90386600921866 /* AddListingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListingTableViewController.swift; sourceTree = "<group>"; };
 		225A66041E8EA7760063337A /* MarketplaceDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceDetailTableViewController.swift; sourceTree = "<group>"; };
+		229CD2C41E9195470039D88D /* MarketplaceImageGalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceImageGalleryTableViewCell.swift; sourceTree = "<group>"; };
 		3361CEFB73AA8E72E9E0B46D /* Pods-TUHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubTests/Pods-TUHubTests.release.xcconfig"; sourceTree = "<group>"; };
 		3BBBD4D5AE6A3197E62F3182 /* Pods-TUHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6DDB0DADD33842008B60C6C1 /* Pods-TUHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -180,6 +182,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		229CD2C31E9194F40039D88D /* Marketplace */ = {
+			isa = PBXGroup;
+			children = (
+				229CD2C41E9195470039D88D /* MarketplaceImageGalleryTableViewCell.swift */,
+			);
+			name = Marketplace;
+			sourceTree = "<group>";
+		};
 		2F0BE740D8ECDAE2BD2A3D9E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,6 +344,7 @@
 		7DA6D94B1E7F6FC500CD5D02 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				229CD2C31E9194F40039D88D /* Marketplace */,
 				7DA6D94C1E7F6FC500CD5D02 /* Course */,
 				7DA6D9501E7F6FC500CD5D02 /* News */,
 			);
@@ -720,6 +731,7 @@
 				7DA6D9311E7F6ECE00CD5D02 /* Grade.swift in Sources */,
 				7D7FD0131E85ADE800CE769F /* MapsViewController.swift in Sources */,
 				7D7FD0111E85922300CE769F /* String+NSRegularExpression.swift in Sources */,
+				229CD2C51E9195470039D88D /* MarketplaceImageGalleryTableViewCell.swift in Sources */,
 				7DA6D9491E7F6F6800CD5D02 /* NewsTableViewController.swift in Sources */,
 				7DA6D9451E7F6F6800CD5D02 /* CourseSearchResultsTableViewController.swift in Sources */,
 				7DA6D9331E7F6ECE00CD5D02 /* Instructor.swift in Sources */,

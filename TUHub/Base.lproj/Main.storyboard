@@ -659,7 +659,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hOP-pk-6Mc">
-                            <rect key="frame" x="0.0" y="248" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="395" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
@@ -688,25 +688,48 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listingImageCell" textLabel="WuA-Ie-0Hi" style="IBUITableViewCellStyleDefault" id="mV8-Ks-mzv">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listingImageGalleryCell" rowHeight="191" id="mV8-Ks-mzv" customClass="MarketplaceImageGalleryTableViewCell" customModule="TUHub" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="191"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mV8-Ks-mzv" id="VOE-uI-4xb">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="191"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WuA-Ie-0Hi">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rhp-Fk-S45">
+                                            <rect key="frame" x="16" y="10" width="343" height="172"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xzi-9M-9ul">
+                                                <size key="itemSize" width="314" height="172"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="listingImageCell" id="R6r-yY-UEi">
+                                                    <rect key="frame" x="15" y="0.0" width="314" height="172"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                        <rect key="frame" x="0.0" y="0.0" width="314" height="172"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OXz-f0-vxh">
+                                                                <rect key="frame" x="0.0" y="0.0" width="314" height="172"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                    </view>
+                                                </collectionViewCell>
+                                            </cells>
+                                        </collectionView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imageCollectionView" destination="Rhp-Fk-S45" id="vwW-jj-ZYT"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listingSellerCell" textLabel="S7c-Ct-btI" detailTextLabel="9XQ-7d-UxU" style="IBUITableViewCellStyleValue1" id="oJB-rN-auP">
-                                <rect key="frame" x="0.0" y="116" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="263" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oJB-rN-auP" id="P95-77-U85">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -730,7 +753,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listingPriceCell" textLabel="CLQ-JV-kCN" detailTextLabel="DXe-iJ-wPG" style="IBUITableViewCellStyleValue1" id="Ngl-TL-vhz">
-                                <rect key="frame" x="0.0" y="160" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="307" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ngl-TL-vhz" id="N5y-0z-RaK">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -754,7 +777,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listingDescriptionCell" textLabel="2ba-7h-PS1" detailTextLabel="rM0-bb-sdd" style="IBUITableViewCellStyleSubtitle" id="HUz-dC-Mfd">
-                                <rect key="frame" x="0.0" y="204" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="351" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HUz-dC-Mfd" id="nmL-dm-XhL">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -808,10 +831,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactInformationCell" id="3FR-Id-7Fj">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3FR-Id-7Fj" id="nQk-FF-4Cg">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GML-QI-t7X">
@@ -825,10 +848,10 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listingResponseCell" rowHeight="122" id="ygN-pJ-mGw">
-                                <rect key="frame" x="0.0" y="100" width="375" height="122"/>
+                                <rect key="frame" x="0.0" y="99.5" width="375" height="122"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ygN-pJ-mGw" id="EX9-cQ-JJ4">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="122"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="121.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Type your response here (limit 1,000 characters)" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pqR-oZ-2Cw">
@@ -1344,6 +1367,9 @@
                                         <integer key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="9t1-iY-Voy" kind="show" identifier="showListingDetail" id="ACB-0D-eiC"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -1359,9 +1385,6 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="FilterIcon" id="MNI-Wt-Gge"/>
                     </navigationItem>
-                    <connections>
-                        <segue destination="9t1-iY-Voy" kind="show" identifier="showItemDetail" id="Ds5-ln-DVM"/>
-                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pvj-RN-gSR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
