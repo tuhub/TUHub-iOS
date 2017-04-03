@@ -659,23 +659,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hOP-pk-6Mc">
-                            <rect key="frame" x="0.0" y="395" width="375" height="44"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" id="Prc-ko-aFa">
+                            <rect key="frame" x="0.0" y="395" width="375" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                            <state key="normal" title="Contact">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="8"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="didPressContact:" destination="9t1-iY-Voy" eventType="touchUpInside" id="9Vb-er-UAh"/>
-                            </connections>
-                        </button>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWH-Dc-e8J">
+                                    <rect key="frame" x="8" y="8" width="359" height="44"/>
+                                    <color key="backgroundColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="c3L-fm-HcY"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                    <state key="normal" title="Contact">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="8"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="didPressContact:" destination="9t1-iY-Voy" eventType="touchUpInside" id="JIh-P5-bIV"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="KWH-Dc-e8J" firstAttribute="top" secondItem="Prc-ko-aFa" secondAttribute="topMargin" id="NQm-Yi-inc"/>
+                                <constraint firstItem="KWH-Dc-e8J" firstAttribute="leading" secondItem="Prc-ko-aFa" secondAttribute="leadingMargin" id="Ofn-Ux-eXu"/>
+                                <constraint firstAttribute="bottomMargin" secondItem="KWH-Dc-e8J" secondAttribute="bottom" id="TJr-Ll-9jp"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="KWH-Dc-e8J" secondAttribute="trailing" id="mgM-2S-i9m"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listingTitleCell" textLabel="uEo-4H-Zxb" style="IBUITableViewCellStyleDefault" id="rsO-yu-drY">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
