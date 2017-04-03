@@ -1452,6 +1452,9 @@
                                         <integer key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="9t1-iY-Voy" kind="show" identifier="showListingDetail" id="ACB-0D-eiC"/>
+                                </connections>
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="Oyb-Oi-26y"/>
