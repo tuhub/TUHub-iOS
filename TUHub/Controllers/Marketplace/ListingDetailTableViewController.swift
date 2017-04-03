@@ -16,8 +16,6 @@ fileprivate let listingSellerCellID = "listingSellerCell"
 fileprivate let listingPriceCellID = "listingPriceCell"
 fileprivate let listingDescriptionCellID = "listingDescriptionCell"
 
-
-
 class ListingDetailTableViewController: UITableViewController {
     
     var newsItem: NewsItem? {

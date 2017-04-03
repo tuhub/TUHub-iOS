@@ -38,7 +38,7 @@ struct CourseSearchResult {
         self.name = name
         self.title = title
         self.description = description
-        credits = xml["creditHr"]["low"].int!
+        credits = xml["creditHr"]["low"].int
         self.levels = xml["levels"].children.flatMap({ $0.value })
         self.division = division
         self.college = college

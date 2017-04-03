@@ -667,6 +667,11 @@
                             <state key="normal" title="Contact">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="didPressContact:" destination="9t1-iY-Voy" eventType="touchUpInside" id="9Vb-er-UAh"/>
                             </connections>
@@ -847,47 +852,57 @@
             </objects>
             <point key="canvasLocation" x="2685.5999999999999" y="-976.46176911544239"/>
         </scene>
-        <!--Marketplace Response Table View Controller-->
+        <!--Listing Response Table View Controller-->
         <scene sceneID="AFx-aR-bAr">
             <objects>
-                <tableViewController id="BoU-3D-I6T" customClass="MarketplaceResponseTableViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="BoU-3D-I6T" customClass="ListingResponseTableViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="kAQ-7e-8zh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactInformationCell" id="3FR-Id-7Fj">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactInformationCell" id="3FR-Id-7Fj">
                                 <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3FR-Id-7Fj" id="nQk-FF-4Cg">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="3FR-Id-7Fj" id="nQk-FF-4Cg">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GML-QI-t7X">
-                                            <rect key="frame" x="8" y="8" width="359" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GML-QI-t7X">
+                                            <rect key="frame" x="15" y="11" width="345" height="22"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="GML-QI-t7X" firstAttribute="leading" secondItem="nQk-FF-4Cg" secondAttribute="leadingMargin" id="Mnc-pe-El4"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="GML-QI-t7X" secondAttribute="bottom" id="Qgh-FU-EIv"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="GML-QI-t7X" secondAttribute="trailing" id="Yl7-N6-Rhs"/>
+                                        <constraint firstItem="GML-QI-t7X" firstAttribute="top" secondItem="nQk-FF-4Cg" secondAttribute="topMargin" id="aiA-VB-GA7"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listingResponseCell" rowHeight="122" id="ygN-pJ-mGw">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="listingResponseCell" rowHeight="122" id="ygN-pJ-mGw">
                                 <rect key="frame" x="0.0" y="100" width="375" height="122"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ygN-pJ-mGw" id="EX9-cQ-JJ4">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="ygN-pJ-mGw" id="EX9-cQ-JJ4">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="121"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Type your response here (limit 1,000 characters)" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pqR-oZ-2Cw">
-                                            <rect key="frame" x="8" y="8" width="359" height="106"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Type your response here (limit 1,000 characters)" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pqR-oZ-2Cw">
+                                            <rect key="frame" x="15" y="11" width="345" height="100"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="pqR-oZ-2Cw" secondAttribute="bottom" id="DQ0-Cd-oFT"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="pqR-oZ-2Cw" secondAttribute="trailing" id="HXc-FP-V9g"/>
+                                        <constraint firstItem="pqR-oZ-2Cw" firstAttribute="top" secondItem="EX9-cQ-JJ4" secondAttribute="topMargin" id="UB6-Xu-nM4"/>
+                                        <constraint firstItem="pqR-oZ-2Cw" firstAttribute="leading" secondItem="EX9-cQ-JJ4" secondAttribute="leadingMargin" id="nuX-ct-xuZ"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -1358,7 +1373,7 @@
         <scene sceneID="3Vq-jA-cW1">
             <objects>
                 <collectionViewController id="6Kh-J2-ReX" customClass="ListingsCollectionViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="3dA-hW-fFm">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="3dA-hW-fFm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

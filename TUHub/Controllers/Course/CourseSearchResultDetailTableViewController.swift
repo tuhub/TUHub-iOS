@@ -94,7 +94,10 @@ class CourseSearchResultDetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return result != nil ? 4 : 0
+            if result?.credits != nil {
+                return 4
+            }
+            return result != nil ? 3 : 0
         case 1:
             return result != nil ? 1 : 0
         case 2:
@@ -123,8 +126,14 @@ class CourseSearchResultDetailTableViewController: UITableViewController {
                 cell.textLabel?.text = result.description
             case 2:
                 cell = tableView.dequeueReusableCell(withIdentifier: rightDetailCellID) ?? rightDetailCell()
-                cell.textLabel?.text = "Credit Hours"
-                cell.detailTextLabel?.text = "\(String(describing: result.credits))"
+                if let credits = result.credits {
+                    cell.textLabel?.text = "Credit Hours"
+                    cell.detailTextLabel?.text = "\(credits)"
+                } else {
+                    cell = tableView.dequeueReusableCell(withIdentifier: rightDetailCellID) ?? rightDetailCell()
+                    cell.textLabel?.text = "Division"
+                    cell.detailTextLabel?.text = "\(result.division)"
+                }
             case 3:
                 cell = tableView.dequeueReusableCell(withIdentifier: rightDetailCellID) ?? rightDetailCell()
                 cell.textLabel?.text = "Division"

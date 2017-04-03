@@ -1,5 +1,5 @@
 //
-//  ListingsResponseTableViewController.swift
+//  ListingResponseTableViewController.swift
 //  TUHub
 //
 //  Created by Brijesh Nayak on 4/2/17.
@@ -11,7 +11,7 @@ import UIKit
 fileprivate let contactInformationCellID = "contactInformationCell"
 fileprivate let listingResponseCellID = "listingResponseCell"
 
-class ListingsResponseTableViewController: UITableViewController {
+class ListingResponseTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
