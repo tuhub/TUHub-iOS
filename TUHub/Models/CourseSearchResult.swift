@@ -64,7 +64,7 @@ struct CourseSearchResult {
                                       "minRow" : minRow,
                                       "maxRow" : maxRow]
         
-        NetworkManager.shared.request(fromEndpoint: .courseSearch, parameters: params) { (data, error) in
+        NetworkManager.shared.request(fromEndpoint: .courseSearch, queryParameters: params) { (data, error) in
             
             var results: [CourseSearchResult]?
             

@@ -10,8 +10,6 @@ import UIKit
 import CHTCollectionViewWaterfallLayout
 import AlamofireImage
 
-import AWSDynamoDB
-
 private let reuseIdentifier = "marketplaceCell"
 
 class MarketplaceCollectionViewController: UICollectionViewController {
@@ -32,10 +30,6 @@ class MarketplaceCollectionViewController: UICollectionViewController {
 
         // Clear selection between presentations
          self.clearsSelectionOnViewWillAppear = true
-        
-        Listing.retrievePage(true) { (listings, error) in
-            debugPrint(listings)
-        }
         
         setupCollectionView()
     }

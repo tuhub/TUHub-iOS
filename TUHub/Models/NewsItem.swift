@@ -135,7 +135,7 @@ extension NewsItem {
         
         let params: [String : Any] = ["namekeys" : feedsString]
         
-        NetworkManager.shared.request(fromEndpoint: .news, parameters: params) { (data, error) in
+        NetworkManager.shared.request(fromEndpoint: .news, queryParameters: params) { (data, error) in
             
             var newsItems: [NewsItem]?
             

@@ -73,7 +73,7 @@ extension Course {
         }
         
         let params = ["term" : termID, "section" : sectionID]
-        NetworkManager.shared.request(fromEndpoint: .courseRoster, withTUID: user.tuID, parameters: params, authenticateWith: user.credential) { (data, error) in
+        NetworkManager.shared.request(fromEndpoint: .courseRoster, pathParameters: [user.tuID], queryParameters: params, authenticateWith: user.credential) { (data, error) in
             
             var roster: [String]?
             

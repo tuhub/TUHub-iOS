@@ -139,7 +139,7 @@ extension User {
     
     func retrieveGrades(_ responseHandler: GradesResponseHandler?) {
         
-        NetworkManager.shared.request(fromEndpoint: .grades, withTUID: tuID, authenticateWith: credential) { (data, error) in
+        NetworkManager.shared.request(fromEndpoint: .grades, pathParameters: [tuID], authenticateWith: credential) { (data, error) in
             
             var grades: [Term]?
             
@@ -169,7 +169,7 @@ extension User {
     typealias CoursesResponseHandler = ([Term]?, Error?) -> Void
     
     func retrieveCourses(_ responseHandler: CoursesResponseHandler?) {
-        NetworkManager.shared.request(fromEndpoint: .courseOverview, withTUID: tuID, authenticateWith: credential) { (data, error) in
+        NetworkManager.shared.request(fromEndpoint: .courseOverview, pathParameters: [tuID], authenticateWith: credential) { (data, error) in
             
             var courseTerms = [Term]()
             
