@@ -1,5 +1,5 @@
 //
-//  MarketplaceResponseTableViewController.swift
+//  ListingsResponseTableViewController.swift
 //  TUHub
 //
 //  Created by Brijesh Nayak on 4/2/17.
@@ -11,7 +11,7 @@ import UIKit
 fileprivate let contactInformationCellID = "contactInformationCell"
 fileprivate let listingResponseCellID = "listingResponseCell"
 
-class MarketplaceResponseTableViewController: UITableViewController {
+class ListingsResponseTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

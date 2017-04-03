@@ -1,5 +1,5 @@
 //
-//  MarketplaceImageGalleryTableViewCell.swift
+//  ListingImageGalleryTableViewCell.swift
 //  TUHub
 //
 //  Created by Brijesh Nayak on 4/2/17.
@@ -16,7 +16,7 @@ protocol MarketplaceImageGalleryTableViewCellDelegate {
     func present(_ viewController: UIViewController)
 }
 
-class MarketplaceImageGalleryTableViewCell: UITableViewCell {
+class ListingImageGalleryTableViewCell: UITableViewCell {
     
     private static let spaceBetweenCells: CGFloat = 8
 
@@ -33,12 +33,12 @@ class MarketplaceImageGalleryTableViewCell: UITableViewCell {
         imageCollectionView.delegate = self
         
         let layout = imageCollectionView.collectionViewLayout as? CarouselFlowLayout
-        layout?.spacingMode = .fixed(spacing: MarketplaceImageGalleryTableViewCell.spaceBetweenCells)
+        layout?.spacingMode = .fixed(spacing: ListingImageGalleryTableViewCell.spaceBetweenCells)
         layout?.scrollDirection = .horizontal
     }
 }
 
-extension MarketplaceImageGalleryTableViewCell: UICollectionViewDataSource {
+extension ListingImageGalleryTableViewCell: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -58,7 +58,7 @@ extension MarketplaceImageGalleryTableViewCell: UICollectionViewDataSource {
     
 }
 
-extension MarketplaceImageGalleryTableViewCell: UICollectionViewDelegate {
+extension ListingImageGalleryTableViewCell: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         

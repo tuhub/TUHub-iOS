@@ -25,4 +25,22 @@ class Personal: Listing {
         self.id = id
     }
     
+    class func retrieveAll(_ responseHandler: @escaping ([Personal]?, Error?) -> Void) {
+        NetworkManager.shared.request(fromEndpoint: .marketplace,
+                                      pathParameters: ["select_all_personals.jsp"],
+                                      queryParameters: ["activeOnly" : "true"])
+        { (data, error) in
+            
+            var personals: [Personal]?
+            
+            defer { responseHandler(personals, error) }
+            guard let data = data else { return }
+            let json = JSON(data)
+            
+            if let personalsJSON = json["jobList"].array {
+                personals = personalsJSON.flatMap { Personal(json: $0) }
+            }
+        }
+    }
+    
 }

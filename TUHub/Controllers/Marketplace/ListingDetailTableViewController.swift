@@ -18,7 +18,7 @@ fileprivate let listingDescriptionCellID = "listingDescriptionCell"
 
 
 
-class MarketplaceDetailTableViewController: UITableViewController {
+class ListingDetailTableViewController: UITableViewController {
     
     var newsItem: NewsItem? {
         didSet {
@@ -64,7 +64,7 @@ class MarketplaceDetailTableViewController: UITableViewController {
             cell.textLabel?.text = "iPhone 6s"
         case 1:
             cell = tableView.dequeueReusableCell(withIdentifier: listingImageCellID, for: indexPath)
-            (cell as? MarketplaceImageGalleryTableViewCell)?.setUp(with: newsItem, delegate: self)
+            (cell as? ListingImageGalleryTableViewCell)?.setUp(with: newsItem, delegate: self)
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: listingSellerCellID, for: indexPath)
             cell.textLabel?.text = "Seller"
@@ -103,7 +103,7 @@ class MarketplaceDetailTableViewController: UITableViewController {
 }
 
 // MARK: - MarketplaceImageGalleryTableViewCellDelegate
-extension MarketplaceDetailTableViewController: MarketplaceImageGalleryTableViewCellDelegate {
+extension ListingDetailTableViewController: MarketplaceImageGalleryTableViewCellDelegate {
     func present(_ viewController: UIViewController) {
         present(viewController, animated: true, completion: nil)
     }

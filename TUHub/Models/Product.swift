@@ -25,4 +25,22 @@ class Product: Listing {
         self.id = id
     }
     
+    class func retrieveAll(_ responseHandler: @escaping ([Product]?, Error?) -> Void) {
+        NetworkManager.shared.request(fromEndpoint: .marketplace,
+                                      pathParameters: ["select_all_products.jsp"],
+                                      queryParameters: ["activeOnly" : "true"])
+        { (data, error) in
+            
+            var products: [Product]?
+            
+            defer { responseHandler(products, error) }
+            guard let data = data else { return }
+            let json = JSON(data)
+            
+            if let productsJSON = json["productList"].array {
+                products = productsJSON.flatMap { Product(json: $0) }
+            }
+        }
+    }
+    
 }

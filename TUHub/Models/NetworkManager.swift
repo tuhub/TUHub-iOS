@@ -38,10 +38,25 @@ class NetworkManager: NSObject {
     }
     
     func request(fromEndpoint endpoint: Endpoint,
+                 pathParameters: [String],
+                 _ responseHandler: ResponseHandler?) {
+        
+        request(url: endpoint.rawValue, pathParameters: pathParameters, queryParameters: nil, authenticateWith: nil, responseHandler)
+    }
+    
+    func request(fromEndpoint endpoint: Endpoint,
                  queryParameters: Parameters,
                  _ responseHandler: ResponseHandler?) {
         
         request(url: endpoint.rawValue, pathParameters: nil, queryParameters: queryParameters, authenticateWith: nil, responseHandler)
+    }
+    
+    func request(fromEndpoint endpoint: Endpoint,
+                 pathParameters: [String],
+                 queryParameters: Parameters,
+                 _ responseHandler: ResponseHandler?) {
+        
+        request(url: endpoint.rawValue, pathParameters: pathParameters, queryParameters: queryParameters, authenticateWith: nil, responseHandler)
     }
     
     func request(fromEndpoint endpoint: Endpoint,

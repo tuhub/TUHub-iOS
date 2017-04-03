@@ -31,14 +31,14 @@ class Listing {
             let datePostedStr = json["datePosted"].string,
             let datePosted = dateFormatter.date(from: datePostedStr),
             let ownerID = json["ownerId"].string,
-            let isActive = json["isActive"].bool
+            let isActive = json["isActive"].string
             else { return nil }
         
         self.title = title
         self.description = description
         self.datePosted = datePosted
         self.ownerID = ownerID
-        self.isActive = isActive
+        self.isActive = isActive == "true"
         
         if let photosFolder = json["picFolder"].string {
             photos = (reference: photosFolder, isFolder: true)

@@ -1,5 +1,5 @@
 //
-//  MarketplaceCollectionViewController.swift
+//  ListingsCollectionViewController.swift
 //  TUHub
 //
 //  Created by Connor Crawford on 3/30/17.
@@ -16,20 +16,10 @@ fileprivate let listingDetailSegueID = "showListingDetail"
 
 private let reuseIdentifier = "marketplaceCell"
 
-class MarketplaceCollectionViewController: UICollectionViewController {
-
-    fileprivate var newsItems: [NewsItem]? {
-        didSet {
-            if let newsItems = newsItems {
-                images = [UIImage?](repeating: nil, count: newsItems.count)
-            } else {
-                images = nil
-            }
-        }
-    }
+class ListingsCollectionViewController: UICollectionViewController {
+    
+    lazy var listings: [Listing] = []
     fileprivate var images: [UIImage?]?
-    fileprivate weak var marketplaceDetailVC: MarketplaceDetailTableViewController?
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +28,31 @@ class MarketplaceCollectionViewController: UICollectionViewController {
          self.clearsSelectionOnViewWillAppear = true
         
         setupCollectionView()
+        
+        
+        Product.retrieveAll { (products, error) in
+            if let products = products {
+                self.listings.append(contentsOf: products as [Listing])
+                self.listings.sort(by: { $0.datePosted > $1.datePosted })
+                self.collectionView?.reloadData()
+            }
+        }
+        
+        Job.retrieveAll { (jobs, error) in
+            if let jobs = jobs {
+                self.listings.append(contentsOf: jobs as [Listing])
+                self.listings.sort(by: { $0.datePosted > $1.datePosted })
+                self.collectionView?.reloadData()
+            }
+        }
+        
+        Personal.retrieveAll { (personals, error) in
+            if let personals = personals {
+                self.listings.append(contentsOf: personals as [Listing])
+                self.listings.sort(by: { $0.datePosted > $1.datePosted })
+                self.collectionView?.reloadData()
+            }
+        }
     }
 
     //MARK: - CollectionView UI Setup
@@ -69,11 +84,8 @@ class MarketplaceCollectionViewController: UICollectionViewController {
             
             guard let cell = sender as? UICollectionViewCell,
                 let indexPath = collectionView?.indexPath(for: cell),
-                let marketplaceDetailVC = segue.destination as? MarketplaceDetailTableViewController
+                let marketplaceDetailVC = segue.destination as? ListingDetailTableViewController
                 else { break }
-            
-            marketplaceDetailVC.newsItem = newsItems?[indexPath.row]
-            self.marketplaceDetailVC = marketplaceDetailVC
   
         default:
             break
@@ -84,37 +96,37 @@ class MarketplaceCollectionViewController: UICollectionViewController {
 }
 
 // MARK: UICollectionViewDataSource
-extension MarketplaceCollectionViewController {
+extension ListingsCollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return newsItems == nil ? 0 : 1
+        return listings.count % 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return newsItems?.count ?? 0
+        return listings.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
     
-        if let imageView = cell.contentView.viewWithTag(1) as? UIImageView, let newsItem = newsItems?[indexPath.row] {
-            imageView.af_setImage(withURL: newsItem.imageURLs.first!,
-                                  placeholderImage: nil,
-                                  filter: nil) { (response) in
-                                    if response.value != nil && self.images?[indexPath.row] == nil {
-                                        self.images?[indexPath.row] = response.result.value
-                                        collectionView.collectionViewLayout.invalidateLayout()
-                                    }
-            }
-        }
+//        if let imageView = cell.contentView.viewWithTag(1) as? UIImageView, let newsItem = newsItems?[indexPath.row] {
+//            imageView.af_setImage(withURL: newsItem.imageURLs.first!,
+//                                  placeholderImage: nil,
+//                                  filter: nil) { (response) in
+//                                    if response.value != nil && self.images?[indexPath.row] == nil {
+//                                        self.images?[indexPath.row] = response.result.value
+//                                        collectionView.collectionViewLayout.invalidateLayout()
+//                                    }
+//            }
+//        }
         
         return cell
     }
     
 }
 
-extension MarketplaceCollectionViewController: CHTCollectionViewDelegateWaterfallLayout {
+extension ListingsCollectionViewController: CHTCollectionViewDelegateWaterfallLayout {
     func collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAt indexPath: IndexPath!) -> CGSize {
         
         guard let image = images?[indexPath.row]

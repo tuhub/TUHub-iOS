@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		220C27B21E9175E500C86A19 /* MarketplaceResponseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C27B11E9175E500C86A19 /* MarketplaceResponseTableViewController.swift */; };
+		220C27B21E9175E500C86A19 /* ListingResponseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C27B11E9175E500C86A19 /* ListingResponseTableViewController.swift */; };
 		221B07CB1E90386600921866 /* AddListingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B07CA1E90386600921866 /* AddListingTableViewController.swift */; };
-		225A66051E8EA7760063337A /* MarketplaceDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* MarketplaceDetailTableViewController.swift */; };
-		229CD2C51E9195470039D88D /* MarketplaceImageGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229CD2C41E9195470039D88D /* MarketplaceImageGalleryTableViewCell.swift */; };
+		225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */; };
+		229CD2C51E9195470039D88D /* ListingImageGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229CD2C41E9195470039D88D /* ListingImageGalleryTableViewCell.swift */; };
 		37FD610AAB987235177A1533 /* Pods_TUHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C369AC415ABB8738F6351247 /* Pods_TUHubTests.framework */; };
 		7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A4F1E5BF7EF0003A853 /* AppDelegate.swift */; };
 		7D043A571E5BF7EF0003A853 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D043A551E5BF7EF0003A853 /* Main.storyboard */; };
@@ -18,7 +18,7 @@
 		7D043A5C1E5BF7EF0003A853 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D043A5A1E5BF7EF0003A853 /* LaunchScreen.storyboard */; };
 		7D043A671E5BF7EF0003A853 /* TUHubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A661E5BF7EF0003A853 /* TUHubTests.swift */; };
 		7D043A721E5BF7EF0003A853 /* TUHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A711E5BF7EF0003A853 /* TUHubUITests.swift */; };
-		7D439E031E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D439E021E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift */; };
+		7D439E031E8D6F4400FF5538 /* ListingsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D439E021E8D6F4400FF5538 /* ListingsCollectionViewController.swift */; };
 		7D48E1221E9212B6000981D8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48E1211E9212B6000981D8 /* Product.swift */; };
 		7D4E57ED1E920389000B7719 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E57EC1E920389000B7719 /* Listing.swift */; };
 		7D4E57F61E9211AD000B7719 /* Personal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E57F41E9211AD000B7719 /* Personal.swift */; };
@@ -87,10 +87,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		220C27B11E9175E500C86A19 /* MarketplaceResponseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceResponseTableViewController.swift; sourceTree = "<group>"; };
+		220C27B11E9175E500C86A19 /* ListingResponseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingResponseTableViewController.swift; sourceTree = "<group>"; };
 		221B07CA1E90386600921866 /* AddListingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListingTableViewController.swift; sourceTree = "<group>"; };
-		225A66041E8EA7760063337A /* MarketplaceDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceDetailTableViewController.swift; sourceTree = "<group>"; };
-		229CD2C41E9195470039D88D /* MarketplaceImageGalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceImageGalleryTableViewCell.swift; sourceTree = "<group>"; };
+		225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingDetailTableViewController.swift; sourceTree = "<group>"; };
+		229CD2C41E9195470039D88D /* ListingImageGalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingImageGalleryTableViewCell.swift; sourceTree = "<group>"; };
 		3361CEFB73AA8E72E9E0B46D /* Pods-TUHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubTests/Pods-TUHubTests.release.xcconfig"; sourceTree = "<group>"; };
 		3BBBD4D5AE6A3197E62F3182 /* Pods-TUHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6DDB0DADD33842008B60C6C1 /* Pods-TUHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 		7D043A6D1E5BF7EF0003A853 /* TUHubUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TUHubUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D043A711E5BF7EF0003A853 /* TUHubUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TUHubUITests.swift; sourceTree = "<group>"; };
 		7D043A731E5BF7EF0003A853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7D439E021E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceCollectionViewController.swift; sourceTree = "<group>"; };
+		7D439E021E8D6F4400FF5538 /* ListingsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsCollectionViewController.swift; sourceTree = "<group>"; };
 		7D48E1211E9212B6000981D8 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Product.swift; path = Models/Product.swift; sourceTree = "<group>"; };
 		7D4E57EC1E920389000B7719 /* Listing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Listing.swift; path = Models/Listing.swift; sourceTree = "<group>"; };
 		7D4E57F41E9211AD000B7719 /* Personal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Personal.swift; path = Models/Personal.swift; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 		229CD2C31E9194F40039D88D /* Marketplace */ = {
 			isa = PBXGroup;
 			children = (
-				229CD2C41E9195470039D88D /* MarketplaceImageGalleryTableViewCell.swift */,
+				229CD2C41E9195470039D88D /* ListingImageGalleryTableViewCell.swift */,
 			);
 			name = Marketplace;
 			sourceTree = "<group>";
@@ -300,10 +300,10 @@
 		7D439E011E8D6F4400FF5538 /* Marketplace */ = {
 			isa = PBXGroup;
 			children = (
-				7D439E021E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift */,
-				225A66041E8EA7760063337A /* MarketplaceDetailTableViewController.swift */,
+				7D439E021E8D6F4400FF5538 /* ListingsCollectionViewController.swift */,
+				225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */,
 				221B07CA1E90386600921866 /* AddListingTableViewController.swift */,
-				220C27B11E9175E500C86A19 /* MarketplaceResponseTableViewController.swift */,
+				220C27B11E9175E500C86A19 /* ListingResponseTableViewController.swift */,
 			);
 			path = Marketplace;
 			sourceTree = "<group>";
@@ -706,7 +706,7 @@
 				7D4E57F71E9211AD000B7719 /* Job.swift in Sources */,
 				7DA6D9581E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift in Sources */,
 				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
-				225A66051E8EA7760063337A /* MarketplaceDetailTableViewController.swift in Sources */,
+				225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */,
 				7D4E57F61E9211AD000B7719 /* Personal.swift in Sources */,
 				7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */,
 				7DA6D9301E7F6ECE00CD5D02 /* Term.swift in Sources */,
@@ -734,7 +734,7 @@
 				7DA6D9411E7F6F6800CD5D02 /* CourseDetailTableViewController.swift in Sources */,
 				7DA6D9661E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift in Sources */,
 				7DA6D9551E7F6FC500CD5D02 /* CourseCalendarTableViewCell.swift in Sources */,
-				7D439E031E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift in Sources */,
+				7D439E031E8D6F4400FF5538 /* ListingsCollectionViewController.swift in Sources */,
 				7D7CBB981E80CCBA002F7575 /* SearchViewController.swift in Sources */,
 				7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */,
 				7DA6D9461E7F6F6800CD5D02 /* CourseViewController.swift in Sources */,
@@ -743,12 +743,12 @@
 				7DA6D9431E7F6F6800CD5D02 /* CoursePageViewController.swift in Sources */,
 				7DA6D92C1E7F6ECE00CD5D02 /* Course.swift in Sources */,
 				7DA6D96A1E7F6FFF00CD5D02 /* String+CGFloat.swift in Sources */,
-				220C27B21E9175E500C86A19 /* MarketplaceResponseTableViewController.swift in Sources */,
+				220C27B21E9175E500C86A19 /* ListingResponseTableViewController.swift in Sources */,
 				7DA6D9311E7F6ECE00CD5D02 /* Grade.swift in Sources */,
 				7D7FD0131E85ADE800CE769F /* MapsViewController.swift in Sources */,
 				7D4E57ED1E920389000B7719 /* Listing.swift in Sources */,
 				7D7FD0111E85922300CE769F /* String+NSRegularExpression.swift in Sources */,
-				229CD2C51E9195470039D88D /* MarketplaceImageGalleryTableViewCell.swift in Sources */,
+				229CD2C51E9195470039D88D /* ListingImageGalleryTableViewCell.swift in Sources */,
 				7DA6D9491E7F6F6800CD5D02 /* NewsTableViewController.swift in Sources */,
 				7DA6D9451E7F6F6800CD5D02 /* CourseSearchResultsTableViewController.swift in Sources */,
 				7DA6D9331E7F6ECE00CD5D02 /* Instructor.swift in Sources */,
