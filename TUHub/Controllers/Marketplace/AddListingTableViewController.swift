@@ -8,8 +8,8 @@
 
 import UIKit
 
-fileprivate let contactInformationCellID = "contactInformationCell"
-fileprivate let listingInformationCellID = "listingInformationCell"
+fileprivate let textFieldCellID = "textFieldCell"
+fileprivate let textViewCellID = "textViewCell"
 fileprivate let addImageCellID = "addImageCell"
 
 class AddListingTableViewController: UITableViewController {
@@ -30,7 +30,7 @@ class AddListingTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,10 +38,8 @@ class AddListingTableViewController: UITableViewController {
         switch section {
             
         case 0:
-            return 1
+            return 3
         case 1:
-            return 1
-        case 2:
             return 1
         default:
             return 0
@@ -52,10 +50,8 @@ class AddListingTableViewController: UITableViewController {
         switch section {
             
         case 0:
-            return "Contact Information"
+            return "Information"
         case 1:
-            return "Listing Information"
-        case 2:
             return "Add Image"
 
         default:
@@ -70,13 +66,23 @@ class AddListingTableViewController: UITableViewController {
             
             switch indexPath.section {
             case 0:
-                cell = tableView.dequeueReusableCell(withIdentifier: contactInformationCellID, for: indexPath)
+                switch indexPath.row {
+                case 0:
+                    cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellID, for: indexPath)
+                    (cell as! TextFieldTableViewCell).textField.placeholder = "Title"
+                case 1:
+                    cell = tableView.dequeueReusableCell(withIdentifier: textFieldCellID, for: indexPath)
+                    (cell as! TextFieldTableViewCell).textField.placeholder = "Price"
+                case 2:
+                    cell = tableView.dequeueReusableCell(withIdentifier: textViewCellID, for: indexPath)
+                    (cell as! TextViewTableViewCell).textView.text = "Add a description"
+                default:
+                    log.error("Invalid row")
+                }
             case 1:
-                cell = tableView.dequeueReusableCell(withIdentifier: listingInformationCellID, for: indexPath)
-            case 2:
                 cell = tableView.dequeueReusableCell(withIdentifier: addImageCellID, for: indexPath)
             default:
-                log.error("Error: Invalid section")
+                log.error("Invalid section")
               }
             
             return cell

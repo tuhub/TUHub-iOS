@@ -32,7 +32,6 @@ class ListingDetailTableViewController: UITableViewController {
         // Allow table view to automatically determine cell height based on contents
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
-        tableView.cellLayoutMarginsFollowReadableWidth = true
 
     }
 
@@ -54,7 +53,6 @@ class ListingDetailTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let newsItem = self.newsItem!
         var cell: UITableViewCell!
         
         switch indexPath.row {
@@ -64,7 +62,7 @@ class ListingDetailTableViewController: UITableViewController {
             cell.textLabel?.text = "iPhone 6s"
         case 1:
             cell = tableView.dequeueReusableCell(withIdentifier: listingImageCellID, for: indexPath)
-            (cell as? ListingImageGalleryTableViewCell)?.setUp(with: newsItem, delegate: self)
+//            (cell as? ListingImageGalleryTableViewCell)?.setUp(with: newsItem, delegate: self)
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: listingSellerCellID, for: indexPath)
             cell.textLabel?.text = "Seller"
@@ -75,8 +73,9 @@ class ListingDetailTableViewController: UITableViewController {
             cell.detailTextLabel?.text = "$300"
         case 4:
             cell = tableView.dequeueReusableCell(withIdentifier: listingDescriptionCellID, for: indexPath)
-            cell.textLabel?.text = "Description"
-            cell.detailTextLabel?.text = "Used iPhone 6s in good condition. Everything functions properly."
+            let cell = cell as! SubtitleTableViewCell
+            cell.titleLabel.text = "Description"
+            cell.subtitleLabel.text = "Used iPhone 6s in good condition. Everything functions properly."
         default:
             break
         }

@@ -78,7 +78,8 @@ class ListingsCollectionViewController: UICollectionViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        switch segue.identifier! {
+        guard let identifier = segue.identifier else { return }
+        switch identifier {
             
         case listingDetailSegueID:
             
@@ -99,7 +100,7 @@ class ListingsCollectionViewController: UICollectionViewController {
 extension ListingsCollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return listings.count % 1
+        return listings.count > 0 ? 1 : 0
     }
 
 
