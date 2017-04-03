@@ -8,9 +8,7 @@
 
 import AWSDynamoDB
 
-class DatabaseManager {
-    
-    static let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+class DatabaseManager<ModelClass: AWSDynamoDBObjectModel> {
     
     class func describe(table: String) -> AWSTask<AnyObject> {
         let dynamoDB = AWSDynamoDB.default()
@@ -21,10 +19,11 @@ class DatabaseManager {
         return dynamoDB.describeTable(describeTableInput!) as! AWSTask<AnyObject>
     }
     
-    class func save(model: AWSDynamoDBObjectModel, _ responseHandler: @escaping (AWSTask<AnyObject>) -> Void) {
+    class func save(model: AWSDynamoDBObjectModel, _ responseHandler: ((AWSTask<AnyObject>) -> Void)?) {
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         let task = dynamoDBObjectMapper.save(model)
         AWSTask<AnyObject>(forCompletionOfAllTasks: [task]).continueWith(executor: AWSExecutor.mainThread()) { (task) -> Any? in
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -32,12 +31,12 @@ class DatabaseManager {
                 print("Error: \(error)")
             }
             
-            responseHandler(task)
+            responseHandler?(task)
             return nil
         }
     }
     
-    class func retrievePage<ModelClass: AWSDynamoDBObjectModel>(
+    static func retrievePage(
         _ lastEvaluatedKey: [String : AWSDynamoDBAttributeValue]?,
         _ startFromBeginning: Bool,
         _ pageSize: NSNumber,
@@ -51,6 +50,7 @@ class DatabaseManager {
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         let queryExpression = AWSDynamoDBScanExpression()
         queryExpression.exclusiveStartKey = lastEvaluatedKey
         queryExpression.limit = pageSize

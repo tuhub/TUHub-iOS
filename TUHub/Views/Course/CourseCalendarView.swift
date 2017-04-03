@@ -106,7 +106,7 @@ class CourseCalendarView: UIView {
 extension CourseCalendarView: FSCalendarDataSource {
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        return meetings(on: date)?.count ?? 0
+        return meetings(on: date) == nil ? 0 : 1
     }
     
 }

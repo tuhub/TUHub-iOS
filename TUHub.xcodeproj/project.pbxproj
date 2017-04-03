@@ -15,6 +15,13 @@
 		7D043A671E5BF7EF0003A853 /* TUHubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A661E5BF7EF0003A853 /* TUHubTests.swift */; };
 		7D043A721E5BF7EF0003A853 /* TUHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A711E5BF7EF0003A853 /* TUHubUITests.swift */; };
 		7D439E031E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D439E021E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift */; };
+		7D4E57DE1E906BAF000B7719 /* AWSConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E57D81E906BAE000B7719 /* AWSConfiguration.swift */; };
+		7D4E57DF1E906BAF000B7719 /* AWSMobileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E57D91E906BAE000B7719 /* AWSMobileClient.swift */; };
+		7D4E57E01E906BAF000B7719 /* AWSMobileHubHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4E57DA1E906BAE000B7719 /* AWSMobileHubHelper.framework */; };
+		7D4E57E51E906BE3000B7719 /* AWSCognitoIdentityProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4E57E21E906BE3000B7719 /* AWSCognitoIdentityProvider.framework */; };
+		7D4E57E61E906BE3000B7719 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4E57E31E906BE3000B7719 /* AWSCore.framework */; };
+		7D4E57E71E906BE3000B7719 /* AWSDynamoDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4E57E41E906BE3000B7719 /* AWSDynamoDB.framework */; };
+		7D4E57E91E91D340000B7719 /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4E57E81E91D340000B7719 /* AWSS3.framework */; };
 		7D6D6D841E70939500BF121A /* CalendarCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6D6D831E70939500BF121A /* CalendarCellView.xib */; };
 		7D76EAAF1E8EDBE7006CC7BF /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76EAAE1E8EDBE7006CC7BF /* DatabaseManager.swift */; };
 		7D76EAB11E8EDD16006CC7BF /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76EAB01E8EDD16006CC7BF /* Listing.swift */; };
@@ -97,6 +104,13 @@
 		7D043A711E5BF7EF0003A853 /* TUHubUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TUHubUITests.swift; sourceTree = "<group>"; };
 		7D043A731E5BF7EF0003A853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D439E021E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceCollectionViewController.swift; sourceTree = "<group>"; };
+		7D4E57D81E906BAE000B7719 /* AWSConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSConfiguration.swift; sourceTree = "<group>"; };
+		7D4E57D91E906BAE000B7719 /* AWSMobileClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSMobileClient.swift; sourceTree = "<group>"; };
+		7D4E57DA1E906BAE000B7719 /* AWSMobileHubHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSMobileHubHelper.framework; sourceTree = "<group>"; };
+		7D4E57E21E906BE3000B7719 /* AWSCognitoIdentityProvider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCognitoIdentityProvider.framework; path = TUHub/Sdk/Aws/AWSCognitoIdentityProvider.framework; sourceTree = "<group>"; };
+		7D4E57E31E906BE3000B7719 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCore.framework; path = TUHub/Sdk/Aws/AWSCore.framework; sourceTree = "<group>"; };
+		7D4E57E41E906BE3000B7719 /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSDynamoDB.framework; path = TUHub/Sdk/Aws/AWSDynamoDB.framework; sourceTree = "<group>"; };
+		7D4E57E81E91D340000B7719 /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSS3.framework; path = TUHub/Sdk/Aws/AWSS3.framework; sourceTree = "<group>"; };
 		7D6D6D831E70939500BF121A /* CalendarCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCellView.xib; sourceTree = "<group>"; };
 		7D76EAAE1E8EDBE7006CC7BF /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		7D76EAB01E8EDD16006CC7BF /* Listing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
@@ -155,7 +169,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D7FD0181E85B18700CE769F /* MapKit.framework in Frameworks */,
+				7D4E57E61E906BE3000B7719 /* AWSCore.framework in Frameworks */,
 				A1D62E3F439C1C254F6FC729 /* Pods_TUHub.framework in Frameworks */,
+				7D4E57E91E91D340000B7719 /* AWSS3.framework in Frameworks */,
+				7D4E57E01E906BAF000B7719 /* AWSMobileHubHelper.framework in Frameworks */,
+				7D4E57E71E906BE3000B7719 /* AWSDynamoDB.framework in Frameworks */,
+				7D4E57E51E906BE3000B7719 /* AWSCognitoIdentityProvider.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				7D043A4F1E5BF7EF0003A853 /* AppDelegate.swift */,
+				7D4E57D71E906BAE000B7719 /* AmazonAws */,
 				7D043A891E5BF88F0003A853 /* Models */,
 				7DA6D9341E7F6F6800CD5D02 /* Controllers */,
 				7DA6D94B1E7F6FC500CD5D02 /* Views */,
@@ -281,6 +301,16 @@
 				7D439E021E8D6F4400FF5538 /* MarketplaceCollectionViewController.swift */,
 			);
 			path = Marketplace;
+			sourceTree = "<group>";
+		};
+		7D4E57D71E906BAE000B7719 /* AmazonAws */ = {
+			isa = PBXGroup;
+			children = (
+				7D4E57D81E906BAE000B7719 /* AWSConfiguration.swift */,
+				7D4E57D91E906BAE000B7719 /* AWSMobileClient.swift */,
+				7D4E57DA1E906BAE000B7719 /* AWSMobileHubHelper.framework */,
+			);
+			path = AmazonAws;
 			sourceTree = "<group>";
 		};
 		7D7FD0141E85ADEF00CE769F /* Maps */ = {
@@ -378,6 +408,10 @@
 		EF3D9015D8FBE0F6CB30F116 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7D4E57E81E91D340000B7719 /* AWSS3.framework */,
+				7D4E57E21E906BE3000B7719 /* AWSCognitoIdentityProvider.framework */,
+				7D4E57E31E906BE3000B7719 /* AWSCore.framework */,
+				7D4E57E41E906BE3000B7719 /* AWSDynamoDB.framework */,
 				7D7FD0171E85B18700CE769F /* MapKit.framework */,
 				9048A865C973948E6821D8E5 /* Pods_TUHub.framework */,
 				C369AC415ABB8738F6351247 /* Pods_TUHubTests.framework */,
@@ -463,6 +497,7 @@
 				TargetAttributes = {
 					7D043A4B1E5BF7EF0003A853 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = LVQAV2S2JC;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -681,6 +716,7 @@
 				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
 				7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */,
 				7DA6D9301E7F6ECE00CD5D02 /* Term.swift in Sources */,
+				7D4E57DF1E906BAF000B7719 /* AWSMobileClient.swift in Sources */,
 				7DA6D9441E7F6F6800CD5D02 /* CourseSearchResultDetailTableViewController.swift in Sources */,
 				7DA6D9591E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift in Sources */,
 				7DA6D92A1E7F6ECE00CD5D02 /* CourseSearchResult.swift in Sources */,
@@ -712,6 +748,7 @@
 				7DA6D92F1E7F6ECE00CD5D02 /* CourseMeeting.swift in Sources */,
 				7DA6D9431E7F6F6800CD5D02 /* CoursePageViewController.swift in Sources */,
 				7DA6D92C1E7F6ECE00CD5D02 /* Course.swift in Sources */,
+				7D4E57DE1E906BAF000B7719 /* AWSConfiguration.swift in Sources */,
 				7DA6D96A1E7F6FFF00CD5D02 /* String+CGFloat.swift in Sources */,
 				7DA6D9311E7F6ECE00CD5D02 /* Grade.swift in Sources */,
 				7D7FD0131E85ADE800CE769F /* MapsViewController.swift in Sources */,
@@ -872,10 +909,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LVQAV2S2JC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TUHub/AWS",
+					"$(PROJECT_DIR)/TUHub/AmazonAws",
+					"$(PROJECT_DIR)/TUHub/Sdk/Aws",
+				);
 				INFOPLIST_FILE = TUHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.temple.TUhub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -888,10 +932,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LVQAV2S2JC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TUHub/AWS",
+					"$(PROJECT_DIR)/TUHub/AmazonAws",
+					"$(PROJECT_DIR)/TUHub/Sdk/Aws",
+				);
 				INFOPLIST_FILE = TUHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.temple.TUhub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;

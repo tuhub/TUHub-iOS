@@ -18,9 +18,6 @@ target 'TUHub' do
   pod 'UPCarouselFlowLayout', '~> 1.1'
   pod 'TUSafariActivity', '~> 1.0'
   pod 'CHTCollectionViewWaterfallLayout', '~> 0.9'
-  pod 'AWSS3', '~> 2.5.0'
-  pod 'AWSCognito', '~> 2.5.0'
-  pod 'AWSDynamoDB', '~> 2.5.0'
   
   target 'TUHubTests' do
     inherit! :search_paths

@@ -13,23 +13,39 @@ private let tableName = "Listing"
 private let pageSize: NSNumber = 20
 
 class Listing: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
-    var listingID: String?
-    var title: String?
+    
+    var listingId: String?
+    var timestamp: NSNumber?
     var text: String?
-    var imageURLS: [String]?
+    var title: String?
+    var imageURLs: [String]?
     
     class func dynamoDBTableName() -> String {
-        return tableName
+        
+        return "tuhub-mobilehub-13900767-Listings"
     }
     
     class func hashKeyAttribute() -> String {
-        return "listingID"
+        
+        return "listingId"
     }
     
-    func save() {
+    class func rangeKeyAttribute() -> String {
         
+        return "timestamp"
+    }
+    
+    override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any] {
+        return [
+            "listingId" : "listingId",
+            "timestamp" : "timestamp",
+            "text" : "text",
+            "title" : "title",
+            "imageURLs": "imageURLs"
+        ]
     }
 }
+
 
 extension Listing {
     
@@ -38,12 +54,14 @@ extension Listing {
     private static var doneLoading = false
     
     static func retrievePage(_ startFromBeginning: Bool, _ responseHandler: @escaping ([Listing], Error?) -> Void) {
-        DatabaseManager.retrievePage(lastEvaluatedKey,
+        DatabaseManager<Listing>.retrievePage(lastEvaluatedKey,
                                      startFromBeginning,
                                      pageSize) { (results, lastEvalKey, error) in
                                         self.lastEvaluatedKey = lastEvalKey
-                                        responseHandler(results as! [Listing], error)
+                                        responseHandler(results, error)
+        
         }
+        
     }
     
 }

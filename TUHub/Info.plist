@@ -4,17 +4,17 @@
 <dict>
 	<key>AWS</key>
 	<dict>
-		<key>DynamoDBObjectMapper</key>
+		<key>IdentityManager</key>
 		<dict>
 			<key>Default</key>
-			<string>USEast1</string>
+			<dict/>
 		</dict>
-		<key>DynamoDB</key>
+		<key>DynamoDBObjectMapper</key>
 		<dict>
 			<key>Default</key>
 			<dict>
 				<key>Region</key>
-				<string>USEast1</string>
+				<string>us-east-1</string>
 			</dict>
 		</dict>
 		<key>CredentialsProvider</key>
@@ -23,10 +23,10 @@
 			<dict>
 				<key>Default</key>
 				<dict>
-					<key>Region</key>
-					<string>USEast1</string>
 					<key>PoolId</key>
-					<string>us-east-1:e2e6a7cb-d077-485b-9a0c-5cf0a8487920</string>
+					<string>us-east-1:bbb7121f-0ae4-4089-9165-55cd2ea4663d</string>
+					<key>Region</key>
+					<string>us-east-1</string>
 				</dict>
 			</dict>
 		</dict>

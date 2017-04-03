@@ -104,6 +104,7 @@ class TUHubTests: XCTestCase {
         
     }
     
+    
     func testCourseSearch() {
         let asyncExpectation = expectation(description: "testCourseSearch")
         
