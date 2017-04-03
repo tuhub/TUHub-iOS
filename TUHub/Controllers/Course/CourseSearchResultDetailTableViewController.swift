@@ -120,7 +120,7 @@ class CourseSearchResultDetailTableViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 cell = tableView.dequeueReusableCell(withIdentifier: titleCellID) ?? titleCell()
-                cell.textLabel?.text = result.title
+                cell.textLabel?.text = result.title ?? result.name
             case 1:
                 cell = tableView.dequeueReusableCell(withIdentifier: basicCellID) ?? basicCell()
                 cell.textLabel?.text = result.description

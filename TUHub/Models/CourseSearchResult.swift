@@ -13,7 +13,7 @@ private let searchPageSize = 15
 struct CourseSearchResult {
     
     let name: String
-    let title: String
+    let title: String?
     let description: String
     let credits: Int?
     let levels: [String]
@@ -36,7 +36,7 @@ struct CourseSearchResult {
         }
         
         self.name = name
-        self.title = title
+        self.title = title.characters.count > 0 ? title : nil
         self.description = description
         credits = xml["creditHr"]["low"].int
         self.levels = xml["levels"].children.flatMap({ $0.value })
