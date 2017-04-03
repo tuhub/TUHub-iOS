@@ -10,6 +10,10 @@ import UIKit
 import CHTCollectionViewWaterfallLayout
 import AlamofireImage
 
+
+// Segue Identifiers
+fileprivate let listingDetailSegueID = "showListingDetail"
+
 private let reuseIdentifier = "marketplaceCell"
 
 class MarketplaceCollectionViewController: UICollectionViewController {
@@ -24,6 +28,8 @@ class MarketplaceCollectionViewController: UICollectionViewController {
         }
     }
     fileprivate var images: [UIImage?]?
+    fileprivate weak var marketplaceDetailVC: MarketplaceDetailTableViewController?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,15 +58,29 @@ class MarketplaceCollectionViewController: UICollectionViewController {
         collectionView?.collectionViewLayout = layout
     }
     
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        
+        switch segue.identifier! {
+            
+        case listingDetailSegueID:
+            
+            guard let cell = sender as? UICollectionViewCell,
+                let indexPath = collectionView?.indexPath(for: cell),
+                let marketplaceDetailVC = segue.destination as? MarketplaceDetailTableViewController
+                else { break }
+            
+            marketplaceDetailVC.newsItem = newsItems?[indexPath.row]
+            self.marketplaceDetailVC = marketplaceDetailVC
+  
+        default:
+            break
+        }
+        
     }
-    */
+ 
 }
 
 // MARK: UICollectionViewDataSource
@@ -91,6 +111,7 @@ extension MarketplaceCollectionViewController {
         
         return cell
     }
+    
 }
 
 extension MarketplaceCollectionViewController: CHTCollectionViewDelegateWaterfallLayout {
