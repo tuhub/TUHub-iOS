@@ -9,6 +9,7 @@
 import UIKit
 import SafariServices
 import TUSafariActivity
+import MessageUI
 
 fileprivate let listingTitleCellID = "listingTitleCell"
 fileprivate let listingImageCellID = "listingImageGalleryCell"
@@ -16,7 +17,12 @@ fileprivate let listingSellerCellID = "listingSellerCell"
 fileprivate let listingPriceCellID = "listingPriceCell"
 fileprivate let listingDescriptionCellID = "listingDescriptionCell"
 
-class ListingDetailTableViewController: UITableViewController {
+class ListingDetailTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
+    
+    // Email response variables
+    var sendEmailTo = ["tue68553@temple.edu"]
+    var emailSubject = "TUHub Marketplace Email Test"
+    var emailBody = "Hi, \n\nThis is a test for TUHub Marketplace email response."
     
     var newsItem: NewsItem? {
         didSet {
@@ -81,8 +87,65 @@ class ListingDetailTableViewController: UITableViewController {
         return cell
     }
     
+// Handle email response here
     @IBAction func didPressContact(_ sender: Any) {
-        self.performSegue(withIdentifier: "showContactResponse", sender: self)
+        
+        let mailComposeViewController = configuredMailComposeViewController()
+        
+        if MFMailComposeViewController.canSendMail() {
+            self.present(mailComposeViewController, animated: true, completion: nil)
+        }
+//        else {
+//            self.showSendMailErrorAlert()
+//        }
+        
+    }
+    
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.navigationBar.tintColor = UIColor.cherry
+        
+        // Important to set the "mailComposeDelegate" property
+        mailComposerVC.mailComposeDelegate = self
+        
+        // Send email to
+        mailComposerVC.setToRecipients(sendEmailTo)
+        // Email subject
+        mailComposerVC.setSubject(emailSubject)
+        // Email body
+        mailComposerVC.setMessageBody(emailBody, isHTML: false)
+        
+        return mailComposerVC
+        
+    }
+    
+    // Gets called when you tap on cancel, send etc.
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result.rawValue {
+        case MFMailComposeResult.cancelled.rawValue:
+            print("Cancelled mail")
+        case MFMailComposeResult.sent.rawValue:
+            print("Mail sent")
+        default:
+            break
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    // It automatically detects if user don't have email account set up, but I don't know if it alert ther user if you cannot send an email.
+    func showSendMailErrorAlert() {
+        var alertController: UIAlertController?
+        
+        alertController = UIAlertController(title: "Could Not Send Email.",
+                                            message: "Your device could not send e-mail. Please check e-mail configuration and try again.",
+                                            preferredStyle: UIAlertControllerStyle.alert)
+        alertController?.addAction(UIAlertAction(title: "OK",
+                                                 style: .default,
+                                                 handler: nil))
+        
+        present(alertController!, animated: true, completion: nil)
     }
     
     @IBAction func didPressShare(_ sender: UIBarButtonItem) {
