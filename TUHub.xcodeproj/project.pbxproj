@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		220C27B21E9175E500C86A19 /* ListingResponseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C27B11E9175E500C86A19 /* ListingResponseTableViewController.swift */; };
 		221B07CB1E90386600921866 /* AddListingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B07CA1E90386600921866 /* AddListingTableViewController.swift */; };
 		225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */; };
+		227F304A1E930B2A00DE1752 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 227F30491E930B2900DE1752 /* MessageUI.framework */; };
 		37FD610AAB987235177A1533 /* Pods_TUHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C369AC415ABB8738F6351247 /* Pods_TUHubTests.framework */; };
 		7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A4F1E5BF7EF0003A853 /* AppDelegate.swift */; };
 		7D043A571E5BF7EF0003A853 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D043A551E5BF7EF0003A853 /* Main.storyboard */; };
@@ -95,9 +95,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		220C27B11E9175E500C86A19 /* ListingResponseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingResponseTableViewController.swift; sourceTree = "<group>"; };
 		221B07CA1E90386600921866 /* AddListingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListingTableViewController.swift; sourceTree = "<group>"; };
 		225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingDetailTableViewController.swift; sourceTree = "<group>"; };
+		227F30491E930B2900DE1752 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3361CEFB73AA8E72E9E0B46D /* Pods-TUHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubTests/Pods-TUHubTests.release.xcconfig"; sourceTree = "<group>"; };
 		3BBBD4D5AE6A3197E62F3182 /* Pods-TUHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6DDB0DADD33842008B60C6C1 /* Pods-TUHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -182,6 +182,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				227F304A1E930B2A00DE1752 /* MessageUI.framework in Frameworks */,
 				7D7FD0181E85B18700CE769F /* MapKit.framework in Frameworks */,
 				A1D62E3F439C1C254F6FC729 /* Pods_TUHub.framework in Frameworks */,
 			);
@@ -326,7 +327,6 @@
 				7D439E021E8D6F4400FF5538 /* ListingsCollectionViewController.swift */,
 				225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */,
 				221B07CA1E90386600921866 /* AddListingTableViewController.swift */,
-				220C27B11E9175E500C86A19 /* ListingResponseTableViewController.swift */,
 			);
 			path = Marketplace;
 			sourceTree = "<group>";
@@ -428,6 +428,7 @@
 		EF3D9015D8FBE0F6CB30F116 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				227F30491E930B2900DE1752 /* MessageUI.framework */,
 				7D7FD0171E85B18700CE769F /* MapKit.framework */,
 				9048A865C973948E6821D8E5 /* Pods_TUHub.framework */,
 				C369AC415ABB8738F6351247 /* Pods_TUHubTests.framework */,
@@ -513,7 +514,6 @@
 				TargetAttributes = {
 					7D043A4B1E5BF7EF0003A853 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = LVQAV2S2JC;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -775,7 +775,6 @@
 				7DA6D9431E7F6F6800CD5D02 /* CoursePageViewController.swift in Sources */,
 				7DA6D92C1E7F6ECE00CD5D02 /* Course.swift in Sources */,
 				7DA6D96A1E7F6FFF00CD5D02 /* String+CGFloat.swift in Sources */,
-				220C27B21E9175E500C86A19 /* ListingResponseTableViewController.swift in Sources */,
 				7DA6D9311E7F6ECE00CD5D02 /* Grade.swift in Sources */,
 				7D7FD0131E85ADE800CE769F /* MapsViewController.swift in Sources */,
 				7D4E57ED1E920389000B7719 /* Listing.swift in Sources */,
