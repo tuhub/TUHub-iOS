@@ -10,7 +10,7 @@ import SwiftyJSON
 
 class Product: Listing {
     
-    var price: String
+    fileprivate(set) var price: String
     
     required init?(json: JSON) {
         guard
@@ -25,10 +25,10 @@ class Product: Listing {
         self.id = id
     }
     
-    class func retrieveAll(_ responseHandler: @escaping ([Product]?, Error?) -> Void) {
+    class func retrieveAll(onlyActive: Bool = true, _ responseHandler: @escaping ([Product]?, Error?) -> Void) {
         NetworkManager.shared.request(fromEndpoint: .marketplace,
                                       pathParameters: ["select_all_products.jsp"],
-                                      queryParameters: ["activeOnly" : "true"])
+                                      queryParameters: ["activeOnly" : onlyActive ? "true" : "false"])
         { (data, error) in
             
             var products: [Product]?

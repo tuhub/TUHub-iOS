@@ -22,11 +22,11 @@ class ListingImageGalleryTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imageCollectionView: UICollectionView!
     
-    var newsItem: NewsItem!
+    var listing: Listing!
     var delegate: MarketplaceImageGalleryTableViewCellDelegate!
     
-    func setUp(with newsItem: NewsItem, delegate: MarketplaceImageGalleryTableViewCellDelegate) {
-        self.newsItem = newsItem
+    func setUp(with listing: Listing, delegate: MarketplaceImageGalleryTableViewCellDelegate) {
+        self.listing = listing
         self.delegate = delegate
         
         imageCollectionView.dataSource = self
@@ -45,13 +45,13 @@ extension ListingImageGalleryTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return newsItem.imageURLs.count
+        return listing.photoPaths?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: listingImageCellID, for: indexPath)
-        if let imageView = cell.contentView.viewWithTag(1) as? UIImageView {
-            imageView.af_setImage(withURL: newsItem.imageURLs[indexPath.row])
+        if let imageView = cell.contentView.viewWithTag(1) as? UIImageView, let url = URL(string: "\(NetworkManager.Endpoint.s3.rawValue)/\(listing.photoPaths![indexPath.row])") {
+            imageView.af_setImage(withURL: url)
         }
         return cell
     }
@@ -66,10 +66,11 @@ extension ListingImageGalleryTableViewCell: UICollectionViewDelegate {
             let imageView = cell.contentView.viewWithTag(1) as? UIImageView,
             let image = imageView.image {
             
-            let skPhotos = newsItem.imageURLs.map { SKPhoto.photoWithImageURL($0.absoluteString) }
-            let browser = SKPhotoBrowser(originImage: image, photos: skPhotos, animatedFromView: imageView)
-            browser.initializePageIndex(indexPath.row)
-            delegate.present(browser)
+            if let skPhotos: [SKPhoto] = listing.photoPaths?.flatMap({ SKPhoto.photoWithImageURL("\(NetworkManager.Endpoint.s3.rawValue)/\($0)") }) {
+                let browser = SKPhotoBrowser(originImage: image, photos: skPhotos, animatedFromView: imageView)
+                browser.initializePageIndex(indexPath.row)
+                delegate.present(browser)
+            }
         }
         
     }

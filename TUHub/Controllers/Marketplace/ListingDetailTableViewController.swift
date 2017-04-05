@@ -10,42 +10,48 @@ import UIKit
 import SafariServices
 import TUSafariActivity
 
-fileprivate let listingTitleCellID = "listingTitleCell"
-fileprivate let listingImageCellID = "listingImageGalleryCell"
-fileprivate let listingSellerCellID = "listingSellerCell"
-fileprivate let listingPriceCellID = "listingPriceCell"
-fileprivate let listingDescriptionCellID = "listingDescriptionCell"
-
 class ListingDetailTableViewController: UITableViewController {
     
-    var newsItem: NewsItem? {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    var listing: Listing?
+    
+    private lazy var tableViewAttributes: [TableViewAttributes] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Allow table view to automatically determine cell height based on contents
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 100
+        tableView.estimatedRowHeight = 44
+        
+        tableView.showActivityIndicator()
+        
+        if let listing = listing {
+            
+            if listing.owner != nil {
+                setTableViewAttributes()
+            } else {
+                listing.retrieveOwner { (user, error) in
+                    if error != nil {
+                        self.showErrorLabel()
+                        return
+                    }
+                    self.setTableViewAttributes()
+                    self.tableView.reloadData()
+                    self.tableView.hideActivityIndicator()
+                }
+            }
 
-    }
-
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        }
     }
     
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return listing?.owner != nil ? 1 : 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return tableViewAttributes.count
     }
     
     
@@ -53,32 +59,51 @@ class ListingDetailTableViewController: UITableViewController {
         
         var cell: UITableViewCell!
         
-        switch indexPath.row {
-            
-        case 0:
-            cell = tableView.dequeueReusableCell(withIdentifier: listingTitleCellID, for: indexPath)
-            cell.textLabel?.text = "iPhone 6s"
-        case 1:
-            cell = tableView.dequeueReusableCell(withIdentifier: listingImageCellID, for: indexPath)
-//            (cell as? ListingImageGalleryTableViewCell)?.setUp(with: newsItem, delegate: self)
-        case 2:
-            cell = tableView.dequeueReusableCell(withIdentifier: listingSellerCellID, for: indexPath)
-            cell.textLabel?.text = "Seller"
-            cell.detailTextLabel?.text = "Brijesh Nayak"
-        case 3:
-            cell = tableView.dequeueReusableCell(withIdentifier: listingPriceCellID, for: indexPath)
-            cell.textLabel?.text = "Price"
-            cell.detailTextLabel?.text = "$300"
-        case 4:
-            cell = tableView.dequeueReusableCell(withIdentifier: listingDescriptionCellID, for: indexPath)
-            let cell = cell as! SubtitleTableViewCell
-            cell.titleLabel.text = "Description"
-            cell.subtitleLabel.text = "Used iPhone 6s in good condition. Everything functions properly."
-        default:
-            break
+        guard let listing = listing else { return cell }
+        let attribute = tableViewAttributes[indexPath.row]
+        
+        cell = tableView.dequeueReusableCell(withIdentifier: attribute.cellType.rawValue, for: indexPath)
+        
+        switch attribute.cellType {
+        case .titleCell:
+            cell.textLabel?.text = attribute.value
+        case .imageGalleryCell:
+            (cell as! ListingImageGalleryTableViewCell).setUp(with: listing, delegate: self)
+        case .rightDetailCell:
+            cell.textLabel?.text = attribute.key
+            cell.detailTextLabel?.text = attribute.value
+        case .subtitleCell:
+            let subtitleCell = cell as! SubtitleTableViewCell
+            subtitleCell.titleLabel.text = attribute.key
+            subtitleCell.subtitleLabel.text = attribute.value
+//            cell = subtitleCell
         }
         
         return cell
+    }
+    
+    private func showErrorLabel() {
+        
+        tableView.tableFooterView?.isHidden = true
+        let errorLabel = UILabel(frame: CGRect(x: 0,
+                                               y: 0,
+                                               width: tableView.bounds.size.width,
+                                               height: tableView.bounds.size.height))
+        errorLabel.text = "Something went wrong"
+        errorLabel.textColor = UIColor.darkText
+        errorLabel.textAlignment = .center
+        tableView.backgroundView = errorLabel
+        
+    }
+    
+    private func setTableViewAttributes() {
+        if let product = listing as? Product {
+            tableViewAttributes = product.tableViewAttributes
+        } else if let job = listing as? Job {
+            tableViewAttributes = job.tableViewAttributes
+        } else if let personal = listing as? Personal {
+            tableViewAttributes = personal.tableViewAttributes
+        }
     }
     
     @IBAction func didPressContact(_ sender: Any) {
@@ -103,5 +128,91 @@ class ListingDetailTableViewController: UITableViewController {
 extension ListingDetailTableViewController: MarketplaceImageGalleryTableViewCellDelegate {
     func present(_ viewController: UIViewController) {
         present(viewController, animated: true, completion: nil)
+    }
+}
+
+// TODO: Add documentation
+
+fileprivate enum CellType: String {
+    case titleCell = "titleCell"
+    case imageGalleryCell = "imageGalleryCell"
+    case rightDetailCell = "rightDetailCell"
+    case subtitleCell = "subtitleCell"
+}
+
+
+fileprivate typealias TableViewAttributes = (key: String?, value: String?, cellType: CellType)
+fileprivate protocol TableViewDisplayable {
+    var tableViewAttributes: [TableViewAttributes] { get }
+}
+
+extension Product: TableViewDisplayable {
+    fileprivate var tableViewAttributes: [TableViewAttributes] {
+        if photoPaths != nil {
+            return [
+                (key: nil, value: title, cellType: .titleCell),
+                (key: nil, value: nil, cellType: .imageGalleryCell),
+                (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
+                (key: "Seller", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
+                (key: "Price", value: price, cellType: .rightDetailCell),
+                (key: "Description", value: description, cellType: .subtitleCell)
+            ]
+        } else {
+            return [
+                (key: nil, value: title , cellType: .titleCell),
+                (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
+                (key: "Seller", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
+                (key: "Price", value: price, cellType: .rightDetailCell),
+                (key: "Description", value: description, cellType: .subtitleCell)
+            ]
+        }
+    }
+}
+
+extension Job: TableViewDisplayable {
+    fileprivate var tableViewAttributes: [TableViewAttributes] {
+        
+        var attributes: [TableViewAttributes] = [(key: nil, value: title, cellType: .titleCell)]
+        
+        if photoPaths != nil {
+            attributes.append((key: nil, value: nil, cellType: .imageGalleryCell))
+        }
+        
+        attributes.append(contentsOf: [
+            (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
+            (key: "Posted By", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
+            (key: "Location", value: location, cellType: .rightDetailCell)
+            ] as [TableViewAttributes])
+        
+        if let hoursPerWeek = hoursPerWeek {
+            attributes.append((key: "Hours per Week", value: "\(hoursPerWeek)", cellType: .rightDetailCell))
+        }
+        
+        attributes.append(contentsOf: [
+            (key: "Start Date", value: startDate.date, cellType: .rightDetailCell),
+            (key: "Description", value: description, cellType: .subtitleCell)
+            ] as [TableViewAttributes])
+        
+        return attributes
+    }
+}
+
+extension Personal: TableViewDisplayable {
+    fileprivate var tableViewAttributes: [TableViewAttributes] {
+        
+        var attributes: [TableViewAttributes] = [(key: nil, value: title, cellType: .titleCell)]
+        
+        if photoPaths != nil {
+            attributes.append((key: nil, value: nil, cellType: .imageGalleryCell))
+        }
+        
+        attributes.append(contentsOf: [
+            (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
+            (key: "Posted By", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
+            (key: "Location", value: location, cellType: .rightDetailCell),
+            (key: "Description", value: description, cellType: .subtitleCell)
+            ] as [TableViewAttributes])
+        
+        return attributes
     }
 }

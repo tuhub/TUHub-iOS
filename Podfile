@@ -19,6 +19,7 @@ target 'TUHub' do
   pod 'TUSafariActivity', '~> 1.0.0'
   pod 'CHTCollectionViewWaterfallLayout', '~> 0.9.0'
   pod 'AWSS3', '~> 2.5.0'
+  pod 'TLIndexPathTools', '~> 0.4.4'
   
   target 'TUHubTests' do
     inherit! :search_paths

@@ -16,24 +16,23 @@ private let dateFormatter: DateFormatter = {
 
 class Job: Listing {
     
-    var location: String
-    var hoursPerWeek: Int
-    var pay: String
-    var startDate: Date
+    fileprivate(set) var location: String
+    fileprivate(set) var hoursPerWeek: Int?
+    fileprivate(set) var pay: String
+    fileprivate(set) var startDate: Date
     
     required init?(json: JSON) {
         guard
             let id = json["jobId"].string,
             let location = json["location"].string,
-            let hoursPerWeekStr = json["hoursPerWeek"].string,
-            let hoursPerWeek = Int(hoursPerWeekStr),
+            let hoursPerWeek = json["hoursPerWeek"].int,
             let pay = json["pay"].string,
             let startDateStr = json["startDate"].string,
             let startDate = dateFormatter.date(from: startDateStr)
             else { return nil }
         
         self.location = location
-        self.hoursPerWeek = hoursPerWeek
+        self.hoursPerWeek = hoursPerWeek < 0 ? nil : hoursPerWeek
         self.pay = pay
         self.startDate = startDate
         
@@ -42,10 +41,10 @@ class Job: Listing {
         self.id = id
     }
     
-    class func retrieveAll(_ responseHandler: @escaping ([Job]?, Error?) -> Void) {
+    class func retrieveAll(onlyActive: Bool = true, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {
         NetworkManager.shared.request(fromEndpoint: .marketplace,
                                       pathParameters: ["select_all_jobs.jsp"],
-                                      queryParameters: ["activeOnly" : "false"])
+                                      queryParameters: ["activeOnly" : onlyActive ? "true" : "false"])
         { (data, error) in
             
             var jobs: [Job]?

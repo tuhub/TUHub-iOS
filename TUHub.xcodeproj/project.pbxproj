@@ -68,6 +68,11 @@
 		7DA6D96B1E7F6FFF00CD5D02 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9631E7F6FFF00CD5D02 /* String+Date.swift */; };
 		7DA6D96C1E7F6FFF00CD5D02 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9641E7F6FFF00CD5D02 /* UIColor.swift */; };
 		7DA6D96E1E7F72B700CD5D02 /* SignInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D96D1E7F72B700CD5D02 /* SignInTableViewController.swift */; };
+		7DCC7F1B1E9454E900714100 /* UITableView+UIActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCC7F1A1E9454E900714100 /* UITableView+UIActivityIndicator.swift */; };
+		7DE27BD51E932D03004C2F83 /* ListingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE27BD41E932D03004C2F83 /* ListingCollectionViewCell.swift */; };
+		7DE27BD71E932E1C004C2F83 /* BlurryListingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE27BD61E932E1C004C2F83 /* BlurryListingDetailView.swift */; };
+		7DE27BD91E932E3A004C2F83 /* ListingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE27BD81E932E3A004C2F83 /* ListingDetailView.swift */; };
+		7DE27BDB1E93458D004C2F83 /* MarketplaceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE27BDA1E93458D004C2F83 /* MarketplaceUser.swift */; };
 		941AB645B5C3E0E6A95DACF2 /* Pods_TUHubUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCC307919AD5A4C9159AAE0 /* Pods_TUHubUITests.framework */; };
 		A1D62E3F439C1C254F6FC729 /* Pods_TUHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9048A865C973948E6821D8E5 /* Pods_TUHub.framework */; };
 /* End PBXBuildFile section */
@@ -159,6 +164,11 @@
 		7DA6D9631E7F6FFF00CD5D02 /* String+Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		7DA6D9641E7F6FFF00CD5D02 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		7DA6D96D1E7F72B700CD5D02 /* SignInTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInTableViewController.swift; sourceTree = "<group>"; };
+		7DCC7F1A1E9454E900714100 /* UITableView+UIActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+UIActivityIndicator.swift"; sourceTree = "<group>"; };
+		7DE27BD41E932D03004C2F83 /* ListingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListingCollectionViewCell.swift; path = Marketplace/ListingCollectionViewCell.swift; sourceTree = "<group>"; };
+		7DE27BD61E932E1C004C2F83 /* BlurryListingDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlurryListingDetailView.swift; path = Marketplace/BlurryListingDetailView.swift; sourceTree = "<group>"; };
+		7DE27BD81E932E3A004C2F83 /* ListingDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListingDetailView.swift; path = Marketplace/ListingDetailView.swift; sourceTree = "<group>"; };
+		7DE27BDA1E93458D004C2F83 /* MarketplaceUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MarketplaceUser.swift; path = Models/MarketplaceUser.swift; sourceTree = "<group>"; };
 		806A184B82A477E750A74ED6 /* Pods-TUHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHub.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHub/Pods-TUHub.release.xcconfig"; sourceTree = "<group>"; };
 		9048A865C973948E6821D8E5 /* Pods_TUHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TUHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCC307919AD5A4C9159AAE0 /* Pods_TUHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TUHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,6 +213,9 @@
 				7D48E1281E92B826000981D8 /* ListingImageGalleryTableViewCell.swift */,
 				7D48E1251E92B802000981D8 /* TextViewTableViewCell.swift */,
 				7D48E12B1E92BCBB000981D8 /* SubtitleTableViewCell.swift */,
+				7DE27BD41E932D03004C2F83 /* ListingCollectionViewCell.swift */,
+				7DE27BD61E932E1C004C2F83 /* BlurryListingDetailView.swift */,
+				7DE27BD81E932E3A004C2F83 /* ListingDetailView.swift */,
 			);
 			name = Marketplace;
 			sourceTree = "<group>";
@@ -291,6 +304,7 @@
 				7D48E1211E9212B6000981D8 /* Product.swift */,
 				7D4E57F41E9211AD000B7719 /* Personal.swift */,
 				7D4E57F51E9211AD000B7719 /* Job.swift */,
+				7DE27BDA1E93458D004C2F83 /* MarketplaceUser.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -406,6 +420,7 @@
 				7D7FD0101E85922300CE769F /* String+NSRegularExpression.swift */,
 				7DA6D9641E7F6FFF00CD5D02 /* UIColor.swift */,
 				7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */,
+				7DCC7F1A1E9454E900714100 /* UITableView+UIActivityIndicator.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -713,8 +728,10 @@
 			files = (
 				7DA6D96B1E7F6FFF00CD5D02 /* String+Date.swift in Sources */,
 				7D4E57F71E9211AD000B7719 /* Job.swift in Sources */,
+				7DE27BD51E932D03004C2F83 /* ListingCollectionViewCell.swift in Sources */,
 				7DA6D9581E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift in Sources */,
 				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
+				7DCC7F1B1E9454E900714100 /* UITableView+UIActivityIndicator.swift in Sources */,
 				225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */,
 				7D4E57F61E9211AD000B7719 /* Personal.swift in Sources */,
 				7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */,
@@ -726,6 +743,7 @@
 				7D48E1261E92B802000981D8 /* TextViewTableViewCell.swift in Sources */,
 				7DA6D9561E7F6FC500CD5D02 /* CourseCalendarView.swift in Sources */,
 				7DA6D9421E7F6F6800CD5D02 /* CourseListViewController.swift in Sources */,
+				7DE27BD71E932E1C004C2F83 /* BlurryListingDetailView.swift in Sources */,
 				7DA6D9471E7F6F6800CD5D02 /* NewsDetailTableViewController.swift in Sources */,
 				7D48E12A1E92B826000981D8 /* ListingImageGalleryTableViewCell.swift in Sources */,
 				7D48E12C1E92BCBB000981D8 /* SubtitleTableViewCell.swift in Sources */,
@@ -748,6 +766,7 @@
 				7DA6D9661E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift in Sources */,
 				7DA6D9551E7F6FC500CD5D02 /* CourseCalendarTableViewCell.swift in Sources */,
 				7D439E031E8D6F4400FF5538 /* ListingsCollectionViewController.swift in Sources */,
+				7DE27BD91E932E3A004C2F83 /* ListingDetailView.swift in Sources */,
 				7D7CBB981E80CCBA002F7575 /* SearchViewController.swift in Sources */,
 				7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */,
 				7DA6D9461E7F6F6800CD5D02 /* CourseViewController.swift in Sources */,
@@ -764,6 +783,7 @@
 				7DA6D9491E7F6F6800CD5D02 /* NewsTableViewController.swift in Sources */,
 				7DA6D9451E7F6F6800CD5D02 /* CourseSearchResultsTableViewController.swift in Sources */,
 				7DA6D9331E7F6ECE00CD5D02 /* Instructor.swift in Sources */,
+				7DE27BDB1E93458D004C2F83 /* MarketplaceUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

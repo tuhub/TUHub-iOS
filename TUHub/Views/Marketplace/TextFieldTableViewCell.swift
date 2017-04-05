@@ -9,7 +9,5 @@
 import UIKit
 
 class TextFieldTableViewCell: UITableViewCell {
-
     @IBOutlet weak var textField: UITextField!
-
 }

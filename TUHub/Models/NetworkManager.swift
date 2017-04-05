@@ -19,6 +19,7 @@ class NetworkManager: NSObject {
         case news = "https://prd-mobile.temple.edu/banner-mobileserver/rest/1.2/feed"
         case courseSearch = "https://prd-mobile.temple.edu/CourseSearch/searchCatalog.jsp"
         case marketplace = "http://tuhubapi-env.us-east-1.elasticbeanstalk.com"
+        case s3 = "https://tumobilemarketplace.s3.amazonaws.com"
     }
     
     static let shared = NetworkManager()
@@ -32,62 +33,11 @@ class NetworkManager: NSObject {
     typealias ResponseHandler = (Data?, Error?) -> Void
     
     func request(fromEndpoint endpoint: Endpoint,
+                 pathParameters: [String]? = nil,
+                 queryParameters: Parameters? = nil,
+                 authenticateWith credential: Credential? = nil,
                  _ responseHandler: ResponseHandler?) {
-        
-        request(url: endpoint.rawValue, pathParameters: nil, queryParameters: nil, authenticateWith: nil, responseHandler)
-    }
-    
-    func request(fromEndpoint endpoint: Endpoint,
-                 pathParameters: [String],
-                 _ responseHandler: ResponseHandler?) {
-        
-        request(url: endpoint.rawValue, pathParameters: pathParameters, queryParameters: nil, authenticateWith: nil, responseHandler)
-    }
-    
-    func request(fromEndpoint endpoint: Endpoint,
-                 queryParameters: Parameters,
-                 _ responseHandler: ResponseHandler?) {
-        
-        request(url: endpoint.rawValue, pathParameters: nil, queryParameters: queryParameters, authenticateWith: nil, responseHandler)
-    }
-    
-    func request(fromEndpoint endpoint: Endpoint,
-                 pathParameters: [String],
-                 queryParameters: Parameters,
-                 _ responseHandler: ResponseHandler?) {
-        
-        request(url: endpoint.rawValue, pathParameters: pathParameters, queryParameters: queryParameters, authenticateWith: nil, responseHandler)
-    }
-    
-    func request(fromEndpoint endpoint: Endpoint,
-                 authenticateWith credential: Credential,
-                 _ responseHandler: ResponseHandler?) {
-        
-        request(url: endpoint.rawValue, pathParameters: nil, queryParameters: nil, authenticateWith: credential, responseHandler)
-    }
-    
-    func request(fromEndpoint endpoint: Endpoint,
-                 queryParameters: Parameters,
-                 authenticateWith credential: Credential,
-                 _ responseHandler: ResponseHandler?) {
-        
-        request(url: endpoint.rawValue, pathParameters: nil, queryParameters: queryParameters, authenticateWith: credential, responseHandler)
-    }
-    
-    func request(fromEndpoint endpoint: Endpoint,
-                 pathParameters: [String],
-                 authenticateWith credential: Credential,
-                 _ responseHandler: ResponseHandler?) {
-        
-        request(url: endpoint.rawValue, pathParameters: pathParameters, queryParameters: nil, authenticateWith: nil, responseHandler)
-    }
-    
-    func request(fromEndpoint endpoint: Endpoint,
-                 pathParameters: [String],
-                 queryParameters: Parameters,
-                 authenticateWith credential: Credential,
-                 _ responseHandler: ResponseHandler?) {
-        request(url: endpoint.rawValue, pathParameters: pathParameters, queryParameters: queryParameters, authenticateWith: nil, responseHandler)
+        request(url: endpoint.rawValue, pathParameters: pathParameters, queryParameters: queryParameters, authenticateWith: credential, responseHandler)
     }
     
     private func request(url: String,
@@ -127,8 +77,9 @@ class NetworkManager: NSObject {
         
     }
     
-    func download(imageURL url: URL, _ responseHandler: ((UIImage?, Error?) -> Void)?) {
+    func download(imageURL url: String, _ responseHandler: ((UIImage?, Error?) -> Void)?) {
         
+        guard let url = URL(string: url) else { return }
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             let fileURL = documentsURL.appendingPathComponent(url.lastPathComponent)
