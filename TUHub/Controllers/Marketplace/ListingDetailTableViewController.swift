@@ -14,6 +14,10 @@ import MessageUI
 class ListingDetailTableViewController: UITableViewController {
     
     var listing: Listing?
+    // Email response variables
+    var sendEmailTo = ["tue68553@temple.edu"]
+    var emailSubject = "TUHub Marketplace Email Test"
+    var emailBody = "Hi, \n\nThis is a test for TUHub Marketplace email response."
     
     private lazy var tableViewAttributes: [TableViewAttributes] = []
 
@@ -24,13 +28,12 @@ class ListingDetailTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         
-        tableView.showActivityIndicator()
-        
         if let listing = listing {
             
             if listing.owner != nil {
                 setTableViewAttributes()
             } else {
+                tableView.showActivityIndicator()
                 listing.retrieveOwner { (user, error) in
                     if error != nil {
                         self.showErrorLabel()
@@ -107,6 +110,7 @@ class ListingDetailTableViewController: UITableViewController {
         }
     }
     
+// Handle email response here
     @IBAction func didPressContact(_ sender: Any) {
         
         let mailComposeViewController = configuredMailComposeViewController()
@@ -139,20 +143,6 @@ class ListingDetailTableViewController: UITableViewController {
         
     }
     
-    // Gets called when you tap on cancel, send etc.
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        switch result.rawValue {
-        case MFMailComposeResult.cancelled.rawValue:
-            print("Cancelled mail")
-        case MFMailComposeResult.sent.rawValue:
-            print("Mail sent")
-        default:
-            break
-        }
-        
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     // It automatically detects if user don't have email account set up, but I don't know if it alert ther user if you cannot send an email.
     func showSendMailErrorAlert() {
         var alertController: UIAlertController?
@@ -179,6 +169,22 @@ class ListingDetailTableViewController: UITableViewController {
         }
     }
     
+}
+
+extension ListingDetailTableViewController: MFMailComposeViewControllerDelegate {
+    // Gets called when you tap on cancel, send etc.
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result.rawValue {
+        case MFMailComposeResult.cancelled.rawValue:
+            print("Cancelled mail")
+        case MFMailComposeResult.sent.rawValue:
+            print("Mail sent")
+        default:
+            break
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - MarketplaceImageGalleryTableViewCellDelegate
