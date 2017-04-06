@@ -14,10 +14,15 @@ import MessageUI
 class ListingDetailTableViewController: UITableViewController {
     
     var listing: Listing?
+    
     // Email response variables
     var sendEmailTo = ["tue68553@temple.edu"]
-    var emailSubject = "TUHub Marketplace Email Test"
-    var emailBody = "Hi, \n\nThis is a test for TUHub Marketplace email response."
+    var emailSubject:String?
+    var emailBody = "Enter your reposnse here...."
+    
+    // Email Alert
+    var alertTitle:String?
+    var alertMessage:String?
     
     private lazy var tableViewAttributes: [TableViewAttributes] = []
 
@@ -81,6 +86,18 @@ class ListingDetailTableViewController: UITableViewController {
             subtitleCell.titleLabel.text = attribute.key
             subtitleCell.subtitleLabel.text = attribute.value
 //            cell = subtitleCell
+        case .contactCell:
+            let contactButtonCell = cell as! ContactDetailViewCell
+            emailSubject = attribute.key!
+            sendEmailTo = [attribute.value!]
+
+            contactButtonCell.contactButton.tag = indexPath.row
+            contactButtonCell.contactButton.addTarget(self, action: #selector(didPressContact), for: .touchUpInside)
+            
+            // Test
+            debugPrint(contactButtonCell.contactButton.tag)
+            debugPrint(emailSubject!)
+            debugPrint(sendEmailTo[0])
         }
         
         return cell
@@ -109,19 +126,17 @@ class ListingDetailTableViewController: UITableViewController {
             tableViewAttributes = personal.tableViewAttributes
         }
     }
-    
-// Handle email response here
-    @IBAction func didPressContact(_ sender: Any) {
-        
+
+    // MARK: Email response
+    func didPressContact(){
         let mailComposeViewController = configuredMailComposeViewController()
         
         if MFMailComposeViewController.canSendMail() {
             self.present(mailComposeViewController, animated: true, completion: nil)
         }
-//        else {
-//            self.showSendMailErrorAlert()
-//        }
-        
+                else {
+                    debugPrint("Error: Can not send email.")
+                }
     }
     
     func configuredMailComposeViewController() -> MFMailComposeViewController {
@@ -132,31 +147,29 @@ class ListingDetailTableViewController: UITableViewController {
         // Important to set the "mailComposeDelegate" property
         mailComposerVC.mailComposeDelegate = self
         
-        // Send email to
         mailComposerVC.setToRecipients(sendEmailTo)
-        // Email subject
-        mailComposerVC.setSubject(emailSubject)
-        // Email body
+        mailComposerVC.setSubject(emailSubject!)
         mailComposerVC.setMessageBody(emailBody, isHTML: false)
         
         return mailComposerVC
         
     }
     
-    // It automatically detects if user don't have email account set up, but I don't know if it alert ther user if you cannot send an email.
-    func showSendMailErrorAlert() {
+
+    func showEmailAlert() {
         var alertController: UIAlertController?
         
-        alertController = UIAlertController(title: "Could Not Send Email.",
-                                            message: "Your device could not send e-mail. Please check e-mail configuration and try again.",
+        alertController = UIAlertController(title: alertTitle,
+                                            message: alertMessage,
                                             preferredStyle: UIAlertControllerStyle.alert)
-        alertController?.addAction(UIAlertAction(title: "OK",
+        alertController?.addAction(UIAlertAction(title: "Dismiss",
                                                  style: .default,
                                                  handler: nil))
         
         present(alertController!, animated: true, completion: nil)
     }
-    
+   
+    // MARK: Share listing?
     @IBAction func didPressShare(_ sender: UIBarButtonItem) {
         let url:String? = "https://tuportal4.temple.edu/cp/home/displaylogin"
         if let url = url {
@@ -171,13 +184,24 @@ class ListingDetailTableViewController: UITableViewController {
     
 }
 
+// MARK: Email sent, cancelled, failed error.
 extension ListingDetailTableViewController: MFMailComposeViewControllerDelegate {
+    
     // Gets called when you tap on cancel, send etc.
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
         switch result.rawValue {
-        case MFMailComposeResult.cancelled.rawValue:
-            print("Cancelled mail")
+            
+
         case MFMailComposeResult.sent.rawValue:
+            alertTitle = "Email Sent"
+            alertMessage = nil
+            showEmailAlert()
+            print("Mail sent")
+        case MFMailComposeResult.failed.rawValue:
+            alertTitle = "Email Failed"
+            alertMessage = "Something went wrong. Please try again."
+            showEmailAlert()
             print("Mail sent")
         default:
             break
@@ -201,6 +225,7 @@ fileprivate enum CellType: String {
     case imageGalleryCell = "imageGalleryCell"
     case rightDetailCell = "rightDetailCell"
     case subtitleCell = "subtitleCell"
+    case contactCell = "contactCell"
 }
 
 
@@ -218,7 +243,8 @@ extension Product: TableViewDisplayable {
                 (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
                 (key: "Seller", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
                 (key: "Price", value: price, cellType: .rightDetailCell),
-                (key: "Description", value: description, cellType: .subtitleCell)
+                (key: "Description", value: description, cellType: .subtitleCell),
+                (key: title, value: owner?.email, cellType: .contactCell)
             ]
         } else {
             return [
@@ -226,7 +252,8 @@ extension Product: TableViewDisplayable {
                 (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
                 (key: "Seller", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
                 (key: "Price", value: price, cellType: .rightDetailCell),
-                (key: "Description", value: description, cellType: .subtitleCell)
+                (key: "Description", value: description, cellType: .subtitleCell),
+                (key: title, value: owner?.email, cellType: .contactCell)
             ]
         }
     }
@@ -244,7 +271,8 @@ extension Job: TableViewDisplayable {
         attributes.append(contentsOf: [
             (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
             (key: "Posted By", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
-            (key: "Location", value: location, cellType: .rightDetailCell)
+            (key: "Location", value: location, cellType: .rightDetailCell),
+            (key: title, value: owner?.email, cellType: .contactCell)
             ] as [TableViewAttributes])
         
         if let hoursPerWeek = hoursPerWeek {
@@ -273,7 +301,8 @@ extension Personal: TableViewDisplayable {
             (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
             (key: "Posted By", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
             (key: "Location", value: location, cellType: .rightDetailCell),
-            (key: "Description", value: description, cellType: .subtitleCell)
+            (key: "Description", value: description, cellType: .subtitleCell),
+            (key: title, value: owner?.email, cellType: .contactCell)
             ] as [TableViewAttributes])
         
         return attributes
