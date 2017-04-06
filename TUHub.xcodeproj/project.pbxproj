@@ -27,7 +27,9 @@
 		7D4E57F61E9211AD000B7719 /* Personal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E57F41E9211AD000B7719 /* Personal.swift */; };
 		7D4E57F71E9211AD000B7719 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E57F51E9211AD000B7719 /* Job.swift */; };
 		7D6D6D841E70939500BF121A /* CalendarCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6D6D831E70939500BF121A /* CalendarCellView.xib */; };
-		7D7CBB981E80CCBA002F7575 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7CBB971E80CCB9002F7575 /* SearchViewController.swift */; };
+		7D7164DF1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7164DE1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift */; };
+		7D7164E11E95AF930027EDD5 /* CourseTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7164E01E95AF930027EDD5 /* CourseTableViewDataSource.swift */; };
+		7D7164E31E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7164E21E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift */; };
 		7D7FD0111E85922300CE769F /* String+NSRegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0101E85922300CE769F /* String+NSRegularExpression.swift */; };
 		7D7FD0131E85ADE800CE769F /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0121E85ADE800CE769F /* MapsViewController.swift */; };
 		7D7FD0161E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */; };
@@ -46,8 +48,7 @@
 		7DA6D9411E7F6F6800CD5D02 /* CourseDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9361E7F6F6800CD5D02 /* CourseDetailTableViewController.swift */; };
 		7DA6D9421E7F6F6800CD5D02 /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9371E7F6F6800CD5D02 /* CourseListViewController.swift */; };
 		7DA6D9431E7F6F6800CD5D02 /* CoursePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9381E7F6F6800CD5D02 /* CoursePageViewController.swift */; };
-		7DA6D9441E7F6F6800CD5D02 /* CourseSearchResultDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9391E7F6F6800CD5D02 /* CourseSearchResultDetailTableViewController.swift */; };
-		7DA6D9451E7F6F6800CD5D02 /* CourseSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D93A1E7F6F6800CD5D02 /* CourseSearchResultsTableViewController.swift */; };
+		7DA6D9451E7F6F6800CD5D02 /* CourseSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D93A1E7F6F6800CD5D02 /* CourseSearchTableViewController.swift */; };
 		7DA6D9461E7F6F6800CD5D02 /* CourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D93B1E7F6F6800CD5D02 /* CourseViewController.swift */; };
 		7DA6D9471E7F6F6800CD5D02 /* NewsDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D93D1E7F6F6800CD5D02 /* NewsDetailTableViewController.swift */; };
 		7DA6D9481E7F6F6800CD5D02 /* NewsFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D93E1E7F6F6800CD5D02 /* NewsFilterTableViewController.swift */; };
@@ -123,7 +124,9 @@
 		7D4E57F41E9211AD000B7719 /* Personal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Personal.swift; path = Models/Personal.swift; sourceTree = "<group>"; };
 		7D4E57F51E9211AD000B7719 /* Job.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Job.swift; path = Models/Job.swift; sourceTree = "<group>"; };
 		7D6D6D831E70939500BF121A /* CalendarCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCellView.xib; sourceTree = "<group>"; };
-		7D7CBB971E80CCB9002F7575 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		7D7164DE1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSearchResultTableViewDataSource.swift; sourceTree = "<group>"; };
+		7D7164E01E95AF930027EDD5 /* CourseTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewDataSource.swift; sourceTree = "<group>"; };
+		7D7164E21E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailTableViewControllerCellType.swift; sourceTree = "<group>"; };
 		7D7FD0101E85922300CE769F /* String+NSRegularExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NSRegularExpression.swift"; sourceTree = "<group>"; };
 		7D7FD0121E85ADE800CE769F /* MapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsViewController.swift; path = Maps/MapsViewController.swift; sourceTree = "<group>"; };
 		7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsSearchResultsTableViewController.swift; path = Maps/MapsSearchResultsTableViewController.swift; sourceTree = "<group>"; };
@@ -142,8 +145,7 @@
 		7DA6D9361E7F6F6800CD5D02 /* CourseDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailTableViewController.swift; sourceTree = "<group>"; };
 		7DA6D9371E7F6F6800CD5D02 /* CourseListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListViewController.swift; sourceTree = "<group>"; };
 		7DA6D9381E7F6F6800CD5D02 /* CoursePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePageViewController.swift; sourceTree = "<group>"; };
-		7DA6D9391E7F6F6800CD5D02 /* CourseSearchResultDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSearchResultDetailTableViewController.swift; sourceTree = "<group>"; };
-		7DA6D93A1E7F6F6800CD5D02 /* CourseSearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSearchResultsTableViewController.swift; sourceTree = "<group>"; };
+		7DA6D93A1E7F6F6800CD5D02 /* CourseSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSearchTableViewController.swift; sourceTree = "<group>"; };
 		7DA6D93B1E7F6F6800CD5D02 /* CourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseViewController.swift; sourceTree = "<group>"; };
 		7DA6D93D1E7F6F6800CD5D02 /* NewsDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailTableViewController.swift; sourceTree = "<group>"; };
 		7DA6D93E1E7F6F6800CD5D02 /* NewsFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFilterTableViewController.swift; sourceTree = "<group>"; };
@@ -359,9 +361,10 @@
 				7DA6D9361E7F6F6800CD5D02 /* CourseDetailTableViewController.swift */,
 				7DA6D9381E7F6F6800CD5D02 /* CoursePageViewController.swift */,
 				7DA6D9371E7F6F6800CD5D02 /* CourseListViewController.swift */,
-				7DA6D93A1E7F6F6800CD5D02 /* CourseSearchResultsTableViewController.swift */,
-				7DA6D9391E7F6F6800CD5D02 /* CourseSearchResultDetailTableViewController.swift */,
-				7D7CBB971E80CCB9002F7575 /* SearchViewController.swift */,
+				7DA6D93A1E7F6F6800CD5D02 /* CourseSearchTableViewController.swift */,
+				7D7164DE1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift */,
+				7D7164E01E95AF930027EDD5 /* CourseTableViewDataSource.swift */,
+				7D7164E21E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift */,
 			);
 			path = Course;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				TargetAttributes = {
 					7D043A4B1E5BF7EF0003A853 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = LVQAV2S2JC;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -736,7 +740,6 @@
 				7D4E57F61E9211AD000B7719 /* Personal.swift in Sources */,
 				7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */,
 				7DA6D9301E7F6ECE00CD5D02 /* Term.swift in Sources */,
-				7DA6D9441E7F6F6800CD5D02 /* CourseSearchResultDetailTableViewController.swift in Sources */,
 				7DA6D9591E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift in Sources */,
 				221B07CB1E90386600921866 /* AddListingTableViewController.swift in Sources */,
 				7DA6D92A1E7F6ECE00CD5D02 /* CourseSearchResult.swift in Sources */,
@@ -754,6 +757,8 @@
 				7DA6D96C1E7F6FFF00CD5D02 /* UIColor.swift in Sources */,
 				7DA6D92B1E7F6ECE00CD5D02 /* NewsItem.swift in Sources */,
 				7DA6D95B1E7F6FC500CD5D02 /* NewsItemTableViewCell.swift in Sources */,
+				7D7164DF1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift in Sources */,
+				7D7164E31E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift in Sources */,
 				7DA6D92D1E7F6ECE00CD5D02 /* User.swift in Sources */,
 				7DA6D96E1E7F72B700CD5D02 /* SignInTableViewController.swift in Sources */,
 				7D48E1291E92B826000981D8 /* TextFieldTableViewCell.swift in Sources */,
@@ -767,7 +772,6 @@
 				7DA6D9551E7F6FC500CD5D02 /* CourseCalendarTableViewCell.swift in Sources */,
 				7D439E031E8D6F4400FF5538 /* ListingsCollectionViewController.swift in Sources */,
 				7DE27BD91E932E3A004C2F83 /* ListingDetailView.swift in Sources */,
-				7D7CBB981E80CCBA002F7575 /* SearchViewController.swift in Sources */,
 				7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */,
 				7DA6D9461E7F6F6800CD5D02 /* CourseViewController.swift in Sources */,
 				7DA6D92F1E7F6ECE00CD5D02 /* CourseMeeting.swift in Sources */,
@@ -775,12 +779,13 @@
 				7DA6D9431E7F6F6800CD5D02 /* CoursePageViewController.swift in Sources */,
 				7DA6D92C1E7F6ECE00CD5D02 /* Course.swift in Sources */,
 				7DA6D96A1E7F6FFF00CD5D02 /* String+CGFloat.swift in Sources */,
+				7D7164E11E95AF930027EDD5 /* CourseTableViewDataSource.swift in Sources */,
 				7DA6D9311E7F6ECE00CD5D02 /* Grade.swift in Sources */,
 				7D7FD0131E85ADE800CE769F /* MapsViewController.swift in Sources */,
 				7D4E57ED1E920389000B7719 /* Listing.swift in Sources */,
 				7D7FD0111E85922300CE769F /* String+NSRegularExpression.swift in Sources */,
 				7DA6D9491E7F6F6800CD5D02 /* NewsTableViewController.swift in Sources */,
-				7DA6D9451E7F6F6800CD5D02 /* CourseSearchResultsTableViewController.swift in Sources */,
+				7DA6D9451E7F6F6800CD5D02 /* CourseSearchTableViewController.swift in Sources */,
 				7DA6D9331E7F6ECE00CD5D02 /* Instructor.swift in Sources */,
 				7DE27BDB1E93458D004C2F83 /* MarketplaceUser.swift in Sources */,
 			);

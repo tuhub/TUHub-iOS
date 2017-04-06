@@ -152,7 +152,7 @@ class CourseViewController: UIViewController {
             if let courseDetailVC = (segue.destination as? UINavigationController)?.viewControllers.first as? CourseDetailTableViewController,
                 let course = sender as? Course {
                 
-                courseDetailVC.course = course
+                courseDetailVC.dataSource = CourseTableViewDataSource(course: course)
             }
         case showCourseDetailSegueID:
             if let courseDetailVC = segue.destination as? CourseDetailTableViewController,
@@ -160,7 +160,7 @@ class CourseViewController: UIViewController {
                 let indexPath = courseCalendarView.tableView.indexPath(for: cell),
                 let course = courseCalendarView.selectedDateMeetings?[indexPath.row].course {
                 
-                courseDetailVC.course = course
+                courseDetailVC.dataSource = CourseTableViewDataSource(course: course)
             }
         default:
             break

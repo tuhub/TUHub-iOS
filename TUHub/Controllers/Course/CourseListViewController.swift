@@ -49,10 +49,11 @@ class CourseListViewController: UIViewController {
         case showCourseDetailSegueID:
             guard let cell = sender as? UITableViewCell,
                 let indexPath = courseTableView.indexPath(for: cell),
-                let courseDetailVC = segue.destination as? CourseDetailTableViewController
+                let courseDetailVC = segue.destination as? CourseDetailTableViewController,
+                let course = term?.courses[indexPath.row]
                 else { break }
             
-            courseDetailVC.course = term?.courses[indexPath.row]
+            courseDetailVC.tableView.dataSource = CourseTableViewDataSource(course: course)
         default:
             break
         }
