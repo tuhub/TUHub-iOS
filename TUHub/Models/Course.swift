@@ -17,10 +17,10 @@ class Course {
     let title: String
     let sectionID: String
     let sectionNumber: String
-    let credits: UInt8?
+    let credits: Int?
     let termID: String
     private(set) var meetings: [CourseMeeting]? // Presumably, an online class has no meetings?
-    private(set) var instructors: [Instructor]? // Not provided in fullview or calendar view
+    private(set) var instructors: [Instructor]?
     var roster: [String]?
     var grades: [Grade]?
     let startDate: Date?
@@ -33,7 +33,7 @@ class Course {
             let title = json["sectionTitle"].string,
             let sectionID = json["sectionId"].string,
             let sectionNumber = json["courseSectionNumber"].string,
-            let credits = json["credits"].uInt8 ?? UInt8(json["creditHours"].string ?? "")
+            let credits = json["credits"].int ?? Int(json["creditHours"].stringValue)
             else {
                 log.error("Invalid JSON while initializing Course")
                 return nil

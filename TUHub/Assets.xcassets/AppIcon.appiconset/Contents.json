@@ -3,116 +3,104 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "iphone-notification-20pt@2x.png",
+      "filename" : "iTunesArtwork@40.png",
       "scale" : "2x"
     },
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "iphone-notification-20pt@3x.png",
+      "filename" : "iTunesArtwork@60.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "iphone-spotlight-settings-29pt@2x.png",
+      "filename" : "iTunesArtwork@58.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "iphone-spotlight-settings-29pt@3x.png",
+      "filename" : "iTunesArtwork@87.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "iphone-spotlight-40pt@2x.png",
+      "filename" : "iTunesArtwork@80-1.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "iphone-spotlight-40pt@3x.png",
+      "filename" : "iTunesArtwork@120.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "iphone-app-60pt@2x.png",
+      "filename" : "iTunesArtwork@120-1.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "iphone-app-60pt@3x.png",
+      "filename" : "iTunesArtwork@180.png",
       "scale" : "3x"
     },
     {
       "size" : "20x20",
       "idiom" : "ipad",
-      "filename" : "ipad-notifications-20pt@1x.png",
+      "filename" : "iTunesArtwork@20.png",
       "scale" : "1x"
     },
     {
       "size" : "20x20",
       "idiom" : "ipad",
-      "filename" : "ipad-notifications-20pt@2x.png",
+      "filename" : "iTunesArtwork@40-1.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "ipad-settings-29pt@1x.png",
+      "filename" : "iTunesArtwork@29.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "ipad-settings-29pt@2x.png",
+      "filename" : "iTunesArtwork@58-1.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "ipad-spotlight-40pt@1x.png",
+      "filename" : "iTunesArtwork@40-2.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "ipad-spotlight-40pt@2x.png",
+      "filename" : "iTunesArtwork@80-2.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "ipad-app-76pt@1x.png",
+      "filename" : "iTunesArtwork@76.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "ipad-app-76pt@2x.png",
+      "filename" : "iTunesArtwork@152.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "ipad-pro-app-83.5pt@2x.png",
+      "filename" : "iTunesArtwork@167.png",
       "scale" : "2x"
-    },
-    {
-      "size" : "60x60",
-      "idiom" : "car",
-      "filename" : "iphone-app-60pt@2x-1.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "60x60",
-      "idiom" : "car",
-      "filename" : "iphone-app-60pt@3x-1.png",
-      "scale" : "3x"
     }
   ],
   "info" : {

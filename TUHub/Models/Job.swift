@@ -12,7 +12,7 @@ private let pageSize = 15
 
 private let dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "dd/MM/yyyy"
+    dateFormatter.dateFormat = "MM/dd/yyyy"
     return dateFormatter
 }()
 
@@ -43,12 +43,13 @@ class Job: Listing {
         self.id = id
     }
     
-    class func retrieveAll(onlyActive: Bool = true, startIndex: Int = 0, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {
+    class func retrieveAll(onlyActive: Bool = false, startIndex: Int = 0, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {
+        let qParams: [String : Any] = ["activeOnly" : onlyActive ? "true" : "false",
+                                      "offset" : startIndex,
+                                      "limit" : pageSize]
         NetworkManager.shared.request(fromEndpoint: .marketplace,
                                       pathParameters: ["select_all_jobs.jsp"],
-                                      queryParameters: ["activeOnly" : onlyActive ? "true" : "false",
-                                                        "offset" : startIndex,
-                                                        "limit" : pageSize])
+                                      queryParameters: qParams)
         { (data, error) in
             
             var jobs: [Job]?

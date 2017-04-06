@@ -11,9 +11,10 @@ import CHTCollectionViewWaterfallLayout
 import AlamofireImage
 import TLIndexPathTools
 
-// Segue Identifiers
+// MARK: - Segue IdentifierS
 fileprivate let listingDetailSegueID = "showListingDetail"
 
+// MARK: - Cell reuse identifiers
 private let reuseIdentifier = "marketplaceCell"
 
 class ListingsCollectionViewController: TLCollectionViewController {
@@ -121,6 +122,11 @@ class ListingsCollectionViewController: TLCollectionViewController {
         
     }
     
+    override func controller(_ controller: TLIndexPathController, didUpdateDataModel updates: TLIndexPathUpdates) {
+        super.controller(controller, didUpdateDataModel: updates)
+        collectionView?.collectionViewLayout.invalidateLayout()
+    }
+    
 }
 
 // MARK: UICollectionViewDataSource
@@ -147,11 +153,20 @@ extension ListingsCollectionViewController {
     
 }
 
+extension ListingsCollectionViewController {
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let cell = cell as? ListingCollectionViewCell
+        if cell?.imageView.image != nil {
+//            collectionView.collectionViewLayout.invalidateLayout()
+        }
+    }
+}
+
 // MARK: - CHTCollectionViewDelegateWaterfallLayout
 extension ListingsCollectionViewController: CHTCollectionViewDelegateWaterfallLayout {
     func collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAt indexPath: IndexPath!) -> CGSize {
         guard let imageSize = (collectionView.cellForItem(at: indexPath) as? ListingCollectionViewCell)?.imageView.image?.size
-            else { return CGSize(width: 50, height: 70) }
+            else { return CGSize(width: 30, height: 40) }
         return imageSize
     }
 }

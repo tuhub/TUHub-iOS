@@ -26,7 +26,6 @@
 		7D4E57ED1E920389000B7719 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E57EC1E920389000B7719 /* Listing.swift */; };
 		7D4E57F61E9211AD000B7719 /* Personal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E57F41E9211AD000B7719 /* Personal.swift */; };
 		7D4E57F71E9211AD000B7719 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E57F51E9211AD000B7719 /* Job.swift */; };
-		7D6D6D841E70939500BF121A /* CalendarCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6D6D831E70939500BF121A /* CalendarCellView.xib */; };
 		7D7164DF1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7164DE1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift */; };
 		7D7164E11E95AF930027EDD5 /* CourseTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7164E01E95AF930027EDD5 /* CourseTableViewDataSource.swift */; };
 		7D7164E31E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7164E21E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift */; };
@@ -123,7 +122,6 @@
 		7D4E57EC1E920389000B7719 /* Listing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Listing.swift; path = Models/Listing.swift; sourceTree = "<group>"; };
 		7D4E57F41E9211AD000B7719 /* Personal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Personal.swift; path = Models/Personal.swift; sourceTree = "<group>"; };
 		7D4E57F51E9211AD000B7719 /* Job.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Job.swift; path = Models/Job.swift; sourceTree = "<group>"; };
-		7D6D6D831E70939500BF121A /* CalendarCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCellView.xib; sourceTree = "<group>"; };
 		7D7164DE1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSearchResultTableViewDataSource.swift; sourceTree = "<group>"; };
 		7D7164E01E95AF930027EDD5 /* CourseTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewDataSource.swift; sourceTree = "<group>"; };
 		7D7164E21E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailTableViewControllerCellType.swift; sourceTree = "<group>"; };
@@ -318,7 +316,6 @@
 				7D043A551E5BF7EF0003A853 /* Main.storyboard */,
 				7D043A581E5BF7EF0003A853 /* Assets.xcassets */,
 				7D043A5A1E5BF7EF0003A853 /* LaunchScreen.storyboard */,
-				7D6D6D831E70939500BF121A /* CalendarCellView.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -566,7 +563,6 @@
 			files = (
 				7D043A5C1E5BF7EF0003A853 /* LaunchScreen.storyboard in Resources */,
 				7D043A591E5BF7EF0003A853 /* Assets.xcassets in Resources */,
-				7D6D6D841E70939500BF121A /* CalendarCellView.xib in Resources */,
 				7D043A571E5BF7EF0003A853 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -947,6 +943,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.temple.TUhub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -965,6 +962,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.temple.TUhub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;

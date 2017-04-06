@@ -37,8 +37,9 @@ extension JSON {
     
     private static let dateTimeFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        dateFormatter.isLenient = true
         return dateFormatter
     }()
 }

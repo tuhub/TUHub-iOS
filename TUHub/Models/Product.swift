@@ -27,12 +27,13 @@ class Product: Listing {
         self.id = id
     }
     
-    class func retrieveAll(onlyActive: Bool = true, startIndex: Int = 0, _ responseHandler: @escaping ([Product]?, Error?) -> Void) {
+    class func retrieveAll(onlyActive: Bool = false, startIndex: Int = 0, _ responseHandler: @escaping ([Product]?, Error?) -> Void) {
+        let qParams: [String : Any] = ["activeOnly" : onlyActive ? "true" : "false",
+                                       "offset" : startIndex,
+                                       "limit" : pageSize]
         NetworkManager.shared.request(fromEndpoint: .marketplace,
                                       pathParameters: ["select_all_products.jsp"],
-                                      queryParameters: ["activeOnly" : onlyActive ? "true" : "false",
-                                                        "offset" : startIndex,
-                                                        "limit" : pageSize])
+                                      queryParameters: qParams)
         { (data, error) in
             
             var products: [Product]?

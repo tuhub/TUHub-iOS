@@ -10,27 +10,29 @@ import UIKit
 
 class CourseDetailTableViewController: UITableViewController {
     
-    var dataSource: UITableViewDataSource! {
-        didSet {
-            if let dataSource = dataSource as? CourseTableViewDataSource {
-                let course = dataSource.course
-                
-                title = "\(course.name)-\(course.sectionNumber)"
-                
-                // Retrieve the roster and display in table view once loaded
-                if course.roster == nil {
-                    course.retrieveRoster() { (_, error) in
-                        self.tableView.reloadData()
-                    }
-                }
-            }
-        }
-    }
+    var dataSource: UITableViewDataSource!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.isNavigationBarHidden = false
+        
+        // Retrieve the course's roster if the course a user course
+        if let dataSource = dataSource as? CourseTableViewDataSource {
+            let course = dataSource.course
+            
+            title = "\(course.name)-\(course.sectionNumber)"
+            
+            // Retrieve the roster and display in table view once loaded
+            if course.roster == nil {
+                course.retrieveRoster() { (_, error) in
+                    self.tableView.reloadData()
+                }
+            }
+        } else if let dataSource = dataSource as? CourseSearchResultTableViewDataSource {
+            let result = dataSource.result
+            title = result.name
+        }
 
         // Allow table view to automatically determine cell height based on contents
         tableView.rowHeight = UITableViewAutomaticDimension

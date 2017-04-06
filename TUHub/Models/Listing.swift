@@ -10,12 +10,6 @@ import Alamofire
 import SwiftyJSON
 import AEXML
 
-private let dateFormatter: DateFormatter = {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd' at 'HH:mm:ss:sss"
-    return dateFormatter
-}()
-
 private let s3DateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "YYYYMMDD'T'HHMMSS'Z'"
@@ -38,8 +32,7 @@ class Listing {
         guard
             let title = json["title"].string,
             let description = json["description"].string,
-            let datePostedStr = json["datePosted"].string,
-            let datePosted = dateFormatter.date(from: datePostedStr),
+            let datePosted = json["datePosted"].dateTime,
             let ownerID = json["ownerId"].string,
             let isActive = json["isActive"].string
             else { return nil }

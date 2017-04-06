@@ -13,6 +13,11 @@ import FSCalendar
 fileprivate let embedSegueID = "embedCourseListView"
 fileprivate let showCourseDetailSegueID = "showCourseDetail"
 internal let formCourseDetailSegueID = "formCourseDetail"
+fileprivate let dateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .short
+    return dateFormatter
+}()
 
 // MARK: - PerformCourseDetailSegueDelegate
 internal protocol PerformCourseDetailSegueDelegate {
@@ -179,8 +184,6 @@ class CourseViewController: UIViewController {
     
     // MARK: - Utilities
     func setLeftButtonTitle(to date: Date) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
         leftBarButton.title = dateFormatter.string(from: date)
     }
     

@@ -8,6 +8,13 @@
 
 import UIKit
 
+private let dateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .short
+    dateFormatter.timeStyle = .short
+    return dateFormatter
+}()
+
 class CourseTableViewDataSource: NSObject, UITableViewDataSource {
     
     var course: Course
@@ -116,9 +123,6 @@ class CourseTableViewDataSource: NSObject, UITableViewDataSource {
             if let grade = course.grades?[indexPath.row] {
                 
                 // Get the formatted date string
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateStyle = .short
-                dateFormatter.timeStyle = .short
                 let dateString = dateFormatter.string(from: grade.updated)
                 
                 cell.textLabel?.text = grade.grade
