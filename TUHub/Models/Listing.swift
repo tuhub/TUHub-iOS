@@ -12,7 +12,7 @@ import AEXML
 
 private let dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "dd/MM/yyyy"
+    dateFormatter.dateFormat = "yyyy-MM-dd' at 'HH:mm:ss:sss"
     return dateFormatter
 }()
 
@@ -50,7 +50,7 @@ class Listing {
         self.ownerID = ownerID
         self.isActive = isActive == "true"
         
-        if let photosDirectory = json["picFolder"].string ?? json["picFileName"].string {
+        if let photosDirectory = json["picFolder"].string {
             self.photosDirectory = photosDirectory
         }
     }

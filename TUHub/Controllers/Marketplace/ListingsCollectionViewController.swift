@@ -20,6 +20,11 @@ class ListingsCollectionViewController: TLCollectionViewController {
     
     private lazy var lock = NSLock()
     
+    // Keep track of how many of each type of listing is loaded for pagination
+    private var numRowsProducts = 0
+    private var numRowsJobs = 0
+    private var numRowsPersonals = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,19 +37,19 @@ class ListingsCollectionViewController: TLCollectionViewController {
         // Initialize indexPathController's data model
         indexPathController.dataModel = dataModel(for: [])
         
-        Product.retrieveAll(onlyActive: true) { (products, error) in
+        Product.retrieveAll() { (products, error) in
             if let products = products {
                 self.add(listings: products)
             }
         }
         
-        Job.retrieveAll(onlyActive: true) { (jobs, error) in
+        Job.retrieveAll() { (jobs, error) in
             if let jobs = jobs {
                 self.add(listings: jobs)
             }
         }
         
-        Personal.retrieveAll(onlyActive: true) { (personals, error) in
+        Personal.retrieveAll() { (personals, error) in
             if let personals = personals {
                 self.add(listings: personals)
             }

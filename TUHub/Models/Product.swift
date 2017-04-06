@@ -8,6 +8,8 @@
 
 import SwiftyJSON
 
+private let pageSize = 15
+
 class Product: Listing {
     
     fileprivate(set) var price: String
@@ -25,10 +27,12 @@ class Product: Listing {
         self.id = id
     }
     
-    class func retrieveAll(onlyActive: Bool = true, _ responseHandler: @escaping ([Product]?, Error?) -> Void) {
+    class func retrieveAll(onlyActive: Bool = true, startIndex: Int = 0, _ responseHandler: @escaping ([Product]?, Error?) -> Void) {
         NetworkManager.shared.request(fromEndpoint: .marketplace,
                                       pathParameters: ["select_all_products.jsp"],
-                                      queryParameters: ["activeOnly" : onlyActive ? "true" : "false"])
+                                      queryParameters: ["activeOnly" : onlyActive ? "true" : "false",
+                                                        "offset" : startIndex,
+                                                        "limit" : pageSize])
         { (data, error) in
             
             var products: [Product]?
