@@ -1082,7 +1082,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tfZ-lW-RaX" customClass="ExtendedNavBarView" customModule="TUHub" customModuleProvider="target">
+                            <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tfZ-lW-RaX">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="alC-xF-czH">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
