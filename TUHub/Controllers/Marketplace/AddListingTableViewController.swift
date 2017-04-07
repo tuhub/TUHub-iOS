@@ -228,9 +228,9 @@ class AddListingTableViewController: UITableViewController, UIImagePickerControl
 //    }
 //    
 //    
-//    @IBAction func didPressCancel(_ sender: Any) {
-//        dismiss(animated: true, completion: nil)
-//    }
+    @IBAction func didPressCancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
 }
 
