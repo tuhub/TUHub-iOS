@@ -19,7 +19,9 @@ private let s3DateFormatter: DateFormatter = {
 class Listing {
     
     enum Kind: String {
-        case product, job, personal
+        case product = "Product", job = "Job", personal = "Personal"
+        
+        static let all: [Kind] = [.product, .job, .personal]
     }
     
     internal(set) var id: String!

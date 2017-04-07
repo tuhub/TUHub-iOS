@@ -38,6 +38,7 @@
 		7D7FD0181E85B18700CE769F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7FD0171E85B18700CE769F /* MapKit.framework */; };
 		7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */; };
 		7D996A951E97025F00466A21 /* ListingsFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D996A941E97025F00466A21 /* ListingsFilterTableViewController.swift */; };
+		7D996A971E97E3BE00466A21 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D996A961E97E3BE00466A21 /* PickerTableViewCell.swift */; };
 		7DA6D92A1E7F6ECE00CD5D02 /* CourseSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9201E7F6ECE00CD5D02 /* CourseSearchResult.swift */; };
 		7DA6D92B1E7F6ECE00CD5D02 /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9211E7F6ECE00CD5D02 /* NewsItem.swift */; };
 		7DA6D92C1E7F6ECE00CD5D02 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9221E7F6ECE00CD5D02 /* Course.swift */; };
@@ -138,6 +139,7 @@
 		7D7FD0171E85B18700CE769F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselFlowLayout.swift; sourceTree = "<group>"; };
 		7D996A941E97025F00466A21 /* ListingsFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsFilterTableViewController.swift; sourceTree = "<group>"; };
+		7D996A961E97E3BE00466A21 /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PickerTableViewCell.swift; path = Marketplace/PickerTableViewCell.swift; sourceTree = "<group>"; };
 		7DA6D9201E7F6ECE00CD5D02 /* CourseSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CourseSearchResult.swift; path = Models/CourseSearchResult.swift; sourceTree = "<group>"; };
 		7DA6D9211E7F6ECE00CD5D02 /* NewsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsItem.swift; path = Models/NewsItem.swift; sourceTree = "<group>"; };
 		7DA6D9221E7F6ECE00CD5D02 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Course.swift; path = Models/Course.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			children = (
 				2237DBE21E9711AE00520CAD /* CategoryTableViewCell.swift */,
 				22C3D3581E97369C005897DE /* ImageTableViewCell.swift */,
+				7D996A961E97E3BE00466A21 /* PickerTableViewCell.swift */,
 			);
 			name = AddListing;
 			sourceTree = "<group>";
@@ -802,6 +805,7 @@
 				7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */,
 				7DA6D9461E7F6F6800CD5D02 /* CourseViewController.swift in Sources */,
 				7DA6D92F1E7F6ECE00CD5D02 /* CourseMeeting.swift in Sources */,
+				7D996A971E97E3BE00466A21 /* PickerTableViewCell.swift in Sources */,
 				7D48E1221E9212B6000981D8 /* Product.swift in Sources */,
 				7DA6D9431E7F6F6800CD5D02 /* CoursePageViewController.swift in Sources */,
 				7DA6D92C1E7F6ECE00CD5D02 /* Course.swift in Sources */,
