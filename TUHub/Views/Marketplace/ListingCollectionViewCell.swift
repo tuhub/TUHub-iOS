@@ -10,7 +10,7 @@ import UIKit
 import AlamofireImage
 
 protocol ImageLoadedDelegate {
-    func didLoad(image: UIImage?)
+    func didLoad(image: UIImage?, at indexPath: IndexPath)
 }
 
 class ListingCollectionViewCell: UICollectionViewCell {
@@ -20,10 +20,12 @@ class ListingCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var detailsView: ListingDetailView!
     
     var delegate: ImageLoadedDelegate!
+    var indexPath: IndexPath!
     
-    func setUp(_ listing: Listing, _ delegate: ImageLoadedDelegate) {
+    func setUp(_ listing: Listing, _ delegate: ImageLoadedDelegate, _ indexPath: IndexPath) {
         
         self.delegate = delegate
+        self.indexPath = indexPath
         
         // Hide all views
         imageView.isHidden = true
@@ -44,7 +46,7 @@ class ListingCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private func setUpBlurryDetailsView(_ listing: Listing) {
+    func setUpBlurryDetailsView(_ listing: Listing) {
         
         guard let photoPath = listing.photoPaths?.first else {
             setUpDetailsView(listing)
@@ -65,17 +67,17 @@ class ListingCollectionViewCell: UICollectionViewCell {
         
         if let url = URL(string: "\(NetworkManager.Endpoint.s3.rawValue)/\(photoPath)") {
             imageView.af_setImage(withURL: url) { (response) in
-                if let image = response.value {
-                    self.delegate.didLoad(image: image)
-                } else {
+                let image = response.value
+                if image == nil {
                     self.setUpDetailsView(listing)
                 }
+                self.delegate.didLoad(image: image, at: self.indexPath)
             }
         }
 
     }
     
-    private func setUpDetailsView(_ listing: Listing) {
+    func setUpDetailsView(_ listing: Listing) {
         // Show/hide views
         self.imageView.isHidden = true
         self.detailsView.isHidden = false

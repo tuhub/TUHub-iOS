@@ -18,13 +18,28 @@ class Personal: Listing {
         guard
             let id = json["personalId"].string,
             let location = json["location"].string
-            else { return nil }
+            else {
+                log.error("Unable to parse Personal")
+                return nil
+        }
         
         self.location = location
         
         super.init(json: json)
         
         self.id = id
+    }
+    
+    private class func handle(response data: Data?, error: Error?, _ responseHandler: @escaping ([Personal]?, Error?) -> Void) {
+        var personals: [Personal]?
+        
+        defer { responseHandler(personals, error) }
+        guard let data = data else { return }
+        let json = JSON(data)
+        
+        if let personalsJSON = json["personalList"].array {
+            personals = personalsJSON.flatMap { Personal(json: $0) }
+        }
     }
     
     class func retrieveAll(onlyActive: Bool = false, startIndex: Int = 0, _ responseHandler: @escaping ([Personal]?, Error?) -> Void) {
@@ -35,16 +50,19 @@ class Personal: Listing {
                                       pathParameters: ["select_all_personals.jsp"],
                                       queryParameters: qParams)
         { (data, error) in
-            
-            var personals: [Personal]?
-            
-            defer { responseHandler(personals, error) }
-            guard let data = data else { return }
-            let json = JSON(data)
-            
-            if let personalsJSON = json["jobList"].array {
-                personals = personalsJSON.flatMap { Personal(json: $0) }
-            }
+            handle(response: data, error: error, responseHandler)
+        }
+    }
+    
+    class func search(for searchTerms: String, startIndex: Int = 0, _ responseHandler: @escaping ([Personal]?, Error?) -> Void) {
+        let qParams: [String : Any] = ["title" : searchTerms,
+                                       "offset" : startIndex,
+                                       "limit" : pageSize]
+        NetworkManager.shared.request(fromEndpoint: .marketplace,
+                                      pathParameters: ["search_active_personal_titles.jsp"],
+                                      queryParameters: qParams)
+        { (data, error) in
+            handle(response: data, error: error, responseHandler)
         }
     }
     

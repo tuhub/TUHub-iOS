@@ -11,20 +11,22 @@ import SafariServices
 import TUSafariActivity
 import MessageUI
 
-class ListingDetailTableViewController: UITableViewController {
+class ListingDetailTableViewController: UIViewController {
+    
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var contactButton: UIButton!
     
     var listing: Listing?
     
     // Email response variables
-    var sendEmailTo = ["tue68553@temple.edu"]
-    var emailSubject:String?
-    var emailBody = "Enter your reposnse here...."
+    var emailRecipient: String?
     
     // Email Alert
     var alertTitle:String?
     var alertMessage:String?
     
-    private lazy var tableViewAttributes: [TableViewAttributes] = []
+    // The current attributes to be displayed in the table view
+    fileprivate lazy var tableViewAttributes: [TableViewAttributes] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,72 +37,30 @@ class ListingDetailTableViewController: UITableViewController {
         
         if let listing = listing {
             
-            if listing.owner != nil {
+            if let owner = listing.owner {
                 setTableViewAttributes()
+                emailRecipient = owner.email
             } else {
                 tableView.showActivityIndicator()
+                self.contactButton.isHidden = true
+                
                 listing.retrieveOwner { (user, error) in
                     if error != nil {
                         self.showErrorLabel()
                         return
                     }
-                    self.setTableViewAttributes()
-                    self.tableView.reloadData()
+                    if let user = user {
+                        self.emailRecipient = user.email
+                        self.setTableViewAttributes()
+                        self.tableView.reloadData()
+                    }
+                    
                     self.tableView.hideActivityIndicator()
+                    self.contactButton.isHidden = false
                 }
             }
 
         }
-    }
-    
-    // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return listing?.owner != nil ? 1 : 0
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableViewAttributes.count
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        var cell: UITableViewCell!
-        
-        guard let listing = listing else { return cell }
-        let attribute = tableViewAttributes[indexPath.row]
-        
-        cell = tableView.dequeueReusableCell(withIdentifier: attribute.cellType.rawValue, for: indexPath)
-        
-        switch attribute.cellType {
-        case .titleCell:
-            cell.textLabel?.text = attribute.value
-        case .imageGalleryCell:
-            (cell as! ListingImageGalleryTableViewCell).setUp(with: listing, delegate: self)
-        case .rightDetailCell:
-            cell.textLabel?.text = attribute.key
-            cell.detailTextLabel?.text = attribute.value
-        case .subtitleCell:
-            let subtitleCell = cell as! SubtitleTableViewCell
-            subtitleCell.titleLabel.text = attribute.key
-            subtitleCell.subtitleLabel.text = attribute.value
-//            cell = subtitleCell
-        case .contactCell:
-            let contactButtonCell = cell as! ContactDetailViewCell
-            emailSubject = attribute.key!
-            sendEmailTo = [attribute.value!]
-
-            contactButtonCell.contactButton.tag = indexPath.row
-            contactButtonCell.contactButton.addTarget(self, action: #selector(didPressContact), for: .touchUpInside)
-            
-            // Test
-            debugPrint(contactButtonCell.contactButton.tag)
-            debugPrint(emailSubject!)
-            debugPrint(sendEmailTo[0])
-        }
-        
-        return cell
     }
     
     private func showErrorLabel() {
@@ -126,17 +86,17 @@ class ListingDetailTableViewController: UITableViewController {
             tableViewAttributes = personal.tableViewAttributes
         }
     }
-
+    
     // MARK: Email response
-    func didPressContact(){
+    @IBAction func didPressContact(){
         let mailComposeViewController = configuredMailComposeViewController()
         
         if MFMailComposeViewController.canSendMail() {
             self.present(mailComposeViewController, animated: true, completion: nil)
         }
-                else {
-                    debugPrint("Error: Can not send email.")
-                }
+        else {
+            debugPrint("Error: Can not send email.")
+        }
     }
     
     func configuredMailComposeViewController() -> MFMailComposeViewController {
@@ -147,15 +107,20 @@ class ListingDetailTableViewController: UITableViewController {
         // Important to set the "mailComposeDelegate" property
         mailComposerVC.mailComposeDelegate = self
         
-        mailComposerVC.setToRecipients(sendEmailTo)
-        mailComposerVC.setSubject(emailSubject!)
-        mailComposerVC.setMessageBody(emailBody, isHTML: false)
+        if let emailRecipient = emailRecipient, let listing = listing {
+            mailComposerVC.setToRecipients([emailRecipient])
+            
+            let subject = "Responding to your \(listing.title) listing on TUHub"
+            mailComposerVC.setSubject(subject)
+            
+            let message = "Enter your reposnse here..."
+            mailComposerVC.setMessageBody(message, isHTML: false)
+        }
         
         return mailComposerVC
         
     }
     
-
     func showEmailAlert() {
         var alertController: UIAlertController?
         
@@ -168,19 +133,20 @@ class ListingDetailTableViewController: UITableViewController {
         
         present(alertController!, animated: true, completion: nil)
     }
-   
-    // MARK: Share listing?
-    @IBAction func didPressShare(_ sender: UIBarButtonItem) {
-        let url:String? = "https://tuportal4.temple.edu/cp/home/displaylogin"
-        if let url = url {
-            let openSafariActivity = TUSafariActivity()
-            let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: [openSafariActivity])
-            let barButtonItem = self.navigationItem.rightBarButtonItem
-            let buttonItemView = barButtonItem?.value(forKey: "view") as? UIView
-            activityVC.popoverPresentationController?.sourceView = buttonItemView
-            present(activityVC, animated: true, completion: nil)
-        }
-    }
+    
+    // Maybe add deep linking to support sharing listings if we have time
+    //    // MARK: Share listing?
+    //    @IBAction func didPressShare(_ sender: UIBarButtonItem) {
+    //        let url:String? = "https://tuportal4.temple.edu/cp/home/displaylogin"
+    //        if let url = url {
+    //            let openSafariActivity = TUSafariActivity()
+    //            let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: [openSafariActivity])
+    //            let barButtonItem = self.navigationItem.rightBarButtonItem
+    //            let buttonItemView = barButtonItem?.value(forKey: "view") as? UIView
+    //            activityVC.popoverPresentationController?.sourceView = buttonItemView
+    //            present(activityVC, animated: true, completion: nil)
+    //        }
+    //    }
     
 }
 
@@ -192,7 +158,7 @@ extension ListingDetailTableViewController: MFMailComposeViewControllerDelegate 
         
         switch result.rawValue {
             
-
+            
         case MFMailComposeResult.sent.rawValue:
             alertTitle = "Email Sent"
             alertMessage = nil
@@ -211,6 +177,45 @@ extension ListingDetailTableViewController: MFMailComposeViewControllerDelegate 
     }
 }
 
+extension ListingDetailTableViewController: UITableViewDataSource {
+    // MARK: - Table view data source
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return listing?.owner != nil ? 1 : 0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tableViewAttributes.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        var cell: UITableViewCell!
+        
+        guard let listing = listing else { return cell }
+        let attribute = tableViewAttributes[indexPath.row]
+        
+        cell = tableView.dequeueReusableCell(withIdentifier: attribute.cellType.rawValue, for: indexPath)
+        
+        switch attribute.cellType {
+        case .titleCell:
+            cell.textLabel?.text = attribute.value
+        case .imageGalleryCell:
+            (cell as! ListingImageGalleryTableViewCell).setUp(with: listing, delegate: self)
+        case .rightDetailCell:
+            cell.textLabel?.text = attribute.key
+            cell.detailTextLabel?.text = attribute.value
+        case .subtitleCell:
+            let subtitleCell = cell as! SubtitleTableViewCell
+            subtitleCell.titleLabel.text = attribute.key
+            subtitleCell.subtitleLabel.text = attribute.value
+        }
+        
+        return cell
+    }
+}
+
 // MARK: - MarketplaceImageGalleryTableViewCellDelegate
 extension ListingDetailTableViewController: MarketplaceImageGalleryTableViewCellDelegate {
     func present(_ viewController: UIViewController) {
@@ -225,7 +230,6 @@ fileprivate enum CellType: String {
     case imageGalleryCell = "imageGalleryCell"
     case rightDetailCell = "rightDetailCell"
     case subtitleCell = "subtitleCell"
-    case contactCell = "contactCell"
 }
 
 
@@ -243,8 +247,7 @@ extension Product: TableViewDisplayable {
                 (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
                 (key: "Seller", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
                 (key: "Price", value: price, cellType: .rightDetailCell),
-                (key: "Description", value: description, cellType: .subtitleCell),
-                (key: title, value: owner?.email, cellType: .contactCell)
+                (key: "Description", value: description, cellType: .subtitleCell)
             ]
         } else {
             return [
@@ -252,8 +255,7 @@ extension Product: TableViewDisplayable {
                 (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
                 (key: "Seller", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
                 (key: "Price", value: price, cellType: .rightDetailCell),
-                (key: "Description", value: description, cellType: .subtitleCell),
-                (key: title, value: owner?.email, cellType: .contactCell)
+                (key: "Description", value: description, cellType: .subtitleCell)
             ]
         }
     }
@@ -271,8 +273,7 @@ extension Job: TableViewDisplayable {
         attributes.append(contentsOf: [
             (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
             (key: "Posted By", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
-            (key: "Location", value: location, cellType: .rightDetailCell),
-            (key: title, value: owner?.email, cellType: .contactCell)
+            (key: "Location", value: location, cellType: .rightDetailCell)
             ] as [TableViewAttributes])
         
         if let hoursPerWeek = hoursPerWeek {
@@ -301,8 +302,7 @@ extension Personal: TableViewDisplayable {
             (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
             (key: "Posted By", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
             (key: "Location", value: location, cellType: .rightDetailCell),
-            (key: "Description", value: description, cellType: .subtitleCell),
-            (key: title, value: owner?.email, cellType: .contactCell)
+            (key: "Description", value: description, cellType: .subtitleCell)
             ] as [TableViewAttributes])
         
         return attributes

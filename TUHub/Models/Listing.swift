@@ -18,15 +18,20 @@ private let s3DateFormatter: DateFormatter = {
 
 class Listing {
     
+    enum Kind: String {
+        case product, job, personal
+    }
+    
     internal(set) var id: String!
     fileprivate(set) var title: String
     fileprivate(set) var description: String
     fileprivate(set) var datePosted: Date
     fileprivate(set) var ownerID: String
     fileprivate(set) var isActive: Bool
-    fileprivate var photosDirectory: String?
     fileprivate(set) var photoPaths: [String]?
     fileprivate(set) var owner: MarketplaceUser?
+    fileprivate var photosDirectory: String?
+    fileprivate var thumbnail: UIImage?
     
     required init?(json: JSON) {
         guard
@@ -35,7 +40,10 @@ class Listing {
             let datePosted = json["datePosted"].dateTime,
             let ownerID = json["ownerId"].string,
             let isActive = json["isActive"].string
-            else { return nil }
+            else {
+                log.error("Unable to parse Listing")
+                return nil
+        }
         
         self.title = title
         self.description = description
@@ -45,6 +53,7 @@ class Listing {
         
         if let photosDirectory = json["picFolder"].string {
             self.photosDirectory = photosDirectory
+            
         }
     }
     
@@ -82,6 +91,22 @@ class Listing {
                 log.error(error)
             } else if let user = user {
                 self.owner = user
+            }
+        }
+    }
+    
+    func retrieveThumbnail(_ responseHandler: @escaping (UIImage?, Error?) -> Void) {
+        retrievePhotoPaths { (paths, error) in
+            if let path = paths?.first {
+                NetworkManager.shared.download(imageURL: "https://tumobilemarketplace.s3.amazonaws.com/\(path)") { (image, error) in
+                    self.thumbnail = image
+                    if let error = error {
+                        log.error("Unable to retrieve thumbanil. Error: \(error)")
+                    }
+                    responseHandler(image, error)
+                }
+            } else {
+                responseHandler(nil, error)
             }
         }
     }

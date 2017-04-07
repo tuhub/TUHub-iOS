@@ -35,6 +35,7 @@
 		7D7FD0161E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */; };
 		7D7FD0181E85B18700CE769F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7FD0171E85B18700CE769F /* MapKit.framework */; };
 		7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */; };
+		7D996A951E97025F00466A21 /* ListingsFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D996A941E97025F00466A21 /* ListingsFilterTableViewController.swift */; };
 		7DA6D92A1E7F6ECE00CD5D02 /* CourseSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9201E7F6ECE00CD5D02 /* CourseSearchResult.swift */; };
 		7DA6D92B1E7F6ECE00CD5D02 /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9211E7F6ECE00CD5D02 /* NewsItem.swift */; };
 		7DA6D92C1E7F6ECE00CD5D02 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9221E7F6ECE00CD5D02 /* Course.swift */; };
@@ -132,6 +133,7 @@
 		7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsSearchResultsTableViewController.swift; path = Maps/MapsSearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		7D7FD0171E85B18700CE769F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselFlowLayout.swift; sourceTree = "<group>"; };
+		7D996A941E97025F00466A21 /* ListingsFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsFilterTableViewController.swift; sourceTree = "<group>"; };
 		7DA6D9201E7F6ECE00CD5D02 /* CourseSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CourseSearchResult.swift; path = Models/CourseSearchResult.swift; sourceTree = "<group>"; };
 		7DA6D9211E7F6ECE00CD5D02 /* NewsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsItem.swift; path = Models/NewsItem.swift; sourceTree = "<group>"; };
 		7DA6D9221E7F6ECE00CD5D02 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Course.swift; path = Models/Course.swift; sourceTree = "<group>"; };
@@ -212,11 +214,11 @@
 		229CD2C31E9194F40039D88D /* Marketplace */ = {
 			isa = PBXGroup;
 			children = (
+				7DE27BD41E932D03004C2F83 /* ListingCollectionViewCell.swift */,
 				7D48E1271E92B826000981D8 /* TextFieldTableViewCell.swift */,
 				7D48E1281E92B826000981D8 /* ListingImageGalleryTableViewCell.swift */,
 				7D48E1251E92B802000981D8 /* TextViewTableViewCell.swift */,
 				7D48E12B1E92BCBB000981D8 /* SubtitleTableViewCell.swift */,
-				7DE27BD41E932D03004C2F83 /* ListingCollectionViewCell.swift */,
 				7DE27BD61E932E1C004C2F83 /* BlurryListingDetailView.swift */,
 				7DE27BD81E932E3A004C2F83 /* ListingDetailView.swift */,
 				22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */,
@@ -329,6 +331,7 @@
 				7D439E021E8D6F4400FF5538 /* ListingsCollectionViewController.swift */,
 				225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */,
 				221B07CA1E90386600921866 /* AddListingTableViewController.swift */,
+				7D996A941E97025F00466A21 /* ListingsFilterTableViewController.swift */,
 			);
 			path = Marketplace;
 			sourceTree = "<group>";
@@ -729,6 +732,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D996A951E97025F00466A21 /* ListingsFilterTableViewController.swift in Sources */,
 				7DA6D96B1E7F6FFF00CD5D02 /* String+Date.swift in Sources */,
 				7D4E57F71E9211AD000B7719 /* Job.swift in Sources */,
 				7DE27BD51E932D03004C2F83 /* ListingCollectionViewCell.swift in Sources */,

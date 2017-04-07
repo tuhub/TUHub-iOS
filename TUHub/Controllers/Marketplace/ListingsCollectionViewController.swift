@@ -12,7 +12,8 @@ import AlamofireImage
 import TLIndexPathTools
 
 // MARK: - Segue IdentifierS
-fileprivate let listingDetailSegueID = "showListingDetail"
+private let listingDetailSegueID = "showListingDetail"
+private let listingFilterSegueID = "presentListingFilter"
 
 // MARK: - Cell reuse identifiers
 private let reuseIdentifier = "marketplaceCell"
@@ -21,10 +22,21 @@ class ListingsCollectionViewController: TLCollectionViewController {
     
     private lazy var lock = NSLock()
     
+    let searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.tintColor = .cherry
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = true
+        return searchController
+    }()
+    
     // Keep track of how many of each type of listing is loaded for pagination
     private var numRowsProducts = 0
     private var numRowsJobs = 0
     private var numRowsPersonals = 0
+    fileprivate lazy var selectedKinds: Set<Listing.Kind> = [.product, .job, .personal]
+    
+    var imageSizes = [IndexPath : CGSize]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,50 +44,77 @@ class ListingsCollectionViewController: TLCollectionViewController {
         // Clear selection between presentations
         self.clearsSelectionOnViewWillAppear = true
         
-        // Set up the collection view's appearance
-        setupCollectionView()
         
         // Initialize indexPathController's data model
         indexPathController.dataModel = dataModel(for: [])
         
-        Product.retrieveAll() { (products, error) in
-            if let products = products {
-                self.add(listings: products)
-            }
+        // Retrieve listings
+        loadListings()
+        
+        // Set up search controller
+        definesPresentationContext = true
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.frame = CGRect(origin: .zero,
+                                                  size: CGSize(width: collectionView!.frame.width,
+                                                               height: 44))
+        collectionView!.addSubview(searchController.searchBar)
+        
+        // Set up the collection view's appearance
+        setupCollectionView()
+    }
+    
+    func loadListings(selection: Set<Listing.Kind>? = nil, shouldClearResults: Bool = false) {
+        
+        if shouldClearResults {
+            clearResults()
         }
         
-        Job.retrieveAll() { (jobs, error) in
-            if let jobs = jobs {
-                self.add(listings: jobs)
-            }
-        }
+        let selection = selection ?? [.product, .job, .personal]
         
-        Personal.retrieveAll() { (personals, error) in
-            if let personals = personals {
-                self.add(listings: personals)
+        for kind in selection {
+            switch kind {
+            case .product:
+                Product.retrieveAll() { (products, error) in
+                    if let products = products {
+                        self.add(listings: products)
+                    }
+                }
+            case .job:
+                Job.retrieveAll() { (jobs, error) in
+                    if let jobs = jobs {
+                        self.add(listings: jobs)
+                    }
+                }
+            case .personal:
+                Personal.retrieveAll() { (personals, error) in
+                    if let personals = personals {
+                        self.add(listings: personals)
+                    }
+                }
             }
+            
         }
     }
     
+    func clearResults() {
+        indexPathController.dataModel = nil
+        imageSizes.removeAll()
+    }
+    
     func dataModel(for listings: [Listing]) -> TLIndexPathDataModel {
-        return TLIndexPathDataModel(items: listings, sectionNameBlock: nil, identifierBlock: {
-            if let listing = $0 as? Listing {
-                let s = String(describing: type(of: listing)) + listing.id
-                return s
-            }
-            return nil
-        })
+        return TLIndexPathDataModel(items: listings, sectionNameBlock: nil, identifierBlock: nil)
     }
     
     func add(listings: [Listing]) {
         // Entering critical section
         lock.lock()
         
-        if var items = indexPathController.items as? [Listing] {
-            items.append(contentsOf: listings)
-            items.sort { $0.datePosted > $1.datePosted }
-            indexPathController.dataModel = dataModel(for: items)
+        var listings = listings
+        if let items = indexPathController.items as? [Listing] {
+            listings.append(contentsOf: items)
+            listings.sort { $0.datePosted > $1.datePosted }
         }
+        indexPathController.dataModel = dataModel(for: listings)
         
         // Exiting critical section
         lock.unlock()
@@ -91,7 +130,7 @@ class ListingsCollectionViewController: TLCollectionViewController {
         layout.minimumColumnSpacing = 8
         layout.minimumInteritemSpacing = 8
         layout.minimumContentHeight = 44
-        layout.sectionInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        layout.sectionInset = UIEdgeInsets(top: searchController.searchBar.frame.height + 8, left: 16, bottom: 8, right: 16)
         
         // Collection view attributes
         self.collectionView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
@@ -116,15 +155,18 @@ class ListingsCollectionViewController: TLCollectionViewController {
                 else { break }
             
             listingDetailVC.listing = indexPathController.dataModel?.item(at: indexPath) as? Listing
+            
+        case listingFilterSegueID:
+            guard let filterVC = (segue.destination as? UINavigationController)?
+                .childViewControllers.first as? ListingsFilterTableViewController
+                else { break }
+            
+            filterVC.selectedKinds = selectedKinds
+            filterVC.delegate = self
         default:
             break
         }
         
-    }
-    
-    override func controller(_ controller: TLIndexPathController, didUpdateDataModel updates: TLIndexPathUpdates) {
-        super.controller(controller, didUpdateDataModel: updates)
-        collectionView?.collectionViewLayout.invalidateLayout()
     }
     
 }
@@ -136,7 +178,6 @@ extension ListingsCollectionViewController {
         return indexPathController.dataModel?.numberOfSections ?? 0
     }
     
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return indexPathController.dataModel?.numberOfRows(inSection: section) ?? 0
     }
@@ -145,7 +186,7 @@ extension ListingsCollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
         if let cell = cell as? ListingCollectionViewCell, let listing = indexPathController.dataModel?.item(at: indexPath) as? Listing {
-            cell.setUp(listing, self)
+            cell.setUp(listing, self, indexPath)
         }
         
         return cell
@@ -153,19 +194,10 @@ extension ListingsCollectionViewController {
     
 }
 
-extension ListingsCollectionViewController {
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let cell = cell as? ListingCollectionViewCell
-        if cell?.imageView.image != nil {
-//            collectionView.collectionViewLayout.invalidateLayout()
-        }
-    }
-}
-
 // MARK: - CHTCollectionViewDelegateWaterfallLayout
 extension ListingsCollectionViewController: CHTCollectionViewDelegateWaterfallLayout {
     func collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAt indexPath: IndexPath!) -> CGSize {
-        guard let imageSize = (collectionView.cellForItem(at: indexPath) as? ListingCollectionViewCell)?.imageView.image?.size
+        guard let imageSize = imageSizes[indexPath]
             else { return CGSize(width: 30, height: 40) }
         return imageSize
     }
@@ -173,7 +205,50 @@ extension ListingsCollectionViewController: CHTCollectionViewDelegateWaterfallLa
 
 // MARK: - ImageLoadedDelegate
 extension ListingsCollectionViewController: ImageLoadedDelegate {
-    func didLoad(image: UIImage?) {
+    func didLoad(image: UIImage?, at indexPath: IndexPath) {
+        imageSizes[indexPath] = image?.size
         collectionView?.collectionViewLayout.invalidateLayout()
+    }
+}
+
+extension ListingsCollectionViewController: UISearchResultsUpdating {
+    @available(iOS 8.0, *)
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        guard let text = searchController.searchBar.text else { return }
+        clearResults()
+        NetworkManager.shared.cancelAllRequests(for: .marketplace)
+        
+        for listingKind in selectedKinds {
+            switch listingKind {
+            case .product:
+                Product.search(for: text) { (results, error) in
+                    if let results = results {
+                        self.add(listings: results)
+                    }
+                }
+            case .job:
+                Job.search(for: text) { (results, error) in
+                    if let results = results {
+                        self.add(listings: results)
+                    }
+                }
+            case .personal:
+                Personal.search(for: text) { (results, error) in
+                    if let results = results {
+                        self.add(listings: results)
+                    }
+                }
+            }
+        }
+    }
+}
+
+extension ListingsCollectionViewController: ListingsFilterDelegate {
+    func didSelect(listingKinds: Set<Listing.Kind>) {
+        if self.selectedKinds != listingKinds {
+            self.selectedKinds = listingKinds
+            loadListings(selection: listingKinds, shouldClearResults: true)
+        }
     }
 }
