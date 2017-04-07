@@ -20,7 +20,7 @@ class AddListingTableViewController: UITableViewController, UIImagePickerControl
     var categoryPicker: UIPickerView!
     var dummyTextField: UITextField!
     
-    var selectedKind: Listing.Kind?
+    var selectedKind: Listing.Kind = .product
     var displayingPicker = false
     
     override func viewDidLoad() {
@@ -30,14 +30,6 @@ class AddListingTableViewController: UITableViewController, UIImagePickerControl
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         debugPrint()
-        
-//        dummyTextField = UITextField()
-//        dummyTextField.isHidden = true
-//        view.addSubview(dummyTextField)
-        
-//        setUpCategoryPicker()
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -107,10 +99,12 @@ class AddListingTableViewController: UITableViewController, UIImagePickerControl
             case 2:
                 cell = tableView.dequeueReusableCell(withIdentifier: rightDetailCellID, for: indexPath)
                 cell.textLabel?.text = "Category"
-                cell.detailTextLabel?.text =  selectedKind?.rawValue ?? "Select"
-//                cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath)
-//                let categoryButtonCell = cell as! CategoryTableViewCell
-//                categoryButtonCell.categoryButton.addTarget(self, action: #selector(didPressCategory), for: .touchUpInside)
+                cell.detailTextLabel?.text =  selectedKind.rawValue
+                if displayingPicker {
+                    cell.detailTextLabel?.textColor = .cherry
+                } else {
+                    cell.detailTextLabel?.textColor = .lightGray
+                }
                 
             case 3:
                 if displayingPicker {
@@ -118,6 +112,7 @@ class AddListingTableViewController: UITableViewController, UIImagePickerControl
                     let picker = (cell as? PickerTableViewCell)?.picker
                     picker?.dataSource = self
                     picker?.delegate = self
+                    picker?.selectRow(Listing.Kind.all.index(of: selectedKind)!, inComponent: 0, animated: true)
                 } else {
                     fallthrough
                 }
@@ -147,9 +142,10 @@ class AddListingTableViewController: UITableViewController, UIImagePickerControl
                 tableView.insertRows(at: [pickerIndexPath], with: .fade)
             } else {
                 tableView.deleteRows(at: [pickerIndexPath], with: .fade)
-                tableView.deselectRow(at: indexPath, animated: true)
             }
+            tableView.reloadRows(at: [indexPath], with: .none)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: Camera
@@ -192,42 +188,6 @@ class AddListingTableViewController: UITableViewController, UIImagePickerControl
         }
     }
     
-    // MARK: Category picker
-//    func setUpCategoryPicker() {
-//        
-//        if categoryPicker == nil {
-//            // Set up date picker as input view
-//            let categoryPicker = UIPickerView()
-//            categoryPicker.dataSource = self
-//            categoryPicker.delegate = self
-//            self.categoryPicker = categoryPicker
-//        }
-//        dummyTextField.inputView = categoryPicker
-//        
-//        // Set up toolbar with today button and done button as accessory view
-//        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
-//        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didPressCategoryPickerDoneButton(_:)))
-//        doneButton.tintColor = UIColor.cherry
-//        toolbar.setItems([flexSpace, doneButton], animated: false)
-//        toolbar.sizeToFit()
-//        dummyTextField.inputAccessoryView = toolbar
-//    }
-//    
-//    func didPressCategory(){
-//        dummyTextField.becomeFirstResponder()
-//    }
-    
-//    func didPressCategoryPickerDoneButton(_ sender: UIBarButtonItem) {
-//        dummyTextField.resignFirstResponder()
-//        
-//        let row = categoryPicker.selectedRow(inComponent: 0)
-//        let categoryButtonTitle = Categories.allValues[row].name
-//        debugPrint(categoryButtonTitle)
-//
-//    }
-//    
-//    
     @IBAction func didPressCancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -256,7 +216,7 @@ extension AddListingTableViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedKind = Listing.Kind.all[row]
-        tableView.reloadRows(at: [IndexPath(row: 2, section: 1)], with: .automatic)
+        tableView.reloadRows(at: [IndexPath(row: 2, section: 1)], with: .none)
     }
     
 }
