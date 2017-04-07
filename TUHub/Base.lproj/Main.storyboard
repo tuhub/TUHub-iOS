@@ -1591,8 +1591,26 @@
                                     <outlet property="textField" destination="rFB-1n-Vew" id="aGM-cN-ngH"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoryCell" id="R9S-5p-o90" customClass="CategoryTableViewCell" customModule="TUHub" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R9S-5p-o90" id="aJt-dd-Jss">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjo-k6-lTH">
+                                            <rect key="frame" x="8" y="7" width="359" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Select Category"/>
+                                        </button>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="categoryButton" destination="bjo-k6-lTH" id="Tyz-cW-bR7"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="textViewCell" rowHeight="150" id="aFp-8r-3OR" customClass="TextViewTableViewCell" customModule="TUHub" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="99.5" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="143.5" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="aFp-8r-3OR" id="4MX-Hj-fX9">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
@@ -1620,8 +1638,8 @@
                                     <outlet property="textView" destination="eb9-jq-Bqy" id="ysl-sC-Kom"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addImageCell" rowHeight="44" id="FUE-ZG-Kmb">
-                                <rect key="frame" x="0.0" y="249.5" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addImageCell" rowHeight="44" id="FUE-ZG-Kmb" customClass="ImageTableViewCell" customModule="TUHub" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="293.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FUE-ZG-Kmb" id="FlL-ju-IPl">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -1647,6 +1665,10 @@
                                         <constraint firstItem="2Mq-1V-2IH" firstAttribute="trailing" secondItem="FlL-ju-IPl" secondAttribute="trailingMargin" id="nul-tb-dhI"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="importPicture" destination="2Mq-1V-2IH" id="8LM-Oc-IhY"/>
+                                    <outlet property="takePicture" destination="Slu-5i-DYm" id="Ll9-yW-ol6"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -1930,9 +1952,9 @@
         <image name="TransparentPixel" width="1" height="1"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="9Jf-qO-gAp"/>
+        <segue reference="c70-KI-y0x"/>
         <segue reference="vuw-nM-MSj"/>
-        <segue reference="tv3-LT-U3M"/>
-        <segue reference="ivz-P0-c8R"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>
