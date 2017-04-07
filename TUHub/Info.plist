@@ -40,6 +40,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>To take pictures</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To import pictures</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

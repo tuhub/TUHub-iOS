@@ -1619,6 +1619,24 @@
                                     <outlet property="textField" destination="rFB-1n-Vew" id="aGM-cN-ngH"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoryCell" id="R9S-5p-o90" customClass="CategoryTableViewCell" customModule="TUHub" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R9S-5p-o90" id="aJt-dd-Jss">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjo-k6-lTH">
+                                            <rect key="frame" x="8" y="7" width="359" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Select Category"/>
+                                        </button>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="categoryButton" destination="bjo-k6-lTH" id="Tyz-cW-bR7"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="textViewCell" rowHeight="150" id="aFp-8r-3OR" customClass="TextViewTableViewCell" customModule="TUHub" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="100" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -1675,6 +1693,10 @@
                                         <constraint firstItem="2Mq-1V-2IH" firstAttribute="trailing" secondItem="FlL-ju-IPl" secondAttribute="trailingMargin" id="nul-tb-dhI"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="importPicture" destination="2Mq-1V-2IH" id="8LM-Oc-IhY"/>
+                                    <outlet property="takePicture" destination="Slu-5i-DYm" id="Ll9-yW-ol6"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>

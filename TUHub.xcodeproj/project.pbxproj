@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		221B07CB1E90386600921866 /* AddListingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B07CA1E90386600921866 /* AddListingTableViewController.swift */; };
+		2237DBE31E9711AE00520CAD /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237DBE21E9711AE00520CAD /* CategoryTableViewCell.swift */; };
 		225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */; };
 		22662BBE1E9682750016A1C8 /* ContactDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */; };
 		227F304A1E930B2A00DE1752 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 227F30491E930B2900DE1752 /* MessageUI.framework */; };
+		22C3D3591E97369C005897DE /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C3D3581E97369C005897DE /* ImageTableViewCell.swift */; };
 		37FD610AAB987235177A1533 /* Pods_TUHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C369AC415ABB8738F6351247 /* Pods_TUHubTests.framework */; };
 		7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A4F1E5BF7EF0003A853 /* AppDelegate.swift */; };
 		7D043A571E5BF7EF0003A853 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D043A551E5BF7EF0003A853 /* Main.storyboard */; };
@@ -98,9 +100,11 @@
 
 /* Begin PBXFileReference section */
 		221B07CA1E90386600921866 /* AddListingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListingTableViewController.swift; sourceTree = "<group>"; };
+		2237DBE21E9711AE00520CAD /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingDetailTableViewController.swift; sourceTree = "<group>"; };
 		22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailViewCell.swift; sourceTree = "<group>"; };
 		227F30491E930B2900DE1752 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		22C3D3581E97369C005897DE /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		3361CEFB73AA8E72E9E0B46D /* Pods-TUHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubTests/Pods-TUHubTests.release.xcconfig"; sourceTree = "<group>"; };
 		3BBBD4D5AE6A3197E62F3182 /* Pods-TUHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6DDB0DADD33842008B60C6C1 /* Pods-TUHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -211,7 +215,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		229CD2C31E9194F40039D88D /* Marketplace */ = {
+		2237DBE01E97002600520CAD /* DetailListing */ = {
 			isa = PBXGroup;
 			children = (
 				7DE27BD41E932D03004C2F83 /* ListingCollectionViewCell.swift */,
@@ -222,6 +226,24 @@
 				7DE27BD61E932E1C004C2F83 /* BlurryListingDetailView.swift */,
 				7DE27BD81E932E3A004C2F83 /* ListingDetailView.swift */,
 				22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */,
+			);
+			name = DetailListing;
+			sourceTree = "<group>";
+		};
+		2237DBE11E97004000520CAD /* AddListing */ = {
+			isa = PBXGroup;
+			children = (
+				2237DBE21E9711AE00520CAD /* CategoryTableViewCell.swift */,
+				22C3D3581E97369C005897DE /* ImageTableViewCell.swift */,
+			);
+			name = AddListing;
+			sourceTree = "<group>";
+		};
+		229CD2C31E9194F40039D88D /* Marketplace */ = {
+			isa = PBXGroup;
+			children = (
+				2237DBE11E97004000520CAD /* AddListing */,
+				2237DBE01E97002600520CAD /* DetailListing */,
 			);
 			name = Marketplace;
 			sourceTree = "<group>";
@@ -520,7 +542,6 @@
 				TargetAttributes = {
 					7D043A4B1E5BF7EF0003A853 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = LVQAV2S2JC;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -739,6 +760,7 @@
 				7DA6D9581E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift in Sources */,
 				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
 				7DCC7F1B1E9454E900714100 /* UITableView+UIActivityIndicator.swift in Sources */,
+				22C3D3591E97369C005897DE /* ImageTableViewCell.swift in Sources */,
 				225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */,
 				7D4E57F61E9211AD000B7719 /* Personal.swift in Sources */,
 				7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */,
@@ -768,6 +790,7 @@
 				7D48E1291E92B826000981D8 /* TextFieldTableViewCell.swift in Sources */,
 				7DA6D95A1E7F6FC500CD5D02 /* NewsImageGalleryTableViewCell.swift in Sources */,
 				7DA6D92E1E7F6ECE00CD5D02 /* NetworkManager.swift in Sources */,
+				2237DBE31E9711AE00520CAD /* CategoryTableViewCell.swift in Sources */,
 				7DA6D9691E7F6FFF00CD5D02 /* String+Boyer-Moore-Horspool.swift in Sources */,
 				7DA6D9321E7F6ECE00CD5D02 /* Credential.swift in Sources */,
 				7DA6D9571E7F6FC500CD5D02 /* CourseDetailHeaderTableViewCell.swift in Sources */,
@@ -945,7 +968,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = LVQAV2S2JC;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TUHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -964,7 +987,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = LVQAV2S2JC;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TUHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
