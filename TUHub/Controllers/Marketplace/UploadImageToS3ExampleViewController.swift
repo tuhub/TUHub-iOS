@@ -10,22 +10,75 @@ import UIKit
 import AWSCore
 import AWSS3
 
-class UploadImageToS3ExampleViewController: UIViewController {
-
+class UploadImageToS3ExampleViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    var image: UIImage!
+    var selectedImageUrl: NSURL!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func didPressUpload(_ sender: Any) {
         uploadImage()
     }
     
+    @IBAction func didPressImportImage(_ sender: Any) {
+        let imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func generateImageUrl(fileName: String) -> NSURL {
+        let fileURL = NSURL(fileURLWithPath: NSTemporaryDirectory().appending(fileName))
+        let data = UIImageJPEGRepresentation(image, 0.3)
+        do {
+            try data!.write(to: fileURL as URL)
+        } catch {
+            print(error)
+        }
+        
+        return fileURL
+    }
+    
+    func remoteImageWithUrl(fileName: String){
+        let fileURL = NSURL(fileURLWithPath: NSTemporaryDirectory().appending(fileName))
+        do {
+            try FileManager.default.removeItem(at: fileURL as URL)
+        } catch {
+            print(error)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        selectedImageUrl = info[UIImagePickerControllerReferenceURL] as? NSURL
+        
+        self.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+
+        let imageName = selectedImageUrl?.lastPathComponent
+        let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let photoURL = NSURL(fileURLWithPath: documentDirectory)
+        let localPath = photoURL.appendingPathComponent(imageName!)
+        print(localPath!)
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: S3 Image Upload
     func uploadImage() {
+        
+        var localFileName: String?
+        
+        if let imageToUpload =  selectedImageUrl {
+            localFileName = imageToUpload.lastPathComponent
+        }
+        
+        if localFileName == nil {
+            return
+        }
         
         // Configure AWS Cognito Credentials
         let myIdentityPoolId = "us-east-1:bbb7121f-0ae4-4089-9165-55cd2ea4663d"
@@ -39,21 +92,24 @@ class UploadImageToS3ExampleViewController: UIViewController {
         // Set up AWS Transfer Manager Request
         let folderName = "testImage"
         let S3BucketName = "tumobilemarketplace/\(folderName)"
-        let ext = "jpeg"
-        let localFileName = "Nature" // local file name here
-        let remoteName = localFileName + "." + ext
+        let remoteName = localFileName!
+//        let ext = "jpeg"
+//        let localFileName = "Nature" // local file name here
+//        let remoteName = localFileName + "." + ext
         //random filename
         //let fileName = NSUUID().UUIDString + "." + ext
-    
-        let imageURL = Bundle.main.url(forResource: localFileName, withExtension: ext)!
+        
+//        let imageURL = Bundle.main.url(forResource: localFileName, withExtension: ext)!
         
         let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest?.body = imageURL
+        //uploadRequest?.body = imageURL
+        uploadRequest?.body = generateImageUrl(fileName: remoteName) as URL
         //Image name
         uploadRequest?.key = remoteName
         // Bucket name
         uploadRequest?.bucket = S3BucketName
-        uploadRequest?.contentType = "image/" + ext
+        //uploadRequest?.contentType = "image/" + ext
+        uploadRequest?.contentType = "image/jpeg"
         
         let transferManager = AWSS3TransferManager.default()
         

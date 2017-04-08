@@ -1901,11 +1901,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzj-Wq-BdW">
-                                <rect key="frame" x="16" y="406" width="343" height="30"/>
+                                <rect key="frame" x="16" y="453" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Upload Image To S3"/>
                                 <connections>
                                     <action selector="didPressUpload:" destination="XF8-Hn-6QN" eventType="touchUpInside" id="JNx-j7-CbT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRc-Tc-Wkj">
+                                <rect key="frame" x="16" y="397" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Import Image"/>
+                                <connections>
+                                    <action selector="didPressImportImage:" destination="XF8-Hn-6QN" eventType="touchUpInside" id="hj0-ZH-o4r"/>
                                 </connections>
                             </button>
                         </subviews>
