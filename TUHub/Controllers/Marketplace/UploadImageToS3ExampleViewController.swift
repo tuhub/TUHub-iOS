@@ -37,7 +37,8 @@ class UploadImageToS3ExampleViewController: UIViewController {
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
         // Set up AWS Transfer Manager Request
-        let S3BucketName = "tumobilemarketplace"
+        let folderName = "testImage"
+        let S3BucketName = "tumobilemarketplace/\(folderName)"
         let ext = "jpeg"
         let localFileName = "Nature" // local file name here
         let remoteName = localFileName + "." + ext
@@ -50,6 +51,7 @@ class UploadImageToS3ExampleViewController: UIViewController {
         uploadRequest?.body = imageURL
         //Image name
         uploadRequest?.key = remoteName
+        // Bucket name
         uploadRequest?.bucket = S3BucketName
         uploadRequest?.contentType = "image/" + ext
         
