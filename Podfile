@@ -21,6 +21,7 @@ target 'TUHub' do
   pod 'TLIndexPathTools', '~> 0.4.4'
   pod 'Eureka', '~> 2.0.1'
   pod 'ImageRow', '~> 1.0'
+  pod 'AWSS3'
   
   target 'TUHubTests' do
     inherit! :search_paths
