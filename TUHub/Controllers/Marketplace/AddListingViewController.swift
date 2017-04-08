@@ -8,7 +8,7 @@
 
 import UIKit
 import Eureka
-import ImageRow
+//import ImageRow
 
 class AddListingViewController: FormViewController {
     
@@ -35,7 +35,7 @@ class AddListingViewController: FormViewController {
             }
             
             +++ Section()
-            <<< TextRow() {
+            <<< TextRow("titleRow") {
                 $0.placeholder = "Title"
                 
                 $0.add(rule: RuleRequired())
@@ -68,7 +68,7 @@ class AddListingViewController: FormViewController {
                     self.doneButton.isEnabled = self.shouldEnableDoneButton()
             }
             
-            <<< TextRow() {
+            <<< TextRow("locRow") {
                 $0.placeholder = "Location"
                 
                 // hide if type is not job or personal
@@ -80,7 +80,7 @@ class AddListingViewController: FormViewController {
                     self.doneButton.isEnabled = self.shouldEnableDoneButton()
             }
             
-            <<< IntRow() {
+            <<< IntRow("hoursRow") {
                 $0.title = "Weekly Hours"
                 $0.value = 0
                 
@@ -96,7 +96,7 @@ class AddListingViewController: FormViewController {
                     self.doneButton.isEnabled = self.shouldEnableDoneButton()
             }
             
-            <<< DecimalRow(){
+            <<< DecimalRow("payRow"){
                 $0.useFormatterDuringInput = true
                 $0.title = "Hourly Pay"
                 $0.placeholder = "Pay"
@@ -119,7 +119,7 @@ class AddListingViewController: FormViewController {
                     self.doneButton.isEnabled = self.shouldEnableDoneButton()
             }
             
-            <<< DateInlineRow() {
+            <<< DateInlineRow("startDateRow") {
                 $0.title = "Start Date"
                 $0.value = Date()
                 
@@ -137,7 +137,7 @@ class AddListingViewController: FormViewController {
             
             
             +++ Section("Description")
-            <<< TextAreaRow() {
+            <<< TextAreaRow("descRow") {
                 $0.title = "Description"
                 $0.placeholder = "Enter text here (max 1,000 characters)"
                 $0.add(rule: RuleMaxLength(maxLength: 1000))
@@ -150,10 +150,7 @@ class AddListingViewController: FormViewController {
             
             
             +++ Section("Photos")
-            <<< ImageRow() {
-                $0.title = "Add Photo"
-                $0.sourceTypes = .All
-                $0.clearAction = .yes(style: .destructive)
+            <<< ImagesRow("imagesRow") { row in
             }
         )
     }
@@ -194,6 +191,11 @@ class AddListingViewController: FormViewController {
         
         for (key, value) in values {
             // Add attrbite to model
+            if key == "imagesRow" {
+                if let val = value as? ImageCollection {
+                    debugPrint(val)
+                }
+            }
         }
         
     }

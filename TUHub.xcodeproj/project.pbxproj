@@ -17,6 +17,7 @@
 		7D043A5C1E5BF7EF0003A853 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D043A5A1E5BF7EF0003A853 /* LaunchScreen.storyboard */; };
 		7D043A671E5BF7EF0003A853 /* TUHubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A661E5BF7EF0003A853 /* TUHubTests.swift */; };
 		7D043A721E5BF7EF0003A853 /* TUHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A711E5BF7EF0003A853 /* TUHubUITests.swift */; };
+		7D33C2131E989FBA00101751 /* ImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33C2121E989FBA00101751 /* ImageCollection.swift */; };
 		7D439E031E8D6F4400FF5538 /* ListingsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D439E021E8D6F4400FF5538 /* ListingsCollectionViewController.swift */; };
 		7D48E1221E9212B6000981D8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48E1211E9212B6000981D8 /* Product.swift */; };
 		7D48E1261E92B802000981D8 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48E1251E92B802000981D8 /* TextViewTableViewCell.swift */; };
@@ -35,10 +36,10 @@
 		7D7FD0181E85B18700CE769F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7FD0171E85B18700CE769F /* MapKit.framework */; };
 		7D8A1A5C1E9825FF006401A1 /* AddListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A1A5B1E9825FF006401A1 /* AddListingViewController.swift */; };
 		7D8A1A5E1E982E02006401A1 /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A1A5D1E982E01006401A1 /* CurrencyFormatter.swift */; };
-		7D8A1A631E983959006401A1 /* ImagesPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A1A611E983959006401A1 /* ImagesPickerCell.swift */; };
-		7D8A1A6B1E983B67006401A1 /* ImagePickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A1A691E983B67006401A1 /* ImagePickerCollectionViewCell.swift */; };
-		7D8A1A6C1E983B67006401A1 /* ImagePickerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D8A1A6A1E983B67006401A1 /* ImagePickerCollectionViewCell.xib */; };
-		7D8A1A6F1E984196006401A1 /* ImagesPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D8A1A6E1E984196006401A1 /* ImagesPickerCell.xib */; };
+		7D8A1A631E983959006401A1 /* ImagesRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A1A611E983959006401A1 /* ImagesRow.swift */; };
+		7D8A1A6B1E983B67006401A1 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A1A691E983B67006401A1 /* ImageCollectionViewCell.swift */; };
+		7D8A1A6C1E983B67006401A1 /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D8A1A6A1E983B67006401A1 /* ImageCollectionViewCell.xib */; };
+		7D8A1A6F1E984196006401A1 /* ImagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D8A1A6E1E984196006401A1 /* ImagesCell.xib */; };
 		7D8A1A711E9848E1006401A1 /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A1A701E9848E1006401A1 /* ImagePickerViewController.swift */; };
 		7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */; };
 		7D996A951E97025F00466A21 /* ListingsFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D996A941E97025F00466A21 /* ListingsFilterTableViewController.swift */; };
@@ -121,6 +122,7 @@
 		7D043A6D1E5BF7EF0003A853 /* TUHubUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TUHubUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D043A711E5BF7EF0003A853 /* TUHubUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TUHubUITests.swift; sourceTree = "<group>"; };
 		7D043A731E5BF7EF0003A853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D33C2121E989FBA00101751 /* ImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollection.swift; sourceTree = "<group>"; };
 		7D439E021E8D6F4400FF5538 /* ListingsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsCollectionViewController.swift; sourceTree = "<group>"; };
 		7D48E1211E9212B6000981D8 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Product.swift; path = Models/Product.swift; sourceTree = "<group>"; };
 		7D48E1251E92B802000981D8 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextViewTableViewCell.swift; path = Marketplace/TextViewTableViewCell.swift; sourceTree = "<group>"; };
@@ -139,10 +141,10 @@
 		7D7FD0171E85B18700CE769F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7D8A1A5B1E9825FF006401A1 /* AddListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListingViewController.swift; sourceTree = "<group>"; };
 		7D8A1A5D1E982E01006401A1 /* CurrencyFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
-		7D8A1A611E983959006401A1 /* ImagesPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagesPickerCell.swift; path = Marketplace/ImagesPickerCell.swift; sourceTree = "<group>"; };
-		7D8A1A691E983B67006401A1 /* ImagePickerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagePickerCollectionViewCell.swift; path = Marketplace/ImagePickerCollectionViewCell.swift; sourceTree = "<group>"; };
-		7D8A1A6A1E983B67006401A1 /* ImagePickerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImagePickerCollectionViewCell.xib; path = Marketplace/ImagePickerCollectionViewCell.xib; sourceTree = "<group>"; };
-		7D8A1A6E1E984196006401A1 /* ImagesPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImagesPickerCell.xib; path = Marketplace/ImagesPickerCell.xib; sourceTree = "<group>"; };
+		7D8A1A611E983959006401A1 /* ImagesRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagesRow.swift; path = Marketplace/ImagesRow.swift; sourceTree = "<group>"; };
+		7D8A1A691E983B67006401A1 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCollectionViewCell.swift; path = Marketplace/ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		7D8A1A6A1E983B67006401A1 /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageCollectionViewCell.xib; path = Marketplace/ImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		7D8A1A6E1E984196006401A1 /* ImagesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImagesCell.xib; path = Marketplace/ImagesCell.xib; sourceTree = "<group>"; };
 		7D8A1A701E9848E1006401A1 /* ImagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
 		7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselFlowLayout.swift; sourceTree = "<group>"; };
 		7D996A941E97025F00466A21 /* ListingsFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsFilterTableViewController.swift; sourceTree = "<group>"; };
@@ -241,10 +243,10 @@
 		2237DBE11E97004000520CAD /* AddListing */ = {
 			isa = PBXGroup;
 			children = (
-				7D8A1A611E983959006401A1 /* ImagesPickerCell.swift */,
-				7D8A1A6E1E984196006401A1 /* ImagesPickerCell.xib */,
-				7D8A1A691E983B67006401A1 /* ImagePickerCollectionViewCell.swift */,
-				7D8A1A6A1E983B67006401A1 /* ImagePickerCollectionViewCell.xib */,
+				7D8A1A611E983959006401A1 /* ImagesRow.swift */,
+				7D8A1A6E1E984196006401A1 /* ImagesCell.xib */,
+				7D8A1A691E983B67006401A1 /* ImageCollectionViewCell.swift */,
+				7D8A1A6A1E983B67006401A1 /* ImageCollectionViewCell.xib */,
 			);
 			name = AddListing;
 			sourceTree = "<group>";
@@ -365,6 +367,7 @@
 				7D996A941E97025F00466A21 /* ListingsFilterTableViewController.swift */,
 				7D8A1A5B1E9825FF006401A1 /* AddListingViewController.swift */,
 				7D8A1A701E9848E1006401A1 /* ImagePickerViewController.swift */,
+				7D33C2121E989FBA00101751 /* ImageCollection.swift */,
 			);
 			path = Marketplace;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				TargetAttributes = {
 					7D043A4B1E5BF7EF0003A853 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = LVQAV2S2JC;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -600,8 +604,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D8A1A6F1E984196006401A1 /* ImagesPickerCell.xib in Resources */,
-				7D8A1A6C1E983B67006401A1 /* ImagePickerCollectionViewCell.xib in Resources */,
+				7D8A1A6F1E984196006401A1 /* ImagesCell.xib in Resources */,
+				7D8A1A6C1E983B67006401A1 /* ImageCollectionViewCell.xib in Resources */,
 				7D043A5C1E5BF7EF0003A853 /* LaunchScreen.storyboard in Resources */,
 				7D043A591E5BF7EF0003A853 /* Assets.xcassets in Resources */,
 				7D043A571E5BF7EF0003A853 /* Main.storyboard in Resources */,
@@ -785,6 +789,7 @@
 				7DA6D9421E7F6F6800CD5D02 /* CourseListViewController.swift in Sources */,
 				7DE27BD71E932E1C004C2F83 /* BlurryListingDetailView.swift in Sources */,
 				7DA6D9471E7F6F6800CD5D02 /* NewsDetailTableViewController.swift in Sources */,
+				7D33C2131E989FBA00101751 /* ImageCollection.swift in Sources */,
 				22662BBE1E9682750016A1C8 /* ContactDetailViewCell.swift in Sources */,
 				7D48E12A1E92B826000981D8 /* ListingImageGalleryTableViewCell.swift in Sources */,
 				7D48E12C1E92BCBB000981D8 /* SubtitleTableViewCell.swift in Sources */,
@@ -794,7 +799,7 @@
 				7DA6D9481E7F6F6800CD5D02 /* NewsFilterTableViewController.swift in Sources */,
 				7DA6D96C1E7F6FFF00CD5D02 /* UIColor.swift in Sources */,
 				7DA6D92B1E7F6ECE00CD5D02 /* NewsItem.swift in Sources */,
-				7D8A1A631E983959006401A1 /* ImagesPickerCell.swift in Sources */,
+				7D8A1A631E983959006401A1 /* ImagesRow.swift in Sources */,
 				7DA6D95B1E7F6FC500CD5D02 /* NewsItemTableViewCell.swift in Sources */,
 				7D7164DF1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift in Sources */,
 				7D7164E31E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift in Sources */,
@@ -818,7 +823,7 @@
 				7D8A1A5E1E982E02006401A1 /* CurrencyFormatter.swift in Sources */,
 				7D48E1221E9212B6000981D8 /* Product.swift in Sources */,
 				7DA6D9431E7F6F6800CD5D02 /* CoursePageViewController.swift in Sources */,
-				7D8A1A6B1E983B67006401A1 /* ImagePickerCollectionViewCell.swift in Sources */,
+				7D8A1A6B1E983B67006401A1 /* ImageCollectionViewCell.swift in Sources */,
 				7DA6D92C1E7F6ECE00CD5D02 /* Course.swift in Sources */,
 				7DA6D96A1E7F6FFF00CD5D02 /* String+CGFloat.swift in Sources */,
 				7D7164E11E95AF930027EDD5 /* CourseTableViewDataSource.swift in Sources */,
@@ -984,7 +989,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LVQAV2S2JC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TUHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1003,7 +1008,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LVQAV2S2JC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TUHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

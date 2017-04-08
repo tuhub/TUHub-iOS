@@ -1,5 +1,5 @@
 //
-//  ImagePickerCollectionViewCell.swift
+//  ImageCollectionViewCell.swift
 //  TUHub
 //
 //  Created by Connor Crawford on 4/7/17.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ImagePickerCollectionViewCell: UICollectionViewCell {
+class ImageCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var placeHolderImageView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
     }
 
 }
