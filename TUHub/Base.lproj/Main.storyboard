@@ -58,7 +58,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="135"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="1Fh-qW-kNY" id="R4P-Lh-efj">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="134.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RdT-S0-Tco">
@@ -258,7 +258,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bSK-tR-HyU" id="i9k-wl-qMC">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNV-vx-Wta">
@@ -692,7 +692,7 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="191"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="FNp-FD-dEp" id="SgO-fa-5jz">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="191"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="190.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView verifyAmbiguity="ignoreSizes" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2vB-EZ-Ae3">
@@ -780,7 +780,7 @@
                                         <rect key="frame" x="0.0" y="307" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="meS-GH-4zQ" id="Qce-zH-aoj">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="RFM-xc-hiS">
@@ -871,7 +871,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="77"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="RJ1-VN-HGe" id="OHJ-rD-l7w">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="76.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="p87-js-n7P">
@@ -1214,7 +1214,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="63"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="Dty-OO-QR7" id="IsY-3Q-MPZ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="342" height="63"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="342" height="62.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AV3-WB-Aar">
@@ -1860,11 +1860,18 @@
                                 <action selector="didPressCancel:" destination="VXk-xB-9Yx" id="Lhk-wy-H29"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="B9o-Lv-RuY">
-                            <connections>
-                                <action selector="didPressDone:" destination="VXk-xB-9Yx" id="qpN-k8-7KH"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="done" systemItem="done" id="B9o-Lv-RuY">
+                                <connections>
+                                    <action selector="didPressDone:" destination="VXk-xB-9Yx" id="qpN-k8-7KH"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Upload" id="rU6-WV-7FM">
+                                <connections>
+                                    <segue destination="XF8-Hn-6QN" kind="show" id="THE-u8-OJP"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="doneButton" destination="B9o-Lv-RuY" id="GaK-ho-sqx"/>
@@ -1873,6 +1880,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6un-0i-yuA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3759" y="-287"/>
+        </scene>
+        <!--Upload Image ToS3 Example View Controller-->
+        <scene sceneID="JdJ-FC-LIW">
+            <objects>
+                <viewController id="XF8-Hn-6QN" customClass="UploadImageToS3ExampleViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bCw-Qw-3b2"/>
+                        <viewControllerLayoutGuide type="bottom" id="KRa-qZ-xwE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LOZ-5a-0oj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Retrieve and display uploaded image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Xi-yf-Gdg">
+                                <rect key="frame" x="16" y="86" width="343" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18.5"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzj-Wq-BdW">
+                                <rect key="frame" x="16" y="453" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Upload Image To S3"/>
+                                <connections>
+                                    <action selector="didPressUpload:" destination="XF8-Hn-6QN" eventType="touchUpInside" id="JNx-j7-CbT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRc-Tc-Wkj">
+                                <rect key="frame" x="16" y="397" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Import Image"/>
+                                <connections>
+                                    <action selector="didPressImportImage:" destination="XF8-Hn-6QN" eventType="touchUpInside" id="hj0-ZH-o4r"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CCP-tE-ke4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4618.3999999999996" y="-309.89505247376314"/>
         </scene>
         <!--Listings-->
         <scene sceneID="wVc-PS-RxO">

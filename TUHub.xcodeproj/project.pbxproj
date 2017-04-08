@@ -10,6 +10,8 @@
 		225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */; };
 		22662BBE1E9682750016A1C8 /* ContactDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */; };
 		227F304A1E930B2A00DE1752 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 227F30491E930B2900DE1752 /* MessageUI.framework */; };
+		228A3E721E99115B0015519F /* Nature.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 228A3E711E99115B0015519F /* Nature.jpeg */; };
+		22E583781E99084E004C98DD /* UploadImageToS3ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E583771E99084E004C98DD /* UploadImageToS3ExampleViewController.swift */; };
 		37FD610AAB987235177A1533 /* Pods_TUHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C369AC415ABB8738F6351247 /* Pods_TUHubTests.framework */; };
 		7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A4F1E5BF7EF0003A853 /* AppDelegate.swift */; };
 		7D043A571E5BF7EF0003A853 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D043A551E5BF7EF0003A853 /* Main.storyboard */; };
@@ -107,6 +109,8 @@
 		225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingDetailTableViewController.swift; sourceTree = "<group>"; };
 		22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailViewCell.swift; sourceTree = "<group>"; };
 		227F30491E930B2900DE1752 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		228A3E711E99115B0015519F /* Nature.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Nature.jpeg; sourceTree = "<group>"; };
+		22E583771E99084E004C98DD /* UploadImageToS3ExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadImageToS3ExampleViewController.swift; sourceTree = "<group>"; };
 		3361CEFB73AA8E72E9E0B46D /* Pods-TUHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubTests/Pods-TUHubTests.release.xcconfig"; sourceTree = "<group>"; };
 		3BBBD4D5AE6A3197E62F3182 /* Pods-TUHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6DDB0DADD33842008B60C6C1 /* Pods-TUHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -795,6 +799,7 @@
 				7D48E12C1E92BCBB000981D8 /* SubtitleTableViewCell.swift in Sources */,
 				7D7FD0161E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift in Sources */,
 				7DA6D9671E7F6FFF00CD5D02 /* JSON+Date.swift in Sources */,
+				22E583781E99084E004C98DD /* UploadImageToS3ExampleViewController.swift in Sources */,
 				7DA6D9651E7F6FFF00CD5D02 /* Date+String.swift in Sources */,
 				7DA6D9481E7F6F6800CD5D02 /* NewsFilterTableViewController.swift in Sources */,
 				7DA6D96C1E7F6FFF00CD5D02 /* UIColor.swift in Sources */,
