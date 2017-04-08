@@ -7,12 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		221B07CB1E90386600921866 /* AddListingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B07CA1E90386600921866 /* AddListingTableViewController.swift */; };
-		2237DBE31E9711AE00520CAD /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237DBE21E9711AE00520CAD /* CategoryTableViewCell.swift */; };
 		225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */; };
 		22662BBE1E9682750016A1C8 /* ContactDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */; };
 		227F304A1E930B2A00DE1752 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 227F30491E930B2900DE1752 /* MessageUI.framework */; };
-		22C3D3591E97369C005897DE /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C3D3581E97369C005897DE /* ImageTableViewCell.swift */; };
 		37FD610AAB987235177A1533 /* Pods_TUHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C369AC415ABB8738F6351247 /* Pods_TUHubTests.framework */; };
 		7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A4F1E5BF7EF0003A853 /* AppDelegate.swift */; };
 		7D043A571E5BF7EF0003A853 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D043A551E5BF7EF0003A853 /* Main.storyboard */; };
@@ -36,9 +33,15 @@
 		7D7FD0131E85ADE800CE769F /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0121E85ADE800CE769F /* MapsViewController.swift */; };
 		7D7FD0161E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */; };
 		7D7FD0181E85B18700CE769F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7FD0171E85B18700CE769F /* MapKit.framework */; };
+		7D8A1A5C1E9825FF006401A1 /* AddListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A1A5B1E9825FF006401A1 /* AddListingViewController.swift */; };
+		7D8A1A5E1E982E02006401A1 /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A1A5D1E982E01006401A1 /* CurrencyFormatter.swift */; };
+		7D8A1A631E983959006401A1 /* ImagesPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A1A611E983959006401A1 /* ImagesPickerCell.swift */; };
+		7D8A1A6B1E983B67006401A1 /* ImagePickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A1A691E983B67006401A1 /* ImagePickerCollectionViewCell.swift */; };
+		7D8A1A6C1E983B67006401A1 /* ImagePickerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D8A1A6A1E983B67006401A1 /* ImagePickerCollectionViewCell.xib */; };
+		7D8A1A6F1E984196006401A1 /* ImagesPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D8A1A6E1E984196006401A1 /* ImagesPickerCell.xib */; };
+		7D8A1A711E9848E1006401A1 /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A1A701E9848E1006401A1 /* ImagePickerViewController.swift */; };
 		7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */; };
 		7D996A951E97025F00466A21 /* ListingsFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D996A941E97025F00466A21 /* ListingsFilterTableViewController.swift */; };
-		7D996A971E97E3BE00466A21 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D996A961E97E3BE00466A21 /* PickerTableViewCell.swift */; };
 		7DA6D92A1E7F6ECE00CD5D02 /* CourseSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9201E7F6ECE00CD5D02 /* CourseSearchResult.swift */; };
 		7DA6D92B1E7F6ECE00CD5D02 /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9211E7F6ECE00CD5D02 /* NewsItem.swift */; };
 		7DA6D92C1E7F6ECE00CD5D02 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9221E7F6ECE00CD5D02 /* Course.swift */; };
@@ -100,12 +103,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		221B07CA1E90386600921866 /* AddListingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListingTableViewController.swift; sourceTree = "<group>"; };
-		2237DBE21E9711AE00520CAD /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingDetailTableViewController.swift; sourceTree = "<group>"; };
 		22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailViewCell.swift; sourceTree = "<group>"; };
 		227F30491E930B2900DE1752 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		22C3D3581E97369C005897DE /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		3361CEFB73AA8E72E9E0B46D /* Pods-TUHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubTests/Pods-TUHubTests.release.xcconfig"; sourceTree = "<group>"; };
 		3BBBD4D5AE6A3197E62F3182 /* Pods-TUHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6DDB0DADD33842008B60C6C1 /* Pods-TUHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,9 +137,15 @@
 		7D7FD0121E85ADE800CE769F /* MapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsViewController.swift; path = Maps/MapsViewController.swift; sourceTree = "<group>"; };
 		7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsSearchResultsTableViewController.swift; path = Maps/MapsSearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		7D7FD0171E85B18700CE769F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		7D8A1A5B1E9825FF006401A1 /* AddListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListingViewController.swift; sourceTree = "<group>"; };
+		7D8A1A5D1E982E01006401A1 /* CurrencyFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
+		7D8A1A611E983959006401A1 /* ImagesPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagesPickerCell.swift; path = Marketplace/ImagesPickerCell.swift; sourceTree = "<group>"; };
+		7D8A1A691E983B67006401A1 /* ImagePickerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagePickerCollectionViewCell.swift; path = Marketplace/ImagePickerCollectionViewCell.swift; sourceTree = "<group>"; };
+		7D8A1A6A1E983B67006401A1 /* ImagePickerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImagePickerCollectionViewCell.xib; path = Marketplace/ImagePickerCollectionViewCell.xib; sourceTree = "<group>"; };
+		7D8A1A6E1E984196006401A1 /* ImagesPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImagesPickerCell.xib; path = Marketplace/ImagesPickerCell.xib; sourceTree = "<group>"; };
+		7D8A1A701E9848E1006401A1 /* ImagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
 		7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselFlowLayout.swift; sourceTree = "<group>"; };
 		7D996A941E97025F00466A21 /* ListingsFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsFilterTableViewController.swift; sourceTree = "<group>"; };
-		7D996A961E97E3BE00466A21 /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PickerTableViewCell.swift; path = Marketplace/PickerTableViewCell.swift; sourceTree = "<group>"; };
 		7DA6D9201E7F6ECE00CD5D02 /* CourseSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CourseSearchResult.swift; path = Models/CourseSearchResult.swift; sourceTree = "<group>"; };
 		7DA6D9211E7F6ECE00CD5D02 /* NewsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsItem.swift; path = Models/NewsItem.swift; sourceTree = "<group>"; };
 		7DA6D9221E7F6ECE00CD5D02 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Course.swift; path = Models/Course.swift; sourceTree = "<group>"; };
@@ -235,9 +241,10 @@
 		2237DBE11E97004000520CAD /* AddListing */ = {
 			isa = PBXGroup;
 			children = (
-				2237DBE21E9711AE00520CAD /* CategoryTableViewCell.swift */,
-				22C3D3581E97369C005897DE /* ImageTableViewCell.swift */,
-				7D996A961E97E3BE00466A21 /* PickerTableViewCell.swift */,
+				7D8A1A611E983959006401A1 /* ImagesPickerCell.swift */,
+				7D8A1A6E1E984196006401A1 /* ImagesPickerCell.xib */,
+				7D8A1A691E983B67006401A1 /* ImagePickerCollectionViewCell.swift */,
+				7D8A1A6A1E983B67006401A1 /* ImagePickerCollectionViewCell.xib */,
 			);
 			name = AddListing;
 			sourceTree = "<group>";
@@ -333,8 +340,8 @@
 				7DA6D9211E7F6ECE00CD5D02 /* NewsItem.swift */,
 				7D4E57EC1E920389000B7719 /* Listing.swift */,
 				7D48E1211E9212B6000981D8 /* Product.swift */,
-				7D4E57F41E9211AD000B7719 /* Personal.swift */,
 				7D4E57F51E9211AD000B7719 /* Job.swift */,
+				7D4E57F41E9211AD000B7719 /* Personal.swift */,
 				7DE27BDA1E93458D004C2F83 /* MarketplaceUser.swift */,
 			);
 			name = Models;
@@ -355,8 +362,9 @@
 			children = (
 				7D439E021E8D6F4400FF5538 /* ListingsCollectionViewController.swift */,
 				225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */,
-				221B07CA1E90386600921866 /* AddListingTableViewController.swift */,
 				7D996A941E97025F00466A21 /* ListingsFilterTableViewController.swift */,
+				7D8A1A5B1E9825FF006401A1 /* AddListingViewController.swift */,
+				7D8A1A701E9848E1006401A1 /* ImagePickerViewController.swift */,
 			);
 			path = Marketplace;
 			sourceTree = "<group>";
@@ -452,6 +460,7 @@
 				7DA6D9641E7F6FFF00CD5D02 /* UIColor.swift */,
 				7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */,
 				7DCC7F1A1E9454E900714100 /* UITableView+UIActivityIndicator.swift */,
+				7D8A1A5D1E982E01006401A1 /* CurrencyFormatter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -591,6 +600,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D8A1A6F1E984196006401A1 /* ImagesPickerCell.xib in Resources */,
+				7D8A1A6C1E983B67006401A1 /* ImagePickerCollectionViewCell.xib in Resources */,
 				7D043A5C1E5BF7EF0003A853 /* LaunchScreen.storyboard in Resources */,
 				7D043A591E5BF7EF0003A853 /* Assets.xcassets in Resources */,
 				7D043A571E5BF7EF0003A853 /* Main.storyboard in Resources */,
@@ -763,13 +774,11 @@
 				7DA6D9581E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift in Sources */,
 				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
 				7DCC7F1B1E9454E900714100 /* UITableView+UIActivityIndicator.swift in Sources */,
-				22C3D3591E97369C005897DE /* ImageTableViewCell.swift in Sources */,
 				225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */,
 				7D4E57F61E9211AD000B7719 /* Personal.swift in Sources */,
 				7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */,
 				7DA6D9301E7F6ECE00CD5D02 /* Term.swift in Sources */,
 				7DA6D9591E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift in Sources */,
-				221B07CB1E90386600921866 /* AddListingTableViewController.swift in Sources */,
 				7DA6D92A1E7F6ECE00CD5D02 /* CourseSearchResult.swift in Sources */,
 				7D48E1261E92B802000981D8 /* TextViewTableViewCell.swift in Sources */,
 				7DA6D9561E7F6FC500CD5D02 /* CourseCalendarView.swift in Sources */,
@@ -785,6 +794,7 @@
 				7DA6D9481E7F6F6800CD5D02 /* NewsFilterTableViewController.swift in Sources */,
 				7DA6D96C1E7F6FFF00CD5D02 /* UIColor.swift in Sources */,
 				7DA6D92B1E7F6ECE00CD5D02 /* NewsItem.swift in Sources */,
+				7D8A1A631E983959006401A1 /* ImagesPickerCell.swift in Sources */,
 				7DA6D95B1E7F6FC500CD5D02 /* NewsItemTableViewCell.swift in Sources */,
 				7D7164DF1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift in Sources */,
 				7D7164E31E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift in Sources */,
@@ -793,7 +803,6 @@
 				7D48E1291E92B826000981D8 /* TextFieldTableViewCell.swift in Sources */,
 				7DA6D95A1E7F6FC500CD5D02 /* NewsImageGalleryTableViewCell.swift in Sources */,
 				7DA6D92E1E7F6ECE00CD5D02 /* NetworkManager.swift in Sources */,
-				2237DBE31E9711AE00520CAD /* CategoryTableViewCell.swift in Sources */,
 				7DA6D9691E7F6FFF00CD5D02 /* String+Boyer-Moore-Horspool.swift in Sources */,
 				7DA6D9321E7F6ECE00CD5D02 /* Credential.swift in Sources */,
 				7DA6D9571E7F6FC500CD5D02 /* CourseDetailHeaderTableViewCell.swift in Sources */,
@@ -804,16 +813,19 @@
 				7DE27BD91E932E3A004C2F83 /* ListingDetailView.swift in Sources */,
 				7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */,
 				7DA6D9461E7F6F6800CD5D02 /* CourseViewController.swift in Sources */,
+				7D8A1A5C1E9825FF006401A1 /* AddListingViewController.swift in Sources */,
 				7DA6D92F1E7F6ECE00CD5D02 /* CourseMeeting.swift in Sources */,
-				7D996A971E97E3BE00466A21 /* PickerTableViewCell.swift in Sources */,
+				7D8A1A5E1E982E02006401A1 /* CurrencyFormatter.swift in Sources */,
 				7D48E1221E9212B6000981D8 /* Product.swift in Sources */,
 				7DA6D9431E7F6F6800CD5D02 /* CoursePageViewController.swift in Sources */,
+				7D8A1A6B1E983B67006401A1 /* ImagePickerCollectionViewCell.swift in Sources */,
 				7DA6D92C1E7F6ECE00CD5D02 /* Course.swift in Sources */,
 				7DA6D96A1E7F6FFF00CD5D02 /* String+CGFloat.swift in Sources */,
 				7D7164E11E95AF930027EDD5 /* CourseTableViewDataSource.swift in Sources */,
 				7DA6D9311E7F6ECE00CD5D02 /* Grade.swift in Sources */,
 				7D7FD0131E85ADE800CE769F /* MapsViewController.swift in Sources */,
 				7D4E57ED1E920389000B7719 /* Listing.swift in Sources */,
+				7D8A1A711E9848E1006401A1 /* ImagePickerViewController.swift in Sources */,
 				7D7FD0111E85922300CE769F /* String+NSRegularExpression.swift in Sources */,
 				7DA6D9491E7F6F6800CD5D02 /* NewsTableViewController.swift in Sources */,
 				7DA6D9451E7F6F6800CD5D02 /* CourseSearchTableViewController.swift in Sources */,

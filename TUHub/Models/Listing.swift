@@ -12,7 +12,8 @@ import AEXML
 
 private let s3DateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "YYYYMMDD'T'HHMMSS'Z'"
+    dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+    dateFormatter.dateFormat = "yyyyMMdd'T'hhmmss'Z'"
     return dateFormatter
 }()
 
@@ -33,7 +34,6 @@ class Listing {
     fileprivate(set) var photoPaths: [String]?
     fileprivate(set) var owner: MarketplaceUser?
     fileprivate var photosDirectory: String?
-    fileprivate var thumbnail: UIImage?
     
     required init?(json: JSON) {
         guard
@@ -93,22 +93,6 @@ class Listing {
                 log.error(error)
             } else if let user = user {
                 self.owner = user
-            }
-        }
-    }
-    
-    func retrieveThumbnail(_ responseHandler: @escaping (UIImage?, Error?) -> Void) {
-        retrievePhotoPaths { (paths, error) in
-            if let path = paths?.first {
-                NetworkManager.shared.download(imageURL: "https://tumobilemarketplace.s3.amazonaws.com/\(path)") { (image, error) in
-                    self.thumbnail = image
-                    if let error = error {
-                        log.error("Unable to retrieve thumbanil. Error: \(error)")
-                    }
-                    responseHandler(image, error)
-                }
-            } else {
-                responseHandler(nil, error)
             }
         }
     }
