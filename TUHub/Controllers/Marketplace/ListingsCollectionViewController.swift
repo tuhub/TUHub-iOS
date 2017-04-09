@@ -22,6 +22,8 @@ class ListingsCollectionViewController: TLCollectionViewController {
     
     private lazy var lock = NSLock()
     
+    @IBOutlet weak var composeButton: UIBarButtonItem!
+
     let searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.tintColor = .cherry
@@ -57,6 +59,11 @@ class ListingsCollectionViewController: TLCollectionViewController {
         searchController.searchBar.frame = CGRect(origin: .zero,
                                                   size: CGSize(width: collectionView!.frame.width,
                                                                height: 44))
+        
+        // Compose button should be disabled until we can authenticate the user
+        composeButton.isEnabled = false
+        
+        // Add the search bar above the collection view
         collectionView!.addSubview(searchController.searchBar)
         
         if #available(iOS 10.0, *) {
@@ -66,6 +73,34 @@ class ListingsCollectionViewController: TLCollectionViewController {
         
         // Set up the collection view's appearance
         setupCollectionView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if MarketplaceUser.current == nil {
+            self.composeButton.isEnabled = false
+            if let userId = User.current?.username {
+                MarketplaceUser.retrieve(user: userId) { (user, error) in
+                    
+                    if let error = error {
+                        log.error(error)
+                    }
+                    else if let user = user {
+                        MarketplaceUser.current = user
+                        self.composeButton.isEnabled = true
+                        return
+                    }
+                    
+                    // Display sign up
+                    let signUpVC = MarketplaceSignUpViewController()
+                    signUpVC.userId = userId
+                    let navVC = UINavigationController(rootViewController: signUpVC)
+                    self.present(navVC, animated: true, completion: nil)
+                }
+            }
+        } else {
+            self.composeButton.isEnabled = true
+        }
     }
     
     func refreshListings() {

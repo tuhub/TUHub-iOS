@@ -28,6 +28,7 @@
 		7D4E57ED1E920389000B7719 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E57EC1E920389000B7719 /* Listing.swift */; };
 		7D4E57F61E9211AD000B7719 /* Personal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E57F41E9211AD000B7719 /* Personal.swift */; };
 		7D4E57F71E9211AD000B7719 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E57F51E9211AD000B7719 /* Job.swift */; };
+		7D5F61A21E9A827A000A1F1A /* MarketplaceSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5F61A11E9A827A000A1F1A /* MarketplaceSignUpViewController.swift */; };
 		7D7164DF1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7164DE1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift */; };
 		7D7164E11E95AF930027EDD5 /* CourseTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7164E01E95AF930027EDD5 /* CourseTableViewDataSource.swift */; };
 		7D7164E31E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7164E21E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift */; };
@@ -134,6 +135,7 @@
 		7D4E57EC1E920389000B7719 /* Listing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Listing.swift; path = Models/Listing.swift; sourceTree = "<group>"; };
 		7D4E57F41E9211AD000B7719 /* Personal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Personal.swift; path = Models/Personal.swift; sourceTree = "<group>"; };
 		7D4E57F51E9211AD000B7719 /* Job.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Job.swift; path = Models/Job.swift; sourceTree = "<group>"; };
+		7D5F61A11E9A827A000A1F1A /* MarketplaceSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceSignUpViewController.swift; sourceTree = "<group>"; };
 		7D7164DE1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSearchResultTableViewDataSource.swift; sourceTree = "<group>"; };
 		7D7164E01E95AF930027EDD5 /* CourseTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewDataSource.swift; sourceTree = "<group>"; };
 		7D7164E21E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailTableViewControllerCellType.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				7D996A941E97025F00466A21 /* ListingsFilterTableViewController.swift */,
 				7D8A1A5B1E9825FF006401A1 /* AddListingViewController.swift */,
 				7D8A1A701E9848E1006401A1 /* ImagePickerViewController.swift */,
+				7D5F61A11E9A827A000A1F1A /* MarketplaceSignUpViewController.swift */,
 			);
 			path = Marketplace;
 			sourceTree = "<group>";
@@ -800,6 +803,7 @@
 				7D7FD0161E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift in Sources */,
 				7DA6D9671E7F6FFF00CD5D02 /* JSON+Date.swift in Sources */,
 				7DA6D9651E7F6FFF00CD5D02 /* Date+String.swift in Sources */,
+				7D5F61A21E9A827A000A1F1A /* MarketplaceSignUpViewController.swift in Sources */,
 				7DA6D9481E7F6F6800CD5D02 /* NewsFilterTableViewController.swift in Sources */,
 				7DA6D96C1E7F6FFF00CD5D02 /* UIColor.swift in Sources */,
 				7DA6D92B1E7F6ECE00CD5D02 /* NewsItem.swift in Sources */,

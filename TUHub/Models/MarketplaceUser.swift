@@ -10,11 +10,7 @@ import SwiftyJSON
 
 struct MarketplaceUser {
     
-    static var current: MarketplaceUser? = MarketplaceUser(id: "tue91477",
-                                                           email: "tue91477@temple.edu",
-                                                           firstName: "Connor",
-                                                           lastName: "C",
-                                                           phone: nil)
+    static var current: MarketplaceUser?
     
     fileprivate(set) var userId: String
     fileprivate(set) var email: String
@@ -63,6 +59,7 @@ struct MarketplaceUser {
             defer { responseHandler(user, error) }
             
             let json = JSON(data)
+            debugPrint(json)
             if let usersJSON = json["userList"].array, let userJSON = usersJSON.first {
                 user = MarketplaceUser(json: userJSON)
             }

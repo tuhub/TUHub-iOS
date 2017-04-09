@@ -156,9 +156,6 @@ class AddListingViewController: FormViewController {
     }
     
     func shouldEnableDoneButton() -> Bool {
-        for e in form.validate(includeHidden: false) {
-            debugPrint(e)
-        }
         return form.validate(includeHidden: false).count == 0
     }
     
