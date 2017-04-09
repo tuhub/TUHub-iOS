@@ -12,17 +12,17 @@ import AWSS3
 final class AWS {
     static let bucket = "tumobilemarketplace"
     
-    static func upload(images: [UIImage], _ responseHandler: @escaping (Error?)->Void) -> String {
+    static func upload(folder: String, images: [UIImage], _ responseHandler: @escaping (Error?)->Void) { // -> String {
         
-        let folder = ProcessInfo.processInfo.globallyUniqueString
+//        let folder = ProcessInfo.processInfo.globallyUniqueString
         let bucket = AWS.bucket + "/" + folder
         let ext = "jpeg"
         
         DispatchQueue.global(qos: .userInitiated).async {
             
-            for image in images {
+            for (i, image) in images.enumerated() {
                 if let url = AWS.writeImageToFile(image) {
-                    let file = url.lastPathComponent
+                    let file = "\(i)"
                     
                     // build an upload request
                     guard let uploadRequest = AWSS3TransferManagerUploadRequest() else {
@@ -43,7 +43,7 @@ final class AWS {
                         }
                         
                         if task.result != nil {
-                            let s3URL = URL(string: "http://s3.amazonaws.com/\(AWS.bucket)/\(uploadRequest.key!)")!
+                            let s3URL = URL(string: "http://s3.amazonaws.com/\(bucket)/\(uploadRequest.key!)")!
                             print("Uploaded to:\n\(s3URL)")
                         }
                         else {
@@ -58,7 +58,7 @@ final class AWS {
             }
         }
         
-        return folder
+//        return folder
     }
     
     private static func writeImageToFile(_ image: UIImage) -> URL? {

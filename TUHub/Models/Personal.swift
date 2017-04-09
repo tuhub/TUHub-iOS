@@ -35,7 +35,7 @@ class Personal: Listing {
         super.init(title: title, desc: desc, ownerID: ownerID, photosDir: photosDir)
     }
     
-    override func post(_ responseHandler: @escaping (Error?) -> Void) {
+    override func post(_ responseHandler: @escaping (_ listingID: String?, Error?) -> Void) {
         
         var qParams: [String : Any] = ["title" : title,
                                        "isActive" : "true",
@@ -50,9 +50,22 @@ class Personal: Listing {
         }
         
         NetworkManager.shared.request(toEndpoint: .marketplace, pathParameters: ["insert_personal.jsp"], queryParameters: qParams) { (data, error) in
-            debugPrint(data ?? "")
-            debugPrint(error ?? "")
-            responseHandler(error)
+            
+            guard let data = data else { responseHandler(nil, error); return }
+            
+            let json = JSON(data: data)
+            debugPrint(json)
+            let errorStr = json["error"].string
+            if errorStr == nil || errorStr!.characters.count == 0 {
+                // Successfully posted, now go get the post ID to get the photo directory
+                Personal.retrieve(belongingTo: self.ownerID) { (personals, error) in
+                    if let personal = personals?.first {
+                        responseHandler(personal.photosDirectory!, error)
+                    }
+                }
+            } else {
+                responseHandler(nil, error)
+            }
         }
     }
     
@@ -65,6 +78,15 @@ class Personal: Listing {
         
         if let personalsJSON = json["personalList"].array {
             personals = personalsJSON.flatMap { Personal(json: $0) }
+        }
+    }
+    
+    private class func retrieve(belongingTo userID: String, _ responseHandler: @escaping ([Personal]?, Error?) -> Void) {
+        NetworkManager.shared.request(fromEndpoint: .marketplace,
+                                      pathParameters: ["find_personals_by_user_id.jsp"],
+                                      queryParameters: ["userId" : userID])
+        { (data, error) in
+            handle(response: data, error: error, responseHandler)
         }
     }
     

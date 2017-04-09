@@ -54,17 +54,17 @@ class Job: Listing {
     init(title: String, desc: String?, ownerID: String, photosDir: String?, location: String?, hours: Int, pay: Double, startDate: Date) {
         self.location = location
         self.hoursPerWeek = hours
-        self.pay = String(format: "$%.02f", locale: Locale.current, arguments: [pay])
+        self.pay = String(format: "%.02f", locale: Locale.current, arguments: [pay])
         self.startDate = startDate
         super.init(title: title, desc: desc, ownerID: ownerID, photosDir: photosDir)
     }
     
-    override func post(_ responseHandler: @escaping (Error?) -> Void) {
+    override func post(_ responseHandler: @escaping (_ listingID: String?, Error?) -> Void) {
         
         var qParams: [String : Any] = ["title" : title,
                                        "pay" : pay,
                                        "hoursPerWeek" : hoursPerWeek,
-                                       "startDate" : dateFormatter.string(from: startDate),
+                                       "startDate" : postDateFormatter.string(from: startDate),
                                        "isActive" : "true",
                                        "ownerId" : ownerID]
         
@@ -77,9 +77,23 @@ class Job: Listing {
         }
         
         NetworkManager.shared.request(toEndpoint: .marketplace, pathParameters: ["insert_job.jsp"], queryParameters: qParams) { (data, error) in
-            debugPrint(data ?? "")
-            debugPrint(error ?? "")
-            responseHandler(error)
+            
+            guard let data = data else { responseHandler(nil, error); return }
+            
+            let json = JSON(data: data)
+            let errorStr = json["error"].string
+            if errorStr == nil || errorStr!.characters.count == 0 {
+                // Successfully posted, now go get the post ID to get the photo directory
+                Job.retrieve(belongingTo: self.ownerID) { (jobs, error) in
+                    if let job = jobs?.first {
+                        responseHandler(job.photosDirectory!, error)
+                    } else {
+                        responseHandler(nil, error)
+                    }
+                }
+            } else {
+                responseHandler(nil, error)
+            }
         }
     }
 
@@ -93,6 +107,15 @@ class Job: Listing {
         
         if let jobsJSON = json["jobList"].array {
             jobs = jobsJSON.flatMap { Job(json: $0) }
+        }
+    }
+    
+    private class func retrieve(belongingTo userID: String, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {
+        NetworkManager.shared.request(fromEndpoint: .marketplace,
+                                      pathParameters: ["find_jobs_by_user_id.jsp"],
+                                      queryParameters: ["userId" : userID])
+        { (data, error) in
+            handle(response: data, error: error, responseHandler)
         }
     }
     

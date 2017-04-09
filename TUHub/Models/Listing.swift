@@ -82,8 +82,10 @@ class Listing {
                 let xmlDoc = try AEXMLDocument(xml: xmlData)
                 let contentsXML = xmlDoc.root.children.filter({ $0.name == "Contents" && $0["Key"].string != prefix })
                 
-                filePaths = []
                 for item in contentsXML {
+                    if filePaths == nil {
+                        filePaths = []
+                    }
                     filePaths!.append(item["Key"].string)
                 }
                 self.photoPaths = filePaths
@@ -104,7 +106,7 @@ class Listing {
         }
     }
     
-    func post(_ responseHandler: @escaping (Error?) -> Void) {
+    func post(_ responseHandler: @escaping (_ listingID: String?, Error?) -> Void) {
         fatalError("Function not implemented in Listing supertype")
     }
     

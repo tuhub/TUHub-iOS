@@ -35,7 +35,7 @@ class Product: Listing {
         super.init(title: title, desc: desc, ownerID: ownerID, photosDir: photosDir)
     }
     
-    override func post(_ responseHandler: @escaping (Error?) -> Void) {
+    override func post(_ responseHandler: @escaping (_ listingID: String?, Error?) -> Void) {
         
         var qParams: [String : Any] = ["title" : title,
                                        "price" : price,
@@ -45,21 +45,24 @@ class Product: Listing {
         if let desc = description {
             qParams["description"] = desc
         }
-        
-        if let picFolder = photosDirectory {
-            qParams["picFolder"] = picFolder
-        }
-        
+                
         NetworkManager.shared.request(toEndpoint: .marketplace, pathParameters: ["insert_product.jsp"], queryParameters: qParams) { (data, error) in
             
+            guard let data = data else { responseHandler(nil, error); return }
             
-            if let data = data {
-                let json = JSON(data: data)
-                debugPrint(json)
+            let json = JSON(data: data)
+            let errorStr = json["error"].string
+            if errorStr == nil || errorStr!.characters.count == 0 {
+                // Successfully posted, now go get the post ID to get the photo directory
+                Product.retrieve(belongingTo: self.ownerID) { (products, error) in
+                    if let product = products?.first {
+                        responseHandler(product.photosDirectory!, error)
+                    }
+                }
+            } else {
+                responseHandler(nil, error)
             }
             
-            debugPrint(error ?? "")
-            responseHandler(error)
         }
     }
     
@@ -72,6 +75,15 @@ class Product: Listing {
         
         if let productsJSON = json["productList"].array {
             products = productsJSON.flatMap { Product(json: $0) }
+        }
+    }
+    
+    class func retrieve(belongingTo userID: String, _ responseHandler: @escaping ([Product]?, Error?) -> Void) {
+        NetworkManager.shared.request(fromEndpoint: .marketplace,
+                                      pathParameters: ["find_products_by_user_id.jsp"],
+                                      queryParameters: ["userId" : userID])
+        { (data, error) in
+            handle(response: data, error: error, responseHandler)
         }
     }
     

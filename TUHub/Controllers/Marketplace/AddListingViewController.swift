@@ -180,21 +180,12 @@ class AddListingViewController: FormViewController {
         let desc = values["descRow"] as? String
         let photos = (values["imagesRow"] as? ImageCollection)?.images
         
-        var photosDir: String?
-        if let photos = photos {
-            photosDir = AWS.upload(images: photos) { error in
-                if let error = error {
-                    // TODO: Handle error
-                }
-            }
-        }
-        
         switch tag {
         case Listing.Kind.product.rawValue:
             
             // Get attributes for Product
             if let price = values["priceRow"] as? Double {
-                listing = Product(title: title, desc: desc, ownerID: user.userId, photosDir: photosDir, price: price)
+                listing = Product(title: title, desc: desc, ownerID: user.userId, photosDir: nil, price: price)
             }
         case Listing.Kind.job.rawValue:
             
@@ -202,16 +193,25 @@ class AddListingViewController: FormViewController {
                 
                 let loc = values["locRow"] as? String
                 
-                listing = Job(title: title, desc: desc, ownerID: user.userId, photosDir: photosDir, location: loc, hours: hours, pay: pay, startDate: date)
+                listing = Job(title: title, desc: desc, ownerID: user.userId, photosDir: nil, location: loc, hours: hours, pay: pay, startDate: date)
             }
         case Listing.Kind.personal.rawValue:
             let loc = values["locRow"] as? String
-            listing = Personal(title: title, desc: desc, ownerID: user.userId, photosDir: photosDir, location: loc)
+            listing = Personal(title: title, desc: desc, ownerID: user.userId, photosDir: nil, location: loc)
         default:
             assert(false)
         }
         
-        listing?.post { error in
+        // Post the listing, then get its ID after it's posted to use for the S3 folder name
+        listing?.post { (listingID, error) in
+            if let listingID = listingID, let photos = photos {
+                AWS.upload(folder: listingID, images: photos) { error in
+                    if let error = error {
+                        // TODO: Handle error
+                    }
+                }
+            }
+            
             self.dismiss(animated: true, completion: nil)
         }
         
