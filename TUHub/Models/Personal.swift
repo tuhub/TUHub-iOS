@@ -12,7 +12,7 @@ private let pageSize = 15
 
 class Personal: Listing {
     
-    fileprivate(set) var location: String
+    fileprivate(set) var location: String!
     
     required init?(json: JSON) {
         guard
@@ -28,6 +28,32 @@ class Personal: Listing {
         super.init(json: json)
         
         self.id = id
+    }
+    
+    init(title: String, desc: String?, ownerID: String, photosDir: String?, location: String?) {
+        self.location = location
+        super.init(title: title, desc: desc, ownerID: ownerID, photosDir: photosDir)
+    }
+    
+    override func post(_ responseHandler: @escaping (Error?) -> Void) {
+        
+        var qParams: [String : Any] = ["title" : title,
+                                       "isActive" : "true",
+                                       "ownerId" : ownerID]
+        
+        if let desc = description {
+            qParams["description"] = desc
+        }
+        
+        if let loc = location {
+            qParams["location"] = loc
+        }
+        
+        NetworkManager.shared.request(toEndpoint: .marketplace, pathParameters: ["insert_personal.jsp"], queryParameters: qParams) { (data, error) in
+            debugPrint(data ?? "")
+            debugPrint(error ?? "")
+            responseHandler(error)
+        }
     }
     
     private class func handle(response data: Data?, error: Error?, _ responseHandler: @escaping ([Personal]?, Error?) -> Void) {

@@ -37,10 +37,19 @@ class NetworkManager: NSObject {
                  queryParameters: Parameters? = nil,
                  authenticateWith credential: Credential? = nil,
                  _ responseHandler: ResponseHandler?) {
-        request(url: endpoint.rawValue, pathParameters: pathParameters, queryParameters: queryParameters, authenticateWith: credential, responseHandler)
+        request(url: endpoint.rawValue, method: .get, pathParameters: pathParameters, queryParameters: queryParameters, authenticateWith: credential, responseHandler)
+    }
+    
+    func request(toEndpoint endpoint: Endpoint,
+                 pathParameters: [String]? = nil,
+                 queryParameters: Parameters? = nil,
+                 authenticateWith credential: Credential? = nil,
+                 _ responseHandler: ResponseHandler?) {
+        request(url: endpoint.rawValue, method: .post, pathParameters: pathParameters, queryParameters: queryParameters, authenticateWith: credential, responseHandler)
     }
     
     private func request(url: String,
+                         method: HTTPMethod,
                          pathParameters: [String]?,
                          queryParameters: Parameters?,
                          authenticateWith credential: Credential?,
@@ -62,7 +71,7 @@ class NetworkManager: NSObject {
             }
         }
         
-        alamofireManager.request(url, method: .get, parameters: queryParameters, encoding: URLEncoding.default, headers: headers).responseData { (response) in
+        alamofireManager.request(url, method: method, parameters: queryParameters, encoding: URLEncoding.default, headers: headers).responseData { (response) in
             // Log error if there is one
             let error: Error? = {
                 guard case let .failure(error) = response.result else { return nil }

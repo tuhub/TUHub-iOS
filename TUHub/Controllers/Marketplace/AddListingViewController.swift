@@ -169,34 +169,52 @@ class AddListingViewController: FormViewController {
     @IBAction func didPressDone(_ sender: UIBarButtonItem) {
         // TODO: insert into DB
         let values = form.values(includeHidden: false)
-        var listing: Listing!
+        var listing: Listing?
         
-        guard let tag = form.rowBy(tag: "categoryRow")?.baseValue as? String else { return }
+        // Get attributes shared by all listings
+        guard
+            let tag = values["categoryRow"] as? String,
+            let title = values["titleRow"] as? String,
+            let user = MarketplaceUser.current
+            else { return }
+        let desc = values["descRow"] as? String
+        let photos = (values["imagesRow"] as? ImageCollection)?.images
+        
+        var photosDir: String?
+        if let photos = photos {
+            photosDir = AWS.upload(images: photos) { error in
+                if let error = error {
+                    // TODO: Handle error
+                }
+            }
+        }
+        
         switch tag {
         case Listing.Kind.product.rawValue:
-            // TODO: Create init with params other than JSON
-            // listing = Product()
-            break
+            
+            // Get attributes for Product
+            if let price = values["priceRow"] as? Double {
+                listing = Product(title: title, desc: desc, ownerID: user.userId, photosDir: photosDir, price: price)
+            }
         case Listing.Kind.job.rawValue:
-            // TODO: Create init with params other than JSON
-            // listing = job()
-            break
+            
+            if let hours = values["hoursRow"] as? Int, let pay = values["payRow"] as? Double, let date = values["startDateRow"] as? Date {
+                
+                let loc = values["locRow"] as? String
+                
+                listing = Job(title: title, desc: desc, ownerID: user.userId, photosDir: photosDir, location: loc, hours: hours, pay: pay, startDate: date)
+            }
         case Listing.Kind.personal.rawValue:
-            // TODO: Create init with params other than JSON
-            // listing = Personal()
-            break
+            let loc = values["locRow"] as? String
+            listing = Personal(title: title, desc: desc, ownerID: user.userId, photosDir: photosDir, location: loc)
         default:
             assert(false)
         }
         
-        for (key, value) in values {
-            // Add attrbite to model
-            if key == "imagesRow" {
-                if let val = value as? ImageCollection {
-                    debugPrint(val)
-                }
-            }
+        listing?.post { error in
+            self.dismiss(animated: true, completion: nil)
         }
+        
         
     }
     

@@ -273,17 +273,14 @@ extension Job: TableViewDisplayable {
         attributes.append(contentsOf: [
             (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
             (key: "Posted By", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
-            (key: "Location", value: location, cellType: .rightDetailCell)
-            ] as [TableViewAttributes])
-        
-        if let hoursPerWeek = hoursPerWeek {
-            attributes.append((key: "Hours per Week", value: "\(hoursPerWeek)", cellType: .rightDetailCell))
-        }
-        
-        attributes.append(contentsOf: [
+            (key: "Location", value: location, cellType: .rightDetailCell),
+            (key: "Hours per Week", value: "\(hoursPerWeek)", cellType: .rightDetailCell),
             (key: "Start Date", value: startDate.date, cellType: .rightDetailCell),
-            (key: "Description", value: description, cellType: .subtitleCell)
             ] as [TableViewAttributes])
+        
+        if let desc = description {
+            attributes.append((key: "Description", value: desc, cellType: .subtitleCell))
+        }
         
         return attributes
     }

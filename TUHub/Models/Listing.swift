@@ -27,13 +27,13 @@ class Listing {
     
     internal(set) var id: String!
     fileprivate(set) var title: String
-    fileprivate(set) var description: String
-    fileprivate(set) var datePosted: Date
+    fileprivate(set) var description: String?
+    fileprivate(set) var datePosted: Date!
     fileprivate(set) var ownerID: String
-    fileprivate(set) var isActive: Bool
+    fileprivate(set) var isActive: Bool!
+    fileprivate(set) var photosDirectory: String?
     fileprivate(set) var photoPaths: [String]?
     fileprivate(set) var owner: MarketplaceUser?
-    fileprivate var photosDirectory: String?
     
     required init?(json: JSON) {
         guard
@@ -53,10 +53,17 @@ class Listing {
         self.ownerID = ownerID
         self.isActive = isActive == "true"
         
-        if let photosDirectory = json["picFolder"].string {
+        if let photosDirectory = json["picFolder"].string, photosDirectory.characters.count > 0 {
             self.photosDirectory = photosDirectory
             
         }
+    }
+    
+    init(title: String, desc: String?, ownerID: String, photosDir: String?) {
+        self.title = title
+        self.description = desc
+        self.ownerID = ownerID
+        self.photosDirectory = photosDir
     }
     
     func retrievePhotoPaths(_ responseHandler: @escaping ([String]?, Error?) -> Void) {
@@ -95,6 +102,10 @@ class Listing {
                 self.owner = user
             }
         }
+    }
+    
+    func post(_ responseHandler: @escaping (Error?) -> Void) {
+        fatalError("Function not implemented in Listing supertype")
     }
     
 }

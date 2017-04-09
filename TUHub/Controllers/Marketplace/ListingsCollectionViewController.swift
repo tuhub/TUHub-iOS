@@ -59,8 +59,17 @@ class ListingsCollectionViewController: TLCollectionViewController {
                                                                height: 44))
         collectionView!.addSubview(searchController.searchBar)
         
+        if #available(iOS 10.0, *) {
+            collectionView?.refreshControl = UIRefreshControl()
+            collectionView?.refreshControl?.addTarget(self, action: #selector(refreshListings), for: .valueChanged)
+        }
+        
         // Set up the collection view's appearance
         setupCollectionView()
+    }
+    
+    func refreshListings() {
+        loadListings(shouldClearResults: true)
     }
     
     func loadListings(selection: Set<Listing.Kind>? = nil, shouldClearResults: Bool = false) {
@@ -75,18 +84,27 @@ class ListingsCollectionViewController: TLCollectionViewController {
             switch kind {
             case .product:
                 Product.retrieveAll() { (products, error) in
+                    if #available(iOS 10.0, *) {
+                        self.collectionView?.refreshControl?.endRefreshing()
+                    }
                     if let products = products {
                         self.add(listings: products)
                     }
                 }
             case .job:
                 Job.retrieveAll() { (jobs, error) in
+                    if #available(iOS 10.0, *) {
+                        self.collectionView?.refreshControl?.endRefreshing()
+                    }
                     if let jobs = jobs {
                         self.add(listings: jobs)
                     }
                 }
             case .personal:
                 Personal.retrieveAll() { (personals, error) in
+                    if #available(iOS 10.0, *) {
+                        self.collectionView?.refreshControl?.endRefreshing()
+                    }
                     if let personals = personals {
                         self.add(listings: personals)
                     }

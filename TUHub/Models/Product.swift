@@ -12,7 +12,7 @@ private let pageSize = 15
 
 class Product: Listing {
     
-    fileprivate(set) var price: String
+    fileprivate(set) var price: String!
     
     required init?(json: JSON) {
         guard
@@ -28,6 +28,39 @@ class Product: Listing {
         super.init(json: json)
         
         self.id = id
+    }
+    
+    init(title: String, desc: String?, ownerID: String, photosDir: String?, price: Double) {
+        self.price = String(format: "%.02f", locale: Locale.current, arguments: [price])
+        super.init(title: title, desc: desc, ownerID: ownerID, photosDir: photosDir)
+    }
+    
+    override func post(_ responseHandler: @escaping (Error?) -> Void) {
+        
+        var qParams: [String : Any] = ["title" : title,
+                                       "price" : price,
+                                       "isActive" : "true",
+                                       "ownerId" : ownerID]
+        
+        if let desc = description {
+            qParams["description"] = desc
+        }
+        
+        if let picFolder = photosDirectory {
+            qParams["picFolder"] = picFolder
+        }
+        
+        NetworkManager.shared.request(toEndpoint: .marketplace, pathParameters: ["insert_product.jsp"], queryParameters: qParams) { (data, error) in
+            
+            
+            if let data = data {
+                let json = JSON(data: data)
+                debugPrint(json)
+            }
+            
+            debugPrint(error ?? "")
+            responseHandler(error)
+        }
     }
     
     private class func handle(response data: Data?, error: Error?, _ responseHandler: @escaping ([Product]?, Error?) -> Void) {

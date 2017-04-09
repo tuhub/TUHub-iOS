@@ -16,17 +16,22 @@ private let dateFormatter: DateFormatter = {
     return dateFormatter
 }()
 
+private let postDateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MM-dd-yyyy"
+    return dateFormatter
+}()
+
 class Job: Listing {
     
-    fileprivate(set) var location: String
-    fileprivate(set) var hoursPerWeek: Int?
-    fileprivate(set) var pay: String
-    fileprivate(set) var startDate: Date
+    fileprivate(set) var location: String?
+    fileprivate(set) var hoursPerWeek: Int
+    fileprivate(set) var pay: String!
+    fileprivate(set) var startDate: Date!
     
     required init?(json: JSON) {
         guard
             let id = json["jobId"].string,
-            let location = json["location"].string,
             let hoursPerWeek = json["hoursPerWeek"].int,
             let pay = json["pay"].string,
             let startDateStr = json["startDate"].string,
@@ -36,8 +41,8 @@ class Job: Listing {
                 return nil
         }
         
-        self.location = location
-        self.hoursPerWeek = hoursPerWeek < 0 ? nil : hoursPerWeek
+        location = json["location"].string
+        self.hoursPerWeek = hoursPerWeek
         self.pay = pay
         self.startDate = startDate
         
@@ -45,6 +50,39 @@ class Job: Listing {
         
         self.id = id
     }
+    
+    init(title: String, desc: String?, ownerID: String, photosDir: String?, location: String?, hours: Int, pay: Double, startDate: Date) {
+        self.location = location
+        self.hoursPerWeek = hours
+        self.pay = String(format: "$%.02f", locale: Locale.current, arguments: [pay])
+        self.startDate = startDate
+        super.init(title: title, desc: desc, ownerID: ownerID, photosDir: photosDir)
+    }
+    
+    override func post(_ responseHandler: @escaping (Error?) -> Void) {
+        
+        var qParams: [String : Any] = ["title" : title,
+                                       "pay" : pay,
+                                       "hoursPerWeek" : hoursPerWeek,
+                                       "startDate" : dateFormatter.string(from: startDate),
+                                       "isActive" : "true",
+                                       "ownerId" : ownerID]
+        
+        if let desc = description {
+            qParams["description"] = desc
+        }
+        
+        if let loc = location {
+            qParams["location"] = loc
+        }
+        
+        NetworkManager.shared.request(toEndpoint: .marketplace, pathParameters: ["insert_job.jsp"], queryParameters: qParams) { (data, error) in
+            debugPrint(data ?? "")
+            debugPrint(error ?? "")
+            responseHandler(error)
+        }
+    }
+
     
     private class func handle(response data: Data?, error: Error?, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {
         var jobs: [Job]?
