@@ -18,6 +18,8 @@ class NetworkManager: NSObject {
         case getUserInfo = "https://prd-mobile.temple.edu/banner-mobileserver/api/2.0/security/getUserInfo"
         case news = "https://prd-mobile.temple.edu/banner-mobileserver/rest/1.2/feed"
         case courseSearch = "https://prd-mobile.temple.edu/CourseSearch/searchCatalog.jsp"
+        case marketplace = "http://tuhubapi-env.us-east-1.elasticbeanstalk.com"
+        case s3 = "https://tumobilemarketplace.s3.amazonaws.com"
     }
     
     static let shared = NetworkManager()
@@ -31,54 +33,28 @@ class NetworkManager: NSObject {
     typealias ResponseHandler = (Data?, Error?) -> Void
     
     func request(fromEndpoint endpoint: Endpoint,
-                        _ responseHandler: ResponseHandler?) {
-        
-        request(url: endpoint.rawValue, withTUID: nil, parameters: nil, authenticateWith: nil, responseHandler)
+                 pathParameters: [String]? = nil,
+                 queryParameters: Parameters? = nil,
+                 authenticateWith credential: Credential? = nil,
+                 _ responseHandler: ResponseHandler?) {
+        request(url: endpoint.rawValue, method: .get, pathParameters: pathParameters, queryParameters: queryParameters, authenticateWith: credential, responseHandler)
     }
     
-    func request(fromEndpoint endpoint: Endpoint,
-                        parameters: Parameters,
-                        _ responseHandler: ResponseHandler?) {
-        
-        request(url: endpoint.rawValue, withTUID: nil, parameters: parameters, authenticateWith: nil, responseHandler)
-    }
-    
-    func request(fromEndpoint endpoint: Endpoint,
-                        authenticateWith credential: Credential,
-                        _ responseHandler: ResponseHandler?) {
-        
-        request(url: endpoint.rawValue, withTUID: nil, parameters: nil, authenticateWith: credential, responseHandler)
-    }
-    
-    func request(fromEndpoint endpoint: Endpoint,
-                        parameters: Parameters,
-                        authenticateWith credential: Credential,
-                        _ responseHandler: ResponseHandler?) {
-        
-        request(url: endpoint.rawValue, withTUID: nil, parameters: parameters, authenticateWith: credential, responseHandler)
-    }
-    
-    func request(fromEndpoint endpoint: Endpoint,
-                        withTUID tuID: String,
-                        authenticateWith credential: Credential,
-                        _ responseHandler: ResponseHandler?) {
-        
-        request(url: endpoint.rawValue, withTUID: tuID, parameters: nil, authenticateWith: nil, responseHandler)
-    }
-    
-    func request(fromEndpoint endpoint: Endpoint,
-                        withTUID tuID: String,
-                        parameters: Parameters,
-                        authenticateWith credential: Credential,
-                        _ responseHandler: ResponseHandler?) {
-        request(url: endpoint.rawValue, withTUID: tuID, parameters: parameters, authenticateWith: nil, responseHandler)
+    func request(toEndpoint endpoint: Endpoint,
+                 pathParameters: [String]? = nil,
+                 queryParameters: Parameters? = nil,
+                 authenticateWith credential: Credential? = nil,
+                 _ responseHandler: ResponseHandler?) {
+        request(url: endpoint.rawValue, method: .post, pathParameters: pathParameters, queryParameters: queryParameters, authenticateWith: credential, responseHandler)
     }
     
     private func request(url: String,
-                                withTUID tuID: String?,
-                                parameters: Parameters?,
-                                authenticateWith credential: Credential?,
-                                _ responseHandler: ResponseHandler?) {
+                         method: HTTPMethod,
+                         pathParameters: [String]?,
+                         queryParameters: Parameters?,
+                         authenticateWith credential: Credential?,
+                         _ responseHandler: ResponseHandler?) {
+        var url = url
         
         // Generate HTTP Basic Auth header
         var headers: HTTPHeaders?
@@ -89,9 +65,13 @@ class NetworkManager: NSObject {
             }
         }
         
-        let url = url + (tuID != nil ? "/\(tuID!)" : "")
+        if let pathParameters = pathParameters {
+            for param in pathParameters {
+                url += "/\(param)"
+            }
+        }
         
-        alamofireManager.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseData { (response) in
+        alamofireManager.request(url, method: method, parameters: queryParameters, encoding: URLEncoding.default, headers: headers).responseData { (response) in
             // Log error if there is one
             let error: Error? = {
                 guard case let .failure(error) = response.result else { return nil }
@@ -103,11 +83,12 @@ class NetworkManager: NSObject {
             
             responseHandler?(data, error)
         }
-
+        
     }
     
-    func download(imageURL url: URL, _ responseHandler: ((UIImage?, Error?) -> Void)?) {
+    func download(imageURL url: String, _ responseHandler: ((UIImage?, Error?) -> Void)?) {
         
+        guard let url = URL(string: url) else { return }
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             let fileURL = documentsURL.appendingPathComponent(url.lastPathComponent)

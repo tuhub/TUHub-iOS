@@ -6,17 +6,21 @@ target 'TUHub' do
   use_frameworks!
 
   # Pods for TUHub
-  pod 'Alamofire', '~> 4.3'
-  pod 'AlamofireNetworkActivityIndicator', '~> 2.1'
-  pod 'AlamofireImage', '~> 3.1'
-  pod 'SwiftyJSON', '~> 3.1'
-  pod 'FSCalendar', '~> 2.7'
-  pod 'SwiftyBeaver', '~> 1.1'
-  pod 'SKPhotoBrowser', '~> 4.0'
-  pod 'AEXML', '~> 4.0'
+  pod 'Alamofire', '~> 4.4.0'
+  pod 'AlamofireNetworkActivityIndicator', '~> 2.1.0'
+  pod 'AlamofireImage', '~> 3.2.0'
+  pod 'SwiftyJSON', '~> 3.1.0'
+  pod 'FSCalendar', '~> 2.7.0'
+  pod 'SwiftyBeaver', '~> 1.1.0'
+  pod 'SKPhotoBrowser', '~> 4.0.0'
+  pod 'AEXML', '~> 4.1.0'
   pod 'Kanna', '~> 2.1.0'
-  pod 'UPCarouselFlowLayout', '~> 1.1'
-  pod 'TUSafariActivity', '~> 1.0'
+  pod 'UPCarouselFlowLayout', '~> 1.1.0'
+  pod 'TUSafariActivity', '~> 1.0.0'
+  pod 'CHTCollectionViewWaterfallLayout', '~> 0.9.0'
+  pod 'TLIndexPathTools', '~> 0.4.4'
+  pod 'Eureka', '~> 2.0.1'
+  pod 'AWSS3', '~> 2.5.0'
   
   target 'TUHubTests' do
     inherit! :search_paths

@@ -45,16 +45,14 @@ class CourseListViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        switch segue.identifier! {
-        case showCourseDetailSegueID:
-            guard let cell = sender as? UITableViewCell,
+        if segue.identifier == showCourseDetailSegueID {
+            if let cell = sender as? UITableViewCell,
                 let indexPath = courseTableView.indexPath(for: cell),
-                let courseDetailVC = segue.destination as? CourseDetailTableViewController
-                else { break }
-            
-            courseDetailVC.course = term?.courses[indexPath.row]
-        default:
-            break
+                let courseDetailVC = segue.destination as? CourseDetailTableViewController,
+                let course = term?.courses[indexPath.row]{
+                
+                courseDetailVC.dataSource = CourseTableViewDataSource(course: course)
+            }
         }
     }
     

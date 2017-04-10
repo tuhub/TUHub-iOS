@@ -27,5 +27,10 @@ class NewsItemTableViewCell: UITableViewCell {
                                        placeholderImage: nil,
                                        filter: filter)
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbnailImageView.image = nil
+    }
 
 }

@@ -19,12 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         
         let console = ConsoleDestination()  // log to Xcode Console
-//        let file = FileDestination()  // log to default swiftybeaver.log file
         log.addDestination(console)
-//        log.addDestination(file)
         
         // Set the UIPageControl tint colors for CoursePageViewController (white by default, need to be darker)
         let pageControl: UIPageControl = UIPageControl.appearance(whenContainedInInstancesOf: [CoursePageViewController.self])

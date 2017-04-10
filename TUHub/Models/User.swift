@@ -139,7 +139,7 @@ extension User {
     
     func retrieveGrades(_ responseHandler: GradesResponseHandler?) {
         
-        NetworkManager.shared.request(fromEndpoint: .grades, withTUID: tuID, authenticateWith: credential) { (data, error) in
+        NetworkManager.shared.request(fromEndpoint: .grades, pathParameters: [tuID], authenticateWith: credential) { (data, error) in
             
             var grades: [Term]?
             
@@ -169,7 +169,7 @@ extension User {
     typealias CoursesResponseHandler = ([Term]?, Error?) -> Void
     
     func retrieveCourses(_ responseHandler: CoursesResponseHandler?) {
-        NetworkManager.shared.request(fromEndpoint: .courseOverview, withTUID: tuID, authenticateWith: credential) { (data, error) in
+        NetworkManager.shared.request(fromEndpoint: .courseOverview, pathParameters: [tuID], authenticateWith: credential) { (data, error) in
             
             var courseTerms = [Term]()
             
@@ -218,11 +218,6 @@ extension User {
             return
         }
         
-        struct SearchResult {
-            var course: Course
-            var index: String.Index
-        }
-        
         DispatchQueue.global(qos: .userInitiated).async {
             
             var results = [Term]()
@@ -236,7 +231,7 @@ extension User {
                 // The term to hold the results
                 var term = term
                 
-                var courseResults = [SearchResult]()
+                var courseResults: [(course: Course, index: String.Index)] = []
                 for course in term.courses {
                     
                     // Find the lowest index at which the occurence of the search term appeared
@@ -257,7 +252,7 @@ extension User {
                     
                     // Append the result if the term appeared
                     if let minIndex = minIndex {
-                        courseResults.append(SearchResult(course: course, index: minIndex))
+                        courseResults.append((course: course, index: minIndex))
                     }
                 }
                 

@@ -8,14 +8,14 @@
 
 import AEXML
 
+private let searchPageSize = 15
+
 struct CourseSearchResult {
     
-    static let searchPageSize = 15
-    
     let name: String
-    let title: String
+    let title: String?
     let description: String
-    let credits: Int
+    let credits: Int?
     let levels: [String]
     let division: String
     let college: String
@@ -36,9 +36,9 @@ struct CourseSearchResult {
         }
         
         self.name = name
-        self.title = title
+        self.title = title.characters.count > 0 ? title : nil
         self.description = description
-        credits = xml["creditHr"]["low"].int!
+        credits = xml["creditHr"]["low"].int
         self.levels = xml["levels"].children.flatMap({ $0.value })
         self.division = division
         self.college = college
@@ -55,8 +55,8 @@ struct CourseSearchResult {
         let searchTerms = searchText.replacingOccurrences(of: " ", with: ",").trimmingCharacters(in: setToRemove)
         
         // Determine min and max rows based on the desired page
-        let minRow = pageNumber * CourseSearchResult.searchPageSize + 1
-        let maxRow = (pageNumber + 1) * CourseSearchResult.searchPageSize
+        let minRow = pageNumber * searchPageSize + 1
+        let maxRow = (pageNumber + 1) * searchPageSize
         
         let params: [String : Any] = ["searchTerms" : searchTerms,
                                       "term" : "All",
@@ -64,7 +64,7 @@ struct CourseSearchResult {
                                       "minRow" : minRow,
                                       "maxRow" : maxRow]
         
-        NetworkManager.shared.request(fromEndpoint: .courseSearch, parameters: params) { (data, error) in
+        NetworkManager.shared.request(fromEndpoint: .courseSearch, queryParameters: params) { (data, error) in
             
             var results: [CourseSearchResult]?
             

@@ -104,6 +104,7 @@ class TUHubTests: XCTestCase {
         
     }
     
+    
     func testCourseSearch() {
         let asyncExpectation = expectation(description: "testCourseSearch")
         
@@ -125,6 +126,13 @@ class TUHubTests: XCTestCase {
                 log.error(error)
             }
         }
+        
+    }
+    
+    func testJobsOfUser() {
+        let asyncExpectation = expectation(description: "testCourseSearch")
+        
+        Job.retrieve
         
     }
     

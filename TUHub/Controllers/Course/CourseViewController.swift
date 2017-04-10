@@ -13,6 +13,11 @@ import FSCalendar
 fileprivate let embedSegueID = "embedCourseListView"
 fileprivate let showCourseDetailSegueID = "showCourseDetail"
 internal let formCourseDetailSegueID = "formCourseDetail"
+fileprivate let dateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .short
+    return dateFormatter
+}()
 
 // MARK: - PerformCourseDetailSegueDelegate
 internal protocol PerformCourseDetailSegueDelegate {
@@ -152,7 +157,7 @@ class CourseViewController: UIViewController {
             if let courseDetailVC = (segue.destination as? UINavigationController)?.viewControllers.first as? CourseDetailTableViewController,
                 let course = sender as? Course {
                 
-                courseDetailVC.course = course
+                courseDetailVC.dataSource = CourseTableViewDataSource(course: course)
             }
         case showCourseDetailSegueID:
             if let courseDetailVC = segue.destination as? CourseDetailTableViewController,
@@ -160,7 +165,7 @@ class CourseViewController: UIViewController {
                 let indexPath = courseCalendarView.tableView.indexPath(for: cell),
                 let course = courseCalendarView.selectedDateMeetings?[indexPath.row].course {
                 
-                courseDetailVC.course = course
+                courseDetailVC.dataSource = CourseTableViewDataSource(course: course)
             }
         default:
             break
@@ -179,8 +184,6 @@ class CourseViewController: UIViewController {
     
     // MARK: - Utilities
     func setLeftButtonTitle(to date: Date) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
         leftBarButton.title = dateFormatter.string(from: date)
     }
     
