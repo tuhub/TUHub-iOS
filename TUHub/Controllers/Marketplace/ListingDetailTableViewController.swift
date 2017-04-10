@@ -31,6 +31,11 @@ class ListingDetailTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Remove edit button if the listing doesn't belong to the current user
+        if listing?.ownerID != MarketplaceUser.current?.userId {
+            navigationItem.rightBarButtonItem = nil
+        }
+        
         // Allow table view to automatically determine cell height based on contents
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44

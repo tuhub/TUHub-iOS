@@ -32,10 +32,16 @@ class ListingsCollectionViewController: TLCollectionViewController {
         return searchController
     }()
     
+    fileprivate var isSearching = false
+    
     // Keep track of how many of each type of listing is loaded for pagination
-    private var numRowsProducts = 0
-    private var numRowsJobs = 0
-    private var numRowsPersonals = 0
+    fileprivate var numRowsProducts = 0
+    fileprivate var numRowsJobs = 0
+    fileprivate var numRowsPersonals = 0
+    fileprivate var lastProduct: Product?
+    fileprivate var lastJob: Job?
+    fileprivate var lastPersonal: Personal?
+    
     fileprivate lazy var selectedKinds: Set<Listing.Kind> = [.product, .job, .personal]
     
     var imageSizes = [IndexPath : CGSize]()
@@ -79,6 +85,7 @@ class ListingsCollectionViewController: TLCollectionViewController {
         super.viewDidAppear(animated)
         if MarketplaceUser.current == nil {
             self.composeButton.isEnabled = false
+            
             if let userId = User.current?.username {
                 MarketplaceUser.retrieve(user: userId) { (user, error) in
                     
@@ -91,11 +98,17 @@ class ListingsCollectionViewController: TLCollectionViewController {
                         return
                     }
                     
-                    // Display sign up
-                    let signUpVC = MarketplaceSignUpViewController()
-                    signUpVC.userId = userId
-                    let navVC = UINavigationController(rootViewController: signUpVC)
-                    self.present(navVC, animated: true, completion: nil)
+                    let defaults = UserDefaults.standard
+                    let key = "hasPromptedSignIn"
+                    if !defaults.bool(forKey: key) {
+                        // Display sign up
+                        let signUpVC = MarketplaceSignUpViewController()
+                        signUpVC.userId = userId
+                        let navVC = UINavigationController(rootViewController: signUpVC)
+                        self.present(navVC, animated: true, completion: nil)
+                        defaults.set(true, forKey: key)
+                    }
+
                 }
             }
         } else {
@@ -107,7 +120,7 @@ class ListingsCollectionViewController: TLCollectionViewController {
         loadListings(shouldClearResults: true)
     }
     
-    func loadListings(selection: Set<Listing.Kind>? = nil, shouldClearResults: Bool = false) {
+    func loadListings(selection: Set<Listing.Kind>? = nil, startIndex: Int = 0, shouldClearResults: Bool = false) {
         
         if shouldClearResults {
             clearResults()
@@ -118,30 +131,36 @@ class ListingsCollectionViewController: TLCollectionViewController {
         for kind in selection {
             switch kind {
             case .product:
-                Product.retrieveAll() { (products, error) in
+                Product.retrieveAll(startIndex: startIndex) { (products, error) in
                     if #available(iOS 10.0, *) {
                         self.collectionView?.refreshControl?.endRefreshing()
                     }
                     if let products = products {
                         self.add(listings: products)
+                        self.numRowsProducts += products.count
+                        self.lastProduct = products.last
                     }
                 }
             case .job:
-                Job.retrieveAll() { (jobs, error) in
+                Job.retrieveAll(startIndex: startIndex) { (jobs, error) in
                     if #available(iOS 10.0, *) {
                         self.collectionView?.refreshControl?.endRefreshing()
                     }
                     if let jobs = jobs {
                         self.add(listings: jobs)
+                        self.numRowsJobs +=  jobs.count
+                        self.lastJob = jobs.last
                     }
                 }
             case .personal:
-                Personal.retrieveAll() { (personals, error) in
+                Personal.retrieveAll(startIndex: startIndex) { (personals, error) in
                     if #available(iOS 10.0, *) {
                         self.collectionView?.refreshControl?.endRefreshing()
                     }
                     if let personals = personals {
                         self.add(listings: personals)
+                        self.numRowsPersonals += personals.count
+                        self.lastPersonal = personals.last
                     }
                 }
             }
@@ -152,6 +171,9 @@ class ListingsCollectionViewController: TLCollectionViewController {
     func clearResults() {
         indexPathController.dataModel = nil
         imageSizes.removeAll()
+        self.numRowsProducts = 0
+        self.numRowsJobs = 0
+        self.numRowsPersonals = 0
     }
     
     func dataModel(for listings: [Listing]) -> TLIndexPathDataModel {
@@ -245,6 +267,29 @@ extension ListingsCollectionViewController {
         return cell
     }
     
+//    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        
+//        guard !searchController.isActive else { return }
+//        
+//        if let listing = indexPathController.dataModel?.item(at: indexPath) {
+//            if let product = listing as? Product, let lastProduct = lastProduct  {
+//                if product.id == lastProduct.id {
+//                    loadListings(selection: [.product], startIndex: numRowsProducts)
+//                }
+//            }
+//            else if let job = listing as? Job, let lastJob = lastJob {
+//                if job.id == lastJob.id {
+//                    loadListings(selection: [.job], startIndex: numRowsJobs)
+//                }
+//            }
+//            else if let personal = listing as? Personal, let lastPersonal = lastPersonal {
+//                if personal.id == lastPersonal.id {
+//                    loadListings(selection: [.personal], startIndex: numRowsPersonals)
+//                }
+//            }
+//        }
+//    }
+    
 }
 
 // MARK: - CHTCollectionViewDelegateWaterfallLayout
@@ -295,8 +340,10 @@ extension ListingsCollectionViewController: UISearchResultsUpdating {
             }
         }
     }
+    
 }
 
+// MARK: - ListingsFilterDelegate
 extension ListingsCollectionViewController: ListingsFilterDelegate {
     func didSelect(listingKinds: Set<Listing.Kind>) {
         if self.selectedKinds != listingKinds {

@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-private let pageSize = 15
+//private let pageSize = 15
 
 private let dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
@@ -110,7 +110,7 @@ class Job: Listing {
         }
     }
     
-    private class func retrieve(belongingTo userID: String, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {
+    class func retrieve(belongingTo userID: String, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {
         NetworkManager.shared.request(fromEndpoint: .marketplace,
                                       pathParameters: ["find_jobs_by_user_id.jsp"],
                                       queryParameters: ["userId" : userID])
@@ -120,9 +120,9 @@ class Job: Listing {
     }
     
     class func retrieveAll(onlyActive: Bool = false, startIndex: Int = 0, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {
-        let qParams: [String : Any] = ["activeOnly" : onlyActive ? "true" : "false",
-                                      "offset" : startIndex,
-                                      "limit" : pageSize]
+        let qParams: [String : Any] = ["activeOnly" : onlyActive ? "true" : "false"]
+//                                      "offset" : startIndex,
+//                                      "limit" : pageSize]
         NetworkManager.shared.request(fromEndpoint: .marketplace,
                                       pathParameters: ["select_all_jobs.jsp"],
                                       queryParameters: qParams)
@@ -132,9 +132,9 @@ class Job: Listing {
     }
     
     class func search(for searchTerms: String, startIndex: Int = 0, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {
-        let qParams: [String : Any] = ["title" : searchTerms,
-                                       "offset" : startIndex,
-                                       "limit" : pageSize]
+        let qParams: [String : Any] = ["title" : searchTerms]
+//                                       "offset" : startIndex,
+//                                       "limit" : pageSize]
         NetworkManager.shared.request(fromEndpoint: .marketplace,
                                       pathParameters: ["search_active_job_titles.jsp"],
                                       queryParameters: qParams)
