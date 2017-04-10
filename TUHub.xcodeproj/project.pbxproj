@@ -32,6 +32,11 @@
 		7D7164DF1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7164DE1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift */; };
 		7D7164E11E95AF930027EDD5 /* CourseTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7164E01E95AF930027EDD5 /* CourseTableViewDataSource.swift */; };
 		7D7164E31E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7164E21E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift */; };
+		7D7E0E371E9C0CC2007A1D16 /* Marketplace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7E0E361E9C0CC1007A1D16 /* Marketplace.storyboard */; };
+		7D7E0E391E9C0CFF007A1D16 /* Courses.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7E0E381E9C0CFF007A1D16 /* Courses.storyboard */; };
+		7D7E0E3B1E9C0D46007A1D16 /* Maps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7E0E3A1E9C0D46007A1D16 /* Maps.storyboard */; };
+		7D7E0E3D1E9C0D52007A1D16 /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7E0E3C1E9C0D52007A1D16 /* News.storyboard */; };
+		7D7E0E3F1E9C0D5F007A1D16 /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7E0E3E1E9C0D5F007A1D16 /* More.storyboard */; };
 		7D7FD0111E85922300CE769F /* String+NSRegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0101E85922300CE769F /* String+NSRegularExpression.swift */; };
 		7D7FD0131E85ADE800CE769F /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0121E85ADE800CE769F /* MapsViewController.swift */; };
 		7D7FD0161E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */; };
@@ -140,6 +145,11 @@
 		7D7164DE1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseSearchResultTableViewDataSource.swift; sourceTree = "<group>"; };
 		7D7164E01E95AF930027EDD5 /* CourseTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewDataSource.swift; sourceTree = "<group>"; };
 		7D7164E21E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailTableViewControllerCellType.swift; sourceTree = "<group>"; };
+		7D7E0E361E9C0CC1007A1D16 /* Marketplace.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Marketplace.storyboard; path = UI/Marketplace.storyboard; sourceTree = "<group>"; };
+		7D7E0E381E9C0CFF007A1D16 /* Courses.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Courses.storyboard; path = UI/Courses.storyboard; sourceTree = "<group>"; };
+		7D7E0E3A1E9C0D46007A1D16 /* Maps.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Maps.storyboard; path = UI/Maps.storyboard; sourceTree = "<group>"; };
+		7D7E0E3C1E9C0D52007A1D16 /* News.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = News.storyboard; path = UI/News.storyboard; sourceTree = "<group>"; };
+		7D7E0E3E1E9C0D5F007A1D16 /* More.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = More.storyboard; path = UI/More.storyboard; sourceTree = "<group>"; };
 		7D7FD0101E85922300CE769F /* String+NSRegularExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NSRegularExpression.swift"; sourceTree = "<group>"; };
 		7D7FD0121E85ADE800CE769F /* MapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsViewController.swift; path = Maps/MapsViewController.swift; sourceTree = "<group>"; };
 		7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsSearchResultsTableViewController.swift; path = Maps/MapsSearchResultsTableViewController.swift; sourceTree = "<group>"; };
@@ -354,6 +364,11 @@
 				7D043A551E5BF7EF0003A853 /* Main.storyboard */,
 				7D043A581E5BF7EF0003A853 /* Assets.xcassets */,
 				7D043A5A1E5BF7EF0003A853 /* LaunchScreen.storyboard */,
+				7D7E0E381E9C0CFF007A1D16 /* Courses.storyboard */,
+				7D7E0E361E9C0CC1007A1D16 /* Marketplace.storyboard */,
+				7D7E0E3A1E9C0D46007A1D16 /* Maps.storyboard */,
+				7D7E0E3C1E9C0D52007A1D16 /* News.storyboard */,
+				7D7E0E3E1E9C0D5F007A1D16 /* More.storyboard */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -606,10 +621,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D8A1A6F1E984196006401A1 /* ImagesCell.xib in Resources */,
+				7D7E0E3F1E9C0D5F007A1D16 /* More.storyboard in Resources */,
 				7D8A1A6C1E983B67006401A1 /* ImageCollectionViewCell.xib in Resources */,
 				7D043A5C1E5BF7EF0003A853 /* LaunchScreen.storyboard in Resources */,
+				7D7E0E371E9C0CC2007A1D16 /* Marketplace.storyboard in Resources */,
+				7D7E0E3D1E9C0D52007A1D16 /* News.storyboard in Resources */,
+				7D7E0E391E9C0CFF007A1D16 /* Courses.storyboard in Resources */,
 				7D043A591E5BF7EF0003A853 /* Assets.xcassets in Resources */,
 				7D043A571E5BF7EF0003A853 /* Main.storyboard in Resources */,
+				7D7E0E3B1E9C0D46007A1D16 /* Maps.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

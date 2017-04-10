@@ -10,6 +10,5 @@ import UIKit
 
 class SubtitleTableViewCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var subtitleLabel: UILabel!
-
+    @IBOutlet var subtitleTextView: UITextView!
 }

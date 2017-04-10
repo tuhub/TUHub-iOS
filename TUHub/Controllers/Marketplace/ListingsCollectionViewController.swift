@@ -62,6 +62,7 @@ class ListingsCollectionViewController: TLCollectionViewController {
         // Set up search controller
         definesPresentationContext = true
         searchController.searchResultsUpdater = self
+        searchController.delegate = self
         searchController.searchBar.frame = CGRect(origin: .zero,
                                                   size: CGSize(width: collectionView!.frame.width,
                                                                height: 44))
@@ -171,13 +172,20 @@ class ListingsCollectionViewController: TLCollectionViewController {
     func clearResults() {
         indexPathController.dataModel = nil
         imageSizes.removeAll()
+        collectionView?.collectionViewLayout.invalidateLayout()
         self.numRowsProducts = 0
         self.numRowsJobs = 0
         self.numRowsPersonals = 0
     }
     
     func dataModel(for listings: [Listing]) -> TLIndexPathDataModel {
-        return TLIndexPathDataModel(items: listings, sectionNameBlock: nil, identifierBlock: nil)
+        return TLIndexPathDataModel(items: listings, sectionNameBlock: nil, identifierBlock: {
+            if let listing = $0 as? Listing {
+                let s = String(describing: type(of: listing)) + listing.id
+                return s
+            }
+            return nil
+        })
     }
     
     func add(listings: [Listing]) {
@@ -214,6 +222,28 @@ class ListingsCollectionViewController: TLCollectionViewController {
         collectionView?.collectionViewLayout = layout
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if let layout = collectionView?.collectionViewLayout as? CHTCollectionViewWaterfallLayout {
+            if traitCollection.verticalSizeClass == .regular {
+                if traitCollection.horizontalSizeClass == .regular {
+                    layout.columnCount = 4
+                } else {
+                    layout.columnCount = 2
+                }
+            } else {
+                if traitCollection.horizontalSizeClass == .regular {
+                    layout.columnCount = 4
+                } else {
+                    layout.columnCount = 3
+                }
+            }
+            collectionView?.collectionViewLayout.invalidateLayout()
+        }
+        var frame = searchController.searchBar.frame
+        frame.size.width = collectionView!.frame.width
+        searchController.searchBar.frame = frame
+    }
     
     // MARK: - Navigation
     
@@ -295,7 +325,7 @@ extension ListingsCollectionViewController {
 // MARK: - CHTCollectionViewDelegateWaterfallLayout
 extension ListingsCollectionViewController: CHTCollectionViewDelegateWaterfallLayout {
     func collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAt indexPath: IndexPath!) -> CGSize {
-        guard let imageSize = imageSizes[indexPath]
+        guard let imageSize = imageSizes[indexPath] ?? (collectionView.cellForItem(at: indexPath) as? ListingCollectionViewCell)?.imageView.image?.size
             else { return CGSize(width: 30, height: 40) }
         return imageSize
     }
@@ -313,7 +343,7 @@ extension ListingsCollectionViewController: UISearchResultsUpdating {
     @available(iOS 8.0, *)
     func updateSearchResults(for searchController: UISearchController) {
         
-        guard let text = searchController.searchBar.text else { return }
+        guard let text = searchController.searchBar.text, text.characters.count > 0 else { return }
         clearResults()
         NetworkManager.shared.cancelAllRequests(for: .marketplace)
         
@@ -341,6 +371,12 @@ extension ListingsCollectionViewController: UISearchResultsUpdating {
         }
     }
     
+}
+
+extension ListingsCollectionViewController: UISearchControllerDelegate {
+    func didDismissSearchController(_ searchController: UISearchController) {
+        loadListings(selection: selectedKinds, shouldClearResults: true)
+    }
 }
 
 // MARK: - ListingsFilterDelegate

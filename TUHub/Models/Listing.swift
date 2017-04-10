@@ -66,15 +66,14 @@ class Listing {
         self.photosDirectory = photosDir
     }
     
-    func retrievePhotoPaths(_ responseHandler: @escaping ([String]?, Error?) -> Void) {
-        guard let photosDirectory = photosDirectory else { return }
+    func retrievePhotoPaths(_ responseHandler: @escaping ([String]?, Error?) -> Void) -> DataRequest? {
+        guard let photosDirectory = photosDirectory else { return nil }
         
         let prefix = "\(photosDirectory)/"
         let params: [String : Any] = ["list-type" : 2,
                                       "x-amz-date" : s3DateFormatter.string(from: Date()),
                                       "prefix" : prefix]
-        
-        Alamofire.request("https://tumobilemarketplace.s3.amazonaws.com", method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { (data) in
+        return Alamofire.request("https://tumobilemarketplace.s3.amazonaws.com", method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { (data) in
             var filePaths: [String]?
             guard let xmlData = data.result.value else { return }
             defer { responseHandler(filePaths, data.error) }

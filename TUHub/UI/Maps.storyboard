@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7Yk-US-5Wh">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Maps-->
+        <scene sceneID="bYx-wD-ST9">
+            <objects>
+                <navigationController id="7Yk-US-5Wh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Maps" image="MapsIcon" selectedImage="MapsIcon-Filled" id="r00-zh-rpp"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="P04-hz-hda">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="PLa-y2-ffc" kind="relationship" relationship="rootViewController" id="5P4-zg-N6w"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zvz-LE-DGl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="860" y="1212"/>
+        </scene>
+        <!--Maps View Controller-->
+        <scene sceneID="Hxd-Au-EXF">
+            <objects>
+                <viewController definesPresentationContext="YES" id="PLa-y2-ffc" customClass="MapsViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bJX-Rr-z95"/>
+                        <viewControllerLayoutGuide type="bottom" id="wE1-tX-ms0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="y7m-Dg-xJG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView verifyAmbiguity="ignoreSizes" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cvM-ct-t79">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="cvM-ct-t79" secondAttribute="bottom" id="AlH-73-G38"/>
+                            <constraint firstAttribute="trailing" secondItem="cvM-ct-t79" secondAttribute="trailing" id="XtG-6g-pD2"/>
+                            <constraint firstItem="cvM-ct-t79" firstAttribute="leading" secondItem="y7m-Dg-xJG" secondAttribute="leading" id="je8-Pw-ygX"/>
+                            <constraint firstItem="cvM-ct-t79" firstAttribute="top" secondItem="y7m-Dg-xJG" secondAttribute="topMargin" id="mnf-b8-S3d"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZOk-pg-DLE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wxq-81-LkW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1793" y="1214"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="MapsIcon" width="25" height="25"/>
+        <image name="MapsIcon-Filled" width="25" height="25"/>
+    </resources>
+    <color key="tintColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+</document>
