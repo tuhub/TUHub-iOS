@@ -78,6 +78,13 @@ class ListingDetailTableViewController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        var contentInset = tableView.contentInset
+        contentInset.bottom = (tabBarController?.tabBar.frame.height ?? 0) + contactButton.frame.height + 16
+        tableView.contentInset = contentInset
+    }
+    
     private func showErrorLabel() {
         
         tableView.tableFooterView?.isHidden = true
@@ -224,7 +231,7 @@ extension ListingDetailTableViewController: UITableViewDataSource {
         case .subtitleCell:
             let subtitleCell = cell as! SubtitleTableViewCell
             subtitleCell.titleLabel.text = attribute.key
-            subtitleCell.subtitleLabel.text = attribute.value
+            subtitleCell.subtitleTextView.text = attribute.value
         }
         
         return cell
@@ -255,45 +262,43 @@ fileprivate protocol TableViewDisplayable {
 
 extension Product: TableViewDisplayable {
     fileprivate var tableViewAttributes: [TableViewAttributes] {
+        var attributes: [TableViewAttributes] = [
+            (key: nil, value: title, cellType: .titleCell),
+            (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
+            (key: "Seller", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
+            (key: "Price", value: price, cellType: .rightDetailCell)
+        ]
+        
         if photoPaths != nil {
-            return [
-                (key: nil, value: title, cellType: .titleCell),
-                (key: nil, value: nil, cellType: .imageGalleryCell),
-                (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
-                (key: "Seller", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
-                (key: "Price", value: price, cellType: .rightDetailCell),
-                (key: "Description", value: description, cellType: .subtitleCell)
-            ]
-        } else {
-            return [
-                (key: nil, value: title , cellType: .titleCell),
-                (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
-                (key: "Seller", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
-                (key: "Price", value: price, cellType: .rightDetailCell),
-                (key: "Description", value: description, cellType: .subtitleCell)
-            ]
+            attributes.insert((key: nil, value: nil, cellType: .imageGalleryCell), at: 1)
         }
+        
+        if let desc = description, desc.characters.count > 0 {
+            attributes.append((key: "Description", value: desc, cellType: .subtitleCell))
+        }
+        
+        return attributes
+        
     }
 }
 
 extension Job: TableViewDisplayable {
     fileprivate var tableViewAttributes: [TableViewAttributes] {
         
-        var attributes: [TableViewAttributes] = [(key: nil, value: title, cellType: .titleCell)]
-        
-        if photoPaths != nil {
-            attributes.append((key: nil, value: nil, cellType: .imageGalleryCell))
-        }
-        
-        attributes.append(contentsOf: [
+        var attributes: [TableViewAttributes] = [
+            (key: nil, value: title, cellType: .titleCell),
             (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
             (key: "Posted By", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
             (key: "Location", value: location, cellType: .rightDetailCell),
             (key: "Hours per Week", value: "\(hoursPerWeek)", cellType: .rightDetailCell),
-            (key: "Start Date", value: startDate.date, cellType: .rightDetailCell),
-            ] as [TableViewAttributes])
+            (key: "Start Date", value: startDate.date, cellType: .rightDetailCell)
+        ]
         
-        if let desc = description {
+        if photoPaths != nil {
+            attributes.insert((key: nil, value: nil, cellType: .imageGalleryCell), at: 1)
+        }
+        
+        if let desc = description, desc.characters.count > 0 {
             attributes.append((key: "Description", value: desc, cellType: .subtitleCell))
         }
         
@@ -304,18 +309,20 @@ extension Job: TableViewDisplayable {
 extension Personal: TableViewDisplayable {
     fileprivate var tableViewAttributes: [TableViewAttributes] {
         
-        var attributes: [TableViewAttributes] = [(key: nil, value: title, cellType: .titleCell)]
-        
-        if photoPaths != nil {
-            attributes.append((key: nil, value: nil, cellType: .imageGalleryCell))
-        }
-        
-        attributes.append(contentsOf: [
+        var attributes: [TableViewAttributes] = [
+            (key: nil, value: title, cellType: .titleCell),
             (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
             (key: "Posted By", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
-            (key: "Location", value: location, cellType: .rightDetailCell),
-            (key: "Description", value: description, cellType: .subtitleCell)
-            ] as [TableViewAttributes])
+            (key: "Location", value: location, cellType: .rightDetailCell)
+        ]
+        
+        if photoPaths != nil {
+            attributes.insert((key: nil, value: nil, cellType: .imageGalleryCell), at: 1)
+        }
+        
+        if let desc = description, desc.characters.count > 0 {
+            attributes.append((key: "Description", value: desc, cellType: .subtitleCell))
+        }
         
         return attributes
     }

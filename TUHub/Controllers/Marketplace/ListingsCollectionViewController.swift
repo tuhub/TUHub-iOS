@@ -214,6 +214,28 @@ class ListingsCollectionViewController: TLCollectionViewController {
         collectionView?.collectionViewLayout = layout
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if let layout = collectionView?.collectionViewLayout as? CHTCollectionViewWaterfallLayout {
+            if traitCollection.verticalSizeClass == .regular {
+                if traitCollection.horizontalSizeClass == .regular {
+                    layout.columnCount = 4
+                } else {
+                    layout.columnCount = 2
+                }
+            } else {
+                if traitCollection.horizontalSizeClass == .regular {
+                    layout.columnCount = 4
+                } else {
+                    layout.columnCount = 3
+                }
+            }
+            collectionView?.collectionViewLayout.invalidateLayout()
+        }
+        var frame = searchController.searchBar.frame
+        frame.size.width = collectionView!.frame.width
+        searchController.searchBar.frame = frame
+    }
     
     // MARK: - Navigation
     
