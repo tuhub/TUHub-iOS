@@ -264,7 +264,7 @@ extension Product: TableViewDisplayable {
     fileprivate var tableViewAttributes: [TableViewAttributes] {
         var attributes: [TableViewAttributes] = [
             (key: nil, value: title, cellType: .titleCell),
-            (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
+            (key: "Posted On", value: datePosted.datetime, cellType: .rightDetailCell),
             (key: "Seller", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
             (key: "Price", value: price, cellType: .rightDetailCell)
         ]
@@ -287,7 +287,7 @@ extension Job: TableViewDisplayable {
         
         var attributes: [TableViewAttributes] = [
             (key: nil, value: title, cellType: .titleCell),
-            (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
+            (key: "Posted On", value: datePosted.datetime, cellType: .rightDetailCell),
             (key: "Posted By", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
             (key: "Location", value: location, cellType: .rightDetailCell),
             (key: "Hours per Week", value: "\(hoursPerWeek)", cellType: .rightDetailCell),
@@ -311,7 +311,7 @@ extension Personal: TableViewDisplayable {
         
         var attributes: [TableViewAttributes] = [
             (key: nil, value: title, cellType: .titleCell),
-            (key: "Posted On", value: datePosted.date, cellType: .rightDetailCell),
+            (key: "Posted On", value: datePosted.datetime, cellType: .rightDetailCell),
             (key: "Posted By", value: "\(owner!.firstName) \(owner!.lastName)", cellType: .rightDetailCell),
             (key: "Location", value: location, cellType: .rightDetailCell)
         ]

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 import AlamofireImage
 
 protocol ImageLoadedDelegate {
@@ -21,6 +22,7 @@ class ListingCollectionViewCell: UICollectionViewCell {
     
     var delegate: ImageLoadedDelegate!
     var indexPath: IndexPath!
+    var photoPathsRequest: DataRequest?
     
     func setUp(_ listing: Listing, _ delegate: ImageLoadedDelegate, _ indexPath: IndexPath) {
         
@@ -35,7 +37,7 @@ class ListingCollectionViewCell: UICollectionViewCell {
         if let _ = listing.photoPaths?.first {
             setUpBlurryDetailsView(listing)
         } else {
-            listing.retrievePhotoPaths { (paths, error) in
+            photoPathsRequest = listing.retrievePhotoPaths { (paths, error) in
                 if paths != nil {
                     self.setUpBlurryDetailsView(listing)
                 } else {
@@ -67,11 +69,16 @@ class ListingCollectionViewCell: UICollectionViewCell {
         
         if let url = URL(string: "\(NetworkManager.Endpoint.s3.rawValue)/\(photoPath)") {
             imageView.af_setImage(withURL: url) { (response) in
-                let image = response.value
-                if image == nil {
+                if let error = response.error {
+                    dump(error)
+                    return
+                }
+                if let image = response.value {
+                    self.delegate.didLoad(image: image, at: self.indexPath)
+                } else {
                     self.setUpDetailsView(listing)
                 }
-                self.delegate.didLoad(image: image, at: self.indexPath)
+                
             }
         }
 
@@ -92,8 +99,21 @@ class ListingCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-        super.prepareForReuse()
+        imageView.af_cancelImageRequest()
+        if let request = photoPathsRequest {
+            request.cancel()
+            self.photoPathsRequest = nil
+        }
+        
         imageView.image = nil
+        blurryDetailsView.textLabel.text = nil
+        blurryDetailsView.detailTextLabel.text = nil
+        detailsView.textLabel.text = nil
+        detailsView.detailTextLabel.text = nil
+        imageView.isHidden = true
+        detailsView.isHidden = true
+        blurryDetailsView.isHidden = true
+        super.prepareForReuse()
     }
     
 }

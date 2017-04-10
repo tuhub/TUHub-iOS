@@ -115,7 +115,7 @@ class NetworkManager: NSObject {
     }
     
     func cancelAllRequests(for endpoint: Endpoint) {
-        Alamofire.SessionManager.default.session.getAllTasks { (tasks) in
+        alamofireManager.session.getAllTasks { (tasks) in
             for task in tasks {
                 if let url = task.currentRequest?.url, url.absoluteString.hasPrefix(endpoint.rawValue) {
                     task.cancel()
