@@ -56,12 +56,22 @@ class ListingDetailTableViewController: UIViewController {
                     }
                     if let user = user {
                         self.emailRecipient = user.email
-                        self.setTableViewAttributes()
-                        self.tableView.reloadData()
+                        
+                        if listing.photoPaths == nil {
+                            listing.retrievePhotoPaths { (_, _) in
+                                self.setTableViewAttributes()
+                                self.tableView.reloadData()
+                                self.tableView.hideActivityIndicator()
+                                self.contactButton.isHidden = false
+                            }
+                        } else {
+                            self.setTableViewAttributes()
+                            self.tableView.reloadData()
+                            self.tableView.hideActivityIndicator()
+                            self.contactButton.isHidden = false
+                        }
                     }
                     
-                    self.tableView.hideActivityIndicator()
-                    self.contactButton.isHidden = false
                 }
             }
 
