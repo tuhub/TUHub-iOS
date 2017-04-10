@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hGe-ng-2mQ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Root View Controller-->
+        <scene sceneID="dUD-S8-D0U">
+            <objects>
+                <tableViewController id="8vo-J1-7jl" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ig0-FK-jOy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="9MY-Ig-hnN">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ozg-De-wCY">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ozg-De-wCY" id="x9J-eD-DpH">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bf7-32-2Xw">
+                                                    <rect key="frame" x="154" y="8" width="67" height="28"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <state key="normal" title="Sign Out"/>
+                                                    <connections>
+                                                        <segue destination="ujv-q5-BpB" kind="unwind" unwindAction="unwindToSignInViewControllerWithSegue:" id="hOo-tv-KeW"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="bf7-32-2Xw" firstAttribute="centerX" secondItem="x9J-eD-DpH" secondAttribute="centerX" id="5Lh-Ve-Wce"/>
+                                                <constraint firstItem="bf7-32-2Xw" firstAttribute="top" secondItem="x9J-eD-DpH" secondAttribute="topMargin" id="Aay-zC-cBl"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="bf7-32-2Xw" secondAttribute="bottom" id="NmT-E7-ErK"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="8vo-J1-7jl" id="9lz-eJ-WAi"/>
+                            <outlet property="delegate" destination="8vo-J1-7jl" id="ODd-aY-6Q1"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="2Wp-Ao-aYa"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZTR-I3-H8N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ujv-q5-BpB" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1798" y="3706"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fxA-FD-fka">
+            <objects>
+                <navigationController id="hGe-ng-2mQ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" selectedImage="MeIcon - Filled" systemItem="more" id="3GL-e5-AFs"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mEh-Ne-MhY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="8vo-J1-7jl" kind="relationship" relationship="rootViewController" id="26W-k6-ZXf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XGd-t7-Pj8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="862" y="3706"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="MeIcon - Filled" width="25" height="25"/>
+    </resources>
+    <color key="tintColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+</document>
