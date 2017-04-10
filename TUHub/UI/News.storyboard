@@ -7,7 +7,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,37 +24,37 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsItemCell" rowHeight="135" id="ihb-Ty-QIg" customClass="NewsItemTableViewCell" customModule="TUHub" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="newsItemCell" rowHeight="135" id="ihb-Ty-QIg" customClass="NewsItemTableViewCell" customModule="TUHub" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="135"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="ihb-Ty-QIg" id="bUk-0c-ddg">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="134.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ahM-Wk-Wsu">
-                                            <rect key="frame" x="275" y="25" width="85" height="85"/>
+                                            <rect key="frame" x="249" y="25" width="85" height="85"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="85" id="a8E-sj-E82"/>
                                                 <constraint firstAttribute="width" secondItem="ahM-Wk-Wsu" secondAttribute="height" multiplier="1:1" id="egT-e1-ffM"/>
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="BnB-mk-2Au">
-                                            <rect key="frame" x="15" y="11" width="252" height="113"/>
+                                            <rect key="frame" x="15" y="11" width="226" height="113"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAw-Iy-jnH">
-                                                    <rect key="frame" x="0.0" y="0.0" width="252" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="226" height="20.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNn-Or-YeP">
-                                                    <rect key="frame" x="0.0" y="53" width="252" height="14.5"/>
+                                                    <rect key="frame" x="0.0" y="53" width="226" height="14.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1d Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TiM-ZH-Dme">
-                                                    <rect key="frame" x="0.0" y="99.5" width="252" height="13.5"/>
+                                                    <rect key="frame" x="0.0" y="99.5" width="226" height="13.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                     <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -79,11 +78,7 @@
                                     <outlet property="descriptionLabel" destination="fNn-Or-YeP" id="Yq1-sY-ul3"/>
                                     <outlet property="thumbnailImageView" destination="ahM-Wk-Wsu" id="F5f-sd-LBr"/>
                                     <outlet property="titleLabel" destination="gAw-Iy-jnH" id="sc5-1m-jDD"/>
-                                    <segue destination="wL3-rq-OSP" kind="showDetail" identifier="showNewsDetail" id="L9Z-zz-QmH">
-                                        <segue key="commit" inheritsFrom="parent" id="uPa-J1-9cW"/>
-                                        <segue key="preview" inheritsFrom="commit" id="Rt1-ir-Xk9"/>
-                                        <nil key="action"/>
-                                    </segue>
+                                    <segue destination="wL3-rq-OSP" kind="showDetail" identifier="showNewsDetail" id="rbf-xq-m4b"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -207,8 +202,8 @@
                 <splitViewController id="8VK-Hn-9Dm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="News" image="NewsIcon" selectedImage="NewsIcon-Filled" id="bg5-K9-0Du"/>
                     <connections>
-                        <segue destination="Qgn-D2-8S7" kind="relationship" relationship="masterViewController" id="1Fa-dU-uYc"/>
-                        <segue destination="wL3-rq-OSP" kind="relationship" relationship="detailViewController" id="bOE-HY-gYP"/>
+                        <segue destination="Qgn-D2-8S7" kind="relationship" relationship="masterViewController" id="70t-p5-L5C"/>
+                        <segue destination="wL3-rq-OSP" kind="relationship" relationship="detailViewController" id="9Aa-aL-yvf"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n5S-3S-F3X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -432,7 +427,7 @@
         <image name="NewsIcon-Filled" width="30" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bOE-HY-gYP"/>
+        <segue reference="rbf-xq-m4b"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>
