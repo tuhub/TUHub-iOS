@@ -17,6 +17,7 @@ class NetworkManager: NSObject {
         case courseRoster = "https://prd-mobile.temple.edu/banner-mobileserver/api/2.0/courses/roster"
         case getUserInfo = "https://prd-mobile.temple.edu/banner-mobileserver/api/2.0/security/getUserInfo"
         case news = "https://prd-mobile.temple.edu/banner-mobileserver/rest/1.2/feed"
+        case maps = "https://prd-mobile.temple.edu/banner-mobileserver/api/2.0/campus/13"
         case courseSearch = "https://prd-mobile.temple.edu/CourseSearch/searchCatalog.jsp"
         case marketplace = "http://tuhubapi-env.us-east-1.elasticbeanstalk.com"
         case s3 = "https://tumobilemarketplace.s3.amazonaws.com"

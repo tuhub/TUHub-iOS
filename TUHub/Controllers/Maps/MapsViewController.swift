@@ -6,10 +6,13 @@
 //  Copyright © 2017 Temple University. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import MapKit
 import CoreLocation
 import ISHHoverBar
+
+let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
 
 class MapsViewController: UIViewController {
     
@@ -35,6 +38,10 @@ class MapsViewController: UIViewController {
     }()
     
     let locationManager = CLLocationManager()
+    lazy var centerMapFirstTime: Void = {
+        let region = MKCoordinateRegion(center: self.mapView.userLocation.coordinate, span: defaultSpan)
+        self.mapView.setRegion(region, animated: false)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,11 +63,56 @@ class MapsViewController: UIViewController {
         let topConstraint = NSLayoutConstraint(item: hoverBar, attribute: .top, relatedBy: .equal, toItem: topLayoutGuide, attribute: .bottom, multiplier: 1, constant: 8)
         NSLayoutConstraint.activate([trailingConstraint, topConstraint])
         
+        // Map view set up
+        mapView.delegate = self
+        
         // Location manager set up
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        
+        // Retrieve campuses and their buildings
+        Campus.retrieveAll { (campuses, error) in
+            guard error == nil else {
+                let alertController = UIAlertController(title: "Unable to Retrieve Campus Information",
+                                                    message: "TUHub was unable to retrieve campus and building information from Temple's servers. Please try again shortly.",
+                                                    preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss",
+                                                         style: .default,
+                                                         handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+            
+            if let campuses = campuses, let nearest = self.nearest(of: campuses) {
+                self.mapView.setRegion(nearest.region, animated: true)
+            } else {
+                _ = self.centerMapFirstTime
+            }
+        }
+        
     }
     
+    func nearest(of campuses: [Campus]) -> Campus? {
+        
+        guard var nearest: Campus = campuses.first else { return nil }
+        var campuses = campuses.dropFirst()
+        
+        var minDist: Double = 0
+        guard let userLocation = mapView.userLocation.location else {
+            let i = campuses.index(where: { $0.id == "MN" })!
+            return campuses[i]
+        }
+        
+        for campus in campuses {
+            let campusLocation = CLLocation(latitude: campus.region.center.latitude, longitude: campus.region.center.longitude)
+            let dist = userLocation.distance(from: campusLocation)
+            if dist < minDist {
+                minDist = dist
+                nearest = campus
+            }
+        }
+        return nearest
+    }
 
     /*
     // MARK: - Navigation
@@ -77,4 +129,13 @@ class MapsViewController: UIViewController {
 // MARK: - CLLocationManagerDelegate
 extension MapsViewController: CLLocationManagerDelegate {
     
+}
+
+// MARK: - MKMapViewDelegate
+extension MapsViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        // Center the map the first time we get a real location change.
+//        _ = centerMapFirstTime
+    }
 }

@@ -37,6 +37,7 @@
 		7D7E0E3B1E9C0D46007A1D16 /* Maps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7E0E3A1E9C0D46007A1D16 /* Maps.storyboard */; };
 		7D7E0E3D1E9C0D52007A1D16 /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7E0E3C1E9C0D52007A1D16 /* News.storyboard */; };
 		7D7E0E3F1E9C0D5F007A1D16 /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7E0E3E1E9C0D5F007A1D16 /* More.storyboard */; };
+		7D7E0E411E9D7DED007A1D16 /* Campus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E0E401E9D7DED007A1D16 /* Campus.swift */; };
 		7D7FD0111E85922300CE769F /* String+NSRegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0101E85922300CE769F /* String+NSRegularExpression.swift */; };
 		7D7FD0131E85ADE800CE769F /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0121E85ADE800CE769F /* MapsViewController.swift */; };
 		7D7FD0161E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */; };
@@ -150,6 +151,7 @@
 		7D7E0E3A1E9C0D46007A1D16 /* Maps.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Maps.storyboard; path = UI/Maps.storyboard; sourceTree = "<group>"; };
 		7D7E0E3C1E9C0D52007A1D16 /* News.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = News.storyboard; path = UI/News.storyboard; sourceTree = "<group>"; };
 		7D7E0E3E1E9C0D5F007A1D16 /* More.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = More.storyboard; path = UI/More.storyboard; sourceTree = "<group>"; };
+		7D7E0E401E9D7DED007A1D16 /* Campus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Campus.swift; path = Models/Campus.swift; sourceTree = "<group>"; };
 		7D7FD0101E85922300CE769F /* String+NSRegularExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NSRegularExpression.swift"; sourceTree = "<group>"; };
 		7D7FD0121E85ADE800CE769F /* MapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsViewController.swift; path = Maps/MapsViewController.swift; sourceTree = "<group>"; };
 		7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsSearchResultsTableViewController.swift; path = Maps/MapsSearchResultsTableViewController.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				7D4E57F41E9211AD000B7719 /* Personal.swift */,
 				7DE27BDA1E93458D004C2F83 /* MarketplaceUser.swift */,
 				7D33C2141E9974D300101751 /* ImageCollection.swift */,
+				7D7E0E401E9D7DED007A1D16 /* Campus.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -824,6 +827,7 @@
 				7DA6D92B1E7F6ECE00CD5D02 /* NewsItem.swift in Sources */,
 				7D8A1A631E983959006401A1 /* ImagesRow.swift in Sources */,
 				7DA6D95B1E7F6FC500CD5D02 /* NewsItemTableViewCell.swift in Sources */,
+				7D7E0E411E9D7DED007A1D16 /* Campus.swift in Sources */,
 				7DFF54741E9B134200A8A849 /* MyListingsTableViewController.swift in Sources */,
 				7D7164DF1E95AD900027EDD5 /* CourseSearchResultTableViewDataSource.swift in Sources */,
 				7D7164E31E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift in Sources */,

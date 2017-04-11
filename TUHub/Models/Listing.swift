@@ -66,7 +66,8 @@ class Listing {
         self.photosDirectory = photosDir
     }
     
-    func retrievePhotoPaths(_ responseHandler: @escaping ([String]?, Error?) -> Void) -> DataRequest? {
+    
+    @discardableResult func retrievePhotoPaths(_ responseHandler: @escaping ([String]?, Error?) -> Void) -> DataRequest? {
         guard let photosDirectory = photosDirectory else { return nil }
         
         let prefix = "\(photosDirectory)/"
