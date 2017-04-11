@@ -21,6 +21,8 @@ target 'TUHub' do
   pod 'TLIndexPathTools', '~> 0.4.4'
   pod 'Eureka', '~> 2.0.1'
   pod 'AWSS3', '~> 2.5.0'
+  pod 'YelpAPI', '~> 2.0.0'
+  pod 'ISHHoverBar', '~> 1.0.1'
   
   target 'TUHubTests' do
     inherit! :search_paths

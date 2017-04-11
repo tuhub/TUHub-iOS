@@ -362,13 +362,13 @@
 			isa = PBXGroup;
 			children = (
 				7D043A551E5BF7EF0003A853 /* Main.storyboard */,
-				7D043A581E5BF7EF0003A853 /* Assets.xcassets */,
 				7D043A5A1E5BF7EF0003A853 /* LaunchScreen.storyboard */,
 				7D7E0E381E9C0CFF007A1D16 /* Courses.storyboard */,
 				7D7E0E361E9C0CC1007A1D16 /* Marketplace.storyboard */,
 				7D7E0E3A1E9C0D46007A1D16 /* Maps.storyboard */,
 				7D7E0E3C1E9C0D52007A1D16 /* News.storyboard */,
 				7D7E0E3E1E9C0D5F007A1D16 /* More.storyboard */,
+				7D043A581E5BF7EF0003A853 /* Assets.xcassets */,
 			);
 			name = UI;
 			sourceTree = "<group>";
