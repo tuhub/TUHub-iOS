@@ -65,4 +65,4 @@ fastlane/screenshots
 fastlane/test_output
 
 # sensitive
-TUHub/YLPClient+Secret.swift
+TUHub/Utilities/YLPClient+Secret.swift
