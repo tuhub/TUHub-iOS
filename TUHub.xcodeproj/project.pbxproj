@@ -38,6 +38,7 @@
 		7D7E0E3D1E9C0D52007A1D16 /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7E0E3C1E9C0D52007A1D16 /* News.storyboard */; };
 		7D7E0E3F1E9C0D5F007A1D16 /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7E0E3E1E9C0D5F007A1D16 /* More.storyboard */; };
 		7D7E0E411E9D7DED007A1D16 /* Campus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E0E401E9D7DED007A1D16 /* Campus.swift */; };
+		7D7E0E431E9D9929007A1D16 /* YLPClient+Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E0E421E9D9929007A1D16 /* YLPClient+Secret.swift */; };
 		7D7FD0111E85922300CE769F /* String+NSRegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0101E85922300CE769F /* String+NSRegularExpression.swift */; };
 		7D7FD0131E85ADE800CE769F /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0121E85ADE800CE769F /* MapsViewController.swift */; };
 		7D7FD0161E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */; };
@@ -152,6 +153,7 @@
 		7D7E0E3C1E9C0D52007A1D16 /* News.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = News.storyboard; path = UI/News.storyboard; sourceTree = "<group>"; };
 		7D7E0E3E1E9C0D5F007A1D16 /* More.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = More.storyboard; path = UI/More.storyboard; sourceTree = "<group>"; };
 		7D7E0E401E9D7DED007A1D16 /* Campus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Campus.swift; path = Models/Campus.swift; sourceTree = "<group>"; };
+		7D7E0E421E9D9929007A1D16 /* YLPClient+Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YLPClient+Secret.swift"; sourceTree = "<group>"; };
 		7D7FD0101E85922300CE769F /* String+NSRegularExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NSRegularExpression.swift"; sourceTree = "<group>"; };
 		7D7FD0121E85ADE800CE769F /* MapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsViewController.swift; path = Maps/MapsViewController.swift; sourceTree = "<group>"; };
 		7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsSearchResultsTableViewController.swift; path = Maps/MapsSearchResultsTableViewController.swift; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 				7DCC7F1A1E9454E900714100 /* UITableView+UIActivityIndicator.swift */,
 				7D8A1A5D1E982E01006401A1 /* CurrencyFormatter.swift */,
 				7D33C2161E99754F00101751 /* AWS.swift */,
+				7D7E0E421E9D9929007A1D16 /* YLPClient+Secret.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -845,6 +848,7 @@
 				7D439E031E8D6F4400FF5538 /* ListingsCollectionViewController.swift in Sources */,
 				7DE27BD91E932E3A004C2F83 /* ListingDetailView.swift in Sources */,
 				7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */,
+				7D7E0E431E9D9929007A1D16 /* YLPClient+Secret.swift in Sources */,
 				7DA6D9461E7F6F6800CD5D02 /* CourseViewController.swift in Sources */,
 				7D8A1A5C1E9825FF006401A1 /* AddListingViewController.swift in Sources */,
 				7DA6D92F1E7F6ECE00CD5D02 /* CourseMeeting.swift in Sources */,

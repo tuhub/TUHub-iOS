@@ -11,13 +11,13 @@ import UIKit
 import MapKit
 import CoreLocation
 import ISHHoverBar
+import YelpAPI
 
 let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
 
 class MapsViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
-    var locationButton: MKUserTrackingBarButtonItem!
 
     lazy var searchController: UISearchController = {
         let resultsController = MapsSearchResultsTableViewController()
@@ -37,11 +37,17 @@ class MapsViewController: UIViewController {
         return searchController
     }()
     
-    let locationManager = CLLocationManager()
     lazy var centerMapFirstTime: Void = {
         let region = MKCoordinateRegion(center: self.mapView.userLocation.coordinate, span: defaultSpan)
         self.mapView.setRegion(region, animated: false)
     }()
+    
+    var locationButton: MKUserTrackingBarButtonItem!
+    let locationManager = CLLocationManager()
+    var yelpClient: YLPClient?
+    
+    var busineses: [YLPBusiness]?
+    var selectedBusiness: YLPBusiness?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,10 +90,20 @@ class MapsViewController: UIViewController {
             }
             
             if let campuses = campuses, let nearest = self.nearest(of: campuses) {
-                self.mapView.setRegion(nearest.region, animated: true)
+                self.mapView.setRegion(nearest.region, animated: false)
             } else {
                 _ = self.centerMapFirstTime
             }
+            self.mapView(self.mapView, regionDidChangeAnimated: false)
+        }
+        
+        // Set up Yelp Client
+        YLPClient.authorize(withAppId: YLPClient.id, secret: YLPClient.secret) { (client, error) in
+            if let error = error {
+                log.error(error)
+                return
+            }
+            self.yelpClient = client
         }
         
     }
@@ -138,4 +154,66 @@ extension MapsViewController: MKMapViewDelegate {
         // Center the map the first time we get a real location change.
 //        _ = centerMapFirstTime
     }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        let center = mapView.centerCoordinate
+        let coordinate = YLPCoordinate(latitude: center.latitude, longitude: center.longitude)
+        
+        // Set up query
+        let query = YLPQuery(coordinate: coordinate)
+        query.radiusFilter = Double(Int(mapView.region.radius))
+        query.sort = .distance
+        query.limit = 40
+        
+        yelpClient?.search(with: query) { (search, error) in
+            if let error = error {
+                log.error(error)
+                return
+            }
+            
+            if let businesses = search?.businesses {
+                if let oldBusinesses = self.busineses {
+                    self.mapView.removeAnnotations(oldBusinesses)
+                }
+                
+                self.mapView.addAnnotations(businesses)
+            }
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let business = view.annotation as? YLPBusiness {
+            selectedBusiness = business
+            // TODO: Perform segue here, use selectedBusiness to pass to detail VC
+        }
+    }
+}
+
+extension YLPBusiness: MKAnnotation {
+    public var coordinate: CLLocationCoordinate2D {
+        let ylpCoord = self.location.coordinate
+        let lat: Double = ylpCoord?.latitude ?? 0
+        let long: Double = ylpCoord?.longitude ?? 0
+        
+        return CLLocationCoordinate2D(latitude: lat, longitude: long)
+    }
+    
+    public var title: String? {
+        return self.name
+    }
+    
+}
+
+extension MKCoordinateRegion {
+    
+    /// Radius in meters
+    var radius: Double {
+        let loc1 = CLLocation(latitude: center.latitude - (span.latitudeDelta / 2), longitude: center.longitude)
+        let loc2 = CLLocation(latitude: center.latitude + (span.latitudeDelta / 2), longitude: center.longitude)
+        let loc3 = CLLocation(latitude: center.latitude, longitude: center.longitude - (span.longitudeDelta / 2))
+        let loc4 = CLLocation(latitude: center.latitude, longitude: center.longitude + (span.longitudeDelta / 2))
+        
+        return max(loc1.distance(from: loc2), loc3.distance(from: loc4))
+    }
+    
 }
