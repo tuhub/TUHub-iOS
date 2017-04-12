@@ -13,6 +13,9 @@ import CoreLocation
 import ISHHoverBar
 import YelpAPI
 
+// Segue Identifiers
+fileprivate let mapsDetailSegueID = "showMapsDetail"
+
 let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
 
 class MapsViewController: UIViewController {
@@ -130,15 +133,23 @@ class MapsViewController: UIViewController {
         return nearest
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        switch segue.identifier! {
+            
+        case mapsDetailSegueID:
+
+                let mapsDetailVC = segue.destination as? MapsDetailTableViewController
+                mapsDetailVC?.selectedBusiness = self.selectedBusiness
+
+        default:
+            break
+        }
     }
-    */
+ 
 
 }
 
@@ -184,9 +195,10 @@ extension MapsViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let business = view.annotation as? YLPBusiness {
             selectedBusiness = business
-            // TODO: Perform segue here, use selectedBusiness to pass to detail VC
+            performSegue(withIdentifier: "showMapsDetail", sender: self)
         }
     }
+    
 }
 
 extension YLPBusiness: MKAnnotation {

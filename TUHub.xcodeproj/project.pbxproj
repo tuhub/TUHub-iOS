@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22535D4D1E9DB70600698577 /* MapsDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22535D4C1E9DB70600698577 /* MapsDetailTableViewController.swift */; };
 		225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */; };
 		22662BBE1E9682750016A1C8 /* ContactDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */; };
 		227F304A1E930B2A00DE1752 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 227F30491E930B2900DE1752 /* MessageUI.framework */; };
@@ -114,6 +115,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		22535D4C1E9DB70600698577 /* MapsDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsDetailTableViewController.swift; sourceTree = "<group>"; };
 		225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingDetailTableViewController.swift; sourceTree = "<group>"; };
 		22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailViewCell.swift; sourceTree = "<group>"; };
 		227F30491E930B2900DE1752 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -397,6 +399,7 @@
 			children = (
 				7D7FD0121E85ADE800CE769F /* MapsViewController.swift */,
 				7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */,
+				22535D4C1E9DB70600698577 /* MapsDetailTableViewController.swift */,
 			);
 			name = Maps;
 			sourceTree = "<group>";
@@ -806,6 +809,7 @@
 				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
 				7D33C2171E99754F00101751 /* AWS.swift in Sources */,
 				7DCC7F1B1E9454E900714100 /* UITableView+UIActivityIndicator.swift in Sources */,
+				22535D4D1E9DB70600698577 /* MapsDetailTableViewController.swift in Sources */,
 				225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */,
 				7D4E57F61E9211AD000B7719 /* Personal.swift in Sources */,
 				7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */,
