@@ -16,7 +16,7 @@ import YelpAPI
 // Segue Identifiers
 private let mapsDetailSegueID = "showMapsDetail"
 
-private let defaultCampusKey = "defaultCampus"
+let defaultCampusKey = "defaultCampus"
 
 class MapsViewController: UIViewController {
     
@@ -34,12 +34,17 @@ class MapsViewController: UIViewController {
         return searchController
     }()
     
+    var campuses: [Campus]?
+    
     var locationButton: MKUserTrackingBarButtonItem!
     let locationManager = CLLocationManager()
     var yelpClient: YLPClient?
     
     lazy var businesses: [YLPBusiness] = []
     var selectedBusinessID: String?
+    
+    var hoverBar: ISHHoverBar!
+    var infoButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +53,11 @@ class MapsViewController: UIViewController {
         navigationItem.titleView = searchController.searchBar
         
         // Set up toolbar
-        let hoverBar = ISHHoverBar(frame: CGRect(x: 0, y: 0, width: 44, height: 88))
-        let infoButton = UIBarButtonItem(image: #imageLiteral(resourceName: "InfoIcon"), style: .plain, target: nil, action: nil) // TODO: Add action for info button
+        hoverBar = ISHHoverBar(frame: CGRect(x: 0, y: 0, width: 44, height: 88))
+        
+        infoButton = UIBarButtonItem(image: #imageLiteral(resourceName: "InfoIcon"), style: .plain, target: self, action: #selector(showMapsOptions))
+        infoButton.isEnabled = false
+        
         locationButton = MKUserTrackingBarButtonItem(mapView: mapView)
         hoverBar.items = [infoButton, locationButton]
         hoverBar.orientation = .vertical
@@ -69,49 +77,6 @@ class MapsViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-        // Retrieve campuses and their buildings
-        Campus.retrieveAll { (campuses, error) in
-            guard error == nil, let campuses = campuses else {
-                let alertController = UIAlertController(title: "Unable to Retrieve Campus Information",
-                                                        message: "TUHub was unable to retrieve campus and building information from Temple's servers. Please try again shortly.",
-                                                        preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss",
-                                                        style: .default,
-                                                        handler: nil))
-                self.present(alertController, animated: true, completion: nil)
-                return
-            }
-            
-            let defaults = UserDefaults.standard
-            if let defaultCampusID = defaults.string(forKey: defaultCampusKey) {
-                
-                // Find the campus object corresponding to the default campus ID
-                if let i = campuses.index(where: { $0.id == defaultCampusID }) {
-                    let campus = campuses[i]
-                    
-                    // Set campus as mapView's region
-                    DispatchQueue.main.async {
-                        self.mapView.setRegion(campus.region, animated: false)
-                        self.loadBusiness(in: campus.region)
-                    }
-                }
-                // The default campus has been removed, ask to select a new one
-                else {
-                    self.showDefaultCampusSelection(campuses)
-                }
-            }
-            // No default campus selected, prompt to select one
-            else {
-                self.showDefaultCampusSelection(campuses)
-            }
-            
-            if let resultsController = self.searchController.searchResultsController as? MapsSearchResultsTableViewController {
-                resultsController.campuses = campuses
-            }
-            
-        }
-
-        
         // Set up Yelp Client
         YLPClient.authorize(withAppId: YLPClient.id, secret: YLPClient.secret) { (client, error) in
             if let error = error {
@@ -126,6 +91,12 @@ class MapsViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let insets = UIEdgeInsets(top: topLayoutGuide.length, left: 0, bottom: bottomLayoutGuide.length, right: 0)
@@ -133,10 +104,66 @@ class MapsViewController: UIViewController {
         resultsController?.insets = insets
         resultsController?.delegate = self
 
+        // Retrieve campuses and their buildings
+        Campus.retrieveAll { (campuses, error) in
+            guard error == nil, let campuses = campuses else {
+                let alertController = UIAlertController(title: "Unable to Retrieve Campus Information",
+                                                        message: "TUHub was unable to retrieve campus and building information from Temple's servers. Please try again shortly.",
+                                                        preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss",
+                                                        style: .default,
+                                                        handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+            
+            self.campuses = campuses
+            self.infoButton.isEnabled = true
+            
+            // Add Temple buildings to the map
+            for campus in campuses {
+                if let buildings = campus.buildings {
+                    self.mapView.addAnnotations(buildings)
+                }
+            }
+            
+            // Check if user has selected a default campus
+            let defaults = UserDefaults.standard
+            if let defaultCampusID = defaults.string(forKey: defaultCampusKey) {
+                
+                // Find the campus object corresponding to the default campus ID
+                if let i = campuses.index(where: { $0.id == defaultCampusID }) {
+                    let campus = campuses[i]
+                    
+                    // Set campus as mapView's region
+                    DispatchQueue.main.async {
+                        self.didChangeCampus(to: campus)
+                    }
+                }
+                    // The default campus has been removed, ask to select a new one
+                else {
+                    self.showDefaultCampusSelection(campuses)
+                }
+            }
+                // No default campus selected, prompt to select one
+            else {
+                self.showDefaultCampusSelection(campuses)
+            }
+            
+            if let resultsController = self.searchController.searchResultsController as? MapsSearchResultsTableViewController {
+                resultsController.campuses = campuses
+            }
+            
+        }
     }
     
     func showDefaultCampusSelection(_ campuses: [Campus]) {
         let actionSheet = UIAlertController(title: "Select Your Default Campus", message: "Select the campus that you would like to be displayed when you first open the app.", preferredStyle: .actionSheet)
+        
+        var frame = hoverBar.frame
+        frame.size = CGSize(width: frame.size.width, height: frame.size.height / 2)
+        actionSheet.popoverPresentationController?.sourceView = self.view
+        actionSheet.popoverPresentationController?.sourceRect = frame
         
         for campus in campuses {
             let action = UIAlertAction(title: campus.name, style: .default) { (action) in
@@ -147,8 +174,7 @@ class MapsViewController: UIViewController {
                 
                 // Show selection on map
                 DispatchQueue.main.async {
-                    self.mapView.setRegion(campus.region, animated: false)
-                    self.loadBusiness(in: campus.region)
+                    self.didChangeCampus(to: campus)
                 }
                 
             }
@@ -156,6 +182,27 @@ class MapsViewController: UIViewController {
         }
         
         self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func showMapsOptions() {
+        guard let mapsOptionsVC = storyboard?.instantiateViewController(withIdentifier: "MapsOptionsVC") as? MapsOptionsViewController else { return }
+        
+        mapsOptionsVC.campuses = self.campuses
+        mapsOptionsVC.mapType = self.mapView.mapType
+        mapsOptionsVC.delegate = self
+        
+        let navVC = UINavigationController(rootViewController: mapsOptionsVC)
+        if traitCollection.horizontalSizeClass == .compact {
+            navVC.modalPresentationStyle = .overFullScreen
+        } else {
+            navVC.modalPresentationStyle = .popover
+        }
+        
+        var frame = hoverBar.frame
+        frame.size = CGSize(width: frame.size.width, height: frame.size.height / 2)
+        navVC.popoverPresentationController?.sourceView = self.view
+        navVC.popoverPresentationController?.sourceRect = frame
+        present(navVC, animated: true, completion: nil)
     }
     
     // MARK: - Navigation
@@ -270,6 +317,17 @@ extension MapsViewController: MapsSearchResultsTableViewControllerDelegate {
         mapView.addAnnotation(business)
         mapView.setCenter(business.coordinate, animated: true)
         mapView.selectAnnotation(business, animated: true)
+    }
+}
+
+extension MapsViewController: MapsOptionsViewControllerDelegate {
+    func didChangeMapType(to mapType: MKMapType) {
+        mapView.mapType = mapType
+    }
+    
+    func didChangeCampus(to campus: Campus) {
+        mapView.setRegion(campus.region, animated: true)
+        loadBusiness(in: campus.region)
     }
 }
 

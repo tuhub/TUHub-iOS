@@ -56,6 +56,7 @@
 		7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */; };
 		7D942B781E9EC1DA00EEB312 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D942B771E9EC1DA00EEB312 /* Building.swift */; };
 		7D942B7A1E9ED72700EEB312 /* BusinessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D942B791E9ED72700EEB312 /* BusinessTableViewCell.swift */; };
+		7D942B8C1EA003D400EEB312 /* MapsOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D942B8B1EA003D400EEB312 /* MapsOptionsViewController.swift */; };
 		7D996A951E97025F00466A21 /* ListingsFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D996A941E97025F00466A21 /* ListingsFilterTableViewController.swift */; };
 		7DA6D92A1E7F6ECE00CD5D02 /* CourseSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9201E7F6ECE00CD5D02 /* CourseSearchResult.swift */; };
 		7DA6D92B1E7F6ECE00CD5D02 /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9211E7F6ECE00CD5D02 /* NewsItem.swift */; };
@@ -176,6 +177,7 @@
 		7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselFlowLayout.swift; sourceTree = "<group>"; };
 		7D942B771E9EC1DA00EEB312 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Building.swift; path = Models/Building.swift; sourceTree = "<group>"; };
 		7D942B791E9ED72700EEB312 /* BusinessTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BusinessTableViewCell.swift; path = Maps/BusinessTableViewCell.swift; sourceTree = "<group>"; };
+		7D942B8B1EA003D400EEB312 /* MapsOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsOptionsViewController.swift; path = Maps/MapsOptionsViewController.swift; sourceTree = "<group>"; };
 		7D996A941E97025F00466A21 /* ListingsFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsFilterTableViewController.swift; sourceTree = "<group>"; };
 		7DA6D9201E7F6ECE00CD5D02 /* CourseSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CourseSearchResult.swift; path = Models/CourseSearchResult.swift; sourceTree = "<group>"; };
 		7DA6D9211E7F6ECE00CD5D02 /* NewsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsItem.swift; path = Models/NewsItem.swift; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 				7D7FD0121E85ADE800CE769F /* MapsViewController.swift */,
 				7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */,
 				22535D4C1E9DB70600698577 /* MapsDetailViewController.swift */,
+				7D942B8B1EA003D400EEB312 /* MapsOptionsViewController.swift */,
 			);
 			name = Maps;
 			sourceTree = "<group>";
@@ -835,6 +838,7 @@
 				7DE27BD51E932D03004C2F83 /* ListingCollectionViewCell.swift in Sources */,
 				7DA6D9581E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift in Sources */,
 				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
+				7D942B8C1EA003D400EEB312 /* MapsOptionsViewController.swift in Sources */,
 				7D33C2171E99754F00101751 /* AWS.swift in Sources */,
 				7DCC7F1B1E9454E900714100 /* UITableView+UIActivityIndicator.swift in Sources */,
 				22535D4D1E9DB70600698577 /* MapsDetailViewController.swift in Sources */,

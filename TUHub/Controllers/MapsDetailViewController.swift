@@ -149,7 +149,7 @@ extension MapsDetailViewController: UITableViewDataSource {
         // Leading 1
         var leadingOne = ""
         if hasLeadingOne {
-            leadingOne = "1 "
+            leadingOne = "+1 "
             sourceIndex += 1
         }
         
