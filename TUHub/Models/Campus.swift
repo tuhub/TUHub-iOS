@@ -20,6 +20,8 @@ class Campus {
     private(set) var northWestLongitude: Double
     private(set) var southEastLatitude: Double
     private(set) var southEastLongitude: Double
+    private(set) var buildings: [Building]?
+    
     lazy var region: MKCoordinateRegion = {
         // Calculate span
         let latDelta = abs(self.northWestLatitude - self.southEastLatitude)
@@ -32,7 +34,6 @@ class Campus {
         let center = CLLocationCoordinate2D(latitude: centerLat, longitude: centerLong)
         return MKCoordinateRegion(center: center, span: span)
     }()
-//    private(set) var buildings: []
     
     init?(json: JSON) {
         guard
@@ -53,6 +54,8 @@ class Campus {
         self.northWestLongitude = northWestLongitude
         self.southEastLatitude = southEastLatitude
         self.southEastLongitude = southEastLongitude
+        
+        self.buildings = json["buildings"].array?.flatMap { Building(json: $0) }
         
     }
     

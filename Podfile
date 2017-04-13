@@ -23,6 +23,7 @@ target 'TUHub' do
   pod 'AWSS3', '~> 2.5.0'
   pod 'YelpAPI', '~> 2.0.0'
   pod 'ISHHoverBar', '~> 1.0.1'
+  pod 'Cosmos', '~> 9.0.0'
   
   target 'TUHubTests' do
     inherit! :search_paths

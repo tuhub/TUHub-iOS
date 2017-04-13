@@ -23,13 +23,7 @@ class MapsViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
 
     lazy var searchController: UISearchController = {
-        let resultsController = MapsSearchResultsTableViewController()
-        resultsController.view.backgroundColor = .clear
-        resultsController.modalPresentationStyle = .overCurrentContext
-        let visualEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
-        let visualEffectView = UIVisualEffectView(effect: visualEffect)
-        visualEffectView.frame = resultsController.view.bounds
-        resultsController.view.insertSubview(visualEffectView, at: 0)
+        let resultsController = self.storyboard!.instantiateViewController(withIdentifier: "MapsSearchResultsVC") as! MapsSearchResultsTableViewController
         
         let searchController = UISearchController(searchResultsController: resultsController)
         searchController.searchResultsUpdater = resultsController
@@ -41,9 +35,30 @@ class MapsViewController: UIViewController {
     }()
     
     lazy var centerMapFirstTime: Void = {
-        let region = MKCoordinateRegion(center: self.mapView.userLocation.coordinate, span: defaultSpan)
-        self.mapView.setRegion(region, animated: false)
+        // Retrieve campuses and their buildings
+        Campus.retrieveAll { (campuses, error) in
+            guard error == nil else {
+                let alertController = UIAlertController(title: "Unable to Retrieve Campus Information",
+                                                        message: "TUHub was unable to retrieve campus and building information from Temple's servers. Please try again shortly.",
+                                                        preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss",
+                                                        style: .default,
+                                                        handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+            
+            if let campuses = campuses, let nearest = self.nearest(of: campuses) {
+                if let resultsController = self.searchController.searchResultsController as? MapsSearchResultsTableViewController {
+                    resultsController.campuses = campuses
+                }
+                self.mapView.setRegion(nearest.region, animated: false)
+                self.loadBusiness(in: nearest.region)
+            }
+        }
     }()
+    
+    var mapLock = NSLock()
     
     var locationButton: MKUserTrackingBarButtonItem!
     let locationManager = CLLocationManager()
@@ -54,7 +69,7 @@ class MapsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Put search bar in navigation bar
         navigationItem.titleView = searchController.searchBar
         
@@ -79,27 +94,6 @@ class MapsViewController: UIViewController {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
-        // Retrieve campuses and their buildings
-        Campus.retrieveAll { (campuses, error) in
-            guard error == nil else {
-                let alertController = UIAlertController(title: "Unable to Retrieve Campus Information",
-                                                    message: "TUHub was unable to retrieve campus and building information from Temple's servers. Please try again shortly.",
-                                                    preferredStyle: UIAlertControllerStyle.alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss",
-                                                         style: .default,
-                                                         handler: nil))
-                self.present(alertController, animated: true, completion: nil)
-                return
-            }
-            
-            if let campuses = campuses, let nearest = self.nearest(of: campuses) {
-                self.mapView.setRegion(nearest.region, animated: false)
-            } else {
-                _ = self.centerMapFirstTime
-            }
-            self.mapView(self.mapView, regionDidChangeAnimated: false)
-        }
-        
         // Set up Yelp Client
         YLPClient.authorize(withAppId: YLPClient.id, secret: YLPClient.secret) { (client, error) in
             if let error = error {
@@ -107,6 +101,12 @@ class MapsViewController: UIViewController {
                 return
             }
             self.yelpClient = client
+            
+            if let resultsController = self.searchController.searchResultsController as? MapsSearchResultsTableViewController {
+                resultsController.yelpClient = client
+            }
+            
+            self.locationManager.startUpdatingLocation()
         }
         
     }
@@ -116,15 +116,20 @@ class MapsViewController: UIViewController {
         guard var nearest: Campus = campuses.first else { return nil }
         var campuses = campuses.dropFirst()
         
-        var minDist: Double = 0
+        func distance(to campus: Campus, from location: CLLocation) -> CLLocationDistance {
+            let campusLocation = CLLocation(latitude: campus.region.center.latitude, longitude: campus.region.center.longitude)
+            return location.distance(from: campusLocation)
+        }
+        
         guard let userLocation = mapView.userLocation.location else {
             let i = campuses.index(where: { $0.id == "MN" })!
             return campuses[i]
         }
         
+        var minDist: Double = distance(to: nearest, from: userLocation)
+        
         for campus in campuses {
-            let campusLocation = CLLocation(latitude: campus.region.center.latitude, longitude: campus.region.center.longitude)
-            let dist = userLocation.distance(from: campusLocation)
+            let dist = distance(to: campus, from: userLocation)
             if dist < minDist {
                 minDist = dist
                 nearest = campus
@@ -138,7 +143,10 @@ class MapsViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier! {
+        
+        guard let identifier = segue.identifier else { return }
+        
+        switch identifier {
             
         case mapsDetailSegueID:
 
@@ -155,26 +163,23 @@ class MapsViewController: UIViewController {
 
 // MARK: - CLLocationManagerDelegate
 extension MapsViewController: CLLocationManagerDelegate {
-    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        _ = centerMapFirstTime
+    }
 }
 
 // MARK: - MKMapViewDelegate
 extension MapsViewController: MKMapViewDelegate {
     
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        // Center the map the first time we get a real location change.
-//        _ = centerMapFirstTime
-    }
-    
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        let center = mapView.centerCoordinate
+    func loadBusiness(in region: MKCoordinateRegion) {
+        let center = region.center
         let coordinate = YLPCoordinate(latitude: center.latitude, longitude: center.longitude)
         
         // Set up query
         let query = YLPQuery(coordinate: coordinate)
-        query.radiusFilter = Double(Int(mapView.region.radius))
+        query.radiusFilter = Double(Int(region.radius)) // radiusFilter is a double, but the API takes an int? Nice job Yelp
         query.sort = .distance
-        query.limit = 40
+        query.limit = 20
         
         yelpClient?.search(with: query) { (search, error) in
             if let error = error {
@@ -183,20 +188,62 @@ extension MapsViewController: MKMapViewDelegate {
             }
             
             if let businesses = search?.businesses {
-                if let oldBusinesses = self.busineses {
-                    self.mapView.removeAnnotations(oldBusinesses)
+                self.mapLock.try()
+                
+                DispatchQueue.main.async {
+                    self.mapView.addAnnotations(businesses)
+                    self.busineses = businesses
                 }
                 
-                self.mapView.addAnnotations(businesses)
+                self.mapLock.unlock()
             }
         }
     }
     
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        if let oldBusinesses = self.busineses {
+            mapView.removeAnnotations(oldBusinesses)
+            self.busineses = nil
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        if let resultsController = searchController.searchResultsController as? MapsSearchResultsTableViewController {
+            resultsController.region = mapView.region
+        }
+        loadBusiness(in: mapView.region)
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let business = view.annotation as? YLPBusiness {
             selectedBusiness = business
             performSegue(withIdentifier: "showMapsDetail", sender: self)
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if annotation is MKUserLocation {
+            //return nil so map view draws dot for standard user location instead of pin
+            return nil
+        }
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView?.canShowCallout = true
+            pinView?.animatesDrop = false
+            pinView?.pinTintColor = UIColor.cherry
+            pinView?.isDraggable = false
+            pinView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else {
+            pinView?.annotation = annotation
+        }
+        
+        return pinView
     }
     
 }
@@ -212,6 +259,18 @@ extension YLPBusiness: MKAnnotation {
     
     public var title: String? {
         return self.name
+    }
+    
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    static func ==(lhs: YLPBusiness, rhs: YLPBusiness) -> Bool {
+        return lhs.identifier == rhs.identifier
     }
     
 }
