@@ -18,6 +18,10 @@ private let mapsDetailSegueID = "showMapsDetail"
 
 let defaultCampusKey = "defaultCampus"
 
+private let minimumLatitudeOffset = 0.001
+private let minimumLongitudeOffset = 0.001
+private let minimumSpanOffset = 0.001
+
 class MapsViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
@@ -45,6 +49,8 @@ class MapsViewController: UIViewController {
     
     var hoverBar: ISHHoverBar!
     var infoButton: UIBarButtonItem!
+    
+    var oldRegion: MKCoordinateRegion?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -258,6 +264,20 @@ extension MapsViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+        // Check the offset between the old region and the new one, don't load new businesses if too small
+        if let oldRegion = self.oldRegion {
+            let newRegion = mapView.region
+            let latOffset = abs(oldRegion.center.latitude - newRegion.center.latitude)
+            let longOffset = abs(oldRegion.center.longitude - newRegion.center.longitude)
+            let spanOffset = max(abs(oldRegion.span.latitudeDelta - newRegion.span.latitudeDelta), abs(oldRegion.span.longitudeDelta - newRegion.span.longitudeDelta))
+            
+            if latOffset < minimumLatitudeOffset && longOffset < minimumLongitudeOffset && spanOffset < minimumSpanOffset {
+                return
+            }
+        }
+
+        self.oldRegion = mapView.region
         
         // Notify the resultsController of the region change
         if let resultsController = searchController.searchResultsController as? MapsSearchResultsTableViewController {

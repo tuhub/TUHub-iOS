@@ -123,7 +123,10 @@ extension MapsSearchResultsTableViewController: UITableViewDelegate {
                     return
                 }
                 if let businesses = search?.businesses {
-                    self.businessResults.append(contentsOf: businesses)
+                    DispatchQueue.main.async {
+                        self.businesses.append(contentsOf: businesses)
+                        self.tableView.reloadData()
+                    }
                 }
             }
         }
@@ -132,10 +135,10 @@ extension MapsSearchResultsTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            let building = buildingResults[indexPath.row]
+            let building = buildings[indexPath.row]
             delegate?.didSelect(building: building)
         case 1:
-            let business = businessResults[indexPath.row]
+            let business = businesses[indexPath.row]
             delegate?.didSelect(business: business)
         default:
             break
@@ -188,7 +191,7 @@ extension MapsSearchResultsTableViewController: UISearchResultsUpdating {
             let coordinate = YLPCoordinate(latitude: region.center.latitude, longitude: region.center.longitude)
             let query = YLPQuery(coordinate: coordinate)
             query.radiusFilter = Double(Int(region.radius))
-            query.limit = 20
+            query.limit = 3
             query.sort = .bestMatched
             query.term = searchText
             self.yelpQuery = query
