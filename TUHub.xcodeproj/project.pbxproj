@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22356FEF1E9EF8E400399897 /* MapsImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22356FEE1E9EF8E400399897 /* MapsImageTableViewCell.swift */; };
 		22535D4D1E9DB70600698577 /* MapsDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22535D4C1E9DB70600698577 /* MapsDetailTableViewController.swift */; };
 		225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */; };
 		22662BBE1E9682750016A1C8 /* ContactDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */; };
+		2279D9301E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2279D92F1E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift */; };
 		227F304A1E930B2A00DE1752 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 227F30491E930B2900DE1752 /* MessageUI.framework */; };
 		37FD610AAB987235177A1533 /* Pods_TUHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C369AC415ABB8738F6351247 /* Pods_TUHubTests.framework */; };
 		7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A4F1E5BF7EF0003A853 /* AppDelegate.swift */; };
@@ -115,9 +117,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		22356FEE1E9EF8E400399897 /* MapsImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsImageTableViewCell.swift; sourceTree = "<group>"; };
 		22535D4C1E9DB70600698577 /* MapsDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsDetailTableViewController.swift; sourceTree = "<group>"; };
 		225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingDetailTableViewController.swift; sourceTree = "<group>"; };
 		22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailViewCell.swift; sourceTree = "<group>"; };
+		2279D92F1E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		227F30491E930B2900DE1752 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3361CEFB73AA8E72E9E0B46D /* Pods-TUHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubTests/Pods-TUHubTests.release.xcconfig"; sourceTree = "<group>"; };
 		3BBBD4D5AE6A3197E62F3182 /* Pods-TUHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -256,6 +260,15 @@
 				7D8A1A6A1E983B67006401A1 /* ImageCollectionViewCell.xib */,
 			);
 			name = AddListing;
+			sourceTree = "<group>";
+		};
+		2279D92E1E9ED9680067CCC2 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				2279D92F1E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift */,
+				22356FEE1E9EF8E400399897 /* MapsImageTableViewCell.swift */,
+			);
+			name = Maps;
 			sourceTree = "<group>";
 		};
 		229CD2C31E9194F40039D88D /* Marketplace */ = {
@@ -444,6 +457,7 @@
 		7DA6D94B1E7F6FC500CD5D02 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2279D92E1E9ED9680067CCC2 /* Maps */,
 				229CD2C31E9194F40039D88D /* Marketplace */,
 				7DA6D94C1E7F6FC500CD5D02 /* Course */,
 				7DA6D9501E7F6FC500CD5D02 /* News */,
@@ -830,6 +844,7 @@
 				7DA6D9651E7F6FFF00CD5D02 /* Date+String.swift in Sources */,
 				7D5F61A21E9A827A000A1F1A /* MarketplaceSignUpViewController.swift in Sources */,
 				7DA6D9481E7F6F6800CD5D02 /* NewsFilterTableViewController.swift in Sources */,
+				2279D9301E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift in Sources */,
 				7DA6D96C1E7F6FFF00CD5D02 /* UIColor.swift in Sources */,
 				7DA6D92B1E7F6ECE00CD5D02 /* NewsItem.swift in Sources */,
 				7D8A1A631E983959006401A1 /* ImagesRow.swift in Sources */,
@@ -869,6 +884,7 @@
 				7D8A1A711E9848E1006401A1 /* ImagePickerViewController.swift in Sources */,
 				7D7FD0111E85922300CE769F /* String+NSRegularExpression.swift in Sources */,
 				7DA6D9491E7F6F6800CD5D02 /* NewsTableViewController.swift in Sources */,
+				22356FEF1E9EF8E400399897 /* MapsImageTableViewCell.swift in Sources */,
 				7DA6D9451E7F6F6800CD5D02 /* CourseSearchTableViewController.swift in Sources */,
 				7DA6D9331E7F6ECE00CD5D02 /* Instructor.swift in Sources */,
 				7DE27BDB1E93458D004C2F83 /* MarketplaceUser.swift in Sources */,

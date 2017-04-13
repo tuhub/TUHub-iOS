@@ -9,12 +9,23 @@
 import UIKit
 import YelpAPI
 
+// UITableViewCell reuse identifier
+fileprivate let mapsHeaderCellID = "mapsHeaderCell"
+fileprivate let mapsImageCellID = "mapsImageCell"
+fileprivate let mapsPhoneNumberCellID = "mapsPhoneNumberCell"
+
+
 class MapsDetailTableViewController: UITableViewController {
     
-    var selectedBusiness: YLPBusiness?
+    var selectedBusiness: YLPBusiness!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Allow table view to automatically determine cell height based on contents
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
+        tableView.cellLayoutMarginsFollowReadableWidth = true
     }
 
     // MARK: - Table view data source
@@ -24,25 +35,27 @@ class MapsDetailTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 3
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        print(selectedBusiness!.name)
-        print(selectedBusiness!.categories.count)
-        print(selectedBusiness!.categories[0].alias)
-        print(selectedBusiness!.categories[0].name)
-        print(selectedBusiness!.categories[1].name)
-        print(selectedBusiness!.categories[2].name)
-        print(selectedBusiness!.identifier)
-        print(selectedBusiness!.location.address)
-        print(selectedBusiness!.rating)
+        var cell: UITableViewCell!
         
-        cell.textLabel?.text = selectedBusiness?.title
+        switch indexPath.row {
+        case 0:
+            cell = tableView.dequeueReusableCell(withIdentifier: mapsHeaderCellID, for: indexPath)
+            (cell as? MapsHeaderTableViewCell)?.setUp(from: selectedBusiness)
+        case 1:
+            cell = tableView.dequeueReusableCell(withIdentifier: mapsImageCellID, for: indexPath)
+            (cell as? MapsImageTableViewCell)?.setUp(from: selectedBusiness)
+        case 2:
+            cell = tableView.dequeueReusableCell(withIdentifier: mapsPhoneNumberCellID, for: indexPath)
+            cell.textLabel?.text = selectedBusiness.phone
+        default:
+            break
+        }
         
         return cell
     }
