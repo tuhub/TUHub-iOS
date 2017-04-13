@@ -14,9 +14,9 @@ import ISHHoverBar
 import YelpAPI
 
 // Segue Identifiers
-fileprivate let mapsDetailSegueID = "showMapsDetail"
+private let mapsDetailSegueID = "showMapsDetail"
 
-let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
+private let defaultCampusKey = "defaultCampus"
 
 class MapsViewController: UIViewController {
     
@@ -34,37 +34,11 @@ class MapsViewController: UIViewController {
         return searchController
     }()
     
-    lazy var centerMapFirstTime: Void = {
-        // Retrieve campuses and their buildings
-        Campus.retrieveAll { (campuses, error) in
-            guard error == nil else {
-                let alertController = UIAlertController(title: "Unable to Retrieve Campus Information",
-                                                        message: "TUHub was unable to retrieve campus and building information from Temple's servers. Please try again shortly.",
-                                                        preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss",
-                                                        style: .default,
-                                                        handler: nil))
-                self.present(alertController, animated: true, completion: nil)
-                return
-            }
-            
-            if let campuses = campuses, let nearest = self.nearest(of: campuses) {
-                if let resultsController = self.searchController.searchResultsController as? MapsSearchResultsTableViewController {
-                    resultsController.campuses = campuses
-                }
-                self.mapView.setRegion(nearest.region, animated: false)
-                self.loadBusiness(in: nearest.region)
-            }
-        }
-    }()
-    
-    var mapLock = NSLock()
-    
     var locationButton: MKUserTrackingBarButtonItem!
     let locationManager = CLLocationManager()
     var yelpClient: YLPClient?
     
-    var busineses: [YLPBusiness]?
+    lazy var businesses: [YLPBusiness] = []
     var selectedBusiness: YLPBusiness?
     
     override func viewDidLoad() {
@@ -91,8 +65,52 @@ class MapsViewController: UIViewController {
         mapView.delegate = self
         
         // Location manager set up
-        locationManager.delegate = self
+//        locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
+        // Retrieve campuses and their buildings
+        Campus.retrieveAll { (campuses, error) in
+            guard error == nil, let campuses = campuses else {
+                let alertController = UIAlertController(title: "Unable to Retrieve Campus Information",
+                                                        message: "TUHub was unable to retrieve campus and building information from Temple's servers. Please try again shortly.",
+                                                        preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss",
+                                                        style: .default,
+                                                        handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+            
+            let defaults = UserDefaults.standard
+            if let defaultCampusID = defaults.string(forKey: defaultCampusKey) {
+                
+                // Find the campus object corresponding to the default campus ID
+                if let i = campuses.index(where: { $0.id == defaultCampusID }) {
+                    let campus = campuses[i]
+                    
+                    // Set campus as mapView's region
+                    DispatchQueue.main.async {
+                        self.mapView.setRegion(campus.region, animated: false)
+                        self.loadBusiness(in: campus.region)
+                    }
+                }
+                // The default campus has been removed, ask to select a new one
+                else {
+                    self.showDefaultCampusSelection(campuses)
+                }
+            }
+            // No default campus selected, prompt to select one
+            else {
+                self.showDefaultCampusSelection(campuses)
+            }
+            
+            if let resultsController = self.searchController.searchResultsController as? MapsSearchResultsTableViewController {
+                resultsController.campuses = campuses
+            }
+            
+        }
+
         
         // Set up Yelp Client
         YLPClient.authorize(withAppId: YLPClient.id, secret: YLPClient.secret) { (client, error) in
@@ -105,8 +123,6 @@ class MapsViewController: UIViewController {
             if let resultsController = self.searchController.searchResultsController as? MapsSearchResultsTableViewController {
                 resultsController.yelpClient = client
             }
-            
-            self.locationManager.startUpdatingLocation()
         }
         
     }
@@ -120,33 +136,28 @@ class MapsViewController: UIViewController {
 
     }
     
-    func nearest(of campuses: [Campus]) -> Campus? {
-        
-        guard var nearest: Campus = campuses.first else { return nil }
-        var campuses = campuses.dropFirst()
-        
-        func distance(to campus: Campus, from location: CLLocation) -> CLLocationDistance {
-            let campusLocation = CLLocation(latitude: campus.region.center.latitude, longitude: campus.region.center.longitude)
-            return location.distance(from: campusLocation)
-        }
-        
-        guard let userLocation = mapView.userLocation.location else {
-            let i = campuses.index(where: { $0.id == "MN" })!
-            return campuses[i]
-        }
-        
-        var minDist: Double = distance(to: nearest, from: userLocation)
+    func showDefaultCampusSelection(_ campuses: [Campus]) {
+        let actionSheet = UIAlertController(title: "Select Your Default Campus", message: "Select the campus that you would like to be displayed when you first open the app.", preferredStyle: .actionSheet)
         
         for campus in campuses {
-            let dist = distance(to: campus, from: userLocation)
-            if dist < minDist {
-                minDist = dist
-                nearest = campus
+            let action = UIAlertAction(title: campus.name, style: .default) { (action) in
+                
+                // Save selection to user defaults
+                let defaults = UserDefaults.standard
+                defaults.set(campus.id, forKey: defaultCampusKey)
+                
+                // Show selection on map
+                DispatchQueue.main.async {
+                    self.mapView.setRegion(campus.region, animated: false)
+                    self.loadBusiness(in: campus.region)
+                }
+                
             }
+            actionSheet.addAction(action)
         }
-        return nearest
+        
+        self.present(actionSheet, animated: true, completion: nil)
     }
-
     
     // MARK: - Navigation
 
@@ -156,25 +167,15 @@ class MapsViewController: UIViewController {
         guard let identifier = segue.identifier else { return }
         
         switch identifier {
-            
         case mapsDetailSegueID:
-            
             let mapsDetailVC = segue.destination as? MapsDetailViewController
             mapsDetailVC?.selectedBusiness = self.selectedBusiness
-            
         default:
             break
         }
     }
  
 
-}
-
-// MARK: - CLLocationManagerDelegate
-extension MapsViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        _ = centerMapFirstTime
-    }
 }
 
 // MARK: - MKMapViewDelegate
@@ -189,6 +190,7 @@ extension MapsViewController: MKMapViewDelegate {
         query.radiusFilter = Double(Int(region.radius)) // radiusFilter is a double, but the API takes an int? Nice job Yelp
         query.sort = .distance
         query.limit = 20
+        query.term = "food"
         
         yelpClient?.search(with: query) { (search, error) in
             if let error = error {
@@ -197,36 +199,41 @@ extension MapsViewController: MKMapViewDelegate {
             }
             
             if let businesses = search?.businesses {
-                self.mapLock.try()
-                
                 DispatchQueue.main.async {
                     self.mapView.addAnnotations(businesses)
-                    self.busineses = businesses
+                    self.businesses.append(contentsOf: businesses)
                 }
-                
-                self.mapLock.unlock()
             }
         }
     }
     
-    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        if let oldBusinesses = self.busineses {
-            mapView.removeAnnotations(oldBusinesses)
-            self.busineses = nil
-        }
-    }
-    
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+        // Notify the resultsController of the region change
         if let resultsController = searchController.searchResultsController as? MapsSearchResultsTableViewController {
             resultsController.region = mapView.region
         }
+        
+        // Remove old annotations
+        mapView.removeAnnotations(self.businesses)
+        self.businesses.removeAll()
+        
+        // Load new businesses in this region
         loadBusiness(in: mapView.region)
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let business = view.annotation as? YLPBusiness {
-            selectedBusiness = business
-            performSegue(withIdentifier: "showMapsDetail", sender: self)
+            yelpClient?.business(withId: business.identifier) { (business, error) in
+                self.selectedBusiness = business
+                if let hours = business?.hours {
+                    for day in hours {
+                        dump(day.startTimeComponents)
+                        dump(day.endTimeComponents)
+                    }
+                }
+                self.performSegue(withIdentifier: "showMapsDetail", sender: self)
+            }
         }
     }
     
@@ -291,19 +298,6 @@ extension YLPBusiness: MKAnnotation {
     public var title: String? {
         return self.name
     }
-    
-    /// Returns a Boolean value indicating whether two values are equal.
-    ///
-    /// Equality is the inverse of inequality. For any values `a` and `b`,
-    /// `a == b` implies that `a != b` is `false`.
-    ///
-    /// - Parameters:
-    ///   - lhs: A value to compare.
-    ///   - rhs: Another value to compare.
-    static func ==(lhs: YLPBusiness, rhs: YLPBusiness) -> Bool {
-        return lhs.identifier == rhs.identifier
-    }
-    
 }
 
 extension MKCoordinateRegion {

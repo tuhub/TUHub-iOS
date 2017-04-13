@@ -21,7 +21,7 @@ target 'TUHub' do
   pod 'TLIndexPathTools', '~> 0.4.4'
   pod 'Eureka', '~> 2.0.1'
   pod 'AWSS3', '~> 2.5.0'
-  pod 'YelpAPI', '~> 2.0.0'
+  pod 'YelpAPI', :git => "https://github.com/ConnorDCrawford/yelp-ios.git"
   pod 'ISHHoverBar', '~> 1.0.1'
   pod 'Cosmos', '~> 9.0.0'
   

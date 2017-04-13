@@ -22,6 +22,9 @@ class MapsSearchResultsTableViewController: UIViewController {
     
     lazy var buildingResults: [Building] = []
     lazy var businessResults: [YLPBusiness] = []
+    lazy var buildings: [Building] = []
+    lazy var businesses: [YLPBusiness] = []
+    
     var yelpQuery: YLPQuery?
     
     override func viewDidLoad() {
@@ -53,9 +56,9 @@ extension MapsSearchResultsTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return buildingResults.count
+            return buildings.count
         case 1:
-            return businessResults.count
+            return businesses.count
         default:
             return 0
         }
@@ -64,9 +67,9 @@ extension MapsSearchResultsTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return buildingResults.count > 0 ? "Buildings" : nil
+            return buildings.count > 0 ? "Buildings" : nil
         case 1:
-            return businessResults.count > 0 ? "Businesses" : nil
+            return businesses.count > 0 ? "Businesses" : nil
         default:
             return nil
         }
@@ -79,14 +82,14 @@ extension MapsSearchResultsTableViewController: UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            let building = buildingResults[indexPath.row]
+            let building = buildings[indexPath.row]
             cell.textLabel?.text = building.name
             if let i = campuses?.index(where: { $0.id == building.campusID }) {
                 cell.detailTextLabel?.text = campuses?[i].name
             }
         case 1:
             if let cell = cell as? BusinessTableViewCell {
-                let business = businessResults[indexPath.row]
+                let business = businesses[indexPath.row]
                 cell.titleLabel.text = business.name
                 cell.starView.rating = business.rating
                 cell.detailLabel.text = ""
@@ -111,7 +114,7 @@ extension MapsSearchResultsTableViewController: UITableViewDataSource {
 
 extension MapsSearchResultsTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.section == 1, indexPath.row == businessResults.count - 1, let query = yelpQuery {
+        if indexPath.section == 1, indexPath.row == businesses.count - 1, let query = yelpQuery {
             // Load next page of Yelp results
             query.offset = UInt(indexPath.row)
             yelpClient?.search(with: query) { (search, error) in
@@ -148,9 +151,15 @@ extension MapsSearchResultsTableViewController: UISearchResultsUpdating {
         
         guard let searchText = searchController.searchBar.text?.lowercased() else { return }
         
+        let group = DispatchGroup()
+        
+        
         if let campuses = campuses {
             for campus in campuses {
                 if let buildings = campus.buildings {
+                    
+                    // Add to dispatch group
+                    group.enter()
                     DispatchQueue.global(qos: .userInteractive).async {
                         var results: [(building: Building, index: String.Index)] = []
                         
@@ -167,10 +176,8 @@ extension MapsSearchResultsTableViewController: UISearchResultsUpdating {
                             return $0.index < $1.index
                         }
                         
-                        DispatchQueue.main.async {
-                            self.buildingResults = results.map { $0.building }
-                            self.tableView.reloadData()
-                        }
+                        self.buildingResults = results.map { $0.building }
+                        group.leave()
                     }
                 }
 
@@ -186,6 +193,8 @@ extension MapsSearchResultsTableViewController: UISearchResultsUpdating {
             query.term = searchText
             self.yelpQuery = query
             
+            // Add to dispatch group
+            group.enter()
             yelpClient?.search(with: query) { (search, error) in
                 self.businessResults.removeAll()
                 
@@ -194,14 +203,19 @@ extension MapsSearchResultsTableViewController: UISearchResultsUpdating {
                     return
                 }
                 
-                DispatchQueue.main.async {
-                    if let businesses = search?.businesses {
-                        self.businessResults = businesses
-                    }
-                    self.tableView.reloadData()
+                if let businesses = search?.businesses {
+                    self.businessResults = businesses
                 }
+                group.leave()
             }
         }
+        
+        group.notify(queue: .main) { 
+            self.buildings = self.buildingResults
+            self.businesses = self.businessResults
+            self.tableView.reloadData()
+        }
+        
     }
 
     
