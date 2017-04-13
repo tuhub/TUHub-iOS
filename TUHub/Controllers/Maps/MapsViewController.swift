@@ -111,6 +111,13 @@ class MapsViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let insets = UIEdgeInsets(top: topLayoutGuide.length, left: 0, bottom: bottomLayoutGuide.length, right: 0)
+        (searchController.searchResultsController as? MapsSearchResultsTableViewController)?.insets = insets
+
+    }
+    
     func nearest(of campuses: [Campus]) -> Campus? {
         
         guard var nearest: Campus = campuses.first else { return nil }
@@ -149,10 +156,10 @@ class MapsViewController: UIViewController {
         switch identifier {
             
         case mapsDetailSegueID:
-
-                let mapsDetailVC = segue.destination as? MapsDetailTableViewController
-                mapsDetailVC?.selectedBusiness = self.selectedBusiness
-
+            
+            let mapsDetailVC = segue.destination as? MapsDetailTableViewController
+            mapsDetailVC?.selectedBusiness = self.selectedBusiness
+            
         default:
             break
         }

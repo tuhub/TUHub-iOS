@@ -17,12 +17,8 @@ fileprivate let mapsPhoneNumberCellID = "mapsPhoneNumberCell"
 
 class MapsDetailTableViewController: UITableViewController {
     
-    var selectedBusiness: YLPBusiness? {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    
+    var selectedBusiness: YLPBusiness!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,20 +43,19 @@ class MapsDetailTableViewController: UITableViewController {
 
         var cell: UITableViewCell!
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
-        // One of these lines was causing a crash
-//        print(selectedBusiness!.name)
-//        print(selectedBusiness!.categories.count)
-//        print(selectedBusiness!.categories[0].alias)
-//        print(selectedBusiness!.categories[0].name)
-//        print(selectedBusiness!.categories[1].name)
-//        print(selectedBusiness!.categories[2].name)
-//        print(selectedBusiness!.identifier)
-//        print(selectedBusiness!.location.address)
-//        print(selectedBusiness!.rating)
-        
-        cell.textLabel?.text = selectedBusiness?.title
+        switch indexPath.row {
+        case 0:
+            cell = tableView.dequeueReusableCell(withIdentifier: mapsHeaderCellID, for: indexPath)
+            (cell as? MapsHeaderTableViewCell)?.setUp(from: selectedBusiness)
+        case 1:
+            cell = tableView.dequeueReusableCell(withIdentifier: mapsImageCellID, for: indexPath)
+            (cell as? MapsImageTableViewCell)?.setUp(from: selectedBusiness)
+        case 2:
+            cell = tableView.dequeueReusableCell(withIdentifier: mapsPhoneNumberCellID, for: indexPath)
+            cell.textLabel?.text = selectedBusiness.phone
+        default:
+            break
+        }
         
         return cell
     }

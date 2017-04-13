@@ -17,6 +17,7 @@ class MapsSearchResultsTableViewController: UIViewController {
     var yelpClient: YLPClient?
     var campuses: [Campus]?
     var region: MKCoordinateRegion?
+    var insets: UIEdgeInsets?
     
     lazy var buildingResults: [Building] = []
     lazy var businessResults: [YLPBusiness] = []
@@ -27,6 +28,10 @@ class MapsSearchResultsTableViewController: UIViewController {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
+        
+        if let insets = insets {
+            tableView.contentInset = insets
+        }
     }
     
     // MARK: - Navigation
@@ -148,9 +153,8 @@ extension MapsSearchResultsTableViewController: UISearchResultsUpdating {
                             return $0.index < $1.index
                         }
                         
-                        self.buildingResults = results.map { $0.building }
-                        
                         DispatchQueue.main.async {
+                            self.buildingResults = results.map { $0.building }
                             self.tableView.reloadData()
                         }
                     }
@@ -176,11 +180,10 @@ extension MapsSearchResultsTableViewController: UISearchResultsUpdating {
                     return
                 }
                 
-                if let businesses = search?.businesses {
-                    self.businessResults = businesses
-                }
-                
                 DispatchQueue.main.async {
+                    if let businesses = search?.businesses {
+                        self.businessResults = businesses
+                    }
                     self.tableView.reloadData()
                 }
             }
