@@ -124,7 +124,6 @@ class MapsViewController: UIViewController {
                 resultsController.yelpClient = client
             }
         }
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
