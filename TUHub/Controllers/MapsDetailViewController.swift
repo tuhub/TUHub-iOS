@@ -78,7 +78,7 @@ extension MapsDetailViewController: UITableViewDataSource {
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: mapsPhoneNumberCellID, for: indexPath)
             
-            if let formattedPhoneNumber = format(phoneNumber: selectedBusiness.phone!) {
+            if let phone = selectedBusiness.phone, let formattedPhoneNumber = format(phoneNumber: phone) {
                 cell.textLabel?.text = formattedPhoneNumber
             }
             else {
