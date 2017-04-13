@@ -14,8 +14,6 @@ class MapsImageTableViewCell: UITableViewCell {
     // IBOutlets
     
     @IBOutlet weak var businessImageView: UIImageView!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var stateLabel: UILabel!
     
     func setUp(from selectedBusiness: YLPBusiness) {
         
@@ -23,10 +21,6 @@ class MapsImageTableViewCell: UITableViewCell {
             let url = URL(string: "\(selectedBusiness.imageURL!)")
             businessImageView.af_setImage(withURL: url!)
         }
-        
-        addressLabel.text = selectedBusiness.location.address[0]
-        stateLabel.text = "\(selectedBusiness.location.city), \(selectedBusiness.location.stateCode) \(selectedBusiness.location.postalCode)"
-        
     }
 
 }

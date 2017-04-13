@@ -11,9 +11,9 @@ import YelpAPI
 import MapKit
 
 // UITableViewCell reuse identifier
-fileprivate let mapsHeaderCellID = "mapsHeaderCell"
-fileprivate let mapsImageCellID = "mapsImageCell"
-fileprivate let mapsPhoneNumberCellID = "mapsPhoneNumberCell"
+fileprivate let headerCellID = "headerCell"
+fileprivate let imageCellID = "imageCell"
+fileprivate let multilineCellID = "multilineCell"
 
 
 class MapsDetailViewController: UIViewController {
@@ -60,7 +60,7 @@ extension MapsDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return selectedBusiness.imageURL == nil ? 2 : 3
     }
     
     
@@ -70,13 +70,30 @@ extension MapsDetailViewController: UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            cell = tableView.dequeueReusableCell(withIdentifier: mapsHeaderCellID, for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: headerCellID, for: indexPath)
             (cell as? MapsHeaderTableViewCell)?.setUp(from: selectedBusiness)
         case 1:
-            cell = tableView.dequeueReusableCell(withIdentifier: mapsImageCellID, for: indexPath)
-            (cell as? MapsImageTableViewCell)?.setUp(from: selectedBusiness)
+            if selectedBusiness.imageURL != nil {
+                cell = tableView.dequeueReusableCell(withIdentifier: imageCellID, for: indexPath)
+                (cell as? MapsImageTableViewCell)?.setUp(from: selectedBusiness)
+            } else {
+                fallthrough
+            }
         case 2:
-            cell = tableView.dequeueReusableCell(withIdentifier: mapsPhoneNumberCellID, for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: multilineCellID, for: indexPath)
+            cell.textLabel?.text = ""
+            for (i, line) in selectedBusiness.location.address.enumerated() {
+                cell.textLabel?.text! += "\(line)"
+                if i == selectedBusiness.location.address.count - 1 {
+                    cell.textLabel?.text! += "\n"
+                } else {
+                    cell.textLabel?.text! += ", "
+                }
+            }
+            cell.textLabel?.text! += "\(selectedBusiness.location.city), \(selectedBusiness.location.stateCode)\n"
+            cell.textLabel?.text! += "\(selectedBusiness.location.postalCode)\n"
+        case 3:
+            cell = tableView.dequeueReusableCell(withIdentifier: multilineCellID, for: indexPath)
             
             if let phone = selectedBusiness.phone, let formattedPhoneNumber = format(phoneNumber: phone) {
                 cell.textLabel?.text = formattedPhoneNumber
