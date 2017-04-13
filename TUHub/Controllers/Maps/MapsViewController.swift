@@ -232,7 +232,10 @@ extension MapsViewController: MKMapViewDelegate {
                         dump(day.endTimeComponents)
                     }
                 }
-                self.performSegue(withIdentifier: "showMapsDetail", sender: self)
+                
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "showMapsDetail", sender: self)
+                }
             }
         }
     }
