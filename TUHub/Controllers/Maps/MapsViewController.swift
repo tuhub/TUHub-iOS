@@ -114,7 +114,9 @@ class MapsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let insets = UIEdgeInsets(top: topLayoutGuide.length, left: 0, bottom: bottomLayoutGuide.length, right: 0)
-        (searchController.searchResultsController as? MapsSearchResultsTableViewController)?.insets = insets
+        let resultsController = searchController.searchResultsController as? MapsSearchResultsTableViewController
+        resultsController?.insets = insets
+        resultsController?.delegate = self
 
     }
     
@@ -157,7 +159,7 @@ class MapsViewController: UIViewController {
             
         case mapsDetailSegueID:
             
-            let mapsDetailVC = segue.destination as? MapsDetailTableViewController
+            let mapsDetailVC = segue.destination as? MapsDetailViewController
             mapsDetailVC?.selectedBusiness = self.selectedBusiness
             
         default:
@@ -253,6 +255,28 @@ extension MapsViewController: MKMapViewDelegate {
         return pinView
     }
     
+}
+
+extension MapsViewController: MapsSearchResultsTableViewControllerDelegate {
+    func didSelect(building: Building) {
+        searchController.isActive = false
+        mapView.addAnnotation(building)
+        mapView.setCenter(building.coordinate, animated: true)
+        mapView.selectAnnotation(building, animated: true)
+    }
+    
+    func didSelect(business: YLPBusiness) {
+        searchController.isActive = false
+        mapView.addAnnotation(business)
+        mapView.setCenter(business.coordinate, animated: true)
+        mapView.selectAnnotation(business, animated: true)
+    }
+}
+
+extension Building: MKAnnotation {
+    var title: String? {
+        return self.name
+    }
 }
 
 extension YLPBusiness: MKAnnotation {

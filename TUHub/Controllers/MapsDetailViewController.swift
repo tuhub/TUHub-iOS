@@ -1,5 +1,5 @@
 //
-//  MapsDetailTableViewController.swift
+//  MapsDetailViewController.swift
 //  TUHub
 //
 //  Created by Brijesh Nayak on 4/11/17.
@@ -15,7 +15,9 @@ fileprivate let mapsImageCellID = "mapsImageCell"
 fileprivate let mapsPhoneNumberCellID = "mapsPhoneNumberCell"
 
 
-class MapsDetailTableViewController: UITableViewController {
+class MapsDetailViewController: UIViewController {
+    
+    @IBOutlet var tableView: UITableView!
     
     var selectedBusiness: YLPBusiness!
 
@@ -27,20 +29,20 @@ class MapsDetailTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 100
         tableView.cellLayoutMarginsFollowReadableWidth = true
     }
+}
 
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
+extension MapsDetailViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return selectedBusiness == nil ? 0 : 1
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
-
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         var cell: UITableViewCell!
         
         switch indexPath.row {
@@ -59,5 +61,4 @@ class MapsDetailTableViewController: UITableViewController {
         
         return cell
     }
-
 }

@@ -10,13 +10,13 @@ import Foundation
 import SwiftyJSON
 import CoreLocation
 
-class Building {
+class Building: NSObject {
     var id: String
-    var coordinates: CLLocationCoordinate2D
+    var coordinate: CLLocationCoordinate2D
     var source: String
     var name: String
     var campusID: String
-    var description: String?
+    var desc: String?
     var imageURL: String?
     var address: String?
     
@@ -34,11 +34,11 @@ class Building {
         }
         
         self.id = id
-        self.coordinates = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         self.source = source
         self.name = name
         self.campusID = campusID
-        self.description = json["longDescription"].string
+        self.desc = json["longDescription"].string
         self.imageURL = json["imageUrl"].string
         self.address = json["address"].string
     }

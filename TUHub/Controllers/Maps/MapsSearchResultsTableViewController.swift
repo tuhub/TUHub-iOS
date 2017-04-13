@@ -14,6 +14,7 @@ class MapsSearchResultsTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var delegate: MapsSearchResultsTableViewControllerDelegate?
     var yelpClient: YLPClient?
     var campuses: [Campus]?
     var region: MKCoordinateRegion?
@@ -124,6 +125,19 @@ extension MapsSearchResultsTableViewController: UITableViewDelegate {
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            let building = buildingResults[indexPath.row]
+            delegate?.didSelect(building: building)
+        case 1:
+            let business = businessResults[indexPath.row]
+            delegate?.didSelect(business: business)
+        default:
+            break
+        }
+    }
 }
 
 // MARK: - UISearchResultsUpdating
@@ -191,4 +205,9 @@ extension MapsSearchResultsTableViewController: UISearchResultsUpdating {
     }
 
     
+}
+
+protocol MapsSearchResultsTableViewControllerDelegate {
+    func didSelect(business: YLPBusiness)
+    func didSelect(building: Building)
 }
