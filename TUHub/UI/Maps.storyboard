@@ -311,7 +311,7 @@
                                         <rect key="frame" x="0.0" y="133" width="375" height="216"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="EoU-D4-PjB" id="U4x-SP-ZiX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nHF-lc-eFh">
@@ -355,7 +355,7 @@
                                     <outlet property="delegate" destination="ALC-a5-QZP" id="FPZ-Lz-P0j"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDe-hX-ycM">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDe-hX-ycM">
                                 <rect key="frame" x="16" y="615" width="343" height="44"/>
                                 <color key="backgroundColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -374,15 +374,22 @@
                                     <action selector="didPressDirections:" destination="ALC-a5-QZP" eventType="touchUpInside" id="nIv-hb-R4U"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9Od-Zx-PE6">
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="fGw-ah-sl0" firstAttribute="top" secondItem="kDe-hX-ycM" secondAttribute="bottom" constant="8" id="3Lt-lU-MNG"/>
+                            <constraint firstItem="9Od-Zx-PE6" firstAttribute="centerX" secondItem="J0n-vg-atm" secondAttribute="centerX" id="Ddz-Ar-7ca"/>
                             <constraint firstItem="kDe-hX-ycM" firstAttribute="leading" secondItem="J0n-vg-atm" secondAttribute="leadingMargin" id="PJi-v7-Wdp"/>
+                            <constraint firstItem="9Od-Zx-PE6" firstAttribute="centerY" secondItem="J0n-vg-atm" secondAttribute="centerY" id="aXk-0w-Knk"/>
                             <constraint firstItem="kDe-hX-ycM" firstAttribute="trailing" secondItem="J0n-vg-atm" secondAttribute="trailingMargin" id="yaU-iV-fCh"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="9Od-Zx-PE6" id="G7i-b0-yRd"/>
+                        <outlet property="directionsButton" destination="kDe-hX-ycM" id="hzc-aS-ope"/>
                         <outlet property="tableView" destination="lcy-q1-NAL" id="yIk-Bx-JT1"/>
                     </connections>
                 </viewController>

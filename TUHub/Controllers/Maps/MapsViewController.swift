@@ -39,7 +39,7 @@ class MapsViewController: UIViewController {
     var yelpClient: YLPClient?
     
     lazy var businesses: [YLPBusiness] = []
-    var selectedBusiness: YLPBusiness?
+    var selectedBusinessID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -167,8 +167,12 @@ class MapsViewController: UIViewController {
         
         switch identifier {
         case mapsDetailSegueID:
-            let mapsDetailVC = segue.destination as? MapsDetailViewController
-            mapsDetailVC?.selectedBusiness = self.selectedBusiness
+            guard let selectedBusinessID = self.selectedBusinessID,
+                let yelpClient = self.yelpClient,
+                let mapsDetailVC = segue.destination as? MapsDetailViewController
+                else { break }
+                mapsDetailVC.businessID = selectedBusinessID
+                mapsDetailVC.yelpClient = yelpClient
         default:
             break
         }
@@ -222,21 +226,8 @@ extension MapsViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if let business = view.annotation as? YLPBusiness {
-            yelpClient?.business(withId: business.identifier) { (business, error) in
-                self.selectedBusiness = business
-                if let hours = business?.hours {
-                    for day in hours {
-                        dump(day.startTimeComponents)
-                        dump(day.endTimeComponents)
-                    }
-                }
-                
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "showMapsDetail", sender: self)
-                }
-            }
-        }
+        self.selectedBusinessID = (view.annotation as? YLPBusiness)?.identifier
+        self.performSegue(withIdentifier: "showMapsDetail", sender: self)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
