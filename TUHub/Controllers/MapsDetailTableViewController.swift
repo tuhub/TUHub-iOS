@@ -9,6 +9,12 @@
 import UIKit
 import YelpAPI
 
+// UITableViewCell reuse identifier
+fileprivate let mapsHeaderCellID = "mapsHeaderCell"
+fileprivate let mapsImageCellID = "mapsImageCell"
+fileprivate let mapsPhoneNumberCellID = "mapsPhoneNumberCell"
+
+
 class MapsDetailTableViewController: UITableViewController {
     
     var selectedBusiness: YLPBusiness? {
@@ -19,6 +25,11 @@ class MapsDetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Allow table view to automatically determine cell height based on contents
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
+        tableView.cellLayoutMarginsFollowReadableWidth = true
     }
 
     // MARK: - Table view data source
@@ -28,11 +39,13 @@ class MapsDetailTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 3
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        var cell: UITableViewCell!
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
