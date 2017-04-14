@@ -124,7 +124,9 @@ extension MapsDetailViewController: UITableViewDataSource {
                 cell.textLabel?.addGestureRecognizer(tap)
                 
                 // Phone call Image
-                var callImage = UIImageView(image: #imageLiteral(resourceName: "Call"))
+                let callImage = UIImageView(image: #imageLiteral(resourceName: "Call"))
+                callImage.contentMode = .scaleAspectFit
+                callImage.frame = CGRect(x:0, y:0, width: 30, height: 30)
                 cell.accessoryView = callImage
                 cell.accessoryView?.addGestureRecognizer(tap)
             }
