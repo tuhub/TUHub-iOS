@@ -120,7 +120,9 @@ extension MapsDetailViewController: UITableViewDataSource {
             if let phone = business.phone, let formattedPhoneNumber = format(phoneNumber: phone) {
                 cell.textLabel?.textColor = UIColor.cherry
                 cell.textLabel?.text = formattedPhoneNumber
-                let tap = UITapGestureRecognizer(target: self, action: #selector(makePhoneCall(sender:)))
+                let tap = UITapGestureRecognizer(target: self, action: #selector(makePhoneCall))
+                let imageTap = UITapGestureRecognizer(target: self, action: #selector(makePhoneCall))
+
                 cell.textLabel?.addGestureRecognizer(tap)
                 
                 // Phone call Image
@@ -128,7 +130,8 @@ extension MapsDetailViewController: UITableViewDataSource {
                 callImage.contentMode = .scaleAspectFit
                 callImage.frame = CGRect(x:0, y:0, width: 30, height: 30)
                 cell.accessoryView = callImage
-                cell.accessoryView?.addGestureRecognizer(tap)
+                cell.accessoryView?.addGestureRecognizer(imageTap)
+                
             }
             else {
                 cell.textLabel?.text = nil
@@ -141,7 +144,7 @@ extension MapsDetailViewController: UITableViewDataSource {
         return cell
     }
     
-    func makePhoneCall(sender:UITapGestureRecognizer) {
+    func makePhoneCall() {
         guard let phoneNumber = URL(string: "telprompt://" + (business?.phone)!)
             else { return }
         
@@ -221,4 +224,9 @@ extension String.CharacterView {
     }
 }
 
+extension MapsDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        makePhoneCall()
+    }
+}
 
