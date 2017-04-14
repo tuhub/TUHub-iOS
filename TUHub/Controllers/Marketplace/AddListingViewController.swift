@@ -200,16 +200,47 @@ class AddListingViewController: FormViewController {
         }
         
         // Post the listing, then get its ID after it's posted to use for the S3 folder name
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         listing?.post { (listingID, error) in
+            
+            if error != nil {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                // Notify user that their listing wasn't posted
+                let alertController = UIAlertController(title: "Unable to Post Listing",
+                                                        message: "Something went wrong, and TUHub was not unable to post your listing. Please try again shortly.",
+                                                        preferredStyle: .alert)
+                let action = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+                alertController.addAction(action)
+                
+                DispatchQueue.main.async {
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
+            
             if let listingID = listingID, let photos = photos {
                 AWS.upload(folder: listingID, images: photos) { error in
-                    if let error = error {
-                        // TODO: Handle error
+                    if error != nil {
+                        // Notify user that their images weren't added
+                        let alertController = UIAlertController(title: "Unable to Upload Images",
+                                                                message: "Your post was added, but TUHub was unable to upload all of your images.",
+                                                                preferredStyle: .alert)
+                        let action = UIAlertAction(title: "Dismiss", style: .cancel, handler: { (_) in
+                            self.dismiss(animated: true, completion: nil)
+                        })
+                        alertController.addAction(action)
+                        
+                        DispatchQueue.main.async {
+                            self.present(alertController, animated: true, completion: nil)
+                        }
+                        
+                        return
                     }
+                    self.dismiss(animated: true, completion: nil)
                 }
             }
             
-            self.dismiss(animated: true, completion: nil)
         }
         
         
