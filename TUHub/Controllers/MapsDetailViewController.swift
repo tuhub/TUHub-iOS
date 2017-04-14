@@ -81,7 +81,19 @@ extension MapsDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return business!.imageURL == nil ? 3 : 4
+        var numberOfRows = 0
+        
+        if (business!.imageURL == nil) {
+            numberOfRows = 3
+        } else if ((business!.imageURL == nil) && (business!.phone == nil)) {
+            numberOfRows = 2
+        } else if (business!.phone == nil) {
+            numberOfRows = 3
+        } else {
+            numberOfRows = 4
+        }
+        
+        return numberOfRows
     }
     
     
@@ -121,16 +133,16 @@ extension MapsDetailViewController: UITableViewDataSource {
                 cell.textLabel?.textColor = UIColor.cherry
                 cell.textLabel?.text = formattedPhoneNumber
                 let tap = UITapGestureRecognizer(target: self, action: #selector(makePhoneCall))
-                let imageTap = UITapGestureRecognizer(target: self, action: #selector(makePhoneCall))
-
                 cell.textLabel?.addGestureRecognizer(tap)
+
+                // Set up Call Button
+                let callButton = UIButton(type: .custom)
+                callButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+                callButton.setImage(#imageLiteral(resourceName: "Call"), for: .normal)
+                callButton.contentMode = .scaleAspectFit
+                callButton.addTarget(self, action:#selector(makePhoneCall), for: .touchUpInside)
                 
-                // Phone call Image
-                let callImage = UIImageView(image: #imageLiteral(resourceName: "Call"))
-                callImage.contentMode = .scaleAspectFit
-                callImage.frame = CGRect(x:0, y:0, width: 30, height: 30)
-                cell.accessoryView = callImage
-                cell.accessoryView?.addGestureRecognizer(imageTap)
+                cell.accessoryView = callButton as UIView
                 
             }
             else {
@@ -224,9 +236,4 @@ extension String.CharacterView {
     }
 }
 
-extension MapsDetailViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        makePhoneCall()
-    }
-}
 
