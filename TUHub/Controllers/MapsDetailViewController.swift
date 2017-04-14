@@ -122,6 +122,11 @@ extension MapsDetailViewController: UITableViewDataSource {
                 cell.textLabel?.text = formattedPhoneNumber
                 let tap = UITapGestureRecognizer(target: self, action: #selector(makePhoneCall(sender:)))
                 cell.textLabel?.addGestureRecognizer(tap)
+                
+                // Phone call Image
+                var callImage = UIImageView(image: #imageLiteral(resourceName: "Call"))
+                cell.accessoryView = callImage
+                cell.accessoryView?.addGestureRecognizer(tap)
             }
             else {
                 cell.textLabel?.text = nil
