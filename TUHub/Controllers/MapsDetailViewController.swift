@@ -81,7 +81,7 @@ extension MapsDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return business!.imageURL == nil ? 2 : 3
+        return business!.imageURL == nil ? 3 : 4
     }
     
     
@@ -118,7 +118,10 @@ extension MapsDetailViewController: UITableViewDataSource {
             cell = tableView.dequeueReusableCell(withIdentifier: multilineCellID, for: indexPath)
             
             if let phone = business.phone, let formattedPhoneNumber = format(phoneNumber: phone) {
+                cell.textLabel?.textColor = UIColor.cherry
                 cell.textLabel?.text = formattedPhoneNumber
+                let tap = UITapGestureRecognizer(target: self, action: #selector(makePhoneCall(sender:)))
+                cell.textLabel?.addGestureRecognizer(tap)
             }
             else {
                 cell.textLabel?.text = nil
@@ -130,6 +133,20 @@ extension MapsDetailViewController: UITableViewDataSource {
         
         return cell
     }
+    
+    func makePhoneCall(sender:UITapGestureRecognizer) {
+        guard let phoneNumber = URL(string: "telprompt://" + (business?.phone)!)
+            else { return }
+        
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(phoneNumber, options: [:], completionHandler: nil)
+        } else {
+            // Fallback on earlier versions
+            UIApplication.shared.openURL(phoneNumber)
+        }
+        debugPrint("Call")
+    }
+    
     // MARK: Formate Phone number
     func format(phoneNumber sourcePhoneNumber: String) -> String? {
         
