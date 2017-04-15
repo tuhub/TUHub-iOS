@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		22356FEF1E9EF8E400399897 /* MapsImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22356FEE1E9EF8E400399897 /* MapsImageTableViewCell.swift */; };
+		22359B6F1EA2A5AB0050B05A /* MapsBuildingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22359B6E1EA2A5AB0050B05A /* MapsBuildingDetailViewController.swift */; };
+		22359B711EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22359B701EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift */; };
 		22535D4D1E9DB70600698577 /* MapsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22535D4C1E9DB70600698577 /* MapsDetailViewController.swift */; };
 		225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */; };
 		22662BBE1E9682750016A1C8 /* ContactDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */; };
@@ -123,6 +125,8 @@
 
 /* Begin PBXFileReference section */
 		22356FEE1E9EF8E400399897 /* MapsImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsImageTableViewCell.swift; sourceTree = "<group>"; };
+		22359B6E1EA2A5AB0050B05A /* MapsBuildingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsBuildingDetailViewController.swift; path = Maps/MapsBuildingDetailViewController.swift; sourceTree = "<group>"; };
+		22359B701EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsBuildingImageTableViewCell.swift; sourceTree = "<group>"; };
 		22535D4C1E9DB70600698577 /* MapsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsDetailViewController.swift; sourceTree = "<group>"; };
 		225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingDetailTableViewController.swift; sourceTree = "<group>"; };
 		22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailViewCell.swift; sourceTree = "<group>"; };
@@ -279,6 +283,7 @@
 				22356FEE1E9EF8E400399897 /* MapsImageTableViewCell.swift */,
 				7D74A2901EA14A5E00F8C04D /* HoursTableViewCell.swift */,
 				7D74A2921EA1811600F8C04D /* ExpandingSectionHeaderTableViewCell.swift */,
+				22359B701EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift */,
 			);
 			name = Maps;
 			sourceTree = "<group>";
@@ -427,6 +432,7 @@
 				7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */,
 				22535D4C1E9DB70600698577 /* MapsDetailViewController.swift */,
 				7D942B8B1EA003D400EEB312 /* MapsOptionsViewController.swift */,
+				22359B6E1EA2A5AB0050B05A /* MapsBuildingDetailViewController.swift */,
 			);
 			name = Maps;
 			sourceTree = "<group>";
@@ -846,6 +852,7 @@
 				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
 				7D942B8C1EA003D400EEB312 /* MapsOptionsViewController.swift in Sources */,
 				7D33C2171E99754F00101751 /* AWS.swift in Sources */,
+				22359B6F1EA2A5AB0050B05A /* MapsBuildingDetailViewController.swift in Sources */,
 				7DCC7F1B1E9454E900714100 /* UITableView+UIActivityIndicator.swift in Sources */,
 				22535D4D1E9DB70600698577 /* MapsDetailViewController.swift in Sources */,
 				225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */,
@@ -873,6 +880,7 @@
 				7DA6D92B1E7F6ECE00CD5D02 /* NewsItem.swift in Sources */,
 				7D942B7A1E9ED72700EEB312 /* BusinessTableViewCell.swift in Sources */,
 				7D8A1A631E983959006401A1 /* ImagesRow.swift in Sources */,
+				22359B711EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift in Sources */,
 				7DA6D95B1E7F6FC500CD5D02 /* NewsItemTableViewCell.swift in Sources */,
 				7D7E0E411E9D7DED007A1D16 /* Campus.swift in Sources */,
 				7DFF54741E9B134200A8A849 /* MyListingsTableViewController.swift in Sources */,
