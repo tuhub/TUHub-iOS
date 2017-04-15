@@ -54,6 +54,27 @@ class MapsDetailViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        var inset = tableView.separatorInset
+        inset = UIEdgeInsets(top: inset.top, left: inset.left, bottom: inset.bottom, right: inset.left)
+        tableView.separatorInset = inset
+    }
+    
+    func makePhoneCall() {
+        guard let phoneNumber = URL(string: "telprompt://" + (business?.phone)!)
+            else { return }
+        
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(phoneNumber, options: [:], completionHandler: nil)
+        } else {
+            // Fallback on earlier versions
+            UIApplication.shared.openURL(phoneNumber)
+        }
+        debugPrint("Call")
+    }
+    
     // MARK: Format Phone number
     func format(phoneNumber sourcePhoneNumber: String) -> String? {
         
@@ -183,10 +204,20 @@ extension MapsDetailViewController: UITableViewDataSource {
                 cell = tableView.dequeueReusableCell(withIdentifier: multilineCellID, for: indexPath)
                 
                 if let phone = business.phone, let formattedPhoneNumber = format(phoneNumber: phone) {
+                    cell.textLabel?.textColor = UIColor.cherry
                     cell.textLabel?.text = formattedPhoneNumber
-                }
-                else {
-                    cell.textLabel?.text = nil
+                    let tap = UITapGestureRecognizer(target: self, action: #selector(makePhoneCall))
+                    cell.textLabel?.addGestureRecognizer(tap)
+                    
+                    // Set up Call Button
+                    let callButton = UIButton(type: .custom)
+                    callButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+                    callButton.setImage(#imageLiteral(resourceName: "Call"), for: .normal)
+                    callButton.contentMode = .scaleAspectFit
+                    callButton.addTarget(self, action:#selector(makePhoneCall), for: .touchUpInside)
+                    
+                    cell.accessoryView = callButton as UIView
+                    
                 }
             case 4:
                 cell = tableView.dequeueReusableCell(withIdentifier: hoursCellID, for: indexPath)

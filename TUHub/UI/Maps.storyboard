@@ -55,7 +55,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="yh3-l0-18b" id="jmd-lN-d8X">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="66.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Tca-oT-2Mb">
@@ -280,7 +280,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="headerCell" rowHeight="111" id="mfq-Tp-xQf" customClass="MapsHeaderTableViewCell" customModule="TUHub" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55" width="375" height="111"/>
+                                        <rect key="frame" x="0.0" y="56" width="375" height="111"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="mfq-Tp-xQf" id="jay-4U-gWR">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
@@ -352,10 +352,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="216" id="EoU-D4-PjB" customClass="MapsImageTableViewCell" customModule="TUHub" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="166" width="375" height="216"/>
+                                        <rect key="frame" x="0.0" y="167" width="375" height="216"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="EoU-D4-PjB" id="U4x-SP-ZiX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nHF-lc-eFh">
@@ -377,7 +377,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="multilineCell" textLabel="J0j-qz-g4G" style="IBUITableViewCellStyleDefault" id="19j-43-QfF">
-                                        <rect key="frame" x="0.0" y="382" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="383" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="19j-43-QfF" id="Nqw-KA-jLg">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -394,10 +394,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="hoursCell" rowHeight="82" id="653-HR-Isf" customClass="HoursTableViewCell" customModule="TUHub" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="426" width="375" height="83"/>
+                                        <rect key="frame" x="0.0" y="427" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="653-HR-Isf" id="adn-Zc-0nF">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jB-Xg-Plw">
@@ -420,7 +420,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOURS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZc-Hp-I4s">
-                                                    <rect key="frame" x="15" y="11" width="46" height="22.5"/>
+                                                    <rect key="frame" x="15" y="19" width="46" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -435,7 +435,7 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="MZc-Hp-I4s" firstAttribute="top" secondItem="adn-Zc-0nF" secondAttribute="topMargin" id="0Ly-Rx-EQZ"/>
+                                                <constraint firstItem="MZc-Hp-I4s" firstAttribute="top" secondItem="adn-Zc-0nF" secondAttribute="topMargin" constant="8" id="0Ly-Rx-EQZ"/>
                                                 <constraint firstItem="8jB-Xg-Plw" firstAttribute="trailing" secondItem="adn-Zc-0nF" secondAttribute="trailingMargin" id="13v-mf-5l3"/>
                                                 <constraint firstItem="8jB-Xg-Plw" firstAttribute="top" secondItem="QIh-Xu-YNq" secondAttribute="bottom" constant="8" id="C5w-so-wP4"/>
                                                 <constraint firstItem="QIh-Xu-YNq" firstAttribute="top" secondItem="MZc-Hp-I4s" secondAttribute="bottom" constant="8" id="PXC-Q2-VAs"/>
