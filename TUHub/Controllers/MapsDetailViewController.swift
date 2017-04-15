@@ -189,19 +189,6 @@ extension MapsDetailViewController: UITableViewDataSource {
                 }
             case 2:
                 cell = tableView.dequeueReusableCell(withIdentifier: multilineCellID, for: indexPath)
-                cell.textLabel?.text = ""
-                for (i, line) in business.location.address.enumerated() {
-                    cell.textLabel?.text! += "\(line)"
-                    if i == business.location.address.count - 1 {
-                        cell.textLabel?.text! += "\n"
-                    } else {
-                        cell.textLabel?.text! += ", "
-                    }
-                }
-                cell.textLabel?.text! += "\(business.location.city), \(business.location.stateCode)\n"
-                cell.textLabel?.text! += "\(business.location.postalCode)\n"
-            case 3:
-                cell = tableView.dequeueReusableCell(withIdentifier: multilineCellID, for: indexPath)
                 
                 if let phone = business.phone, let formattedPhoneNumber = format(phoneNumber: phone) {
                     cell.textLabel?.textColor = UIColor.cherry
@@ -219,6 +206,19 @@ extension MapsDetailViewController: UITableViewDataSource {
                     cell.accessoryView = callButton as UIView
                     
                 }
+            case 3:
+                cell = tableView.dequeueReusableCell(withIdentifier: multilineCellID, for: indexPath)
+                cell.textLabel?.text = ""
+                for (i, line) in business.location.address.enumerated() {
+                    cell.textLabel?.text! += "\(line)"
+                    if i == business.location.address.count - 1 {
+                        cell.textLabel?.text! += "\n"
+                    } else {
+                        cell.textLabel?.text! += ", "
+                    }
+                }
+                cell.textLabel?.text! += "\(business.location.city), \(business.location.stateCode)\n"
+                cell.textLabel?.text! += "\(business.location.postalCode)\n"
             case 4:
                 cell = tableView.dequeueReusableCell(withIdentifier: hoursCellID, for: indexPath)
                 if let hours = business.hours {
