@@ -2,8 +2,30 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>TUHub uses your location to help you find and navigate to places around campus.</string>
+	<key>AWS</key>
+	<dict>
+		<key>CredentialsProvider</key>
+		<dict>
+			<key>CognitoIdentity</key>
+			<dict>
+				<key>Default</key>
+				<dict>
+					<key>PoolId</key>
+					<string>us-east-1:bbb7121f-0ae4-4089-9165-55cd2ea4663d</string>
+					<key>Region</key>
+					<string>USEast1</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>S3TransferManager</key>
+		<dict>
+			<key>Default</key>
+			<dict>
+				<key>Region</key>
+				<string>USEast1</string>
+			</dict>
+		</dict>
+	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -44,6 +66,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>To take pictures</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>TUHub uses your location to help you find and navigate to places around campus.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To import pictures</string>
 	<key>UILaunchStoryboardName</key>
@@ -77,29 +101,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>AWS</key>
-	<dict>
-		<key>CredentialsProvider</key>
-		<dict>
-			<key>CognitoIdentity</key>
-			<dict>
-				<key>Default</key>
-				<dict>
-					<key>PoolId</key>
-					<string>us-east-1:bbb7121f-0ae4-4089-9165-55cd2ea4663d</string>
-					<key>Region</key>
-					<string>USEast1</string>
-				</dict>
-			</dict>
-		</dict>
-		<key>S3TransferManager</key>
-		<dict>
-			<key>Default</key>
-			<dict>
-				<key>Region</key>
-				<string>USEast1</string>
-			</dict>
-		</dict>
-	</dict>
 </dict>
 </plist>

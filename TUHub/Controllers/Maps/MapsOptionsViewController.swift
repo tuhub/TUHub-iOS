@@ -32,7 +32,7 @@ class MapsOptionsViewController: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.backgroundColor = .clear
+        tableView?.backgroundColor = .clear
         
         (form
             +++ Section("Campus")
@@ -75,7 +75,7 @@ class MapsOptionsViewController: FormViewController {
             }
         )
         
-        tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+        tableView?.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         
 //        self.preferredContentSize = CGSize(width: 300, height: 200)
     }
@@ -83,11 +83,11 @@ class MapsOptionsViewController: FormViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        tableView.removeObserver(self, forKeyPath: "contentSize")
+        tableView?.removeObserver(self, forKeyPath: "contentSize")
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        self.preferredContentSize = tableView.contentSize
+        self.preferredContentSize = (tableView?.contentSize)!
     }
 
 

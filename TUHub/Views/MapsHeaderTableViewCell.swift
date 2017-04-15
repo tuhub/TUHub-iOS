@@ -19,7 +19,14 @@ class MapsHeaderTableViewCell: UITableViewCell {
     
     func setUp(from selectedBusiness: YLPBusiness) {
         titleLabel.text = selectedBusiness.title
-        categoryLabel.text = selectedBusiness.categories[0].name
+        var text  = ""
+        for (i, category) in selectedBusiness.categories.enumerated() {
+            text += category.name
+            if i < selectedBusiness.categories.count - 1 {
+                text += ", "
+            }
+            categoryLabel.text = text
+        }
         
         // Rating Stars
         ratingCosmosView.rating = selectedBusiness.rating
