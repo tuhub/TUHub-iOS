@@ -254,7 +254,7 @@ extension MapsViewController: MKMapViewDelegate {
                 return
             }
             
-            if let businesses = search?.businesses {
+            if let businesses = search?.businesses.filter({ !$0.isClosed }) {
                 DispatchQueue.main.async {
                     self.mapView.addAnnotations(businesses)
                     self.businesses.append(contentsOf: businesses)
