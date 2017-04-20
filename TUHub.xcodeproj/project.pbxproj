@@ -10,7 +10,6 @@
 		22356FEF1E9EF8E400399897 /* MapsImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22356FEE1E9EF8E400399897 /* MapsImageTableViewCell.swift */; };
 		22359B6F1EA2A5AB0050B05A /* MapsBuildingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22359B6E1EA2A5AB0050B05A /* MapsBuildingDetailViewController.swift */; };
 		22359B711EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22359B701EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift */; };
-		22535D4D1E9DB70600698577 /* MapsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22535D4C1E9DB70600698577 /* MapsDetailViewController.swift */; };
 		225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */; };
 		22662BBE1E9682750016A1C8 /* ContactDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */; };
 		2279D9301E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2279D92F1E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift */; };
@@ -97,6 +96,7 @@
 		7DA6D96C1E7F6FFF00CD5D02 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9641E7F6FFF00CD5D02 /* UIColor.swift */; };
 		7DA6D96E1E7F72B700CD5D02 /* SignInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D96D1E7F72B700CD5D02 /* SignInTableViewController.swift */; };
 		7DCC7F1B1E9454E900714100 /* UITableView+UIActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCC7F1A1E9454E900714100 /* UITableView+UIActivityIndicator.swift */; };
+		7DDB0BDE1EA85AB4001B5DE5 /* MapsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDB0BDD1EA85AB4001B5DE5 /* MapsDetailViewController.swift */; };
 		7DE27BD51E932D03004C2F83 /* ListingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE27BD41E932D03004C2F83 /* ListingCollectionViewCell.swift */; };
 		7DE27BD71E932E1C004C2F83 /* BlurryListingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE27BD61E932E1C004C2F83 /* BlurryListingDetailView.swift */; };
 		7DE27BD91E932E3A004C2F83 /* ListingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE27BD81E932E3A004C2F83 /* ListingDetailView.swift */; };
@@ -127,7 +127,6 @@
 		22356FEE1E9EF8E400399897 /* MapsImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsImageTableViewCell.swift; sourceTree = "<group>"; };
 		22359B6E1EA2A5AB0050B05A /* MapsBuildingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsBuildingDetailViewController.swift; path = Maps/MapsBuildingDetailViewController.swift; sourceTree = "<group>"; };
 		22359B701EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsBuildingImageTableViewCell.swift; sourceTree = "<group>"; };
-		22535D4C1E9DB70600698577 /* MapsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsDetailViewController.swift; sourceTree = "<group>"; };
 		225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingDetailTableViewController.swift; sourceTree = "<group>"; };
 		22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailViewCell.swift; sourceTree = "<group>"; };
 		2279D92F1E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -222,6 +221,7 @@
 		7DA6D9641E7F6FFF00CD5D02 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		7DA6D96D1E7F72B700CD5D02 /* SignInTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInTableViewController.swift; sourceTree = "<group>"; };
 		7DCC7F1A1E9454E900714100 /* UITableView+UIActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+UIActivityIndicator.swift"; sourceTree = "<group>"; };
+		7DDB0BDD1EA85AB4001B5DE5 /* MapsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsDetailViewController.swift; path = Maps/MapsDetailViewController.swift; sourceTree = "<group>"; };
 		7DE27BD41E932D03004C2F83 /* ListingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListingCollectionViewCell.swift; path = Marketplace/ListingCollectionViewCell.swift; sourceTree = "<group>"; };
 		7DE27BD61E932E1C004C2F83 /* BlurryListingDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlurryListingDetailView.swift; path = Marketplace/BlurryListingDetailView.swift; sourceTree = "<group>"; };
 		7DE27BD81E932E3A004C2F83 /* ListingDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListingDetailView.swift; path = Marketplace/ListingDetailView.swift; sourceTree = "<group>"; };
@@ -428,9 +428,9 @@
 		7D7FD0141E85ADEF00CE769F /* Maps */ = {
 			isa = PBXGroup;
 			children = (
+				7DDB0BDD1EA85AB4001B5DE5 /* MapsDetailViewController.swift */,
 				7D7FD0121E85ADE800CE769F /* MapsViewController.swift */,
 				7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */,
-				22535D4C1E9DB70600698577 /* MapsDetailViewController.swift */,
 				7D942B8B1EA003D400EEB312 /* MapsOptionsViewController.swift */,
 				22359B6E1EA2A5AB0050B05A /* MapsBuildingDetailViewController.swift */,
 			);
@@ -854,7 +854,6 @@
 				7D33C2171E99754F00101751 /* AWS.swift in Sources */,
 				22359B6F1EA2A5AB0050B05A /* MapsBuildingDetailViewController.swift in Sources */,
 				7DCC7F1B1E9454E900714100 /* UITableView+UIActivityIndicator.swift in Sources */,
-				22535D4D1E9DB70600698577 /* MapsDetailViewController.swift in Sources */,
 				225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */,
 				7D4E57F61E9211AD000B7719 /* Personal.swift in Sources */,
 				7D9279FD1E836CCB00E8773F /* CarouselFlowLayout.swift in Sources */,
@@ -889,6 +888,7 @@
 				7DA6D92D1E7F6ECE00CD5D02 /* User.swift in Sources */,
 				7DA6D96E1E7F72B700CD5D02 /* SignInTableViewController.swift in Sources */,
 				7D48E1291E92B826000981D8 /* TextFieldTableViewCell.swift in Sources */,
+				7DDB0BDE1EA85AB4001B5DE5 /* MapsDetailViewController.swift in Sources */,
 				7D74A2911EA14A5E00F8C04D /* HoursTableViewCell.swift in Sources */,
 				7DA6D95A1E7F6FC500CD5D02 /* NewsImageGalleryTableViewCell.swift in Sources */,
 				7DA6D92E1E7F6ECE00CD5D02 /* NetworkManager.swift in Sources */,
