@@ -32,7 +32,7 @@ class Listing {
     fileprivate(set) var ownerID: String
     fileprivate(set) var isActive: Bool!
     fileprivate(set) var photosDirectory: String?
-    fileprivate(set) var photoPaths: [String]?
+    fileprivate(set) var imageURLs: [String]?
     fileprivate(set) var owner: MarketplaceUser?
     
     required init?(json: JSON) {
@@ -74,7 +74,7 @@ class Listing {
         let params: [String : Any] = ["list-type" : 2,
                                       "x-amz-date" : s3DateFormatter.string(from: Date()),
                                       "prefix" : prefix]
-        return Alamofire.request("https://tumobilemarketplace.s3.amazonaws.com", method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { (data) in
+        return Alamofire.request(AWS.bucketURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { (data) in
             var filePaths: [String]?
             guard let xmlData = data.result.value else { return }
             defer { responseHandler(filePaths, data.error) }
@@ -86,9 +86,9 @@ class Listing {
                     if filePaths == nil {
                         filePaths = []
                     }
-                    filePaths!.append(item["Key"].string)
+                    filePaths!.append("\(AWS.bucketURL)/\(item["Key"].string)")
                 }
-                self.photoPaths = filePaths
+                self.imageURLs = filePaths
             } catch {
                 log.error("Unable to parse XML. Error: \(error.localizedDescription)")
             }

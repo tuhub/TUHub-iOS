@@ -10,6 +10,7 @@ import UIKit
 import SafariServices
 import TUSafariActivity
 import MessageUI
+import SKPhotoBrowser
 
 class ListingDetailTableViewController: UIViewController {
     
@@ -30,6 +31,8 @@ class ListingDetailTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.register(UINib(nibName: "ImageGalleryTableViewCell", bundle: nil), forCellReuseIdentifier: CellType.imageGalleryCell.rawValue)
         
         // Remove edit button if the listing doesn't belong to the current user
         if listing?.ownerID != MarketplaceUser.current?.userId {
@@ -57,7 +60,7 @@ class ListingDetailTableViewController: UIViewController {
                     if let user = user {
                         self.emailRecipient = user.email
                         
-                        if listing.photoPaths == nil {
+                        if listing.imageURLs == nil {
                             listing.retrievePhotoPaths { (_, _) in
                                 self.setTableViewAttributes()
                                 self.tableView.reloadData()
@@ -224,7 +227,10 @@ extension ListingDetailTableViewController: UITableViewDataSource {
         case .titleCell:
             cell.textLabel?.text = attribute.value
         case .imageGalleryCell:
-            (cell as! ListingImageGalleryTableViewCell).setUp(with: listing, delegate: self)
+            if let urls = listing.imageURLs?.flatMap({ URL(string: $0) }), let cell = cell as? ImageGalleryTableViewCell {
+                cell.setUp(with: urls)
+                cell.delegate = self
+            }
         case .rightDetailCell:
             cell.textLabel?.text = attribute.key
             cell.detailTextLabel?.text = attribute.value
@@ -239,9 +245,13 @@ extension ListingDetailTableViewController: UITableViewDataSource {
 }
 
 // MARK: - MarketplaceImageGalleryTableViewCellDelegate
-extension ListingDetailTableViewController: MarketplaceImageGalleryTableViewCellDelegate {
-    func present(_ viewController: UIViewController) {
-        present(viewController, animated: true, completion: nil)
+extension ListingDetailTableViewController: ImageGalleryTableViewCellDelegate {
+    func didSelect(imageView: UIImageView, from images: [SKPhoto], at row: Int) {
+        if let image = imageView.image {
+            let browser = SKPhotoBrowser(originImage: image, photos: images, animatedFromView: imageView)
+            browser.initializePageIndex(row)
+            present(browser, animated: true, completion: nil)
+        }
     }
 }
 
@@ -268,7 +278,7 @@ extension Product: ListingTableViewDisplayable {
             (key: "Price", value: price, cellType: .rightDetailCell)
         ]
         
-        if photoPaths != nil {
+        if imageURLs != nil {
             attributes.insert((key: nil, value: nil, cellType: .imageGalleryCell), at: 1)
         }
         
@@ -293,7 +303,7 @@ extension Job: ListingTableViewDisplayable {
             (key: "Start Date", value: startDate.date, cellType: .rightDetailCell)
         ]
         
-        if photoPaths != nil {
+        if imageURLs != nil {
             attributes.insert((key: nil, value: nil, cellType: .imageGalleryCell), at: 1)
         }
         
@@ -315,7 +325,7 @@ extension Personal: ListingTableViewDisplayable {
             (key: "Location", value: location, cellType: .rightDetailCell)
         ]
         
-        if photoPaths != nil {
+        if imageURLs != nil {
             attributes.insert((key: nil, value: nil, cellType: .imageGalleryCell), at: 1)
         }
         

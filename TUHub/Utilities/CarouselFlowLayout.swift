@@ -10,10 +10,12 @@ import UIKit
 import UPCarouselFlowLayout
 
 class CarouselFlowLayout: UPCarouselFlowLayout {
-    
+        
     override func invalidateLayout() {
         guard let collectionView = collectionView else { return }
-        self.itemSize = CGSize(width: collectionView.bounds.width - 44, height: collectionView.bounds.height)
+        let width = collectionView.readableContentGuide.layoutFrame.width
+        let height = (width / 16) * 9
+        self.itemSize = CGSize(width: width, height: height)
         super.invalidateLayout()
     }
     

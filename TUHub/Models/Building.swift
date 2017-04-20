@@ -18,7 +18,14 @@ class Building: NSObject {
     var name: String
     var campusID: String
     var desc: String?
-    var imageURL: URL?
+    lazy var imageURLs: [URL]? = {
+        let str = "https://maps.googleapis.com/maps/api/streetview?size=592x333&location=\(self.coordinate.latitude),\(self.coordinate.longitude)&key=\(StreetViewAPI.key)"
+        
+        if let url = URL(string: str) {
+            return [url]
+        }
+        return nil
+    }()
     var address: String?
     
     init?(json: JSON) {
@@ -40,9 +47,6 @@ class Building: NSObject {
         self.name = name
         self.campusID = campusID
         self.desc = json["longDescription"].string
-        if let imageURLStr = json["imageUrl"].string {
-            self.imageURL = URL(string: imageURLStr)
-        }
         self.address = json["address"].string
     }
     
@@ -58,6 +62,7 @@ class Building: NSObject {
             
             if let addressLines = placemarks?.first?.addressDictionary?["FormattedAddressLines"] as? [String] {
                 address = addressLines.joined(separator: "\n")
+                self.address = address
             }
         }
     }
