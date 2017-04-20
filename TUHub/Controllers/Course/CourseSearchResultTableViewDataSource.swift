@@ -105,3 +105,9 @@ class CourseSearchResultTableViewDataSource: NSObject, UITableViewDataSource {
     }
     
 }
+
+extension UITableView {
+    fileprivate func dequeueReusableCell(withType type: CourseDetailTableViewControllerCellType, for indexPath: IndexPath) -> UITableViewCell {
+        return self.dequeueReusableCell(withIdentifier: type.rawValue, for: indexPath)
+    }
+}

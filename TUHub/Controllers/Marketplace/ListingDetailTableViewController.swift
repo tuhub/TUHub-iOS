@@ -254,7 +254,6 @@ fileprivate enum CellType: String {
     case subtitleCell = "subtitleCell"
 }
 
-
 fileprivate typealias TableViewAttributes = (key: String?, value: String?, cellType: CellType)
 fileprivate protocol TableViewDisplayable {
     var tableViewAttributes: [TableViewAttributes] { get }

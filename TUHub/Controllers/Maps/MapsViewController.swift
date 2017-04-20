@@ -39,6 +39,65 @@ class MapsViewController: UIViewController {
         return searchController
     }()
     
+    lazy var loadCampusesFirstTime: Void = {
+        let insets = UIEdgeInsets(top: self.topLayoutGuide.length, left: 0, bottom: self.bottomLayoutGuide.length, right: 0)
+        let resultsController = self.searchController.searchResultsController as? MapsSearchResultsTableViewController
+        resultsController?.insets = insets
+        resultsController?.delegate = self
+        
+        // Retrieve campuses and their buildings
+        Campus.retrieveAll { (campuses, error) in
+            guard error == nil, let campuses = campuses else {
+                let alertController = UIAlertController(title: "Unable to Retrieve Campus Information",
+                                                        message: "TUHub was unable to retrieve campus and building information from Temple's servers. Please try again shortly.",
+                                                        preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss",
+                                                        style: .default,
+                                                        handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+            
+            self.campuses = campuses
+            self.infoButton.isEnabled = true
+            
+            // Add Temple buildings to the map
+            for campus in campuses {
+                if let buildings = campus.buildings {
+                    self.mapView.addAnnotations(buildings)
+                }
+            }
+            
+            // Check if user has selected a default campus
+            let defaults = UserDefaults.standard
+            if let defaultCampusID = defaults.string(forKey: defaultCampusKey) {
+                
+                // Find the campus object corresponding to the default campus ID
+                if let i = campuses.index(where: { $0.id == defaultCampusID }) {
+                    let campus = campuses[i]
+                    
+                    // Set campus as mapView's region
+                    DispatchQueue.main.async {
+                        self.didChangeCampus(to: campus)
+                    }
+                }
+                    // The default campus has been removed, ask to select a new one
+                else {
+                    self.showDefaultCampusSelection(campuses)
+                }
+            }
+                // No default campus selected, prompt to select one
+            else {
+                self.showDefaultCampusSelection(campuses)
+            }
+            
+            if let resultsController = self.searchController.searchResultsController as? MapsSearchResultsTableViewController {
+                resultsController.campuses = campuses
+            }
+            
+        }
+    }()
+    
     var campuses: [Campus]?
     var selectedBuilding: Building?
 
@@ -100,70 +159,9 @@ class MapsViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let insets = UIEdgeInsets(top: topLayoutGuide.length, left: 0, bottom: bottomLayoutGuide.length, right: 0)
-        let resultsController = searchController.searchResultsController as? MapsSearchResultsTableViewController
-        resultsController?.insets = insets
-        resultsController?.delegate = self
-
-        // Retrieve campuses and their buildings
-        Campus.retrieveAll { (campuses, error) in
-            guard error == nil, let campuses = campuses else {
-                let alertController = UIAlertController(title: "Unable to Retrieve Campus Information",
-                                                        message: "TUHub was unable to retrieve campus and building information from Temple's servers. Please try again shortly.",
-                                                        preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss",
-                                                        style: .default,
-                                                        handler: nil))
-                self.present(alertController, animated: true, completion: nil)
-                return
-            }
-            
-            self.campuses = campuses
-            self.infoButton.isEnabled = true
-            
-            // Add Temple buildings to the map
-            for campus in campuses {
-                if let buildings = campus.buildings {
-                    self.mapView.addAnnotations(buildings)
-                }
-            }
-            
-            // Check if user has selected a default campus
-            let defaults = UserDefaults.standard
-            if let defaultCampusID = defaults.string(forKey: defaultCampusKey) {
-                
-                // Find the campus object corresponding to the default campus ID
-                if let i = campuses.index(where: { $0.id == defaultCampusID }) {
-                    let campus = campuses[i]
-                    
-                    // Set campus as mapView's region
-                    DispatchQueue.main.async {
-                        self.didChangeCampus(to: campus)
-                    }
-                }
-                    // The default campus has been removed, ask to select a new one
-                else {
-                    self.showDefaultCampusSelection(campuses)
-                }
-            }
-                // No default campus selected, prompt to select one
-            else {
-                self.showDefaultCampusSelection(campuses)
-            }
-            
-            if let resultsController = self.searchController.searchResultsController as? MapsSearchResultsTableViewController {
-                resultsController.campuses = campuses
-            }
-            
-        }
+        _ = loadCampusesFirstTime
     }
     
     func showDefaultCampusSelection(_ campuses: [Campus]) {

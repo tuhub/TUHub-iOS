@@ -19,6 +19,7 @@ private let hoursCellID = "hoursCell"
 class MapsDetailViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
     @IBOutlet weak var directionsButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -57,9 +58,15 @@ class MapsDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        var inset = tableView.separatorInset
-        inset = UIEdgeInsets(top: inset.top, left: inset.left, bottom: inset.bottom, right: inset.left)
-        tableView.separatorInset = inset
+        // Make table view's separator insets equal on left and right
+        var separatorInsets = tableView.separatorInset
+        separatorInsets = UIEdgeInsets(top: separatorInsets.top, left: separatorInsets.left, bottom: separatorInsets.bottom, right: separatorInsets.left)
+        tableView.separatorInset = separatorInsets
+        
+        // Make table view's content inset above the directions visual effect view
+        var contentInsets = tableView.contentInset
+        contentInsets = UIEdgeInsets(top: contentInsets.top, left: contentInsets.left, bottom: contentInsets.bottom + visualEffectView.frame.height, right: contentInsets.right)
+        tableView.contentInset = contentInsets
     }
     
     func makePhoneCall() {
@@ -152,84 +159,60 @@ class MapsDetailViewController: UIViewController {
 
 extension MapsDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        if business != nil {
-            return 1
-        }
-        return 0
+        return business == nil ? 0 : 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var numRows = 3
-        
-        if business?.imageURL != nil {
-            numRows += 1
-        }
-        if business?.hours != nil {
-            numRows += 1
-        }
-        return numRows
+        return business?.tableViewAttributes.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell: UITableViewCell!
         let business = self.business!
+        let rowAttributes = business.tableViewAttributes[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: rowAttributes.identifier, for: indexPath)
         
-        if indexPath.section == 0 {
-            switch indexPath.row {
-            case 0:
-                cell = tableView.dequeueReusableCell(withIdentifier: headerCellID, for: indexPath)
-                (cell as? MapsHeaderTableViewCell)?.setUp(from: business)
-            case 1:
-                if business.imageURL != nil {
-                    cell = tableView.dequeueReusableCell(withIdentifier: imageCellID, for: indexPath)
-                    (cell as? MapsImageTableViewCell)?.setUp(from: business)
-                } else {
-                    fallthrough
-                }
-            case 2:
-                cell = tableView.dequeueReusableCell(withIdentifier: multilineCellID, for: indexPath)
+        switch rowAttributes.key {
+        case "header":
+            (cell as? MapsHeaderTableViewCell)?.setUp(from: business)
+        case "image":
+            (cell as? MapsImageTableViewCell)?.setUp(from: business)
+        case "phone":
+            if let formattedPhoneNumber = format(phoneNumber: business.phone!) {
+                cell.textLabel?.textColor = UIColor.cherry
+                cell.textLabel?.text = formattedPhoneNumber
+                let tap = UITapGestureRecognizer(target: self, action: #selector(makePhoneCall))
+                cell.textLabel?.addGestureRecognizer(tap)
                 
-                if let phone = business.phone, let formattedPhoneNumber = format(phoneNumber: phone) {
-                    cell.textLabel?.textColor = UIColor.cherry
-                    cell.textLabel?.text = formattedPhoneNumber
-                    let tap = UITapGestureRecognizer(target: self, action: #selector(makePhoneCall))
-                    cell.textLabel?.addGestureRecognizer(tap)
-                    
-                    // Set up Call Button
-                    let callButton = UIButton(type: .custom)
-                    callButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-                    callButton.setImage(#imageLiteral(resourceName: "Call"), for: .normal)
-                    callButton.contentMode = .scaleAspectFit
-                    callButton.addTarget(self, action:#selector(makePhoneCall), for: .touchUpInside)
-                    
-                    cell.accessoryView = callButton as UIView
-                    
-                }
-            case 3:
-                cell = tableView.dequeueReusableCell(withIdentifier: multilineCellID, for: indexPath)
-                cell.textLabel?.text = ""
-                for (i, line) in business.location.address.enumerated() {
-                    cell.textLabel?.text! += "\(line)"
-                    if i == business.location.address.count - 1 {
-                        cell.textLabel?.text! += "\n"
-                    } else {
-                        cell.textLabel?.text! += ", "
-                    }
-                }
-                cell.textLabel?.text! += "\(business.location.city), \(business.location.stateCode)\n"
-                cell.textLabel?.text! += "\(business.location.postalCode)\n"
-            case 4:
-                cell = tableView.dequeueReusableCell(withIdentifier: hoursCellID, for: indexPath)
-                if let hours = business.hours {
-                    (cell as? HoursTableViewCell)?.setUp(with: hours, isExpanded: showingAllHours)
-                }
-                hoursIndexPath = indexPath
-            default:
-                break
+                // Set up Call Button
+                let callButton = UIButton(type: .custom)
+                callButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+                callButton.setImage(#imageLiteral(resourceName: "Call"), for: .normal)
+                callButton.contentMode = .scaleAspectFit
+                callButton.addTarget(self, action:#selector(makePhoneCall), for: .touchUpInside)
+                
+                cell.accessoryView = callButton as UIView
             }
+        case "address":
+            cell.textLabel?.text = ""
+            for (i, line) in business.location.address.enumerated() {
+                cell.textLabel?.text! += "\(line)"
+                if i == business.location.address.count - 1 {
+                    cell.textLabel?.text! += "\n"
+                } else {
+                    cell.textLabel?.text! += ", "
+                }
+            }
+            cell.textLabel?.text! += "\(business.location.city), \(business.location.stateCode)\n"
+            cell.textLabel?.text! += "\(business.location.postalCode)"
+        case "hours":
+            if let hours = business.hours {
+                (cell as? HoursTableViewCell)?.setUp(with: hours, isExpanded: showingAllHours)
+            }
+            hoursIndexPath = indexPath
+        default:
+            assert(false)
         }
-        
         
         return cell
     }
@@ -258,4 +241,32 @@ extension String.CharacterView {
     }
 }
 
+fileprivate typealias TableViewAttributes = (key: String, identifier: String)
+fileprivate protocol TableViewDisplayable {
+    var tableViewAttributes: [TableViewAttributes] { get }
+}
+
+
+extension YLPBusiness: TableViewDisplayable {
+    
+    fileprivate var tableViewAttributes: [TableViewAttributes] {
+        var attr: [TableViewAttributes] = [(key: "header", identifier: headerCellID)]
+        
+        if imageURL != nil {
+            attr.append((key: "image", identifier: imageCellID))
+        }
+        
+        attr.append((key: "address", identifier: multilineCellID))
+        
+        if phone != nil {
+            attr.append((key: "phone", identifier: multilineCellID))
+        }
+        
+        if hours != nil {
+            attr.append((key: "hours", identifier: hoursCellID))
+        }
+        return attr
+    }
+    
+}
 
