@@ -15,6 +15,7 @@ import SKPhotoBrowser
 class ListingDetailTableViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var visualEffectView: UIVisualEffectView!
     @IBOutlet weak var contactButton: UIButton!
     
     var listing: Listing?
@@ -50,7 +51,7 @@ class ListingDetailTableViewController: UIViewController {
                 emailRecipient = owner.email
             } else {
                 tableView.showActivityIndicator()
-                self.contactButton.isHidden = true
+                self.visualEffectView.isHidden = true
                 
                 listing.retrieveOwner { (user, error) in
                     if error != nil {
@@ -65,13 +66,13 @@ class ListingDetailTableViewController: UIViewController {
                                 self.setTableViewAttributes()
                                 self.tableView.reloadData()
                                 self.tableView.hideActivityIndicator()
-                                self.contactButton.isHidden = false
+                                self.visualEffectView.isHidden = false
                             }
                         } else {
                             self.setTableViewAttributes()
                             self.tableView.reloadData()
                             self.tableView.hideActivityIndicator()
-                            self.contactButton.isHidden = false
+                            self.visualEffectView.isHidden = false
                         }
                     }
                     
@@ -81,11 +82,18 @@ class ListingDetailTableViewController: UIViewController {
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        var contentInset = tableView.contentInset
-        contentInset.bottom = (tabBarController?.tabBar.frame.height ?? 0) + contactButton.frame.height + 16
-        tableView.contentInset = contentInset
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Make table view's separator insets equal on left and right
+        var separatorInsets = tableView.separatorInset
+        separatorInsets = UIEdgeInsets(top: separatorInsets.top, left: separatorInsets.left, bottom: separatorInsets.bottom, right: separatorInsets.left)
+        tableView.separatorInset = separatorInsets
+        
+        // Make table view's content inset above the directions visual effect view
+        var contentInsets = tableView.contentInset
+        contentInsets = UIEdgeInsets(top: contentInsets.top, left: contentInsets.left, bottom: contentInsets.bottom + visualEffectView.frame.height, right: contentInsets.right)
+        tableView.contentInset = contentInsets
     }
     
     private func showErrorLabel() {

@@ -79,7 +79,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="kNH-Cu-cAX">
+                                                <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="kNH-Cu-cAX">
                                                     <rect key="frame" x="15" y="11" width="345" height="71"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JsI-Rs-C65">
@@ -115,33 +115,49 @@
                                     <outlet property="dataSource" destination="bcV-5g-2ax" id="psB-1L-Jtc"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NH9-f7-E4f">
-                                <rect key="frame" x="16" y="615" width="343" height="44"/>
-                                <color key="backgroundColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Mj0-NE-Gt9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <state key="normal" title="Contact">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="didPressContact" destination="bcV-5g-2ax" eventType="touchUpInside" id="n0g-TG-0J8"/>
-                                </connections>
-                            </button>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aJa-yB-hs4">
+                                <rect key="frame" x="0.0" y="591" width="375" height="76"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" id="Dsr-I8-loV">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NH9-f7-E4f">
+                                            <rect key="frame" x="16" y="16" width="343" height="44"/>
+                                            <color key="backgroundColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="Mj0-NE-Gt9"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <state key="normal" title="Contact">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="didPressContact" destination="bcV-5g-2ax" eventType="touchUpInside" id="n0g-TG-0J8"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="NH9-f7-E4f" firstAttribute="leading" secondItem="Dsr-I8-loV" secondAttribute="leadingMargin" id="8J2-Lw-kYY"/>
+                                        <constraint firstItem="NH9-f7-E4f" firstAttribute="top" secondItem="Dsr-I8-loV" secondAttribute="topMargin" constant="8" id="fvJ-Zh-yY0"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="NH9-f7-E4f" secondAttribute="bottom" constant="8" id="oek-tr-SfM"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="NH9-f7-E4f" secondAttribute="trailing" id="z9t-1K-SPR"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="WHd-8G-Ghu" firstAttribute="top" secondItem="NH9-f7-E4f" secondAttribute="bottom" constant="8" id="BIf-No-SXB"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="NH9-f7-E4f" secondAttribute="trailing" id="II3-U2-stc"/>
-                            <constraint firstItem="NH9-f7-E4f" firstAttribute="leading" secondItem="Wvx-Fo-RWc" secondAttribute="leadingMargin" id="LX7-wX-gkt"/>
                             <constraint firstItem="eH9-gm-Wwm" firstAttribute="top" secondItem="Wvx-Fo-RWc" secondAttribute="topMargin" id="NLj-RI-73v"/>
+                            <constraint firstItem="aJa-yB-hs4" firstAttribute="leading" secondItem="Wvx-Fo-RWc" secondAttribute="leading" id="NaH-8a-62H"/>
                             <constraint firstItem="eH9-gm-Wwm" firstAttribute="leading" secondItem="Wvx-Fo-RWc" secondAttribute="leading" id="XjR-lm-A4I"/>
+                            <constraint firstItem="WHd-8G-Ghu" firstAttribute="top" secondItem="aJa-yB-hs4" secondAttribute="bottom" id="Y3k-oW-cwF"/>
+                            <constraint firstAttribute="trailing" secondItem="aJa-yB-hs4" secondAttribute="trailing" id="aE9-yd-mvy"/>
                             <constraint firstAttribute="trailing" secondItem="eH9-gm-Wwm" secondAttribute="trailing" id="hrM-WA-GMi"/>
                             <constraint firstAttribute="bottom" secondItem="eH9-gm-Wwm" secondAttribute="bottom" id="oDk-DC-yp4"/>
                         </constraints>
@@ -152,6 +168,7 @@
                     <connections>
                         <outlet property="contactButton" destination="NH9-f7-E4f" id="Gpx-2H-mpP"/>
                         <outlet property="tableView" destination="eH9-gm-Wwm" id="VnN-p3-GJv"/>
+                        <outlet property="visualEffectView" destination="aJa-yB-hs4" id="p3h-Wk-b1r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="onS-9w-AS1" userLabel="First Responder" sceneMemberID="firstResponder"/>
