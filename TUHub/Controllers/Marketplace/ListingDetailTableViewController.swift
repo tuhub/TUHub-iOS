@@ -255,11 +255,11 @@ fileprivate enum CellType: String {
 }
 
 fileprivate typealias TableViewAttributes = (key: String?, value: String?, cellType: CellType)
-fileprivate protocol TableViewDisplayable {
+fileprivate protocol ListingTableViewDisplayable {
     var tableViewAttributes: [TableViewAttributes] { get }
 }
 
-extension Product: TableViewDisplayable {
+extension Product: ListingTableViewDisplayable {
     fileprivate var tableViewAttributes: [TableViewAttributes] {
         var attributes: [TableViewAttributes] = [
             (key: nil, value: title, cellType: .titleCell),
@@ -281,7 +281,7 @@ extension Product: TableViewDisplayable {
     }
 }
 
-extension Job: TableViewDisplayable {
+extension Job: ListingTableViewDisplayable {
     fileprivate var tableViewAttributes: [TableViewAttributes] {
         
         var attributes: [TableViewAttributes] = [
@@ -305,7 +305,7 @@ extension Job: TableViewDisplayable {
     }
 }
 
-extension Personal: TableViewDisplayable {
+extension Personal: ListingTableViewDisplayable {
     fileprivate var tableViewAttributes: [TableViewAttributes] {
         
         var attributes: [TableViewAttributes] = [

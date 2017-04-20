@@ -7,20 +7,8 @@
 //
 
 import UIKit
-import YelpAPI
 
 class MapsImageTableViewCell: UITableViewCell {
-    
     // IBOutlets
-    
-    @IBOutlet weak var businessImageView: UIImageView!
-    
-    func setUp(from selectedBusiness: YLPBusiness) {
-        
-        if  selectedBusiness.imageURL != nil {
-            let url = URL(string: "\(selectedBusiness.imageURL!)")
-            businessImageView.af_setImage(withURL: url!)
-        }
-    }
-
+    @IBOutlet weak var _imageView: UIImageView!
 }

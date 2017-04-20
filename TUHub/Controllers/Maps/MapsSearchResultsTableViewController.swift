@@ -136,10 +136,10 @@ extension MapsSearchResultsTableViewController: UITableViewDelegate {
         switch indexPath.section {
         case 0:
             let building = buildings[indexPath.row]
-            delegate?.didSelect(building: building)
+            delegate?.didSelect(location: building)
         case 1:
             let business = businesses[indexPath.row]
-            delegate?.didSelect(business: business)
+            delegate?.didSelect(location: business)
         default:
             break
         }
@@ -225,6 +225,5 @@ extension MapsSearchResultsTableViewController: UISearchResultsUpdating {
 }
 
 protocol MapsSearchResultsTableViewControllerDelegate {
-    func didSelect(business: YLPBusiness)
-    func didSelect(building: Building)
+    func didSelect(location: Location)
 }

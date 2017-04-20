@@ -14,8 +14,7 @@ import ISHHoverBar
 import YelpAPI
 
 // Segue Identifiers
-private let mapsBusinessDetailSegueID = "showMapsBusinessDetail"
-private let mapsBuildingDetailSegueID = "showMapsBuildingDetail"
+private let mapsDetailSegueID = "showMapsDetail"
 
 let defaultCampusKey = "defaultCampus"
 
@@ -107,7 +106,6 @@ class MapsViewController: UIViewController {
     var yelpClient: YLPClient?
     
     lazy var businesses: [YLPBusiness] = []
-    var selectedBusinessID: String?
     
     var hoverBar: ISHHoverBar!
     var infoButton: UIBarButtonItem!
@@ -220,18 +218,13 @@ class MapsViewController: UIViewController {
         guard let identifier = segue.identifier else { return }
         
         switch identifier {
-        case mapsBusinessDetailSegueID:
-            guard let selectedBusinessID = self.selectedBusinessID,
+        case mapsDetailSegueID:
+            guard let location  = sender as? Location,
                 let yelpClient = self.yelpClient,
                 let mapsDetailVC = segue.destination as? MapsDetailViewController
                 else { break }
-                mapsDetailVC.businessID = selectedBusinessID
+                mapsDetailVC.location = location
                 mapsDetailVC.yelpClient = yelpClient
-            
-        case mapsBuildingDetailSegueID:
-            guard let selectedBuilding = self.selectedBuilding, let mapsBuildingDetailVC = segue.destination as? MapsBuildingDetailViewController
-                else { break }
-            mapsBuildingDetailVC.building = selectedBuilding
 
         default:
             break
@@ -301,14 +294,8 @@ extension MapsViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
-        if view.annotation is YLPBusiness {
-            self.selectedBusinessID = (view.annotation as? YLPBusiness)?.identifier
-            self.performSegue(withIdentifier: mapsBusinessDetailSegueID, sender: self)
-        }
-        
-        if view.annotation is Building {
-            self.selectedBuilding = (view.annotation as? Building)
-            self.performSegue(withIdentifier: mapsBuildingDetailSegueID, sender: self)
+        if view.annotation is Location {
+            self.performSegue(withIdentifier: mapsDetailSegueID, sender: view.annotation)
         }
     }
     
@@ -340,18 +327,11 @@ extension MapsViewController: MKMapViewDelegate {
 }
 
 extension MapsViewController: MapsSearchResultsTableViewControllerDelegate {
-    func didSelect(building: Building) {
+    func didSelect(location: Location) {
         searchController.isActive = false
-        mapView.addAnnotation(building)
-        mapView.setCenter(building.coordinate, animated: true)
-        mapView.selectAnnotation(building, animated: true)
-    }
-    
-    func didSelect(business: YLPBusiness) {
-        searchController.isActive = false
-        mapView.addAnnotation(business)
-        mapView.setCenter(business.coordinate, animated: true)
-        mapView.selectAnnotation(business, animated: true)
+        mapView.addAnnotation(location)
+        mapView.setCenter(location.coordinate, animated: true)
+        mapView.selectAnnotation(location, animated: true)
     }
 }
 

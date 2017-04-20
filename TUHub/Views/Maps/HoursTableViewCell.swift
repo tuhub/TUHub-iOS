@@ -23,13 +23,17 @@ class HoursTableViewCell: UITableViewCell {
     @IBOutlet weak var rightLabel: UILabel!
     @IBOutlet weak var expandButton: UIButton!
     @IBOutlet weak var separatorHeight: NSLayoutConstraint!
+    @IBOutlet weak var separatorLeading: NSLayoutConstraint!
+    @IBOutlet weak var separatorTrailing: NSLayoutConstraint!
     
-    func setUp(with hours: [YLPHours], isExpanded: Bool) {
+    func setUp(hours: [YLPHours], isExpanded: Bool, inset: UIEdgeInsets) {
         
         let calendar = Calendar.autoupdatingCurrent
         let referenceDate = Date(timeIntervalSinceReferenceDate: 0)
         
         separatorHeight.constant = 1 / UIScreen.main.scale
+        separatorLeading.constant = inset.left
+        separatorTrailing.constant = inset.right
         
         expandButton.setTitle(isExpanded ? "Show Today" : "Show All", for: .normal)
         expandButton.sizeToFit()

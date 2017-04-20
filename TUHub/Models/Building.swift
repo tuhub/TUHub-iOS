@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import CoreLocation
+import AddressBookUI
 
 class Building: NSObject {
     var id: String
@@ -17,7 +18,7 @@ class Building: NSObject {
     var name: String
     var campusID: String
     var desc: String?
-    var imageURL: String?
+    var imageURL: URL?
     var address: String?
     
     init?(json: JSON) {
@@ -39,8 +40,26 @@ class Building: NSObject {
         self.name = name
         self.campusID = campusID
         self.desc = json["longDescription"].string
-        self.imageURL = json["imageUrl"].string
+        if let imageURLStr = json["imageUrl"].string {
+            self.imageURL = URL(string: imageURLStr)
+        }
         self.address = json["address"].string
+    }
+    
+    func retrieveAddress(_ responseHandler: @escaping (String?, Error?) -> Void) {
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error) in
+            var address: String?
+            defer { responseHandler(address, error) }
+            
+            if let error = error {
+                log.error("Unable to reverse geocode Building location: " + error.localizedDescription)
+            }
+            
+            if let addressLines = placemarks?.first?.addressDictionary?["FormattedAddressLines"] as? [String] {
+                address = addressLines.joined(separator: "\n")
+            }
+        }
     }
     
 }

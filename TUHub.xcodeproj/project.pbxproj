@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		22356FEF1E9EF8E400399897 /* MapsImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22356FEE1E9EF8E400399897 /* MapsImageTableViewCell.swift */; };
-		22359B6F1EA2A5AB0050B05A /* MapsBuildingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22359B6E1EA2A5AB0050B05A /* MapsBuildingDetailViewController.swift */; };
 		22359B711EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22359B701EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift */; };
 		225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */; };
 		22662BBE1E9682750016A1C8 /* ContactDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */; };
@@ -37,7 +36,6 @@
 		7D7164E11E95AF930027EDD5 /* CourseTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7164E01E95AF930027EDD5 /* CourseTableViewDataSource.swift */; };
 		7D7164E31E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7164E21E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift */; };
 		7D74A2911EA14A5E00F8C04D /* HoursTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D74A2901EA14A5E00F8C04D /* HoursTableViewCell.swift */; };
-		7D74A2931EA1811600F8C04D /* ExpandingSectionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D74A2921EA1811600F8C04D /* ExpandingSectionHeaderTableViewCell.swift */; };
 		7D7E0E371E9C0CC2007A1D16 /* Marketplace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7E0E361E9C0CC1007A1D16 /* Marketplace.storyboard */; };
 		7D7E0E391E9C0CFF007A1D16 /* Courses.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7E0E381E9C0CFF007A1D16 /* Courses.storyboard */; };
 		7D7E0E3B1E9C0D46007A1D16 /* Maps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7E0E3A1E9C0D46007A1D16 /* Maps.storyboard */; };
@@ -97,6 +95,7 @@
 		7DA6D96E1E7F72B700CD5D02 /* SignInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D96D1E7F72B700CD5D02 /* SignInTableViewController.swift */; };
 		7DCC7F1B1E9454E900714100 /* UITableView+UIActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCC7F1A1E9454E900714100 /* UITableView+UIActivityIndicator.swift */; };
 		7DDB0BDE1EA85AB4001B5DE5 /* MapsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDB0BDD1EA85AB4001B5DE5 /* MapsDetailViewController.swift */; };
+		7DDB0BE01EA8666A001B5DE5 /* TableViewDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDB0BDF1EA8666A001B5DE5 /* TableViewDisplayable.swift */; };
 		7DE27BD51E932D03004C2F83 /* ListingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE27BD41E932D03004C2F83 /* ListingCollectionViewCell.swift */; };
 		7DE27BD71E932E1C004C2F83 /* BlurryListingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE27BD61E932E1C004C2F83 /* BlurryListingDetailView.swift */; };
 		7DE27BD91E932E3A004C2F83 /* ListingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE27BD81E932E3A004C2F83 /* ListingDetailView.swift */; };
@@ -125,7 +124,6 @@
 
 /* Begin PBXFileReference section */
 		22356FEE1E9EF8E400399897 /* MapsImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsImageTableViewCell.swift; sourceTree = "<group>"; };
-		22359B6E1EA2A5AB0050B05A /* MapsBuildingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsBuildingDetailViewController.swift; path = Maps/MapsBuildingDetailViewController.swift; sourceTree = "<group>"; };
 		22359B701EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsBuildingImageTableViewCell.swift; sourceTree = "<group>"; };
 		225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingDetailTableViewController.swift; sourceTree = "<group>"; };
 		22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailViewCell.swift; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 		7D7164E01E95AF930027EDD5 /* CourseTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewDataSource.swift; sourceTree = "<group>"; };
 		7D7164E21E95B1040027EDD5 /* CourseDetailTableViewControllerCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailTableViewControllerCellType.swift; sourceTree = "<group>"; };
 		7D74A2901EA14A5E00F8C04D /* HoursTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HoursTableViewCell.swift; path = Maps/HoursTableViewCell.swift; sourceTree = "<group>"; };
-		7D74A2921EA1811600F8C04D /* ExpandingSectionHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandingSectionHeaderTableViewCell.swift; path = Maps/ExpandingSectionHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		7D7E0E361E9C0CC1007A1D16 /* Marketplace.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Marketplace.storyboard; path = UI/Marketplace.storyboard; sourceTree = "<group>"; };
 		7D7E0E381E9C0CFF007A1D16 /* Courses.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Courses.storyboard; path = UI/Courses.storyboard; sourceTree = "<group>"; };
 		7D7E0E3A1E9C0D46007A1D16 /* Maps.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Maps.storyboard; path = UI/Maps.storyboard; sourceTree = "<group>"; };
@@ -222,6 +219,7 @@
 		7DA6D96D1E7F72B700CD5D02 /* SignInTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInTableViewController.swift; sourceTree = "<group>"; };
 		7DCC7F1A1E9454E900714100 /* UITableView+UIActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+UIActivityIndicator.swift"; sourceTree = "<group>"; };
 		7DDB0BDD1EA85AB4001B5DE5 /* MapsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsDetailViewController.swift; path = Maps/MapsDetailViewController.swift; sourceTree = "<group>"; };
+		7DDB0BDF1EA8666A001B5DE5 /* TableViewDisplayable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDisplayable.swift; sourceTree = "<group>"; };
 		7DE27BD41E932D03004C2F83 /* ListingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListingCollectionViewCell.swift; path = Marketplace/ListingCollectionViewCell.swift; sourceTree = "<group>"; };
 		7DE27BD61E932E1C004C2F83 /* BlurryListingDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlurryListingDetailView.swift; path = Marketplace/BlurryListingDetailView.swift; sourceTree = "<group>"; };
 		7DE27BD81E932E3A004C2F83 /* ListingDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListingDetailView.swift; path = Marketplace/ListingDetailView.swift; sourceTree = "<group>"; };
@@ -282,7 +280,6 @@
 				2279D92F1E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift */,
 				22356FEE1E9EF8E400399897 /* MapsImageTableViewCell.swift */,
 				7D74A2901EA14A5E00F8C04D /* HoursTableViewCell.swift */,
-				7D74A2921EA1811600F8C04D /* ExpandingSectionHeaderTableViewCell.swift */,
 				22359B701EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift */,
 			);
 			name = Maps;
@@ -428,11 +425,10 @@
 		7D7FD0141E85ADEF00CE769F /* Maps */ = {
 			isa = PBXGroup;
 			children = (
-				7DDB0BDD1EA85AB4001B5DE5 /* MapsDetailViewController.swift */,
 				7D7FD0121E85ADE800CE769F /* MapsViewController.swift */,
 				7D7FD0151E85AE3D00CE769F /* MapsSearchResultsTableViewController.swift */,
+				7DDB0BDD1EA85AB4001B5DE5 /* MapsDetailViewController.swift */,
 				7D942B8B1EA003D400EEB312 /* MapsOptionsViewController.swift */,
-				22359B6E1EA2A5AB0050B05A /* MapsBuildingDetailViewController.swift */,
 			);
 			name = Maps;
 			sourceTree = "<group>";
@@ -532,6 +528,7 @@
 				7D8A1A5D1E982E01006401A1 /* CurrencyFormatter.swift */,
 				7D33C2161E99754F00101751 /* AWS.swift */,
 				7D7E0E421E9D9929007A1D16 /* YLPClient+Secret.swift */,
+				7DDB0BDF1EA8666A001B5DE5 /* TableViewDisplayable.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -846,13 +843,13 @@
 			files = (
 				7D996A951E97025F00466A21 /* ListingsFilterTableViewController.swift in Sources */,
 				7DA6D96B1E7F6FFF00CD5D02 /* String+Date.swift in Sources */,
+				7DDB0BE01EA8666A001B5DE5 /* TableViewDisplayable.swift in Sources */,
 				7D4E57F71E9211AD000B7719 /* Job.swift in Sources */,
 				7DE27BD51E932D03004C2F83 /* ListingCollectionViewCell.swift in Sources */,
 				7DA6D9581E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift in Sources */,
 				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
 				7D942B8C1EA003D400EEB312 /* MapsOptionsViewController.swift in Sources */,
 				7D33C2171E99754F00101751 /* AWS.swift in Sources */,
-				22359B6F1EA2A5AB0050B05A /* MapsBuildingDetailViewController.swift in Sources */,
 				7DCC7F1B1E9454E900714100 /* UITableView+UIActivityIndicator.swift in Sources */,
 				225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */,
 				7D4E57F61E9211AD000B7719 /* Personal.swift in Sources */,
@@ -895,7 +892,6 @@
 				7DA6D9691E7F6FFF00CD5D02 /* String+Boyer-Moore-Horspool.swift in Sources */,
 				7DA6D9321E7F6ECE00CD5D02 /* Credential.swift in Sources */,
 				7DA6D9571E7F6FC500CD5D02 /* CourseDetailHeaderTableViewCell.swift in Sources */,
-				7D74A2931EA1811600F8C04D /* ExpandingSectionHeaderTableViewCell.swift in Sources */,
 				7DA6D9411E7F6F6800CD5D02 /* CourseDetailTableViewController.swift in Sources */,
 				7DA6D9661E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift in Sources */,
 				7DA6D9551E7F6FC500CD5D02 /* CourseCalendarTableViewCell.swift in Sources */,

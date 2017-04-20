@@ -16,6 +16,11 @@ private let imageCellID = "imageCell"
 private let multilineCellID = "multilineCell"
 private let hoursCellID = "hoursCell"
 
+protocol Location: MKAnnotation, TableViewDisplayable {
+    var address: String? { get }
+    var imageURL: URL? { get }
+}
+
 class MapsDetailViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
@@ -23,9 +28,8 @@ class MapsDetailViewController: UIViewController {
     @IBOutlet weak var directionsButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var yelpClient: YLPClient!
-    var businessID: String!
-    var business: YLPBusiness?
+    var yelpClient: YLPClient?
+    var location: Location!
     
     fileprivate var showingAllHours = false
     fileprivate var hoursIndexPath: IndexPath?
@@ -38,18 +42,35 @@ class MapsDetailViewController: UIViewController {
         tableView.estimatedRowHeight = 44
         tableView.cellLayoutMarginsFollowReadableWidth = true
         
-        yelpClient.business(withId: businessID) { (business, error) in
-            defer { DispatchQueue.main.async { self.activityIndicator.stopAnimating() } }
-            
-            if let error = error {
-                log.error(error)
-                // TODO: Display error message
-                return
+        if let business = location as? YLPBusiness {
+            activityIndicator.startAnimating()
+            yelpClient?.business(withId: business.identifier) { (business, error) in
+                defer { DispatchQueue.main.async { self.activityIndicator.stopAnimating() } }
+                
+                if let error = error {
+                    log.error(error)
+                    // TODO: Display error message
+                    return
+                }
+                self.location = business
+                DispatchQueue.main.async {
+                    self.directionsButton.isHidden = false
+                    self.tableView.reloadData()
+                }
             }
-            self.business = business
-            DispatchQueue.main.async {
+        }
+        else if let building = location as? Building {
+            if building.address == nil {
+                activityIndicator.startAnimating()
+                building.retrieveAddress { (address, error) in
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                        self.directionsButton.isHidden = false
+                        self.tableView.reloadData()
+                    }
+                }
+            } else {
                 self.directionsButton.isHidden = false
-                self.tableView.reloadData()
             }
         }
         
@@ -70,7 +91,7 @@ class MapsDetailViewController: UIViewController {
     }
     
     func makePhoneCall() {
-        guard let phoneNumber = URL(string: "telprompt://" + (business?.phone)!)
+        guard let business = location as? YLPBusiness, let phoneNumber = URL(string: "telprompt://" + business.phone!)
             else { return }
         
         if #available(iOS 10.0, *) {
@@ -79,7 +100,6 @@ class MapsDetailViewController: UIViewController {
             // Fallback on earlier versions
             UIApplication.shared.openURL(phoneNumber)
         }
-        debugPrint("Call")
     }
     
     // MARK: Format Phone number
@@ -136,21 +156,20 @@ class MapsDetailViewController: UIViewController {
     
     @IBAction func didPressDirections(_ sender: Any) {
         
-        guard let business = business,
-            let latitude = business.location.coordinate?.latitude,
-            let longitude = business.location.coordinate?.longitude
-            else { return }
+        guard let location = location else { return }
         
         let regionDistance: CLLocationDistance = 1000
-        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let coordinates = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
         
         let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
         
-        let placeMark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let placeMark = MKPlacemark(coordinate: location.coordinate, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placeMark)
-        mapItem.name = business.name
-        mapItem.phoneNumber = business.phone
+        mapItem.name = location.title!
+        if let business = location as? YLPBusiness {
+            mapItem.phoneNumber = business.phone
+        }
         mapItem.openInMaps(launchOptions: options)
         
     }
@@ -159,26 +178,25 @@ class MapsDetailViewController: UIViewController {
 
 extension MapsDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return business == nil ? 0 : 1
+        return location == nil ? 0 : 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return business?.tableViewAttributes.count ?? 0
+        return location?.tableViewAttributes.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let business = self.business!
-        let rowAttributes = business.tableViewAttributes[indexPath.row]
+        let rowAttributes = location.tableViewAttributes[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: rowAttributes.identifier, for: indexPath)
         
         switch rowAttributes.key {
         case "header":
-            (cell as? MapsHeaderTableViewCell)?.setUp(from: business)
+            (cell as? MapsHeaderTableViewCell)?.setUp(with: location)
         case "image":
-            (cell as? MapsImageTableViewCell)?.setUp(from: business)
+            (cell as? MapsImageTableViewCell)?._imageView.af_setImage(withURL: location.imageURL!)
         case "phone":
-            if let formattedPhoneNumber = format(phoneNumber: business.phone!) {
+            if let business = location as? YLPBusiness, let formattedPhoneNumber = format(phoneNumber: business.phone!) {
                 cell.textLabel?.textColor = UIColor.cherry
                 cell.textLabel?.text = formattedPhoneNumber
                 let tap = UITapGestureRecognizer(target: self, action: #selector(makePhoneCall))
@@ -194,20 +212,10 @@ extension MapsDetailViewController: UITableViewDataSource {
                 cell.accessoryView = callButton as UIView
             }
         case "address":
-            cell.textLabel?.text = ""
-            for (i, line) in business.location.address.enumerated() {
-                cell.textLabel?.text! += "\(line)"
-                if i == business.location.address.count - 1 {
-                    cell.textLabel?.text! += "\n"
-                } else {
-                    cell.textLabel?.text! += ", "
-                }
-            }
-            cell.textLabel?.text! += "\(business.location.city), \(business.location.stateCode)\n"
-            cell.textLabel?.text! += "\(business.location.postalCode)"
+                cell.textLabel?.text = location.address
         case "hours":
-            if let hours = business.hours {
-                (cell as? HoursTableViewCell)?.setUp(with: hours, isExpanded: showingAllHours)
+            if let business = location as? YLPBusiness, let hours = business.hours {
+                (cell as? HoursTableViewCell)?.setUp(hours: hours, isExpanded: showingAllHours, inset: tableView.separatorInset)
             }
             hoursIndexPath = indexPath
         default:
@@ -241,26 +249,58 @@ extension String.CharacterView {
     }
 }
 
-fileprivate typealias TableViewAttributes = (key: String, identifier: String)
-fileprivate protocol TableViewDisplayable {
-    var tableViewAttributes: [TableViewAttributes] { get }
+extension YLPBusiness: Location {
+    
+    var address: String? {
+        var addr = ""
+        for (i, line) in location.address.enumerated() {
+            addr += "\(line)"
+            if i == location.address.count - 1 {
+                addr += "\n"
+            } else {
+                addr += ", "
+            }
+        }
+        addr += "\(location.city), \(location.stateCode)\n"
+        addr += "\(location.postalCode)"
+        return addr
+    }
+    
 }
 
+extension Building: Location {
+}
 
-extension YLPBusiness: TableViewDisplayable {
-    
-    fileprivate var tableViewAttributes: [TableViewAttributes] {
+extension Building: TableViewDisplayable {
+    var tableViewAttributes: [TableViewAttributes] {
         var attr: [TableViewAttributes] = [(key: "header", identifier: headerCellID)]
         
         if imageURL != nil {
             attr.append((key: "image", identifier: imageCellID))
         }
         
-        attr.append((key: "address", identifier: multilineCellID))
+        if address != nil {
+            attr.append((key: "address", identifier: multilineCellID))
+        }
+        
+        return attr
+    }
+}
+
+extension YLPBusiness: TableViewDisplayable {
+    
+    var tableViewAttributes: [TableViewAttributes] {
+        var attr: [TableViewAttributes] = [(key: "header", identifier: headerCellID)]
+        
+        if imageURL != nil {
+            attr.append((key: "image", identifier: imageCellID))
+        }
         
         if phone != nil {
             attr.append((key: "phone", identifier: multilineCellID))
         }
+        
+        attr.append((key: "address", identifier: multilineCellID))
         
         if hours != nil {
             attr.append((key: "hours", identifier: hoursCellID))
