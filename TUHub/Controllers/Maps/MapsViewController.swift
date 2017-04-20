@@ -29,18 +29,15 @@ class MapsViewController: UIViewController {
     
     var campuses: [Campus]?
     var selectedBuilding: Building?
-
-    
     var locationButton: MKUserTrackingBarButtonItem!
     let locationManager = CLLocationManager()
     var yelpClient: YLPClient?
-    
     lazy var businesses: [YLPBusiness] = []
-    
     var hoverBar: ISHHoverBar!
     var infoButton: UIBarButtonItem!
-    
     var oldRegion: MKCoordinateRegion?
+    var route: MKRoute?
+    var routeDestination: Location?
     
     lazy var searchController: UISearchController = {
         let resultsController = self.storyboard!.instantiateViewController(withIdentifier: "MapsSearchResultsVC") as! MapsSearchResultsTableViewController
@@ -238,6 +235,8 @@ class MapsViewController: UIViewController {
                 return
             }
             guard let route = response?.routes.first else { return }
+            self.route = route
+            self.routeDestination = location
             self.plotPolyline(of: route)
         }
     }
@@ -253,8 +252,8 @@ class MapsViewController: UIViewController {
         
         // Zoom out to fit the route on the map
         mapView.setVisibleMapRect(route.polyline.boundingMapRect,
-                                  edgePadding: UIEdgeInsetsMake(20.0, 20.0, 20.0, 20.0),
-                                  animated: false)
+                                  edgePadding: UIEdgeInsets(top: 60, left: 100, bottom: 60, right: 100),
+                                  animated: true)
     }
     
     // MARK: - Navigation
@@ -301,7 +300,7 @@ extension MapsViewController: MKMapViewDelegate {
                 return
             }
             
-            if let businesses = search?.businesses.filter({ !$0.isClosed }) {
+            if let businesses = search?.businesses.filter({ !$0.isClosed && (self.routeDestination as? YLPBusiness)?.identifier != $0.identifier }) {
                 DispatchQueue.main.async {
                     self.mapView.addAnnotations(businesses)
                     self.businesses.append(contentsOf: businesses)
@@ -341,8 +340,14 @@ extension MapsViewController: MKMapViewDelegate {
         }
         
         // Remove old annotations
-        mapView.removeAnnotations(self.businesses)
-        self.businesses.removeAll()
+        var businesses = self.businesses
+        self.businesses.removeAll(keepingCapacity: false)
+        if let destBusiness = routeDestination as? YLPBusiness, let i = businesses.index(of: destBusiness) {
+            // Preserve the business if it is the destination of the current route
+            businesses.remove(at: i)
+            self.businesses.append(destBusiness)
+        }
+        mapView.removeAnnotations(businesses)
         
         // Load new businesses in this region
         loadBusiness(in: mapView.region)
