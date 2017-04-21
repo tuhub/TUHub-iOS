@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 fileprivate let segueIdentifier = "showTabBar"
 fileprivate let signInLabelCellID = "signInLabelCell"
@@ -16,6 +17,10 @@ fileprivate let skipButtonCellID = "skipButtonCell"
 fileprivate let signInButtonCellID = "signInButtonCell"
 
 class SignInTableViewController: UITableViewController {
+    
+    // MARK: TouchID
+    var switchState = UserDefaults.standard.bool(forKey: "state")
+
     
     weak var usernameField: UITextField? {
         didSet{
@@ -33,7 +38,7 @@ class SignInTableViewController: UITableViewController {
     }
     var signInButton: UIButton?
     var credential: Credential?
-    
+
     var isHidden = true
 
     lazy var invalidCredentialsAlertController: UIAlertController = {
@@ -55,6 +60,8 @@ class SignInTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        UserDefaults.standard.register(defaults: ["state" : true])
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 66
         
@@ -65,6 +72,12 @@ class SignInTableViewController: UITableViewController {
         User.signInSilently { (user, error) in
             
             if user != nil {
+                
+                if self.switchState == true {
+                    // Touch ID
+                    self.authenticateUser()
+                }
+                
                 self.performSegue(withIdentifier: segueIdentifier, sender: self)
             } else {
                 // The user needs to sign in, show the UI
@@ -81,7 +94,7 @@ class SignInTableViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         determineSignInButtonState()
     }
     
@@ -225,6 +238,29 @@ class SignInTableViewController: UITableViewController {
         }
     }
 
+    func authenticateUser() {
+        let context = LAContext()
+        var error: NSError?
+        let reason = "Unlock TUHub"
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+            
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) {
+                (success, authenticationError) in
+                
+                if success {
+                    print("Login successful")
+                } else {
+                    self.authenticateUser()
+                }
+            }
+        } else {
+            let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+        
+    }
     /*
     // MARK: - Navigation
 

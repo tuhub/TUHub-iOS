@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		222B8DB41EA8FF56005503A8 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222B8DB31EA8FF56005503A8 /* MoreTableViewController.swift */; };
+		222B8DB91EA90916005503A8 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222B8DB81EA90916005503A8 /* LocalAuthentication.framework */; };
 		22356FEF1E9EF8E400399897 /* MapsImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22356FEE1E9EF8E400399897 /* MapsImageTableViewCell.swift */; };
 		22359B711EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22359B701EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift */; };
 		225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */; };
 		22662BBE1E9682750016A1C8 /* ContactDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */; };
 		2279D9301E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2279D92F1E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift */; };
+		2279E1A51EA97FD900FDAA13 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2279E1A41EA97FD900FDAA13 /* WebPageViewController.swift */; };
 		227F304A1E930B2A00DE1752 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 227F30491E930B2900DE1752 /* MessageUI.framework */; };
 		37FD610AAB987235177A1533 /* Pods_TUHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C369AC415ABB8738F6351247 /* Pods_TUHubTests.framework */; };
 		7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A4F1E5BF7EF0003A853 /* AppDelegate.swift */; };
@@ -123,11 +126,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		222B8DB31EA8FF56005503A8 /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
+		222B8DB81EA90916005503A8 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		22356FEE1E9EF8E400399897 /* MapsImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsImageTableViewCell.swift; sourceTree = "<group>"; };
 		22359B701EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsBuildingImageTableViewCell.swift; sourceTree = "<group>"; };
 		225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingDetailTableViewController.swift; sourceTree = "<group>"; };
 		22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailViewCell.swift; sourceTree = "<group>"; };
 		2279D92F1E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		2279E1A41EA97FD900FDAA13 /* WebPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
 		227F30491E930B2900DE1752 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3361CEFB73AA8E72E9E0B46D /* Pods-TUHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubTests/Pods-TUHubTests.release.xcconfig"; sourceTree = "<group>"; };
 		3BBBD4D5AE6A3197E62F3182 /* Pods-TUHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -238,6 +244,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				222B8DB91EA90916005503A8 /* LocalAuthentication.framework in Frameworks */,
 				227F304A1E930B2A00DE1752 /* MessageUI.framework in Frameworks */,
 				7D7FD0181E85B18700CE769F /* MapKit.framework in Frameworks */,
 				A1D62E3F439C1C254F6FC729 /* Pods_TUHub.framework in Frameworks */,
@@ -263,6 +270,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		222B8DB01EA8FE6F005503A8 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				222B8DB31EA8FF56005503A8 /* MoreTableViewController.swift */,
+				2279E1A41EA97FD900FDAA13 /* WebPageViewController.swift */,
+			);
+			name = More;
+			sourceTree = "<group>";
+		};
 		2237DBE11E97004000520CAD /* AddListing */ = {
 			isa = PBXGroup;
 			children = (
@@ -449,6 +465,7 @@
 				7D439E011E8D6F4400FF5538 /* Marketplace */,
 				7DA6D93C1E7F6F6800CD5D02 /* News */,
 				7D7FD0141E85ADEF00CE769F /* Maps */,
+				222B8DB01EA8FE6F005503A8 /* More */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -481,10 +498,10 @@
 		7DA6D94B1E7F6FC500CD5D02 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2279D92E1E9ED9680067CCC2 /* Maps */,
-				229CD2C31E9194F40039D88D /* Marketplace */,
 				7DA6D94C1E7F6FC500CD5D02 /* Course */,
+				229CD2C31E9194F40039D88D /* Marketplace */,
 				7DA6D9501E7F6FC500CD5D02 /* News */,
+				2279D92E1E9ED9680067CCC2 /* Maps */,
 				7D942B7B1E9ED72C00EEB312 /* Maps */,
 			);
 			path = Views;
@@ -536,6 +553,7 @@
 		EF3D9015D8FBE0F6CB30F116 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				222B8DB81EA90916005503A8 /* LocalAuthentication.framework */,
 				227F30491E930B2900DE1752 /* MessageUI.framework */,
 				7D7FD0171E85B18700CE769F /* MapKit.framework */,
 				9048A865C973948E6821D8E5 /* Pods_TUHub.framework */,
@@ -622,7 +640,7 @@
 				TargetAttributes = {
 					7D043A4B1E5BF7EF0003A853 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = LVQAV2S2JC;
+						DevelopmentTeam = JGELA3NA8W;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -850,6 +868,7 @@
 				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
 				7D942B8C1EA003D400EEB312 /* MapsOptionsViewController.swift in Sources */,
 				7D33C2171E99754F00101751 /* AWS.swift in Sources */,
+				2279E1A51EA97FD900FDAA13 /* WebPageViewController.swift in Sources */,
 				7DCC7F1B1E9454E900714100 /* UITableView+UIActivityIndicator.swift in Sources */,
 				225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */,
 				7D4E57F61E9211AD000B7719 /* Personal.swift in Sources */,
@@ -875,6 +894,7 @@
 				7DA6D96C1E7F6FFF00CD5D02 /* UIColor.swift in Sources */,
 				7DA6D92B1E7F6ECE00CD5D02 /* NewsItem.swift in Sources */,
 				7D942B7A1E9ED72700EEB312 /* BusinessTableViewCell.swift in Sources */,
+				222B8DB41EA8FF56005503A8 /* MoreTableViewController.swift in Sources */,
 				7D8A1A631E983959006401A1 /* ImagesRow.swift in Sources */,
 				22359B711EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift in Sources */,
 				7DA6D95B1E7F6FC500CD5D02 /* NewsItemTableViewCell.swift in Sources */,
@@ -1073,14 +1093,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = LVQAV2S2JC;
+				DEVELOPMENT_TEAM = JGELA3NA8W;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TUHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies -Onone";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.temple.TUhub;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.temple.TUhub.me;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
@@ -1093,14 +1113,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = LVQAV2S2JC;
+				DEVELOPMENT_TEAM = JGELA3NA8W;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TUHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies -Onone";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.temple.TUhub;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.temple.TUhub.me;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
