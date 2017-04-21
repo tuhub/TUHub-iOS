@@ -11,6 +11,7 @@ import AWSS3
 
 final class AWS {
     static let bucket = "tumobilemarketplace"
+    static let bucketURL = "https://tumobilemarketplace.s3.amazonaws.com"
     
     static func upload(folder: String, images: [UIImage], _ responseHandler: @escaping (Error?)->Void) { // -> String {
         

@@ -31,7 +31,9 @@ class NewsDetailTableViewController: UITableViewController {
         // Allow table view to automatically determine cell height based on contents
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
-        tableView.cellLayoutMarginsFollowReadableWidth = true
+//        tableView.cellLayoutMarginsFollowReadableWidth = true
+        
+        tableView.register(UINib(nibName: "ImageGalleryTableViewCell", bundle: nil), forCellReuseIdentifier: newsImageGalleryCellID)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,7 +65,10 @@ class NewsDetailTableViewController: UITableViewController {
             (cell as? NewsHeaderTableViewCell)?.setUp(from: newsItem)
         case 1:
             cell = tableView.dequeueReusableCell(withIdentifier: newsImageGalleryCellID, for: indexPath)
-            (cell as? NewsImageGalleryTableViewCell)?.setUp(with: newsItem, delegate: self)
+            if let cell = cell as? ImageGalleryTableViewCell {
+                cell.setUp(with: newsItem.imageURLs)
+                cell.delegate = self
+            }
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: newsBodyCellID, for: indexPath)
             (cell as? NewsBodyTableViewCell)?.setUp(with: newsItem, from: tableView)
@@ -86,9 +91,13 @@ class NewsDetailTableViewController: UITableViewController {
     }
 }
 
-// MARK: - NewsImageGalleryTableViewCellDelegate
-extension NewsDetailTableViewController: NewsImageGalleryTableViewCellDelegate {
-    func present(_ viewController: UIViewController) {
-        present(viewController, animated: true, completion: nil)
+// MARK: - ImageGalleryTableViewCellDelegate
+extension NewsDetailTableViewController: ImageGalleryTableViewCellDelegate {
+    func didSelect(imageView: UIImageView, from images: [SKPhoto], at row: Int) {
+        if let image = imageView.image {
+            let browser = SKPhotoBrowser(originImage: image, photos: images, animatedFromView: imageView)
+            browser.initializePageIndex(row)
+            present(browser, animated: true, completion: nil)
+        }
     }
 }

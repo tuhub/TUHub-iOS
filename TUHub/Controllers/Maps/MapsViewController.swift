@@ -17,6 +17,7 @@ import YelpAPI
 private let mapsDetailSegueID = "showMapsDetail"
 
 let defaultCampusKey = "defaultCampus"
+let defaultTransportMethod = "defaultTransport"
 
 private let minimumLatitudeOffset = 0.001
 private let minimumLongitudeOffset = 0.001
@@ -25,7 +26,19 @@ private let minimumSpanOffset = 0.001
 class MapsViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
-
+    
+    var campuses: [Campus]?
+    var selectedBuilding: Building?
+    var locationButton: MKUserTrackingBarButtonItem!
+    let locationManager = CLLocationManager()
+    var yelpClient: YLPClient?
+    lazy var businesses: [YLPBusiness] = []
+    var hoverBar: ISHHoverBar!
+    var infoButton: UIBarButtonItem!
+    var oldRegion: MKCoordinateRegion?
+    var route: MKRoute?
+    var routeDestination: Location?
+    
     lazy var searchController: UISearchController = {
         let resultsController = self.storyboard!.instantiateViewController(withIdentifier: "MapsSearchResultsVC") as! MapsSearchResultsTableViewController
         
@@ -97,20 +110,6 @@ class MapsViewController: UIViewController {
         }
     }()
     
-    var campuses: [Campus]?
-    var selectedBuilding: Building?
-
-    
-    var locationButton: MKUserTrackingBarButtonItem!
-    let locationManager = CLLocationManager()
-    var yelpClient: YLPClient?
-    
-    lazy var businesses: [YLPBusiness] = []
-    
-    var hoverBar: ISHHoverBar!
-    var infoButton: UIBarButtonItem!
-    
-    var oldRegion: MKCoordinateRegion?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,6 +140,7 @@ class MapsViewController: UIViewController {
         // Location manager set up
 //        locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        locationManager.pausesLocationUpdatesAutomatically = true
         locationManager.startUpdatingLocation()
         
         // Set up Yelp Client
@@ -210,6 +210,52 @@ class MapsViewController: UIViewController {
         present(navVC, animated: true, completion: nil)
     }
     
+    func calculateDirections(to location: Location) {
+        // Only perform directions if user's location is available
+        guard let userLocation = mapView.userLocation.location else { return }
+        
+        let request: MKDirectionsRequest = MKDirectionsRequest()
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: userLocation.coordinate, addressDictionary: nil))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: location.coordinate, addressDictionary: nil))
+        request.requestsAlternateRoutes = false
+        
+        // Determine transport type
+        // Save selection to user defaults
+        let defaults = UserDefaults.standard
+        var method: MKDirectionsTransportType = .any
+        if let saved = defaults.object(forKey: defaultTransportMethod) as? Int {
+            method = MKDirectionsTransportType(rawValue: UInt(saved))
+        }
+        request.transportType = method
+        
+        let directions = MKDirections(request: request)
+        directions.calculate { (response, error) in
+            if let error = error {
+                log.error(error)
+                return
+            }
+            guard let route = response?.routes.first else { return }
+            self.route = route
+            self.routeDestination = location
+            self.plotPolyline(of: route)
+        }
+    }
+    
+    func plotPolyline(of route: MKRoute) {
+        // Remove any overlays currently on the map
+        if mapView.overlays.count > 0 {
+            mapView.removeOverlays(mapView.overlays)
+        }
+        
+        // Add our overlay
+        mapView.add(route.polyline)
+        
+        // Zoom out to fit the route on the map
+        mapView.setVisibleMapRect(route.polyline.boundingMapRect,
+                                  edgePadding: UIEdgeInsets(top: 60, left: 100, bottom: 60, right: 100),
+                                  animated: true)
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -254,13 +300,22 @@ extension MapsViewController: MKMapViewDelegate {
                 return
             }
             
-            if let businesses = search?.businesses.filter({ !$0.isClosed }) {
+            if let businesses = search?.businesses.filter({ !$0.isClosed && (self.routeDestination as? YLPBusiness)?.identifier != $0.identifier }) {
                 DispatchQueue.main.async {
                     self.mapView.addAnnotations(businesses)
                     self.businesses.append(contentsOf: businesses)
                 }
             }
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
+        if (overlay is MKPolyline) {
+            polylineRenderer.strokeColor = UIColor.cherry.withAlphaComponent(0.75)
+            polylineRenderer.lineWidth = 5
+        }
+        return polylineRenderer
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
@@ -285,11 +340,23 @@ extension MapsViewController: MKMapViewDelegate {
         }
         
         // Remove old annotations
-        mapView.removeAnnotations(self.businesses)
-        self.businesses.removeAll()
+        var businesses = self.businesses
+        self.businesses.removeAll(keepingCapacity: false)
+        if let destBusiness = routeDestination as? YLPBusiness, let i = businesses.index(of: destBusiness) {
+            // Preserve the business if it is the destination of the current route
+            businesses.remove(at: i)
+            self.businesses.append(destBusiness)
+        }
+        mapView.removeAnnotations(businesses)
         
         // Load new businesses in this region
         loadBusiness(in: mapView.region)
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let location = view.annotation as? Location {
+            calculateDirections(to: location)
+        }
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {

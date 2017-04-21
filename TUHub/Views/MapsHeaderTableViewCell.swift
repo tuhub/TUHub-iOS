@@ -14,8 +14,8 @@ class MapsHeaderTableViewCell: UITableViewCell {
     
     // IBOutlets
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var ratingView: CosmosView!
-    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var ratingView: CosmosView?
+    @IBOutlet weak var categoryLabel: UILabel?
     
     func setUp(with location: Location) {
         titleLabel.text = location.title!
@@ -27,16 +27,16 @@ class MapsHeaderTableViewCell: UITableViewCell {
                 if i < business.categories.count - 1 {
                     text += ", "
                 }
-                categoryLabel.text = text
+                categoryLabel?.text = text
             }
             
             // Rating Stars
-            ratingView.rating = business.rating
-            ratingView.settings.fillMode = .precise
-            ratingView.text = "(\(business.reviewCount)) on Yelp"
+            ratingView?.rating = business.rating
+            ratingView?.settings.fillMode = .precise
+            ratingView?.text = "(\(business.reviewCount)) on Yelp"
         } else {
-            ratingView.removeFromSuperview()
-            categoryLabel.removeFromSuperview()
+            ratingView?.removeFromSuperview()
+            categoryLabel?.removeFromSuperview()
         }
     }
     

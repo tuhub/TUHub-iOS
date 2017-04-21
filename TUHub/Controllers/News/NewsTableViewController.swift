@@ -43,6 +43,7 @@ class NewsTableViewController: UITableViewController {
         // Allow table view to automatically determine cell height based on contents
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
+        clearsSelectionOnViewWillAppear = true
         
         // Begin showing refresh indicator
         tableView.contentOffset = CGPoint(x: 0, y: -self.refreshControl!.frame.size.height) // Needed to fix refresh control bug

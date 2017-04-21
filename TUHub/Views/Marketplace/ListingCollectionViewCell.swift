@@ -34,7 +34,7 @@ class ListingCollectionViewCell: UICollectionViewCell {
         detailsView.isHidden = true
         blurryDetailsView.isHidden = true
         
-        if let _ = listing.photoPaths?.first {
+        if let _ = listing.imageURLs?.first {
             setUpBlurryDetailsView(listing)
         } else {
             photoPathsRequest = listing.retrievePhotoPaths { (paths, error) in
@@ -50,7 +50,7 @@ class ListingCollectionViewCell: UICollectionViewCell {
     
     func setUpBlurryDetailsView(_ listing: Listing) {
         
-        guard let photoPath = listing.photoPaths?.first else {
+        guard let imageURL = listing.imageURLs?.first else {
             setUpDetailsView(listing)
             return
         }
@@ -67,7 +67,7 @@ class ListingCollectionViewCell: UICollectionViewCell {
             blurryDetailsView.detailTextLabel.text = nil
         }
         
-        if let url = URL(string: "\(NetworkManager.Endpoint.s3.rawValue)/\(photoPath)") {
+        if let url = URL(string: imageURL) {
             imageView.af_setImage(withURL: url) { (response) in
                 if let error = response.error {
                     dump(error)

@@ -9,17 +9,13 @@
 import UIKit
 import YelpAPI
 import MapKit
+import SKPhotoBrowser
 
 // UITableViewCell reuse identifier
 private let headerCellID = "headerCell"
 private let imageCellID = "imageCell"
 private let multilineCellID = "multilineCell"
 private let hoursCellID = "hoursCell"
-
-protocol Location: MKAnnotation, TableViewDisplayable {
-    var address: String? { get }
-    var imageURL: URL? { get }
-}
 
 class MapsDetailViewController: UIViewController {
     
@@ -37,10 +33,15 @@ class MapsDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Hide until finished loading
+        tableView.isHidden = true
+        
         // Allow table view to automatically determine cell height based on contents
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         tableView.cellLayoutMarginsFollowReadableWidth = true
+        
+        tableView.register(UINib(nibName: "ImageGalleryTableViewCell", bundle: nil), forCellReuseIdentifier: imageCellID)
         
         if let business = location as? YLPBusiness {
             activityIndicator.startAnimating()
@@ -55,6 +56,7 @@ class MapsDetailViewController: UIViewController {
                 self.location = business
                 DispatchQueue.main.async {
                     self.directionsButton.isHidden = false
+                    self.tableView.isHidden = false
                     self.tableView.reloadData()
                 }
             }
@@ -65,11 +67,13 @@ class MapsDetailViewController: UIViewController {
                 building.retrieveAddress { (address, error) in
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
+                        self.tableView.isHidden = false
                         self.directionsButton.isHidden = false
                         self.tableView.reloadData()
                     }
                 }
             } else {
+                self.tableView.isHidden = false
                 self.directionsButton.isHidden = false
             }
         }
@@ -171,7 +175,6 @@ class MapsDetailViewController: UIViewController {
             mapItem.phoneNumber = business.phone
         }
         mapItem.openInMaps(launchOptions: options)
-        
     }
     
 }
@@ -194,7 +197,10 @@ extension MapsDetailViewController: UITableViewDataSource {
         case "header":
             (cell as? MapsHeaderTableViewCell)?.setUp(with: location)
         case "image":
-            (cell as? MapsImageTableViewCell)?._imageView.af_setImage(withURL: location.imageURL!)
+            if let cell = cell as? ImageGalleryTableViewCell {
+                cell.setUp(with: location.imageURLs!)
+                cell.delegate = self
+            }
         case "phone":
             if let business = location as? YLPBusiness, let formattedPhoneNumber = format(phoneNumber: business.phone!) {
                 cell.textLabel?.textColor = UIColor.cherry
@@ -249,33 +255,11 @@ extension String.CharacterView {
     }
 }
 
-extension YLPBusiness: Location {
-    
-    var address: String? {
-        var addr = ""
-        for (i, line) in location.address.enumerated() {
-            addr += "\(line)"
-            if i == location.address.count - 1 {
-                addr += "\n"
-            } else {
-                addr += ", "
-            }
-        }
-        addr += "\(location.city), \(location.stateCode)\n"
-        addr += "\(location.postalCode)"
-        return addr
-    }
-    
-}
-
-extension Building: Location {
-}
-
 extension Building: TableViewDisplayable {
     var tableViewAttributes: [TableViewAttributes] {
         var attr: [TableViewAttributes] = [(key: "header", identifier: headerCellID)]
         
-        if imageURL != nil {
+        if imageURLs != nil {
             attr.append((key: "image", identifier: imageCellID))
         }
         
@@ -310,3 +294,12 @@ extension YLPBusiness: TableViewDisplayable {
     
 }
 
+extension MapsDetailViewController: ImageGalleryTableViewCellDelegate {
+    func didSelect(imageView: UIImageView, from images: [SKPhoto], at row: Int) {
+        if let image = imageView.image {
+            let browser = SKPhotoBrowser(originImage: image, photos: images, animatedFromView: imageView)
+            browser.initializePageIndex(row)
+            present(browser, animated: true, completion: nil)
+        }
+    }
+}

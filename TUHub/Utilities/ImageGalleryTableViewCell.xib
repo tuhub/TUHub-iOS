@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="none" indentationWidth="10" rowHeight="184" id="KGk-i7-Jjw" customClass="ImageGalleryTableViewCell" customModule="TUHub" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="184"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="184"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view verifyAmbiguity="ignoreSizes" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lCN-mo-TQO">
+                        <rect key="frame" x="15" y="0.0" width="290" height="183.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="lCN-mo-TQO" secondAttribute="height" multiplier="16:9" id="yWd-iW-i0q"/>
+                        </constraints>
+                    </view>
+                    <collectionView verifyAmbiguity="ignoreSizes" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="O5N-dW-gjN">
+                        <rect key="frame" x="0.0" y="5" width="320" height="180"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="n4J-W0-uLy" customClass="CarouselFlowLayout" customModule="TUHub" customModuleProvider="target">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="sideItemScale">
+                                    <real key="value" value="0.90000000000000002"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="sideItemAlpha">
+                                    <real key="value" value="0.84999999999999998"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="lCN-mo-TQO" secondAttribute="trailing" id="F8u-hH-hNX"/>
+                    <constraint firstItem="lCN-mo-TQO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Gl0-B7-dnP"/>
+                    <constraint firstItem="O5N-dW-gjN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="JTy-1b-kS5"/>
+                    <constraint firstAttribute="trailing" secondItem="O5N-dW-gjN" secondAttribute="trailing" id="N4s-vg-tbZ"/>
+                    <constraint firstItem="O5N-dW-gjN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="UjI-f1-TNm"/>
+                    <constraint firstItem="O5N-dW-gjN" firstAttribute="height" secondItem="lCN-mo-TQO" secondAttribute="height" id="bcJ-rf-J6t"/>
+                    <constraint firstItem="lCN-mo-TQO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="dwT-a0-vRH"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="lCN-mo-TQO" secondAttribute="bottom" id="jam-MJ-yb1"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="collectionView" destination="O5N-dW-gjN" id="8vC-ib-z61"/>
+            </connections>
+            <point key="canvasLocation" x="35" y="128"/>
+        </tableViewCell>
+    </objects>
+</document>
