@@ -92,8 +92,8 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="KFL-B0-EHr"/>
-                                <exclude reference="vsC-kV-Q5g"/>
                                 <exclude reference="NmY-Ha-FrO"/>
+                                <exclude reference="vsC-kV-Q5g"/>
                                 <exclude reference="WmO-UE-l9o"/>
                             </mask>
                         </variation>
@@ -101,10 +101,10 @@
                             <mask key="constraints">
                                 <exclude reference="EnG-Lo-MGK"/>
                                 <include reference="KFL-B0-EHr"/>
-                                <include reference="vsC-kV-Q5g"/>
-                                <exclude reference="YEI-rB-F56"/>
-                                <exclude reference="TqV-Il-9cN"/>
                                 <include reference="NmY-Ha-FrO"/>
+                                <exclude reference="TqV-Il-9cN"/>
+                                <exclude reference="YEI-rB-F56"/>
+                                <include reference="vsC-kV-Q5g"/>
                                 <include reference="WmO-UE-l9o"/>
                             </mask>
                         </variation>
@@ -569,27 +569,27 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="KSQ-tC-rb5"/>
                                         <exclude reference="DtL-To-lA4"/>
+                                        <exclude reference="KSQ-tC-rb5"/>
                                         <exclude reference="5HD-Tu-FYb"/>
                                         <exclude reference="pUl-bh-Mt3"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact">
                                     <mask key="constraints">
-                                        <exclude reference="z2m-YR-iwe"/>
                                         <include reference="DtL-To-lA4"/>
-                                        <exclude reference="bJO-o7-m41"/>
+                                        <exclude reference="z2m-YR-iwe"/>
                                         <include reference="5HD-Tu-FYb"/>
+                                        <exclude reference="bJO-o7-m41"/>
                                         <exclude reference="pUl-bh-Mt3"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=regular">
                                     <mask key="constraints">
-                                        <exclude reference="z2m-YR-iwe"/>
                                         <include reference="DtL-To-lA4"/>
-                                        <exclude reference="bJO-o7-m41"/>
+                                        <exclude reference="z2m-YR-iwe"/>
                                         <include reference="5HD-Tu-FYb"/>
+                                        <exclude reference="bJO-o7-m41"/>
                                         <exclude reference="pUl-bh-Mt3"/>
                                     </mask>
                                 </variation>
@@ -705,8 +705,8 @@
         <image name="TransparentPixel" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="e2L-Ys-VLX"/>
-        <segue reference="ybr-7C-OsR"/>
+        <segue reference="uN0-wL-4Yi"/>
+        <segue reference="pnJ-Ra-PHP"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>
