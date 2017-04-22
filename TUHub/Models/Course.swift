@@ -54,7 +54,7 @@ class Course {
 
         // Attempt to map JSON arrays
         instructors = json["instructors"].array?.flatMap({ Instructor(json: $0) })
-        meetings = json["meetingPatterns"].array?.flatMap({ CourseMeeting(json: $0, course: self) }).sorted { $0.startDate < $1.startDate }
+        meetings = json["meetingPatterns"].array?.flatMap({ CourseMeeting(json: $0, course: self) }).sorted { $0.firstMeetingStartDate < $1.firstMeetingStartDate }
         grades = json["grades"].array?.flatMap { Grade(json: $0, course: self) }
         
     }

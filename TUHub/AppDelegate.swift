@@ -31,6 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NetworkActivityIndicatorManager.shared.isEnabled = true
         
+        // Needed to override user agent for Google Calendar sign in
+        let dict = ["UserAgent" : "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"]
+        UserDefaults.standard.register(defaults: dict)
+        
         return true
     }
 
@@ -47,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
-
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }

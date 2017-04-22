@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -54,7 +55,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="yh3-l0-18b" id="jmd-lN-d8X">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="66.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Tca-oT-2Mb">
@@ -273,7 +274,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="q4R-hs-ti0">
-                                    <rect key="frame" x="0.0" y="254" width="375" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="470" width="375" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
@@ -282,7 +283,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="mfq-Tp-xQf" id="jay-4U-gWR">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="110.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="y5z-ea-uIG">
@@ -351,10 +352,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="216" id="EoU-D4-PjB" customClass="MapsImageTableViewCell" customModule="TUHub" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="139" width="375" height="216"/>
+                                        <rect key="frame" x="0.0" y="128" width="375" height="216"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="EoU-D4-PjB" id="U4x-SP-ZiX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="215.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nHF-lc-eFh">
@@ -376,7 +377,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="multilineCell" textLabel="J0j-qz-g4G" style="IBUITableViewCellStyleDefault" id="19j-43-QfF">
-                                        <rect key="frame" x="0.0" y="128" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="344" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="19j-43-QfF" id="Nqw-KA-jLg">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -393,10 +394,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="hoursCell" rowHeight="82" id="653-HR-Isf" customClass="HoursTableViewCell" customModule="TUHub" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="172" width="375" height="82"/>
+                                        <rect key="frame" x="0.0" y="388" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="653-HR-Isf" id="adn-Zc-0nF">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="81.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jB-Xg-Plw">

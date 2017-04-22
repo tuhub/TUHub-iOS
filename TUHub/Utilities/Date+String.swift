@@ -10,6 +10,14 @@ import Foundation
 
 extension Date {
     
+    var iso8601: String {
+        return Formatter.iso8601.string(from: self)
+    }
+    
+    var time: String {
+        return Date.timeFormatter.string(from: self)
+    }
+    
     var date: String {
         return Date.dateFormatter.string(from: self)
     }
@@ -17,6 +25,14 @@ extension Date {
     var datetime: String {
         return Date.dateTimeFormatter.string(from: self)
     }
+    
+    private static var timeFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        dateFormatter.timeZone = .autoupdatingCurrent
+        return dateFormatter
+    }()
     
     private static var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -72,4 +88,15 @@ extension Date {
         return "\(years) year" + addSIfNeeded(years) + " ago"
     }
     
+}
+
+extension Formatter {
+    static let iso8601: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        return formatter
+    }()
 }

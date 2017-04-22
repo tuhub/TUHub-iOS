@@ -73,7 +73,7 @@ class CourseCalendarView: UIView {
             return nil
         }
         
-        meetingsForDate.sort { $0.startDate < $1.startDate }
+        meetingsForDate.sort { $0.firstMeetingStartDate < $1.firstMeetingStartDate }
         
         return meetingsForDate
     }
@@ -84,11 +84,11 @@ class CourseCalendarView: UIView {
         
         // Get the date's day of the week
         let calendar = Calendar.current
-        let dayOfWeek = calendar.component(.weekday, from: date)
+        let dayOfWeek = calendar.component(.weekday, from: date) - 1
         
         var meetingsForDate = [CourseMeeting]()
         for meeting in meetings {
-            if date > meeting.startDate && date < meeting.endDate && meeting.daysOfWeek.contains(dayOfWeek) {
+            if date > meeting.firstMeetingStartDate && date < meeting.lastMeetingEndDate && meeting.daysOfWeek.contains(dayOfWeek) {
                 meetingsForDate.append(meeting)
             }
         }

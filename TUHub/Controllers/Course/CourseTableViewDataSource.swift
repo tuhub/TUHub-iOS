@@ -89,20 +89,20 @@ class CourseTableViewDataSource: NSObject, UITableViewDataSource {
         case 1:
             cell = tableView.dequeueReusableCell(withType: .subtitleCell, for: indexPath)
             
-            if let meeting = course.meetings?[indexPath.row] {
+            if var meeting = course.meetings?[indexPath.row] {
                 
                 // Generate the names of the days in which the meetings occur
                 let daysOfWeek = meeting.daysOfWeek
                 let weekdaySymbols = Calendar.current.shortWeekdaySymbols
                 var str = ""
                 for (i, day) in daysOfWeek.enumerated() {
-                    str += weekdaySymbols[day - 1]
+                    str += weekdaySymbols[day]
                     if i != daysOfWeek.count - 1 {
                         str += ", "
                     }
                 }
                 
-                cell.textLabel?.text = str + ": \(meeting.startTime) to \(meeting.endTime)"
+                cell.textLabel?.text = str + ": \(meeting.firstMeetingStartDate.time) to \(meeting.firstMeetingEndDate.time)"
                 cell.detailTextLabel?.text = "\(meeting.buildingName), Room \(meeting.room)"
             }
             

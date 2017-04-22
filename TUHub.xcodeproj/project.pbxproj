@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		222B8DB41EA8FF56005503A8 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222B8DB31EA8FF56005503A8 /* MoreTableViewController.swift */; };
 		222B8DB91EA90916005503A8 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222B8DB81EA90916005503A8 /* LocalAuthentication.framework */; };
-		22356FEF1E9EF8E400399897 /* MapsImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22356FEE1E9EF8E400399897 /* MapsImageTableViewCell.swift */; };
-		22359B711EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22359B701EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift */; };
 		225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */; };
 		22662BBE1E9682750016A1C8 /* ContactDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */; };
 		2279D9301E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2279D92F1E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift */; };
@@ -132,8 +130,6 @@
 /* Begin PBXFileReference section */
 		222B8DB31EA8FF56005503A8 /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
 		222B8DB81EA90916005503A8 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
-		22356FEE1E9EF8E400399897 /* MapsImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsImageTableViewCell.swift; sourceTree = "<group>"; };
-		22359B701EA2BE780050B05A /* MapsBuildingImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsBuildingImageTableViewCell.swift; sourceTree = "<group>"; };
 		225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingDetailTableViewController.swift; sourceTree = "<group>"; };
 		22662BBD1E9682750016A1C8 /* ContactDetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailViewCell.swift; sourceTree = "<group>"; };
 		2279D92F1E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -650,6 +646,7 @@
 				TargetAttributes = {
 					7D043A4B1E5BF7EF0003A853 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = LVQAV2S2JC;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -1104,7 +1101,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LVQAV2S2JC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TUHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1124,7 +1121,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LVQAV2S2JC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TUHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
