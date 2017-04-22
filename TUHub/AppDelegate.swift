@@ -16,6 +16,8 @@ let log = SwiftyBeaver.self
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    // MARK: TouchID
+    var switchState = UserDefaults.standard.bool(forKey: "state")
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -50,6 +52,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        
+        let authVC = TouchIDViewController()
+        if User.current != nil {
+            if self.switchState == true {
+                application.keyWindow?.rootViewController?.present(authVC, animated: false, completion: nil)
+            }
+        }
+        
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

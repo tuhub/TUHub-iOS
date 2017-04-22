@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import LocalAuthentication
 
 fileprivate let segueIdentifier = "showTabBar"
 fileprivate let signInLabelCellID = "signInLabelCell"
@@ -17,10 +16,6 @@ fileprivate let skipButtonCellID = "skipButtonCell"
 fileprivate let signInButtonCellID = "signInButtonCell"
 
 class SignInTableViewController: UITableViewController {
-    
-    // MARK: TouchID
-    var switchState = UserDefaults.standard.bool(forKey: "state")
-
     
     weak var usernameField: UITextField? {
         didSet{
@@ -59,8 +54,6 @@ class SignInTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        UserDefaults.standard.register(defaults: ["state" : true])
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 66
@@ -72,12 +65,6 @@ class SignInTableViewController: UITableViewController {
         User.signInSilently { (user, error) in
             
             if user != nil {
-                
-                if self.switchState == true {
-                    // Touch ID
-                    self.authenticateUser()
-                }
-                
                 self.performSegue(withIdentifier: segueIdentifier, sender: self)
             } else {
                 // The user needs to sign in, show the UI
@@ -176,6 +163,8 @@ class SignInTableViewController: UITableViewController {
     @IBAction func unwindToSignInViewController(segue: UIStoryboardSegue) {
         self.credential = User.current?.credential
         showUI()
+        UserDefaults.standard.set(false, forKey: "state")
+        UserDefaults.standard.set(false, forKey: "switchState")
         User.signOut()
     }
     
@@ -237,39 +226,6 @@ class SignInTableViewController: UITableViewController {
             return UITableViewCell()
         }
     }
-
-    func authenticateUser() {
-        let context = LAContext()
-        var error: NSError?
-        let reason = "Unlock TUHub"
-        
-        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-            
-            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) {
-                (success, authenticationError) in
-                
-                if success {
-                    print("Login successful")
-                } else {
-                    self.authenticateUser()
-                }
-            }
-        } else {
-            let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID.", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            present(ac, animated: true)
-        }
-        
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

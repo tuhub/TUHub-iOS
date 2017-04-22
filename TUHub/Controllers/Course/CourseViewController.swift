@@ -42,8 +42,7 @@ class CourseViewController: UIViewController {
     var datePicker: UIDatePicker!
     var termPicker: UIPickerView!
     weak var coursePageVC: CoursePageViewController?
-    
-    
+        
     var state = State.calendar
     fileprivate var terms: [Term]?
     

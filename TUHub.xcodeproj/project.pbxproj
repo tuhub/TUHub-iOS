@@ -14,6 +14,7 @@
 		2279D9301E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2279D92F1E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift */; };
 		2279E1A51EA97FD900FDAA13 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2279E1A41EA97FD900FDAA13 /* WebPageViewController.swift */; };
 		227F304A1E930B2A00DE1752 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 227F30491E930B2900DE1752 /* MessageUI.framework */; };
+		22CF58A01EAA857600E011D5 /* TouchIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF589F1EAA857600E011D5 /* TouchIDViewController.swift */; };
 		37FD610AAB987235177A1533 /* Pods_TUHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C369AC415ABB8738F6351247 /* Pods_TUHubTests.framework */; };
 		7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A4F1E5BF7EF0003A853 /* AppDelegate.swift */; };
 		7D043A571E5BF7EF0003A853 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D043A551E5BF7EF0003A853 /* Main.storyboard */; };
@@ -135,6 +136,7 @@
 		2279D92F1E9ED9810067CCC2 /* MapsHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		2279E1A41EA97FD900FDAA13 /* WebPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
 		227F30491E930B2900DE1752 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		22CF589F1EAA857600E011D5 /* TouchIDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIDViewController.swift; sourceTree = "<group>"; };
 		3361CEFB73AA8E72E9E0B46D /* Pods-TUHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubTests/Pods-TUHubTests.release.xcconfig"; sourceTree = "<group>"; };
 		3BBBD4D5AE6A3197E62F3182 /* Pods-TUHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6DDB0DADD33842008B60C6C1 /* Pods-TUHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUHubUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUHubUITests/Pods-TUHubUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 			isa = PBXGroup;
 			children = (
 				7DA6D96D1E7F72B700CD5D02 /* SignInTableViewController.swift */,
+				22CF589F1EAA857600E011D5 /* TouchIDViewController.swift */,
 				7DA6D9351E7F6F6800CD5D02 /* Course */,
 				7D439E011E8D6F4400FF5538 /* Marketplace */,
 				7DA6D93C1E7F6F6800CD5D02 /* News */,
@@ -922,6 +925,7 @@
 				7DA6D9551E7F6FC500CD5D02 /* CourseCalendarTableViewCell.swift in Sources */,
 				7D439E031E8D6F4400FF5538 /* ListingsCollectionViewController.swift in Sources */,
 				7DE27BD91E932E3A004C2F83 /* ListingDetailView.swift in Sources */,
+				22CF58A01EAA857600E011D5 /* TouchIDViewController.swift in Sources */,
 				7D043A501E5BF7EF0003A853 /* AppDelegate.swift in Sources */,
 				7D6E2E8D1EA92AC900A7DBB2 /* ImageGalleryCollectionViewCell.swift in Sources */,
 				7D7E0E431E9D9929007A1D16 /* YLPClient+Secret.swift in Sources */,

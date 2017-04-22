@@ -8,14 +8,18 @@
 
 import UIKit
 
+var url = ""
+
 class WebPageViewController: UIViewController {
     
     @IBOutlet weak var webView: UIWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "TUMail"
+        
+        webView.scrollView.contentInset = UIEdgeInsets.zero
 
-        if let url = URL(string: "https://tumail.temple.edu/") {
+        if let url = URL(string: url) {
             let request = URLRequest(url: url)
             webView.loadRequest(request)
         }
