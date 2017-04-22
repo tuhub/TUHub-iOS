@@ -14,15 +14,25 @@ class TouchIDViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .clear
+        
         UserDefaults.standard.register(defaults: ["state" : true])
         
-        
-
         // Touch ID
         self.authenticateUser()
 
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add a blurry background
+        let visualEffect = UIBlurEffect(style: .light)
+        let visualEffectView = UIVisualEffectView(effect: visualEffect)
+        visualEffectView.frame = view.frame
+        view.addSubview(visualEffectView)
+    }
+    
     func authenticateUser() {
         let context = LAContext()
         var error: NSError?
@@ -33,9 +43,11 @@ class TouchIDViewController: UIViewController {
                 (success, authenticationError) in
                 
                 if success {
-                    print("Login successful")
+                    self.dismiss(animated: false, completion: nil)
                 } else {
-                    self.authenticateUser()
+                    print(type(of: self.presentingViewController!))
+                    // This should dismiss the whole tab bar controller, but it just dismisses this view controller. Why?
+                    self.performSegue(withIdentifier: "unwindToSignIn", sender: self)
                 }
             }
         } else {

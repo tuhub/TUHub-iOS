@@ -16,10 +16,7 @@ let log = SwiftyBeaver.self
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    // MARK: TouchID
-    var switchState = UserDefaults.standard.bool(forKey: "state")
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         let console = ConsoleDestination()  // log to Xcode Console
@@ -32,10 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         pageControl.backgroundColor = UIColor.clear
         
         NetworkActivityIndicatorManager.shared.isEnabled = true
-        
-        // Needed to override user agent for Google Calendar sign in
-        let dict = ["UserAgent" : "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"]
-        UserDefaults.standard.register(defaults: dict)
         
         return true
     }
@@ -53,10 +46,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         
-        let authVC = TouchIDViewController()
+        let switchState = UserDefaults.standard.bool(forKey: "state")
         if User.current != nil {
-            if self.switchState == true {
-                application.keyWindow?.rootViewController?.present(authVC, animated: false, completion: nil)
+            if switchState == true {
+                
+                if var topController = application.keyWindow?.rootViewController {
+                    while let presentedViewController = topController.presentedViewController{
+                        topController = presentedViewController
+                    }
+                    
+                    topController.performSegue(withIdentifier: "showTouchID", sender: topController)
+                }
+                
             }
         }
         

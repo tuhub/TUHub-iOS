@@ -46,12 +46,6 @@ class SignInTableViewController: UITableViewController {
         return alertController
     }()
     
-    lazy var mRefreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.translatesAutoresizingMaskIntoConstraints = false
-        return refreshControl
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -109,37 +103,12 @@ class SignInTableViewController: UITableViewController {
         }
     }
     
-    private func addRefreshControl() {
-        view.addSubview(mRefreshControl)
-        view.addConstraint(
-            NSLayoutConstraint(item: mRefreshControl,
-                               attribute: .centerX,
-                               relatedBy: .equal,
-                               toItem: view,
-                               attribute: .centerX,
-                               multiplier: 1,
-                               constant: 0))
-        view.addConstraint(
-            NSLayoutConstraint(item: mRefreshControl,
-                               attribute: .centerY,
-                               relatedBy: .equal,
-                               toItem: view,
-                               attribute: .centerY,
-                               multiplier: 0.75,
-                               constant: 0))
-        view.bringSubview(toFront: mRefreshControl)
-        mRefreshControl.beginRefreshing()
-    }
-    
     private func hideUI() {
-        addRefreshControl()
         isHidden = true
         tableView.reloadData()
     }
     
     private func showUI() {
-        mRefreshControl.endRefreshing()
-        mRefreshControl.removeFromSuperview()
         isHidden = false
         tableView.reloadData()
     }
