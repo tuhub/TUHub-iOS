@@ -9,8 +9,14 @@
 import UIKit
 import LocalAuthentication
 
+protocol TouchIDViewControllerDelegate {
+    func didFinishTouchID(success: Bool)
+}
+
 class TouchIDViewController: UIViewController {
 
+    var delegate: TouchIDViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,10 +51,9 @@ class TouchIDViewController: UIViewController {
                 if success {
                     self.dismiss(animated: false, completion: nil)
                 } else {
-                    print(type(of: self.presentingViewController!))
-                    // This should dismiss the whole tab bar controller, but it just dismisses this view controller. Why?
                     self.performSegue(withIdentifier: "unwindToSignIn", sender: self)
                 }
+                self.delegate?.didFinishTouchID(success: success)
             }
         } else {
             let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID.", preferredStyle: .alert)

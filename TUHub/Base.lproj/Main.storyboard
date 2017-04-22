@@ -277,6 +277,7 @@
                     </tableView>
                     <connections>
                         <segue destination="49e-Tb-3d3" kind="presentation" identifier="showTabBar" modalTransitionStyle="crossDissolve" id="5hl-Ra-Xs4"/>
+                        <segue destination="UfZ-cK-Wyx" kind="presentation" identifier="showTouchID" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="N24-le-M2r"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8af-7W-HyL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -299,5 +300,8 @@
             <point key="canvasLocation" x="751" y="-154"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="N24-le-M2r"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>

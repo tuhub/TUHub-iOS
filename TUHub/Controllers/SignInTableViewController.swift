@@ -59,6 +59,10 @@ class SignInTableViewController: UITableViewController {
         User.signInSilently { (user, error) in
             
             if user != nil {
+                let touchIDState = UserDefaults.standard.bool(forKey: "state")
+                if touchIDState {
+                    self.performSegue(withIdentifier: "showTouchID", sender: nil)
+                }
                 self.performSegue(withIdentifier: segueIdentifier, sender: self)
             } else {
                 // The user needs to sign in, show the UI
@@ -79,7 +83,16 @@ class SignInTableViewController: UITableViewController {
         determineSignInButtonState()
     }
     
-    internal func rotated() {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
+        
+        if identifier == "showTouchID" {
+            let touchIDController = segue.destination as? TouchIDViewController
+            touchIDController?.delegate = self
+        }
+    }
+    
+    func rotated() {
         // Needed to fix bug where label is clipped (despite constraints)
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -103,12 +116,12 @@ class SignInTableViewController: UITableViewController {
         }
     }
     
-    private func hideUI() {
+    fileprivate func hideUI() {
         isHidden = true
         tableView.reloadData()
     }
     
-    private func showUI() {
+    fileprivate func showUI() {
         isHidden = false
         tableView.reloadData()
     }
@@ -129,12 +142,17 @@ class SignInTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func unwindToSignInViewController(segue: UIStoryboardSegue) {
+    fileprivate func signOut() {
         self.credential = User.current?.credential
         showUI()
         UserDefaults.standard.set(false, forKey: "state")
         UserDefaults.standard.set(false, forKey: "switchState")
         User.signOut()
+        determineSignInButtonState()
+    }
+    
+    @IBAction func unwindToSignInViewController(segue: UIStoryboardSegue) {
+        signOut()
     }
     
     @IBAction func usernameTextFieldDidChange(_ sender: UITextField) {
@@ -212,4 +230,14 @@ extension SignInTableViewController: UITextFieldDelegate {
         return true
     }
     
+}
+
+extension SignInTableViewController: TouchIDViewControllerDelegate {
+    func didFinishTouchID(success: Bool) {
+        if success {
+            performSegue(withIdentifier: segueIdentifier, sender: nil)
+        } else {
+            signOut()
+        }
+    }
 }
