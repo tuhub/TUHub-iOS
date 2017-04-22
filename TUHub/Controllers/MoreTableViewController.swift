@@ -8,6 +8,7 @@
 
 import UIKit
 import LocalAuthentication
+import SafariServices
 
 class MoreTableViewController: UITableViewController {
     
@@ -17,32 +18,23 @@ class MoreTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        touchIDSwitch.isOn =  UserDefaults.standard.bool(forKey: "switchState")
-
+        touchIDSwitch.isOn = UserDefaults.standard.bool(forKey: touchIDKey)
     }
     
     
     @IBAction func didPressTouchID(_ sender: UISwitch) {
-        
-        if (touchIDSwitch.isOn == true) {
-            debugPrint("Touch ID enabled")
-            UserDefaults.standard.set(true, forKey: "state")
-            UserDefaults.standard.set(true, forKey: "switchState")
-        } else {
-            debugPrint("Touch ID disabled")
-            UserDefaults.standard.set(false, forKey: "state")
-            UserDefaults.standard.set(false, forKey: "switchState")
-        }
-        
+        log.info("Touch ID is now \(touchIDSwitch.isOn ? "enabled" : "disabled")")
+        UserDefaults.standard.set(touchIDSwitch.isOn, forKey: touchIDKey)
     }
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
-            url = templeLinks[indexPath.row]
-            performSegue(withIdentifier: "showWebView", sender: self)
+            if let url = URL(string: templeLinks[indexPath.row]) {
+                let safariVC = SFSafariViewController(url: url)
+                present(safariVC, animated: true, completion: nil)
+            }
         }
         
     }

@@ -145,8 +145,7 @@ class SignInTableViewController: UITableViewController {
     fileprivate func signOut() {
         self.credential = User.current?.credential
         showUI()
-        UserDefaults.standard.set(false, forKey: "state")
-        UserDefaults.standard.set(false, forKey: "switchState")
+        UserDefaults.standard.set(false, forKey: touchIDKey)
         User.signOut()
         determineSignInButtonState()
     }
