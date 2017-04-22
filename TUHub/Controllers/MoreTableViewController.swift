@@ -15,8 +15,15 @@ class MoreTableViewController: UITableViewController {
 
     @IBOutlet weak var touchIDSwitch: UISwitch!
     
+    @IBOutlet weak var signOutButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if User.current == nil {
+            touchIDSwitch.isEnabled = false
+            signOutButton.setTitle("Sign In", for: .normal)
+        }
         
         touchIDSwitch.isOn =  UserDefaults.standard.bool(forKey: "switchState")
 

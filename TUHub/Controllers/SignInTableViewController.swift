@@ -33,7 +33,7 @@ class SignInTableViewController: UITableViewController {
     }
     var signInButton: UIButton?
     var credential: Credential?
-
+        
     var isHidden = true
 
     lazy var invalidCredentialsAlertController: UIAlertController = {
@@ -90,6 +90,7 @@ class SignInTableViewController: UITableViewController {
             let touchIDController = segue.destination as? TouchIDViewController
             touchIDController?.delegate = self
         }
+
     }
     
     func rotated() {
