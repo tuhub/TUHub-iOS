@@ -16,6 +16,8 @@ class MoreTableViewController: UITableViewController {
 
     @IBOutlet weak var touchIDSwitch: UISwitch!
     
+    @IBOutlet weak var signOutButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         touchIDSwitch.isOn = UserDefaults.standard.bool(forKey: touchIDKey)
