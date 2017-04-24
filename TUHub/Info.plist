@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCalendarsUsageDescription</key>
-	<string>TUHub needs access to Calendars to save your courses to your calendar.</string>
 	<key>AWS</key>
 	<dict>
 		<key>CredentialsProvider</key>
@@ -48,9 +46,9 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSAllowsArbitraryLoadsInWebContent</key>
-		<true/>
 		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
@@ -70,6 +68,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCalendarsUsageDescription</key>
+	<string>TUHub needs access to Calendars to save your courses to your calendar.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>To take pictures</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

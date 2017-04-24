@@ -89,7 +89,7 @@ class MoreTableViewController: UITableViewController {
             switch row.id {
             case "tumail":
                 cell?.textLabel?.text = "TUmail"
-                cell?.url = "/tumail.temple.edu"
+                cell?.url = "https://tumail.temple.edu"
             case "tuportal":
                 cell?.textLabel?.text = "TUportal"
                 cell?.url = "https://tuportal4.temple.edu"
