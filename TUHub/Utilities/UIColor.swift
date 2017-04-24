@@ -14,6 +14,10 @@ extension UIColor {
         return UIColor(colorLiteralRed: 158.0/256, green: 27.0/256, blue: 52.0/256, alpha: 1.0)
     }
     
+    static var lilac: UIColor {
+        return UIColor(colorLiteralRed: 172.0/256, green: 143.0/256, blue: 182.0/256, alpha: 1.0)
+    }
+    
     static let allColors: [UIColor] = {
         return [UIColor.cyan,
                 UIColor.yellow,

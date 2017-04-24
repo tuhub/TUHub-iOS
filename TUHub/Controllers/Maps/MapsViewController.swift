@@ -423,12 +423,16 @@ extension MapsViewController: MKMapViewDelegate {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView?.canShowCallout = true
             pinView?.animatesDrop = false
-            pinView?.pinTintColor = UIColor.cherry
             pinView?.isDraggable = false
             pinView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-        }
-        else {
+        } else {
             pinView?.annotation = annotation
+        }
+        
+        if annotation is Building {
+            pinView?.pinTintColor = UIColor.cherry
+        } else {
+            pinView?.pinTintColor = UIColor.lightGray
         }
         
         return pinView
