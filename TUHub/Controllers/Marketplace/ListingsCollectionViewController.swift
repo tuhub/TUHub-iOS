@@ -23,6 +23,7 @@ class ListingsCollectionViewController: TLCollectionViewController {
     private lazy var lock = NSLock()
     
     @IBOutlet weak var composeButton: UIBarButtonItem!
+    @IBOutlet weak var meButton: UIBarButtonItem!
 
     let searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
@@ -67,8 +68,9 @@ class ListingsCollectionViewController: TLCollectionViewController {
                                                   size: CGSize(width: collectionView!.frame.width,
                                                                height: 44))
         
-        // Compose button should be disabled until we can authenticate the user
+        // Compose and Me button should be disabled until we can authenticate the user
         composeButton.isEnabled = false
+        meButton.isEnabled = false
         
         // Add the search bar above the collection view
         collectionView!.addSubview(searchController.searchBar)
@@ -114,6 +116,7 @@ class ListingsCollectionViewController: TLCollectionViewController {
             }
         } else {
             self.composeButton.isEnabled = true
+            self.meButton.isEnabled = true
         }
     }
     

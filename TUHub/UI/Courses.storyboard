@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="42J-c0-ap1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="42J-c0-ap1">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
@@ -252,13 +252,7 @@
                             <outlet property="delegate" destination="7OQ-NC-jfh" id="5BC-dW-Gqq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="R2D-UT-DTD">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="lGY-2l-t4Z">
-                            <connections>
-                                <action selector="didPressShare:" destination="7OQ-NC-jfh" id="DKP-MQ-hkt"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="R2D-UT-DTD"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="itp-Ln-zCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -452,8 +446,11 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <view contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HJQ-44-J2J" customClass="FSCalendar">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="301.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                         <color key="backgroundColor" red="0.97638529539999996" green="0.97652524709999999" blue="0.97635465860000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="300" id="vWg-cE-OYT"/>
+                                        </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="allowsMultipleSelection" value="NO"/>
                                             <userDefinedRuntimeAttribute type="color" keyPath="eventDefaultColor">
@@ -474,17 +471,20 @@
                                             <userDefinedRuntimeAttribute type="color" keyPath="eventSelectionColor">
                                                 <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="todaySelectionColor">
+                                                <color key="value" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="63" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VR3-L5-QWk">
-                                        <rect key="frame" x="0.0" y="301.5" width="375" height="301.5"/>
+                                        <rect key="frame" x="0.0" y="300" width="375" height="303"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="courseCalendarCell" rowHeight="63" id="sst-1L-FES" customClass="CourseCalendarTableViewCell" customModule="TUHub" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="63"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="sst-1L-FES" id="68B-mB-XCr">
-                                                    <rect key="frame" x="0.0" y="0.0" width="342" height="62"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="342" height="63"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rGw-1p-APq">
@@ -567,7 +567,6 @@
                                     <constraint firstItem="VR3-L5-QWk" firstAttribute="leading" secondItem="HJQ-44-J2J" secondAttribute="trailing" id="5HD-Tu-FYb"/>
                                     <constraint firstAttribute="trailing" secondItem="VR3-L5-QWk" secondAttribute="trailing" id="C8j-en-4ay"/>
                                     <constraint firstItem="HJQ-44-J2J" firstAttribute="width" secondItem="6Bo-gq-MTc" secondAttribute="width" multiplier="1/2" id="DtL-To-lA4"/>
-                                    <constraint firstItem="HJQ-44-J2J" firstAttribute="height" secondItem="VR3-L5-QWk" secondAttribute="height" id="KSQ-tC-rb5"/>
                                     <constraint firstItem="VR3-L5-QWk" firstAttribute="leading" secondItem="6Bo-gq-MTc" secondAttribute="leading" id="bJO-o7-m41"/>
                                     <constraint firstItem="HJQ-44-J2J" firstAttribute="leading" secondItem="6Bo-gq-MTc" secondAttribute="leading" id="glU-A3-C1g"/>
                                     <constraint firstItem="VR3-L5-QWk" firstAttribute="top" secondItem="HJQ-44-J2J" secondAttribute="bottom" id="pUl-bh-Mt3"/>
@@ -576,7 +575,6 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="DtL-To-lA4"/>
-                                        <exclude reference="KSQ-tC-rb5"/>
                                         <exclude reference="5HD-Tu-FYb"/>
                                         <exclude reference="pUl-bh-Mt3"/>
                                     </mask>
@@ -601,11 +599,11 @@
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="KSQ-tC-rb5"/>
                                         <include reference="pUl-bh-Mt3"/>
                                     </mask>
                                 </variation>
                                 <connections>
+                                    <outlet property="calendarHeight" destination="vWg-cE-OYT" id="1mI-pQ-Bpg"/>
                                     <outlet property="calendarView" destination="HJQ-44-J2J" id="tH7-Dq-Jcd"/>
                                     <outlet property="tableView" destination="VR3-L5-QWk" id="0Lu-Fm-7LR"/>
                                 </connections>
@@ -711,8 +709,8 @@
         <image name="TransparentPixel" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uN0-wL-4Yi"/>
-        <segue reference="pnJ-Ra-PHP"/>
+        <segue reference="e2L-Ys-VLX"/>
+        <segue reference="ybr-7C-OsR"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>

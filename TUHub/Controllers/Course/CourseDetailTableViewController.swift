@@ -52,57 +52,5 @@ class CourseDetailTableViewController: UITableViewController {
     func dismissSelf() {
         dismiss(animated: true, completion: nil)
     }
-
-    @IBAction func didPressShare(_ sender: Any) {
-        
-        let saveBlock: (EKEventStore, [CourseMeeting]) -> Void = { (eventStore, meetings) in
-            let calendar = eventStore.defaultCalendarForNewEvents
-            let event = EKEvent(eventStore: eventStore)
-            for var meeting in meetings {
-                event.calendar = calendar
-                event.title = meeting.course.name
-                event.startDate = meeting.firstMeetingStartDate
-                event.endDate = meeting.firstMeetingEndDate
-                event.availability = .busy
-                event.location = "\(meeting.buildingName) \(meeting.room)"
-                
-                let daysOfWeek: [EKRecurrenceDayOfWeek] = meeting.daysOfWeek.flatMap {
-                    if let weekday = EKWeekday(rawValue: $0 + 1) {
-                        return EKRecurrenceDayOfWeek(weekday)
-                    }
-                    return nil
-                }
-                let end = EKRecurrenceEnd(end: meeting.lastMeetingEndDate)
-                let recurrenceRule = EKRecurrenceRule(recurrenceWith: .weekly,
-                                                      interval: 1,
-                                                      daysOfTheWeek: daysOfWeek,
-                                                      daysOfTheMonth: nil,
-                                                      monthsOfTheYear: nil,
-                                                      weeksOfTheYear: nil,
-                                                      daysOfTheYear: nil,
-                                                      setPositions: nil,
-                                                      end: end)
-                event.addRecurrenceRule(recurrenceRule)
-                
-                try? eventStore.save(event, span: .thisEvent)
-            }
-            try? eventStore.commit()
-        }
-        
-        if let meetings = (dataSource as? CourseTableViewDataSource)?.course.meetings {
-            let eventStore = EKEventStore()
-            let authStatus = EKEventStore.authorizationStatus(for: .event)
-            if authStatus == .notDetermined {
-                eventStore.requestAccess(to: .event) { (_, _) in
-                    saveBlock(eventStore, meetings)
-                }
-            } else {
-                saveBlock(eventStore, meetings)
-            }
-            
-        }
-        
-    }
     
 }
-

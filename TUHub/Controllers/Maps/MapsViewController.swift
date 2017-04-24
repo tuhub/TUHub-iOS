@@ -17,7 +17,7 @@ import YelpAPI
 private let mapsDetailSegueID = "showMapsDetail"
 
 let defaultCampusKey = "defaultCampus"
-let defaultTransportMethod = "defaultTransport"
+let defaultTransportMethodKey = "defaultTransport"
 
 private let minimumLatitudeOffset = 0.001
 private let minimumLongitudeOffset = 0.001
@@ -49,6 +49,14 @@ class MapsViewController: UIViewController {
         searchController.hidesBottomBarWhenPushed = true
         searchController.dimsBackgroundDuringPresentation = false
         return searchController
+    }()
+    
+    lazy var dateComponentsFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .short
+        formatter.allowedUnits = [.day, .hour, .minute]
+        formatter.allowsFractionalUnits = false
+        return formatter
     }()
     
     lazy var loadCampusesFirstTime: Void = {
@@ -222,8 +230,8 @@ class MapsViewController: UIViewController {
         // Determine transport type
         // Save selection to user defaults
         let defaults = UserDefaults.standard
-        var method: MKDirectionsTransportType = .any
-        if let saved = defaults.object(forKey: defaultTransportMethod) as? Int {
+        var method: MKDirectionsTransportType = .walking
+        if let saved = defaults.object(forKey: defaultTransportMethodKey) as? Int {
             method = MKDirectionsTransportType(rawValue: UInt(saved))
         }
         request.transportType = method
@@ -238,6 +246,32 @@ class MapsViewController: UIViewController {
             self.route = route
             self.routeDestination = location
             self.plotPolyline(of: route)
+            
+            let etaView = ETAView.instanceFromNib()
+            
+            var transportMethod: MKDirectionsTransportType = .walking
+            if let saved = UserDefaults.standard.object(forKey: defaultTransportMethodKey) as? Int {
+                transportMethod = MKDirectionsTransportType(rawValue: UInt(saved))
+            }
+            var image: UIImage!
+            switch transportMethod {
+            case MKDirectionsTransportType.walking:
+                image = #imageLiteral(resourceName: "WalkIcon")
+            case MKDirectionsTransportType.automobile:
+                image = #imageLiteral(resourceName: "CarIcon")
+            case MKDirectionsTransportType.transit:
+                image = #imageLiteral(resourceName: "TransitIcon")
+            default:
+                log.error("Invalid transportation method")
+            }
+            etaView.transportMethodImageView.image = image
+            etaView.estimateLabel.text = self.dateComponentsFormatter.string(from: route.expectedTravelTime)
+            
+            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTapETAView))
+            etaView.addGestureRecognizer(tapRecognizer)
+            
+            let annotationView = self.mapView.view(for: location)
+            annotationView?.leftCalloutAccessoryView = etaView
         }
     }
     
@@ -251,9 +285,18 @@ class MapsViewController: UIViewController {
         mapView.add(route.polyline)
         
         // Zoom out to fit the route on the map
-        mapView.setVisibleMapRect(route.polyline.boundingMapRect,
-                                  edgePadding: UIEdgeInsets(top: 60, left: 100, bottom: 60, right: 100),
-                                  animated: true)
+//        let top = (navigationController?.navigationBar.frame.height ?? 0) + 44
+//        let bottom = (tabBarController?.tabBar.frame.height ?? 0) + 44
+//        let x: CGFloat = 132
+//        mapView.setVisibleMapRect(route.polyline.boundingMapRect,
+//                                  edgePadding: UIEdgeInsets(top: top, left: x, bottom: bottom, right: x),
+//                                  animated: true)
+    }
+    
+    func didTapETAView() {
+        if let location = mapView.selectedAnnotations.first as? Location {
+            location.openInMaps()
+        }
     }
     
     // MARK: - Navigation
@@ -400,6 +443,13 @@ extension MapsViewController: MapsSearchResultsTableViewControllerDelegate {
         mapView.setCenter(location.coordinate, animated: true)
         mapView.selectAnnotation(location, animated: true)
     }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        // Remove any overlays currently on the map
+        if mapView.overlays.count > 0 {
+            mapView.removeOverlays(mapView.overlays)
+        }
+    }
 }
 
 extension MapsViewController: MapsOptionsViewControllerDelegate {
@@ -410,6 +460,12 @@ extension MapsViewController: MapsOptionsViewControllerDelegate {
     func didChangeCampus(to campus: Campus) {
         mapView.setRegion(campus.region, animated: true)
         loadBusiness(in: campus.region)
+    }
+    
+    func didChangeTransportType(to: MKDirectionsTransportType) {
+        if let selectedLocation = mapView.selectedAnnotations.first as? Location {
+            calculateDirections(to: selectedLocation)
+        }
     }
 }
 

@@ -96,7 +96,7 @@ class CourseTableViewDataSource: NSObject, UITableViewDataSource {
                 let weekdaySymbols = Calendar.current.shortWeekdaySymbols
                 var str = ""
                 for (i, day) in daysOfWeek.enumerated() {
-                    str += weekdaySymbols[day]
+                    str += weekdaySymbols[day - 1]
                     if i != daysOfWeek.count - 1 {
                         str += ", "
                     }

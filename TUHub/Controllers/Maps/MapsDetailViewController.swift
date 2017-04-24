@@ -159,22 +159,8 @@ class MapsDetailViewController: UIViewController {
     // MARK: Directions Button Pressed
     
     @IBAction func didPressDirections(_ sender: Any) {
-        
         guard let location = location else { return }
-        
-        let regionDistance: CLLocationDistance = 1000
-        let coordinates = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
-        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
-        
-        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
-        
-        let placeMark = MKPlacemark(coordinate: location.coordinate, addressDictionary: nil)
-        let mapItem = MKMapItem(placemark: placeMark)
-        mapItem.name = location.title!
-        if let business = location as? YLPBusiness {
-            mapItem.phoneNumber = business.phone
-        }
-        mapItem.openInMaps(launchOptions: options)
+        location.openInMaps()
     }
     
 }

@@ -19,13 +19,15 @@ class CourseCalendarView: UIView {
 
     @IBOutlet weak var calendarView: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var calendarHeight: NSLayoutConstraint!
     
     var delegate: CourseCalendarViewDelegate?
     var performSegueDelegate: PerformCourseDetailSegueDelegate?
     var courses: [Course]?
     lazy var selectedDate = Date()
     fileprivate var selectedDateCourses: [Course]?
+    let calendar = Calendar.autoupdatingCurrent
+    
     var selectedDateMeetings: [CourseMeeting]? {
         didSet {
             guard let selectedDateMeetings = selectedDateMeetings else { return }
@@ -35,6 +37,11 @@ class CourseCalendarView: UIView {
             }
             selectedDateCourses = courses
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        calendarView.sizeToFit()
     }
     
     func setUp(with courses: [Course], delegate: CourseCalendarViewDelegate?) {
@@ -73,7 +80,7 @@ class CourseCalendarView: UIView {
             return nil
         }
         
-        meetingsForDate.sort { $0.firstMeetingStartDate < $1.firstMeetingStartDate }
+        meetingsForDate.sort { $0.startTime < $1.startTime }
         
         return meetingsForDate
     }
@@ -84,11 +91,13 @@ class CourseCalendarView: UIView {
         
         // Get the date's day of the week
         let calendar = Calendar.current
-        let dayOfWeek = calendar.component(.weekday, from: date) - 1
+        let dayOfWeek = calendar.component(.weekday, from: date)
         
         var meetingsForDate = [CourseMeeting]()
         for meeting in meetings {
-            if date > meeting.firstMeetingStartDate && date < meeting.lastMeetingEndDate && meeting.daysOfWeek.contains(dayOfWeek) {
+            let isWithinStart = calendar.compare(date, to: meeting.firstMeetingStartDate, toGranularity: .day) != .orderedAscending
+            let isWithinEnd = calendar.compare(date, to: meeting.lastMeetingEndDate, toGranularity: .day) != .orderedDescending
+            if isWithinStart && isWithinEnd && meeting.daysOfWeek.contains(dayOfWeek) {
                 meetingsForDate.append(meeting)
             }
         }
@@ -119,6 +128,11 @@ extension CourseCalendarView: FSCalendarDelegate {
         selectedDateMeetings = meetings(on: date)
         delegate?.didSelectDate(date)
         tableView.reloadData()
+    }
+    
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+        calendarHeight.constant = bounds.height
+        layoutIfNeeded()
     }
     
 }

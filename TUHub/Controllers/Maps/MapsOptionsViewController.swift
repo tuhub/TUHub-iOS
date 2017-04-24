@@ -12,6 +12,7 @@ import MapKit
 
 protocol MapsOptionsViewControllerDelegate {
     func didChangeCampus(to campus: Campus)
+    func didChangeTransportType(to: MKDirectionsTransportType)
     func didChangeMapType(to mapType: MKMapType)
 }
 
@@ -35,26 +36,25 @@ class MapsOptionsViewController: FormViewController {
         tableView?.backgroundColor = .clear
         
         (form
-            +++ Section("Campus")
-            // Campus row
-            <<< ActionSheetRow<String>("defaultCampusRow") {
-                $0.title = "Default Campus"
-                let options: [String] = self.campuses.map { $0.name }
-                $0.options = options
+            
+            +++ SelectableSection<ListCheckRow<String>>("Campus", selectionType: .singleSelection(enableDeselection: false))
+            
+            +++ Section("Transportation Type")
+            <<< SegmentedRow<String>("transportRow") {
                 
+                let types: [MKDirectionsTransportType] = [MKDirectionsTransportType.automobile,
+                                                          MKDirectionsTransportType.walking,
+                                                          MKDirectionsTransportType.transit]
+                let current = MKDirectionsTransportType(rawValue:(defaults.object(forKey: defaultTransportMethodKey) as? UInt) ?? MKDirectionsTransportType.walking.rawValue)
+                
+                $0.options = types.flatMap { $0.name }
+                $0.value = current.name
                 $0.cell.backgroundColor = .clear
-                
-                if let defaultCampusID = self.defaults.string(forKey: defaultCampusKey), let i = campuses.index(where: { $0.id == defaultCampusID }) {
-                
-                    let campus = self.campuses[i]
-                    $0.value = campus.name
-                }
-            }.onChange { (row) in
-                if let i = self.campuses.index(where: { $0.name == row.value! }) {
-                    let campus = self.campuses[i]
-                    self.defaults.set(campus.id, forKey: defaultCampusKey)
-                    self.delegate.didChangeCampus(to: campus)
-                }
+                }.onChange { (row) in
+                    if let val = row.value, let selectedType = MKDirectionsTransportType.type(for: val) {
+                        self.defaults.set(selectedType.rawValue, forKey: defaultTransportMethodKey)
+                        self.delegate.didChangeTransportType(to: selectedType)
+                    }
             }
             
             +++ Section("Map Type")
@@ -74,6 +74,25 @@ class MapsOptionsViewController: FormViewController {
                 }
             }
         )
+        
+        let campuses = self.campuses.map { $0.name }
+        let campusSection = form.first! as! SelectableSection<ListCheckRow<String>>
+        let current = self.campuses.first(where: { $0.id == defaults.string(forKey: defaultCampusKey) })
+        for option in campuses {
+            campusSection <<< ListCheckRow<String>(option) {
+                $0.title = option
+                $0.selectableValue = option
+                $0.cell.tintColor = .cherry
+                $0.cell.backgroundColor = .clear
+                $0.value = current?.name == $0.selectableValue ? "" : nil
+            }
+        }
+        campusSection.onSelectSelectableRow = { (cell, row) in
+            if let campus = self.campuses.first(where: { $0.name == row.selectableValue! }) {
+                self.defaults.set(campus.id, forKey: defaultCampusKey)
+                self.delegate.didChangeCampus(to: campus)
+            }
+        }
         
         tableView?.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         

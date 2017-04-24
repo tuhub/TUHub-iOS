@@ -18,7 +18,7 @@ private var timeFormatter: DateFormatter = {
 
 private var calendar = Calendar.autoupdatingCurrent
 
-struct CourseMeeting {
+class CourseMeeting {
     
     var course: Course
     let daysOfWeek: [Int]
@@ -41,9 +41,15 @@ struct CourseMeeting {
         dateComponents = DateComponents(hour: -dateComponents.hour!, minute: -dateComponents.minute!)
         return calendar.date(byAdding: dateComponents, to: self.lastMeetingEndDate)!
     }()
+    lazy var startTime: Time = {
+       return Time(calendar.dateComponents([.hour, .minute, .second], from: self.firstMeetingStartDate))!
+    }()
+    lazy var endTime: Time = {
+        return Time(calendar.dateComponents([.hour, .minute, .second], from: self.firstMeetingEndDate))!
+    }()
     
     init?(json: JSON, course: Course) {
-        guard let daysOfWeek = json["daysOfWeek"].arrayObject?.map({ ($0 as! Int) - 1 }),
+        guard let daysOfWeek = (json["daysOfWeek"].arrayObject as? [Int])?.sorted(),
             let buildingID = json["buildingId"].string,
             let buildingName = json["building"].string,
             let room = json["room"].string,
@@ -63,9 +69,17 @@ struct CourseMeeting {
         self.room = room
         self.course = course
         
+        // Adjust start date to real first day of the meetings, not the first day of the semester (unless that is the actual date of the first meeting)
+        var startComponents = calendar.dateComponents([.weekday, .hour, .minute], from: startDate)
+        var realFirstMeetingDate: Date = startDate
+        if !daysOfWeek.contains(startComponents.weekday!) {
+            startComponents.weekday = daysOfWeek.first(where: { $0 > startComponents.weekday! })
+            realFirstMeetingDate = calendar.nextDate(after: startDate, matching: startComponents, matchingPolicy: .nextTime)!
+        }
+        
         // Temple API assumes non-daylight savings time, so need to remove offset if there is one
         let timezone = TimeZone.autoupdatingCurrent
-        self.firstMeetingStartDate = startDate - timezone.daylightSavingTimeOffset(for: startDate)
+        self.firstMeetingStartDate = realFirstMeetingDate - timezone.daylightSavingTimeOffset(for: realFirstMeetingDate)
         self.lastMeetingEndDate = endDate - timezone.daylightSavingTimeOffset(for: endDate)
     }
 }

@@ -59,7 +59,7 @@ class SignInTableViewController: UITableViewController {
         User.signInSilently { (user, error) in
             
             if user != nil {
-                let touchIDState = UserDefaults.standard.bool(forKey: "state")
+                let touchIDState = UserDefaults.standard.bool(forKey: touchIDKey)
                 if touchIDState {
                     self.performSegue(withIdentifier: "showTouchID", sender: nil)
                 }
@@ -146,7 +146,11 @@ class SignInTableViewController: UITableViewController {
     fileprivate func signOut() {
         self.credential = User.current?.credential
         showUI()
-        UserDefaults.standard.set(false, forKey: touchIDKey)
+        
+        // Clear all defaults
+        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+        UserDefaults.standard.synchronize()
+        
         User.signOut()
         determineSignInButtonState()
     }
