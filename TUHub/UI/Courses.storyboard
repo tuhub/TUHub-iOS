@@ -697,8 +697,8 @@
         <image name="TransparentPixel" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pnJ-Ra-PHP"/>
-        <segue reference="uN0-wL-4Yi"/>
+        <segue reference="e2L-Ys-VLX"/>
+        <segue reference="fpQ-IB-cs5"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -50,6 +50,8 @@ class CourseDetailTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = false
+        tableView.dataSource = dataSource
+        tableView.reloadData()
     }
     
     func dismissSelf() {
