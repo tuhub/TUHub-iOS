@@ -116,7 +116,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDv-Z9-3cO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3578" y="-2463"/>
+            <point key="canvasLocation" x="2689" y="-1648"/>
         </scene>
         <!--Course Detail Table View Controller-->
         <scene sceneID="Tnx-4l-knb">
@@ -256,7 +256,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="itp-Ln-zCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5481" y="-2463"/>
+            <point key="canvasLocation" x="4476" y="-2463"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HSy-HL-6zk">
@@ -272,7 +272,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rNZ-QO-Glr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4516" y="-2463"/>
+            <point key="canvasLocation" x="3545" y="-2463"/>
         </scene>
         <!--Course Page View Controller-->
         <scene sceneID="HHX-kB-Kja">
@@ -286,7 +286,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bHH-0L-wcj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2690" y="-2462"/>
+            <point key="canvasLocation" x="1801" y="-1648"/>
         </scene>
         <!--Courses-->
         <scene sceneID="9dT-bU-Gra">
@@ -417,7 +417,7 @@
             </objects>
             <point key="canvasLocation" x="2690" y="-3168"/>
         </scene>
-        <!--Courses-->
+        <!--Course View Controller-->
         <scene sceneID="gsX-no-y7Q">
             <objects>
                 <viewController id="g11-TR-aTG" customClass="CourseViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
@@ -425,10 +425,16 @@
                         <viewControllerLayoutGuide type="top" id="DMS-DS-fAW"/>
                         <viewControllerLayoutGuide type="bottom" id="yaL-BP-pxt"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ZS1-Dc-dZK">
+                    <view key="view" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" id="ZS1-Dc-dZK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please sign in to view your courses" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKo-Vk-PjS">
+                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GY3-LR-88A">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <connections>
@@ -438,13 +444,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Bo-gq-MTc" customClass="CourseCalendarView" customModule="TUHub" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ptG-iC-9vz">
-                                        <rect key="frame" x="158" y="296" width="97" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                     <view contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HJQ-44-J2J" customClass="FSCalendar">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                         <color key="backgroundColor" red="0.97638529539999996" green="0.97652524709999999" blue="0.97635465860000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -484,7 +483,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="63"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="sst-1L-FES" id="68B-mB-XCr">
-                                                    <rect key="frame" x="0.0" y="0.0" width="342" height="63"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="342" height="62.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rGw-1p-APq">
@@ -552,10 +551,9 @@
                                                     <outlet property="nameLabel" destination="FQe-u4-yrw" id="XVG-Rk-WQe"/>
                                                     <outlet property="separator" destination="Lot-CJ-cJG" id="aXV-c4-LkF"/>
                                                     <outlet property="startTimeLabel" destination="FBq-no-aSj" id="wp3-nb-Dhn"/>
-                                                    <segue destination="7OQ-NC-jfh" kind="show" identifier="showCourseDetail" id="HGv-1y-PZv">
-                                                        <segue key="commit" inheritsFrom="parent" id="s4O-t6-NH6"/>
-                                                        <segue key="preview" inheritsFrom="commit" id="ybr-7C-OsR"/>
-                                                        <nil key="action"/>
+                                                    <segue destination="7OQ-NC-jfh" kind="show" identifier="showCourseDetail" id="fpQ-IB-cs5">
+                                                        <segue key="commit" inheritsFrom="parent" id="ucA-x8-XRd"/>
+                                                        <segue key="preview" inheritsFrom="commit" id="Ddw-dN-4nQ"/>
                                                     </segue>
                                                 </connections>
                                             </tableViewCell>
@@ -614,7 +612,10 @@
                             <constraint firstItem="6Bo-gq-MTc" firstAttribute="centerX" secondItem="ZS1-Dc-dZK" secondAttribute="centerX" id="0Yb-S8-dlw"/>
                             <constraint firstItem="GY3-LR-88A" firstAttribute="leading" secondItem="ZS1-Dc-dZK" secondAttribute="leading" id="1oH-sC-OsN"/>
                             <constraint firstItem="yaL-BP-pxt" firstAttribute="top" secondItem="6Bo-gq-MTc" secondAttribute="bottom" id="4hE-z5-xHA"/>
+                            <constraint firstItem="vKo-Vk-PjS" firstAttribute="leading" secondItem="ZS1-Dc-dZK" secondAttribute="leadingMargin" id="BFO-cr-8JJ"/>
+                            <constraint firstItem="vKo-Vk-PjS" firstAttribute="top" secondItem="DMS-DS-fAW" secondAttribute="bottom" id="Daj-jK-KiY"/>
                             <constraint firstItem="6Bo-gq-MTc" firstAttribute="width" secondItem="ZS1-Dc-dZK" secondAttribute="width" id="TCm-DD-7h4"/>
+                            <constraint firstItem="yaL-BP-pxt" firstAttribute="top" secondItem="vKo-Vk-PjS" secondAttribute="bottom" id="Xzk-Ry-4Jz"/>
                             <constraint firstAttribute="trailing" secondItem="GY3-LR-88A" secondAttribute="trailing" id="ZlL-IP-qVs"/>
                             <constraint firstItem="VR3-L5-QWk" firstAttribute="top" secondItem="DMS-DS-fAW" secondAttribute="bottom" id="aCV-H2-ofl">
                                 <variation key="heightClass=compact" constant="0.0"/>
@@ -625,6 +626,7 @@
                             <constraint firstItem="yaL-BP-pxt" firstAttribute="top" secondItem="HJQ-44-J2J" secondAttribute="bottom" id="q6W-vr-i0q">
                                 <variation key="heightClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstAttribute="trailingMargin" secondItem="vKo-Vk-PjS" secondAttribute="trailing" id="qUK-RX-4bo"/>
                             <constraint firstItem="HJQ-44-J2J" firstAttribute="top" secondItem="DMS-DS-fAW" secondAttribute="bottom" id="t2z-Jb-MAE"/>
                             <constraint firstItem="6Bo-gq-MTc" firstAttribute="top" secondItem="DMS-DS-fAW" secondAttribute="bottom" id="wTO-Np-kpX"/>
                         </constraints>
@@ -647,23 +649,13 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Courses" id="qzf-48-3d2">
+                    <navigationItem key="navigationItem" id="qzf-48-3d2">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="1/1/17" id="EFs-h3-1gZ">
                             <connections>
                                 <action selector="didPressLeftBarButton:" destination="g11-TR-aTG" id="FNM-Yl-Sth"/>
                             </connections>
                         </barButtonItem>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="ZwI-fI-JrT">
-                            <rect key="frame" x="112.5" y="7" width="150" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Calendar"/>
-                                <segment title="List"/>
-                            </segments>
-                            <connections>
-                                <action selector="didToggleSegmentedControl:" destination="g11-TR-aTG" eventType="valueChanged" id="GaL-B3-oMg"/>
-                            </connections>
-                        </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="kan-ot-txn">
                             <connections>
                                 <action selector="didPressSearch:" destination="g11-TR-aTG" id="mmA-Zv-5zf"/>
@@ -674,8 +666,8 @@
                     <connections>
                         <outlet property="courseCalendarView" destination="6Bo-gq-MTc" id="9N3-zV-UEP"/>
                         <outlet property="courseListView" destination="GY3-LR-88A" id="OHt-x3-cA8"/>
-                        <outlet property="dummyTextField" destination="ptG-iC-9vz" id="dT4-XM-vJN"/>
                         <outlet property="leftBarButton" destination="EFs-h3-1gZ" id="vkr-wz-YaV"/>
+                        <outlet property="unauthenticatedMessageLabel" destination="vKo-Vk-PjS" id="x68-IU-RQm"/>
                         <segue destination="9xC-Ux-iJA" kind="presentation" identifier="formCourseDetail" modalPresentationStyle="formSheet" id="e2L-Ys-VLX"/>
                     </connections>
                 </viewController>
@@ -710,7 +702,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="e2L-Ys-VLX"/>
-        <segue reference="ybr-7C-OsR"/>
+        <segue reference="ucA-x8-XRd"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>

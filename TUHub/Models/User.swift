@@ -118,6 +118,7 @@ extension User {
     static func signOut() {
         
         User.current = nil
+        MarketplaceUser.current = nil
         
         // Clear stored credentials
         for (protectionSpace, keyPair) in URLCredentialStorage.shared.allCredentials {
@@ -125,6 +126,10 @@ extension User {
                 URLCredentialStorage.shared.remove(credential, for: protectionSpace)
             }
         }
+        
+        // Clear all defaults
+        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+        UserDefaults.standard.synchronize()
         
         Alamofire.SessionManager.default.session.reset {}
         

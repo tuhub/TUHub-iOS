@@ -36,11 +36,68 @@ class CourseViewController: UIViewController {
     @IBOutlet weak var courseCalendarView: CourseCalendarView!
     @IBOutlet weak var courseListView: UIView!
     @IBOutlet weak var leftBarButton: UIBarButtonItem!
-    @IBOutlet weak var dummyTextField: UITextField!
+    @IBOutlet weak var unauthenticatedMessageLabel: UILabel!
+    
+    lazy var dateDummyTextField: UITextField = {
+        let textField = UITextField(frame: CGRect.zero)
+        textField.inputView = self.datePicker
+        
+        // Set up toolbar with today button and done button as accessory view
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let todayButton = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector(self.didPressTodayButton(_:)))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.didPressDatePickerDoneButton(_:)))
+        todayButton.tintColor = UIColor.cherry
+        doneButton.tintColor = UIColor.cherry
+        toolbar.setItems([todayButton, flexSpace, doneButton], animated: false)
+        toolbar.sizeToFit()
+        textField.inputAccessoryView = toolbar
+        
+        self.view.addSubview(textField)
+        return textField
+    }()
+    lazy var termDummyTextField: UITextField = {
+        let textField = UITextField(frame: CGRect.zero)
+        textField.inputView = self.termPicker
+        
+        // Set up toolbar with today button and done button as accessory view
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didPressTermPickerDoneButton(_:)))
+        doneButton.tintColor = UIColor.cherry
+        toolbar.setItems([flexSpace, doneButton], animated: false)
+        toolbar.sizeToFit()
+        textField.inputAccessoryView = toolbar
+        
+        self.view.addSubview(textField)
+        return textField
+    }()
     
     // MARK: - Properties
-    var datePicker: UIDatePicker!
-    var termPicker: UIPickerView!
+    lazy var datePicker: UIDatePicker = {
+        // Set up date picker as input view
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        return datePicker
+    }()
+    
+    lazy var termPicker: UIPickerView = {
+        // Set up date picker as input view
+        let termPicker = UIPickerView()
+        termPicker.dataSource = self
+        termPicker.delegate = self
+        return termPicker
+    }()
+    
+    // Dispatch once
+    lazy var segmentedControl: UISegmentedControl = {
+        let segmentedControl = UISegmentedControl(items: ["Calendar", "List"])
+        segmentedControl.addTarget(self, action: #selector(didToggleSegmentedControl(_:)), for: .valueChanged)
+        segmentedControl.selectedSegmentIndex = 0
+        self.navigationItem.titleView = segmentedControl
+        return segmentedControl
+    }()
+    
     weak var coursePageVC: CoursePageViewController?
         
     var state = State.calendar
@@ -51,42 +108,45 @@ class CourseViewController: UIViewController {
         super.viewDidLoad()
         
         // Load terms/courses
-        User.current?.retrieveCourses() { (terms, error) in
-            if let error = error {
-                // TODO: Handle error
-                debugPrint(error)
-            }
+        if let user = User.current {
+            // Change calendar scroll direction
+            courseCalendarView.calendarView.scrollDirection = .vertical
+            courseCalendarView.calendarView.pagingEnabled = UI_USER_INTERFACE_IDIOM() != .pad
+            courseCalendarView.performSegueDelegate = self
             
-            if let terms = terms {
-                
-                self.terms = terms
-                var courses = [Course]()
-                
-                for term in terms {
-                    courses.append(contentsOf: term.courses)
+            // Set left bar button's title to the current date
+            setLeftButtonTitle(to: Date())
+            
+            user.retrieveCourses { (terms, error) in
+                if let error = error {
+                    // TODO: Handle error
+                    debugPrint(error)
                 }
                 
-                self.courseCalendarView.setUp(with: courses, delegate: self)
-                self.coursePageVC?.terms = terms
+                if let terms = terms {
+                    self.terms = terms
+                    let courses = terms.flatMap { $0.courses }
+                    self.courseCalendarView.setUp(with: courses, delegate: self)
+                    self.coursePageVC?.terms = terms
+                }
             }
+        } else {
+            unauthenticatedMessageLabel.isHidden = false
+            courseCalendarView.isHidden = true
+            courseListView.isHidden = true
         }
-
-        // Change calendar scroll direction
-        courseCalendarView.calendarView.scrollDirection = .vertical
-        courseCalendarView.calendarView.pagingEnabled = UI_USER_INTERFACE_IDIOM() != .pad
-        courseCalendarView.performSegueDelegate = self
-        
-        // Set left bar button's title to the current date
-        setLeftButtonTitle(to: Date())
-        
-        // Set up date picker for the left bar button
-        setUpDatePicker()
-        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Add subviews the first time this is called
+        if User.current != nil {
+            _ = segmentedControl
+            _ = dateDummyTextField
+            _ = termDummyTextField
+        }
         
         // Needed to prevent previously selected row from remaining selected
         if let selectedRow = courseCalendarView.tableView.indexPathForSelectedRow {
@@ -97,49 +157,6 @@ class CourseViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         courseCalendarView.calendarView.layoutSubviews()
-    }
-    
-    func setUpDatePicker() {
-        
-        if datePicker == nil {
-            // Set up date picker as input view
-            let datePicker = UIDatePicker()
-            datePicker.datePickerMode = .date
-            self.datePicker = datePicker
-        }
-        dummyTextField.inputView = datePicker
-        
-        // Set up toolbar with today button and done button as accessory view
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let todayButton = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector(didPressTodayButton(_:)))
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didPressDatePickerDoneButton(_:)))
-        todayButton.tintColor = UIColor.cherry
-        doneButton.tintColor = UIColor.cherry
-        toolbar.setItems([todayButton, flexSpace, doneButton], animated: false)
-        toolbar.sizeToFit()
-        dummyTextField.inputAccessoryView = toolbar
-    }
-    
-    func setUpTermPicker() {
-        
-        if termPicker == nil {
-            // Set up date picker as input view
-            let termPicker = UIPickerView()
-            termPicker.dataSource = self
-            termPicker.delegate = self
-            self.termPicker = termPicker
-        }
-        dummyTextField.inputView = termPicker
-        
-        // Set up toolbar with today button and done button as accessory view
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didPressTermPickerDoneButton(_:)))
-        doneButton.tintColor = UIColor.cherry
-        toolbar.setItems([flexSpace, doneButton], animated: false)
-        toolbar.sizeToFit()
-        dummyTextField.inputAccessoryView = toolbar
     }
     
     // MARK: - Navigation
@@ -190,8 +207,17 @@ class CourseViewController: UIViewController {
         datePicker.setDate(Date(), animated: true)
     }
     
+    func didPressDatePickerDoneButton(_ sender: UIBarButtonItem) {
+        dateDummyTextField.resignFirstResponder()
+        setLeftButtonTitle(to: datePicker.date)
+        courseCalendarView.calendarView.select(datePicker.date, scrollToDate: true)
+        
+        // Due to a bug(?), the calendar delegate isn't informed when we programmatically select date, so we must do it manually
+        courseCalendarView.calendar(courseCalendarView.calendarView, didSelect: datePicker.date, at: .notFound)
+    }
+    
     func didPressTermPickerDoneButton(_ sender: UIBarButtonItem) {
-        dummyTextField.resignFirstResponder()
+        termDummyTextField.resignFirstResponder()
         guard let i = coursePageVC?.pages.index(where: { (viewController) -> Bool in
             let courseListVC = viewController as? CourseListViewController
             let row = termPicker.selectedRow(inComponent: 0)
@@ -200,39 +226,33 @@ class CourseViewController: UIViewController {
         
         coursePageVC?.slideToPage(index: i, completion: nil)
     }
-    
-    func didPressDatePickerDoneButton(_ sender: UIBarButtonItem) {
-        dummyTextField.resignFirstResponder()
-        setLeftButtonTitle(to: datePicker.date)
-        courseCalendarView.calendarView.select(datePicker.date, scrollToDate: true)
-        
-        // Due to a bug(?), the calendar delegate isn't informed when we programmatically select date, so we must do it manually
-        courseCalendarView.calendar(courseCalendarView.calendarView, didSelect: datePicker.date, at: .notFound)
-    }
 
-    // MARK: - @IBActions
-    @IBAction func didToggleSegmentedControl(_ sender: UISegmentedControl) {
+    func didToggleSegmentedControl(_ sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
         state = sender.selectedSegmentIndex == 0 ? .calendar : .list
         courseCalendarView.isHidden = selectedIndex == 1
         courseListView.isHidden = selectedIndex == 0
-        dummyTextField.resignFirstResponder()
+        dateDummyTextField.resignFirstResponder()
+        termDummyTextField.resignFirstResponder()
         
         if state == .list {
             leftBarButton.title = "Term"
-            setUpTermPicker()
         } else {
             setLeftButtonTitle(to: courseCalendarView.selectedDate)
-            setUpDatePicker()
         }
     }
     
     @IBAction func didPressLeftBarButton(_ sender: UIBarButtonItem) {
-        dummyTextField.becomeFirstResponder()
+        if state == .calendar {
+            termDummyTextField.resignFirstResponder()
+            dateDummyTextField.becomeFirstResponder()
+        } else {
+            dateDummyTextField.resignFirstResponder()
+            termDummyTextField.becomeFirstResponder()
+        }
     }
 
     @IBAction func didPressSearch(_ sender: UIBarButtonItem) {
-//        navigationController?.present(searchController, animated: true, completion: nil)
         performSegue(withIdentifier: "presentSearchController", sender: nil)
     }
 }

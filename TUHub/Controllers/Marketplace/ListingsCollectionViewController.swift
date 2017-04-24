@@ -86,9 +86,7 @@ class ListingsCollectionViewController: TLCollectionViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if MarketplaceUser.current == nil {
-            self.composeButton.isEnabled = false
-            
+        if MarketplaceUser.current == nil {            
             if let userId = User.current?.username {
                 MarketplaceUser.retrieve(user: userId) { (user, error) in
                     
@@ -97,6 +95,7 @@ class ListingsCollectionViewController: TLCollectionViewController {
                     }
                     else if let user = user {
                         MarketplaceUser.current = user
+                        self.meButton.isEnabled = true
                         self.composeButton.isEnabled = true
                         return
                     }

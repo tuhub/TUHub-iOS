@@ -432,7 +432,7 @@ extension MapsViewController: MKMapViewDelegate {
         if annotation is Building {
             pinView?.pinTintColor = UIColor.cherry
         } else {
-            pinView?.pinTintColor = UIColor.lightGray
+            pinView?.pinTintColor = UIColor.purple
         }
         
         return pinView

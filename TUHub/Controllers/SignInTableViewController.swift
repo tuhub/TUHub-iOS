@@ -39,7 +39,7 @@ class SignInTableViewController: UITableViewController {
     lazy var invalidCredentialsAlertController: UIAlertController = {
         let alertController = UIAlertController(title: "Unable to Sign In",
                                                 message: "Invalid username/password. Please try again.",
-                                                preferredStyle: UIAlertControllerStyle.alert)
+                                                preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Dismiss",
                                                 style: .default,
                                                 handler: nil))
@@ -146,11 +146,6 @@ class SignInTableViewController: UITableViewController {
     fileprivate func signOut() {
         self.credential = User.current?.credential
         showUI()
-        
-        // Clear all defaults
-        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-        UserDefaults.standard.synchronize()
-        
         User.signOut()
         determineSignInButtonState()
     }
