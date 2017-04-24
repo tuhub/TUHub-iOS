@@ -35,7 +35,6 @@ class CourseViewController: UIViewController {
     // MARK: - @IBOutlets
     @IBOutlet weak var courseCalendarView: CourseCalendarView!
     @IBOutlet weak var courseListView: UIView!
-    @IBOutlet weak var leftBarButton: UIBarButtonItem!
     @IBOutlet weak var unauthenticatedMessageLabel: UILabel!
     
     lazy var dateDummyTextField: UITextField = {
@@ -71,6 +70,12 @@ class CourseViewController: UIViewController {
         
         self.view.addSubview(textField)
         return textField
+    }()
+    
+    lazy var leftBarButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: nil, style: .plain, target: self, action: #selector(self.didPressLeftBarButton))
+        self.navigationItem.leftBarButtonItem = button
+        return button
     }()
     
     // MARK: - Properties
@@ -146,6 +151,7 @@ class CourseViewController: UIViewController {
             _ = segmentedControl
             _ = dateDummyTextField
             _ = termDummyTextField
+            _ = leftBarButton
         }
         
         // Needed to prevent previously selected row from remaining selected

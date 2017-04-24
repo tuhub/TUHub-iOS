@@ -16,8 +16,6 @@ class CourseDetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.isNavigationBarHidden = false
-        
         // Retrieve the course's roster if the course a user course
         if let dataSource = dataSource as? CourseTableViewDataSource {
             let course = dataSource.course
@@ -47,6 +45,11 @@ class CourseDetailTableViewController: UITableViewController {
             navigationItem.rightBarButtonItem = button
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
     }
     
     func dismissSelf() {

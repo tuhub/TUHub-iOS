@@ -34,6 +34,7 @@ class CourseSearchTableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var hairlineHeight: NSLayoutConstraint!
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     var scope: Scope!
     var userResults: [Term]?
@@ -52,12 +53,28 @@ class CourseSearchTableViewController: UIViewController {
         
         searchBar.delegate = self
         
-        scope = Scope(searchBar.selectedScopeButtonIndex)
+        if User.current != nil {
+            scope = Scope(searchBar.selectedScopeButtonIndex)
+        } else {
+            scope = .all
+            searchBar.scopeButtonTitles = nil
+            searchBar.showsScopeBar = false
+        }
         
         // Auto-size cells
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         tableView.isHidden = true
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillChangeFrame(_:)),
+                                               name: .UIKeyboardWillChangeFrame,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide(_:)),
+                                               name: .UIKeyboardWillHide,
+                                               object: nil)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,6 +134,17 @@ class CourseSearchTableViewController: UIViewController {
         }
         return false
     }
+    
+    func keyboardWillChangeFrame(_ notification: Notification) {
+        if let frame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            tableViewBottomConstraint.constant = frame.height
+        }
+    }
+    
+    func keyboardWillHide(_ notification: Notification) {
+        tableViewBottomConstraint.constant = 0
+    }
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -249,6 +277,10 @@ extension CourseSearchTableViewController: UISearchBarDelegate {
         }
         
         tableView.isHidden = searchText.characters.count == 0
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
