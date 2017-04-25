@@ -24,7 +24,6 @@ target 'TUHub' do
   pod 'YelpAPI', :git => "https://github.com/ConnorDCrawford/yelp-ios.git"
   pod 'ISHHoverBar', '~> 1.0.1'
   pod 'Cosmos', '~> 9.0.0'
-  pod 'Cluster', '~> 1.0.2'
   
   target 'TUHubTests' do
     inherit! :search_paths

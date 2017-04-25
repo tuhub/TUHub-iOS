@@ -144,7 +144,7 @@ class Job: Listing {
         }
     }
     
-    class func retrieveAll(onlyActive: Bool = false, startIndex: Int = 0, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {
+    class func retrieveAll(onlyActive: Bool = true, startIndex: Int = 0, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {
         let qParams: [String : Any] = ["activeOnly" : onlyActive ? "true" : "false"]
 //                                      "offset" : startIndex,
 //                                      "limit" : pageSize]
