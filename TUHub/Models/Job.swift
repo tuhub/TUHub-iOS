@@ -24,10 +24,10 @@ private let postDateFormatter: DateFormatter = {
 
 class Job: Listing {
     
-    fileprivate(set) var location: String?
-    fileprivate(set) var hoursPerWeek: Int
-    fileprivate(set) var pay: String!
-    fileprivate(set) var startDate: Date!
+    var location: String?
+    var hoursPerWeek: Int
+    var pay: String!
+    var startDate: Date!
     
     required init?(json: JSON) {
         guard
@@ -96,7 +96,32 @@ class Job: Listing {
             }
         }
     }
-
+    
+    override func update(_ responseHandler: @escaping (Error?) -> Void) {
+        
+        var qParams: [String : Any] = ["title" : title,
+                                       "pay" : pay,
+                                       "hoursPerWeek" : hoursPerWeek,
+                                       "startDate" : postDateFormatter.string(from: startDate),
+                                       "isActive" : isActive ? "true" : "false",
+                                       "jobId" : id]
+        
+        if let desc = description {
+            qParams["description"] = desc
+        }
+        
+        if let loc = location {
+            qParams["location"] = loc
+        }
+        
+        NetworkManager.shared.request(toEndpoint: .marketplace, pathParameters: ["update_job.jsp"], queryParameters: qParams) { (data, error) in
+            defer { responseHandler(error) }
+            guard let data = data else { return }
+            let json = JSON(data)
+            
+            debugPrint(json)
+        }
+    }
     
     private class func handle(response data: Data?, error: Error?, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {
         var jobs: [Job]?

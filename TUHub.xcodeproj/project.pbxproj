@@ -33,6 +33,7 @@
 		7D4E57F71E9211AD000B7719 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E57F51E9211AD000B7719 /* Job.swift */; };
 		7D5F61A21E9A827A000A1F1A /* MarketplaceSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5F61A11E9A827A000A1F1A /* MarketplaceSignUpViewController.swift */; };
 		7D66B8231EADBD010014835B /* MKDirectionsTransportType+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D66B8221EADBD010014835B /* MKDirectionsTransportType+String.swift */; };
+		7D66B8271EAEBF970014835B /* EditListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D66B8261EAEBF970014835B /* EditListingViewController.swift */; };
 		7D6E2E801EA917A100A7DBB2 /* StreetViewAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6E2E7F1EA917A100A7DBB2 /* StreetViewAPI.swift */; };
 		7D6E2E831EA922B200A7DBB2 /* ImageGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6E2E811EA922B200A7DBB2 /* ImageGalleryTableViewCell.swift */; };
 		7D6E2E841EA922B200A7DBB2 /* ImageGalleryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6E2E821EA922B200A7DBB2 /* ImageGalleryTableViewCell.xib */; };
@@ -170,6 +171,7 @@
 		7D4E57F51E9211AD000B7719 /* Job.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Job.swift; path = Models/Job.swift; sourceTree = "<group>"; };
 		7D5F61A11E9A827A000A1F1A /* MarketplaceSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketplaceSignUpViewController.swift; sourceTree = "<group>"; };
 		7D66B8221EADBD010014835B /* MKDirectionsTransportType+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKDirectionsTransportType+String.swift"; sourceTree = "<group>"; };
+		7D66B8261EAEBF970014835B /* EditListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditListingViewController.swift; sourceTree = "<group>"; };
 		7D6E2E7F1EA917A100A7DBB2 /* StreetViewAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreetViewAPI.swift; sourceTree = "<group>"; };
 		7D6E2E811EA922B200A7DBB2 /* ImageGalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryTableViewCell.swift; sourceTree = "<group>"; };
 		7D6E2E821EA922B200A7DBB2 /* ImageGalleryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageGalleryTableViewCell.xib; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 				225A66041E8EA7760063337A /* ListingDetailTableViewController.swift */,
 				7D996A941E97025F00466A21 /* ListingsFilterTableViewController.swift */,
 				7D8A1A5B1E9825FF006401A1 /* AddListingViewController.swift */,
+				7D66B8261EAEBF970014835B /* EditListingViewController.swift */,
 				7D8A1A701E9848E1006401A1 /* ImagePickerViewController.swift */,
 				7D5F61A11E9A827A000A1F1A /* MarketplaceSignUpViewController.swift */,
 				7DFF54731E9B134200A8A849 /* MyListingsTableViewController.swift */,
@@ -948,6 +951,7 @@
 				7DDB0BDE1EA85AB4001B5DE5 /* MapsDetailViewController.swift in Sources */,
 				7D74A2911EA14A5E00F8C04D /* HoursTableViewCell.swift in Sources */,
 				7DA6D92E1E7F6ECE00CD5D02 /* NetworkManager.swift in Sources */,
+				7D66B8271EAEBF970014835B /* EditListingViewController.swift in Sources */,
 				7DA6D9691E7F6FFF00CD5D02 /* String+Boyer-Moore-Horspool.swift in Sources */,
 				7DA6D9321E7F6ECE00CD5D02 /* Credential.swift in Sources */,
 				7DA6D9571E7F6FC500CD5D02 /* CourseDetailHeaderTableViewCell.swift in Sources */,

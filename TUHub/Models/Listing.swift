@@ -25,15 +25,15 @@ class Listing {
         static let all: [Kind] = [.product, .job, .personal]
     }
     
-    internal(set) var id: String!
-    fileprivate(set) var title: String
-    fileprivate(set) var description: String?
-    fileprivate(set) var datePosted: Date!
-    fileprivate(set) var ownerID: String
-    fileprivate(set) var isActive: Bool!
-    fileprivate(set) var photosDirectory: String?
-    fileprivate(set) var imageURLs: [String]?
-    fileprivate(set) var owner: MarketplaceUser?
+    var id: String!
+    var title: String
+    var description: String?
+    var datePosted: Date!
+    var ownerID: String
+    var isActive: Bool
+    var photosDirectory: String?
+    var imageURLs: [String]?
+    var owner: MarketplaceUser?
     
     required init?(json: JSON) {
         guard
@@ -64,6 +64,7 @@ class Listing {
         self.description = desc
         self.ownerID = ownerID
         self.photosDirectory = photosDir
+        self.isActive = true
     }
     
     
@@ -107,6 +108,10 @@ class Listing {
     }
     
     func post(_ responseHandler: @escaping (_ listingID: String?, Error?) -> Void) {
+        fatalError("Function not implemented in Listing supertype")
+    }
+    
+    func update(_ responseHandler: @escaping (_ error: Error?) -> Void) {
         fatalError("Function not implemented in Listing supertype")
     }
     

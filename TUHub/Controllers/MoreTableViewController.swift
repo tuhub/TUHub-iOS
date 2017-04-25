@@ -48,7 +48,7 @@ class MoreTableViewController: UITableViewController {
                                                        (id: "feedback", cellType: .link),
                                                        (id: "eating", cellType: .link)])
         let security: Section? = shouldShowTouchID ? (name: "Security", cells: [(id: "touch_id", cellType: .toggle)]) : nil
-        let courses: Section = (name: "Courses", cells: [(id: "export", cellType: .action)])
+        let courses: Section? = User.current != nil ? (name: "Courses", cells: [(id: "export", cellType: .action)]) : nil
         let account: Section = (name: "Account", cells: [(id: "account", cellType: .button)])
         let sections: [Section] = ([me, links, dining, security, courses, account] as [Section?]).flatMap { $0 }
         
@@ -95,7 +95,7 @@ class MoreTableViewController: UITableViewController {
                 cell?.url = "https://tuportal4.temple.edu"
             case "esff":
                 cell?.textLabel?.text = "ESFF"
-                cell?.url = "https://tumail.temple.edu"
+                cell?.url = "https://esff.temple.edu"
             case "blackboard":
                 cell?.textLabel?.text = "Blackboard"
                 cell?.url = "https://learn.temple.edu"

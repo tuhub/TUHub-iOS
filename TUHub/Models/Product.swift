@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class Product: Listing {
     
-    fileprivate(set) var price: String!
+    var price: String!
     
     required init?(json: JSON) {
         guard
@@ -63,6 +63,26 @@ class Product: Listing {
                 responseHandler(nil, error)
             }
             
+        }
+    }
+    
+    override func update(_ responseHandler: @escaping (Error?) -> Void) {
+        
+        var qParams: [String : Any] = ["title" : title,
+                                       "price" : price,
+                                       "isActive" : isActive ? "true" : "false",
+                                       "productId" : id]
+        
+        if let desc = description {
+            qParams["description"] = desc
+        }
+        
+        NetworkManager.shared.request(toEndpoint: .marketplace, pathParameters: ["update_product.jsp"], queryParameters: qParams) { (data, error) in
+            defer { responseHandler(error) }
+            guard let data = data else { return }
+            let json = JSON(data)
+            
+            debugPrint(json)
         }
     }
     

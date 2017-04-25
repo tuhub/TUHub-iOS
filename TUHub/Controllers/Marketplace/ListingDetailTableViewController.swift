@@ -17,6 +17,7 @@ class ListingDetailTableViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var visualEffectView: UIVisualEffectView!
     @IBOutlet weak var contactButton: UIButton!
+    @IBOutlet weak var editButton: UIBarButtonItem!
     
     var listing: Listing?
     
@@ -94,6 +95,19 @@ class ListingDetailTableViewController: UIViewController {
         var contentInsets = tableView.contentInset
         contentInsets = UIEdgeInsets(top: contentInsets.top, left: contentInsets.left, bottom: contentInsets.bottom + visualEffectView.frame.height, right: contentInsets.right)
         tableView.contentInset = contentInsets
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let id = segue.identifier else { return }
+        switch id {
+        case "showEdit":
+            if let editVC = (segue.destination as? UINavigationController)?.childViewControllers.first as? EditListingViewController {
+                editVC.delegate = self
+                editVC.listing = listing
+            }
+        default:
+            break
+        }
     }
     
     private func showErrorLabel() {
@@ -260,6 +274,14 @@ extension ListingDetailTableViewController: ImageGalleryTableViewCellDelegate {
             browser.initializePageIndex(row)
             present(browser, animated: true, completion: nil)
         }
+    }
+}
+
+// MARK: - EditListingViewControllerDelegate
+extension ListingDetailTableViewController: EditListingViewControllerDelegate {
+    func didUpdate(listing: Listing) {
+        self.listing = listing
+        tableView.reloadData()
     }
 }
 
