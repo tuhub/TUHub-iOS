@@ -12,7 +12,6 @@ import MapKit
 import CoreLocation
 import ISHHoverBar
 import YelpAPI
-import Cluster
 
 // Segue Identifiers
 private let mapsDetailSegueID = "showMapsDetail"
@@ -33,13 +32,12 @@ class MapsViewController: UIViewController {
     var locationButton: MKUserTrackingBarButtonItem!
     let locationManager = CLLocationManager()
     var yelpClient: YLPClient?
-    lazy var businesses: [String : YLPBusiness] = [:]
+    lazy var businesses: [YLPBusiness] = []
     var hoverBar: ISHHoverBar!
     var infoButton: UIBarButtonItem!
     var oldRegion: MKCoordinateRegion?
     var route: MKRoute?
     var routeDestination: Location?
-    let clusterManager = ClusterManager()
     
     lazy var searchController: UISearchController = {
         let resultsController = self.storyboard!.instantiateViewController(withIdentifier: "MapsSearchResultsVC") as! MapsSearchResultsTableViewController
@@ -86,7 +84,7 @@ class MapsViewController: UIViewController {
             // Add Temple buildings to the map
             for campus in campuses {
                 if let buildings = campus.buildings {
-                    self.clusterManager.add(buildings)
+                    self.mapView.addAnnotations(buildings)
                 }
             }
             
@@ -148,7 +146,7 @@ class MapsViewController: UIViewController {
         mapView.delegate = self
         
         // Location manager set up
-//        locationManager.delegate = self
+        //        locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.pausesLocationUpdatesAutomatically = true
         locationManager.startUpdatingLocation()
@@ -287,12 +285,12 @@ class MapsViewController: UIViewController {
         mapView.add(route.polyline)
         
         // Zoom out to fit the route on the map
-//        let top = (navigationController?.navigationBar.frame.height ?? 0) + 44
-//        let bottom = (tabBarController?.tabBar.frame.height ?? 0) + 44
-//        let x: CGFloat = 132
-//        mapView.setVisibleMapRect(route.polyline.boundingMapRect,
-//                                  edgePadding: UIEdgeInsets(top: top, left: x, bottom: bottom, right: x),
-//                                  animated: true)
+        //        let top = (navigationController?.navigationBar.frame.height ?? 0) + 44
+        //        let bottom = (tabBarController?.tabBar.frame.height ?? 0) + 44
+        //        let x: CGFloat = 132
+        //        mapView.setVisibleMapRect(route.polyline.boundingMapRect,
+        //                                  edgePadding: UIEdgeInsets(top: top, left: x, bottom: bottom, right: x),
+        //                                  animated: true)
     }
     
     func didTapETAView() {
@@ -302,7 +300,7 @@ class MapsViewController: UIViewController {
     }
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -314,15 +312,15 @@ class MapsViewController: UIViewController {
                 let yelpClient = self.yelpClient,
                 let mapsDetailVC = segue.destination as? MapsDetailViewController
                 else { break }
-                mapsDetailVC.location = location
-                mapsDetailVC.yelpClient = yelpClient
-
+            mapsDetailVC.location = location
+            mapsDetailVC.yelpClient = yelpClient
+            
         default:
             break
         }
     }
- 
-
+    
+    
 }
 
 // MARK: - MKMapViewDelegate
@@ -345,24 +343,10 @@ extension MapsViewController: MKMapViewDelegate {
                 return
             }
             
-            if let businesses = search?.businesses.filter({ !$0.isClosed }) {
+            if let businesses = search?.businesses.filter({ !$0.isClosed && (self.routeDestination as? YLPBusiness)?.identifier != $0.identifier }) {
                 DispatchQueue.main.async {
-                    var businessesDict: [String : YLPBusiness] = [:]
-                    businesses.forEach { businessesDict[$0.identifier] = $0 }
-                    
-                    // Find the new elements
-                    var diff: [String : YLPBusiness] = [:]
-                    businessesDict.forEach {
-                        if self.businesses[$0] == nil {
-                            diff[$0] = $1
-                            self.businesses[$0] = $1
-                        }
-                    }
-                    
-                    self.clusterManager.add(Array(diff.values))
-                    if diff.count > 0 {
-                        self.clusterManager.reload(self.mapView)
-                    }
+                    self.mapView.addAnnotations(businesses)
+                    self.businesses.append(contentsOf: businesses)
                 }
             }
         }
@@ -378,7 +362,6 @@ extension MapsViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        clusterManager.reload(mapView)
         
         // Check the offset between the old region and the new one, don't load new businesses if too small
         if let oldRegion = self.oldRegion {
@@ -391,7 +374,7 @@ extension MapsViewController: MKMapViewDelegate {
                 return
             }
         }
-
+        
         self.oldRegion = mapView.region
         
         // Notify the resultsController of the region change
@@ -400,14 +383,14 @@ extension MapsViewController: MKMapViewDelegate {
         }
         
         // Remove old annotations
-//        var businesses = self.businesses
-//        self.businesses.removeAll(keepingCapacity: false)
-//        if let destBusiness = routeDestination as? YLPBusiness, let i = businesses.index(of: destBusiness) {
-//            // Preserve the business if it is the destination of the current route
-//            businesses.remove(at: i)
-//            self.businesses.append(destBusiness)
-//        }
-//        mapView.removeAnnotations(businesses)
+        var businesses = self.businesses
+        self.businesses.removeAll(keepingCapacity: false)
+        if let destBusiness = routeDestination as? YLPBusiness, let i = businesses.index(of: destBusiness) {
+            // Preserve the business if it is the destination of the current route
+            businesses.remove(at: i)
+            self.businesses.append(destBusiness)
+        }
+        mapView.removeAnnotations(businesses)
         
         // Load new businesses in this region
         loadBusiness(in: mapView.region)
@@ -428,40 +411,31 @@ extension MapsViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        var reuseId = "pin"
-        var color = UIColor.gray
-        if annotation is Building {
-            reuseId = "building"
-            color = .cherry
-        } else if annotation is YLPBusiness {
-            reuseId = "business"
-            color = .purple
-        } else if annotation is MKUserLocation {
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if annotation is MKUserLocation {
             //return nil so map view draws dot for standard user location instead of pin
             return nil
         }
         
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
-        
-        if annotation is ClusterAnnotation {
-            if annotationView == nil {
-                annotationView = ClusterAnnotationView(annotation: annotation, reuseIdentifier: reuseId, type: .color(color: color, radius: 25))
-            } else {
-                annotationView?.annotation = annotation
-            }
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView?.canShowCallout = true
+            pinView?.animatesDrop = false
+            pinView?.isDraggable = false
+            pinView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         } else {
-            if annotationView == nil {
-                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-                let annotationView = annotationView as? MKPinAnnotationView
-                annotationView?.pinTintColor = color
-                annotationView?.canShowCallout = true
-                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            } else {
-                annotationView?.annotation = annotation
-            }
+            pinView?.annotation = annotation
         }
         
-        return annotationView
+        if annotation is Building {
+            pinView?.pinTintColor = UIColor.cherry
+        } else {
+            pinView?.pinTintColor = UIColor.purple
+        }
+        
+        return pinView
     }
     
 }
@@ -469,8 +443,7 @@ extension MapsViewController: MKMapViewDelegate {
 extension MapsViewController: MapsSearchResultsTableViewControllerDelegate {
     func didSelect(location: Location) {
         searchController.isActive = false
-//        mapView.addAnnotation(location)
-        clusterManager.add([location])
+        mapView.addAnnotation(location)
         mapView.setCenter(location.coordinate, animated: true)
         mapView.selectAnnotation(location, animated: true)
     }
