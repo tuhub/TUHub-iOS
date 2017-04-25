@@ -110,7 +110,7 @@ class TUHubTests: XCTestCase {
         
         var kResults: [CourseSearchResult]?
         
-        CourseSearchResult.search(for: "psych", pageNumber: 0) { (results, error) in
+        CourseSearchResult.search(for: "Project", pageNumber: 0) { (results, error) in
             kResults = results
             if let error = error {
                 log.error(error)
@@ -129,11 +129,83 @@ class TUHubTests: XCTestCase {
         
     }
     
-    func testJobsOfUser() {
-        let asyncExpectation = expectation(description: "testCourseSearch")
+//    func testJobsOfUser() {
+//        let asyncExpectation = expectation(description: "testCourseSearch")
+//        
+//        Job.retrieve
+//        
+//    }
+    
+// MARK: MarketPlace
+
+    func testMarketplaceUser() {
         
-        Job.retrieve
+        let asyncExpectation = expectation(description: "testMarketplaceUser")
+        var kMarketUser: MarketplaceUser?
+        
+        MarketplaceUser.retrieve(user: "tue68553") { (user, error) in
+            kMarketUser = user
+            if let error = error {
+                log.error(error)
+            }
+            asyncExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 30) { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            
+            XCTAssertNotNil(kMarketUser, "Failed to retrieve user.\nSign in if you have not already done so.")
+        }
         
     }
     
+    // Don't know how to test this, it's always saying "Test Succed" even though I entered wrong user ID
+    func testRetrieveProduct() {
+        
+        let asyncExpectation = expectation(description: "testRetrieveProduct")
+        var kProduct: [Product]?
+
+        Product.retrieve(belongingTo: "123") { (products, error) in
+            kProduct = products
+            if let error = error {
+                log.error(error)
+            }
+            asyncExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 30) { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            
+            XCTAssertNotNil(kProduct, "Failed to retrieve product for the user")
+        }
+        
+    }
+    
+    // Don't know how to test this, it's always saying "Test Succed" even though I entered wrong user ID
+    func testRetrievePersonal() {
+        let asyncExpectation = expectation(description: "testRetrievePersonal")
+        var kPersonal: [Personal]?
+        
+        Personal.retrieve(belongingTo: "123") { (personal, error) in
+            kPersonal = personal
+            if let error = error {
+                log.error(error)
+            }
+            asyncExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 30) { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            
+            XCTAssertNotNil(kPersonal, "Failed to retrieve product for the user")
+        }
+        
+    }
+
 }
