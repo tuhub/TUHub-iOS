@@ -93,15 +93,14 @@ class Personal: Listing {
     }
     
     private class func handle(response data: Data?, error: Error?, _ responseHandler: @escaping ([Personal]?, Error?) -> Void) {
-        var personals: [Personal]?
-        
-        defer { responseHandler(personals, error) }
         guard let data = data else { return }
         let json = JSON(data)
         
+        var personals: [Personal]?
         if let personalsJSON = json["personalList"].array {
             personals = personalsJSON.flatMap { Personal(json: $0) }
         }
+        responseHandler(personals, error)
     }
     
     class func retrieve(belongingTo userID: String, _ responseHandler: @escaping ([Personal]?, Error?) -> Void) {

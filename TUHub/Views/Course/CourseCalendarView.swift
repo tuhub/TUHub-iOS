@@ -39,11 +39,6 @@ class CourseCalendarView: UIView {
         }
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        calendarView.sizeToFit()
-    }
-    
     func setUp(with courses: [Course], delegate: CourseCalendarViewDelegate?) {
         // Init values
         self.courses = courses
@@ -131,7 +126,7 @@ extension CourseCalendarView: FSCalendarDelegate {
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
-        calendarHeight.constant = bounds.height
+//        calendarHeight.constant = bounds.height
         layoutIfNeeded()
     }
     

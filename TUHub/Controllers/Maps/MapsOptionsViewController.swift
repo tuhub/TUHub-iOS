@@ -93,15 +93,15 @@ class MapsOptionsViewController: FormViewController {
                 self.delegate.didChangeCampus(to: campus)
             }
         }
-        
-        tableView?.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
-        
-//        self.preferredContentSize = CGSize(width: 300, height: 200)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView?.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         tableView?.removeObserver(self, forKeyPath: "contentSize")
     }
     

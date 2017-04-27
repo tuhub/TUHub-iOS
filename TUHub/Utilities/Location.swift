@@ -63,5 +63,4 @@ extension YLPBusiness: Location {
     
 }
 
-extension Building: Location {
-}
+extension Building: Location {}

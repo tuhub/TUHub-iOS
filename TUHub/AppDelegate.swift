@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyBeaver
 import AlamofireNetworkActivityIndicator
+import AlamofireImage
 
 let log = SwiftyBeaver.self
 let touchIDKey = "touch_id_enabled"
@@ -30,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         pageControl.backgroundColor = UIColor.clear
         
         NetworkActivityIndicatorManager.shared.isEnabled = true
-        
         return true
     }
 

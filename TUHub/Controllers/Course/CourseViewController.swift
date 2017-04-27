@@ -112,12 +112,12 @@ class CourseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Change calendar scroll direction
+        courseCalendarView.calendarView.scrollDirection = .vertical
+        courseCalendarView.performSegueDelegate = self
+        
         // Load terms/courses
         if let user = User.current {
-            // Change calendar scroll direction
-            courseCalendarView.calendarView.scrollDirection = .vertical
-            courseCalendarView.calendarView.pagingEnabled = UI_USER_INTERFACE_IDIOM() != .pad
-            courseCalendarView.performSegueDelegate = self
             
             // Set left bar button's title to the current date
             setLeftButtonTitle(to: Date())
@@ -160,9 +160,20 @@ class CourseViewController: UIViewController {
         }
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        let isPortraitCompact = traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular
+        courseCalendarView.calendarView.pagingEnabled = isPortraitCompact
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        courseCalendarView.calendarView.layoutSubviews()
+        
+        // Adjust calendar view's table view's insets so they appear within the layout guides
+        var contentInset = courseCalendarView.tableView.contentInset
+        let isPortraitCompact = traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular
+        contentInset = UIEdgeInsets(top: isPortraitCompact ? 0 : topLayoutGuide.length, left: contentInset.left, bottom: bottomLayoutGuide.length, right: contentInset.right)
+        courseCalendarView.tableView.contentInset = contentInset
     }
     
     // MARK: - Navigation

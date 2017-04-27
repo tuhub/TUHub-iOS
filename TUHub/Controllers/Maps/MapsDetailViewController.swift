@@ -14,7 +14,9 @@ import SKPhotoBrowser
 // UITableViewCell reuse identifier
 private let headerCellID = "headerCell"
 private let imageCellID = "imageCell"
-private let multilineCellID = "multilineCell"
+//private let multilineCellID = "multilineCell"
+private let phoneCellID = "phoneCell"
+private let addressCellID = "addressCell"
 private let hoursCellID = "hoursCell"
 
 class MapsDetailViewController: UIViewController {
@@ -82,11 +84,6 @@ class MapsDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Make table view's separator insets equal on left and right
-        var separatorInsets = tableView.separatorInset
-        separatorInsets = UIEdgeInsets(top: separatorInsets.top, left: separatorInsets.left, bottom: separatorInsets.bottom, right: separatorInsets.left)
-        tableView.separatorInset = separatorInsets
         
         // Make table view's content inset above the directions visual effect view
         var contentInsets = tableView.contentInset
@@ -201,10 +198,10 @@ extension MapsDetailViewController: UITableViewDataSource {
                 callButton.contentMode = .scaleAspectFit
                 callButton.addTarget(self, action:#selector(makePhoneCall), for: .touchUpInside)
                 
-                cell.accessoryView = callButton as UIView
+                cell.accessoryView = callButton
             }
         case "address":
-                cell.textLabel?.text = location.address
+            (cell as? TextViewTableViewCell)?.textView.text = location.address
         case "hours":
             if let business = location as? YLPBusiness, let hours = business.hours {
                 (cell as? HoursTableViewCell)?.setUp(hours: hours, isExpanded: showingAllHours, inset: tableView.separatorInset)
@@ -250,7 +247,7 @@ extension Building: TableViewDisplayable {
         }
         
         if address != nil {
-            attr.append((key: "address", identifier: multilineCellID))
+            attr.append((key: "address", identifier: addressCellID))
         }
         
         return attr
@@ -262,15 +259,15 @@ extension YLPBusiness: TableViewDisplayable {
     var tableViewAttributes: [TableViewAttributes] {
         var attr: [TableViewAttributes] = [(key: "header", identifier: headerCellID)]
         
-        if imageURL != nil {
+        if imageURLs != nil {
             attr.append((key: "image", identifier: imageCellID))
         }
         
         if phone != nil {
-            attr.append((key: "phone", identifier: multilineCellID))
+            attr.append((key: "phone", identifier: phoneCellID))
         }
         
-        attr.append((key: "address", identifier: multilineCellID))
+        attr.append((key: "address", identifier: addressCellID))
         
         if hours != nil {
             attr.append((key: "hours", identifier: hoursCellID))

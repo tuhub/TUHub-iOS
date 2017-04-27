@@ -31,10 +31,16 @@ class NewsFilterTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        preferredContentSize = tableView.contentSize
-//        let height = NewsItem.Feed.allValues.count * Int(tableView.rowHeight)
-//        navigationController?.preferredContentSize = CGSize(width: 300, height: height)
+        tableView?.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tableView?.removeObserver(self, forKeyPath: "contentSize")
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        self.preferredContentSize = (tableView?.contentSize)!
     }
     
     // MARK: - Table view data source
@@ -74,7 +80,6 @@ class NewsFilterTableViewController: UITableViewController {
         tableView.reloadRows(at: [indexPath], with: .automatic)
         
     }
-    
 
     @IBAction func didPressCancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)

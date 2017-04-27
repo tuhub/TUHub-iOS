@@ -124,15 +124,14 @@ class Job: Listing {
     }
     
     private class func handle(response data: Data?, error: Error?, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {
-        var jobs: [Job]?
-        
-        defer { responseHandler(jobs, error) }
         guard let data = data else { return }
         let json = JSON(data)
         
+        var jobs: [Job]?
         if let jobsJSON = json["jobList"].array {
             jobs = jobsJSON.flatMap { Job(json: $0) }
         }
+        responseHandler(jobs, error)
     }
     
     class func retrieve(belongingTo userID: String, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {

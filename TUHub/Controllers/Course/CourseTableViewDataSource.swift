@@ -89,7 +89,7 @@ class CourseTableViewDataSource: NSObject, UITableViewDataSource {
         case 1:
             cell = tableView.dequeueReusableCell(withType: .subtitleCell, for: indexPath)
             
-            if var meeting = course.meetings?[indexPath.row] {
+            if let meeting = course.meetings?[indexPath.row] {
                 
                 // Generate the names of the days in which the meetings occur
                 let daysOfWeek = meeting.daysOfWeek

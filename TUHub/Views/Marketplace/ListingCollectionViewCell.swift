@@ -10,8 +10,8 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
-protocol ImageLoadedDelegate {
-    func didLoad(image: UIImage?, at indexPath: IndexPath)
+protocol ListingCollectionViewCellDelegate {
+    func cell(_ cell: ListingCollectionViewCell, didLoadImage image: UIImage?)
 }
 
 class ListingCollectionViewCell: UICollectionViewCell {
@@ -20,22 +20,29 @@ class ListingCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var blurryDetailsView: BlurryListingDetailView!
     @IBOutlet weak var detailsView: ListingDetailView!
     
-    var delegate: ImageLoadedDelegate!
-    var indexPath: IndexPath!
+    var delegate: ListingCollectionViewCellDelegate!
     var photoPathsRequest: DataRequest?
     
-    func setUp(_ listing: Listing, _ delegate: ImageLoadedDelegate, _ indexPath: IndexPath) {
+    override var intrinsicContentSize: CGSize {
+        return imageView.image?.size ?? super.intrinsicContentSize
+    }
+    
+    func setUp(_ listing: Listing, _ delegate: ListingCollectionViewCellDelegate) {
         
         self.delegate = delegate
-        self.indexPath = indexPath
         
         // Hide all views
         imageView.isHidden = true
         detailsView.isHidden = true
         blurryDetailsView.isHidden = true
         
-        if let _ = listing.imageURLs?.first {
-            setUpBlurryDetailsView(listing)
+        
+        if let imageURLs = listing.imageURLs {
+            if imageURLs.count > 0 {
+                setUpBlurryDetailsView(listing)
+            } else {
+                setUpDetailsView(listing)
+            }
         } else {
             photoPathsRequest = listing.retrievePhotoPaths { (paths, error) in
                 if paths != nil {
@@ -44,7 +51,6 @@ class ListingCollectionViewCell: UICollectionViewCell {
                     self.setUpDetailsView(listing)
                 }
             }
-            
         }
     }
     
@@ -71,10 +77,9 @@ class ListingCollectionViewCell: UICollectionViewCell {
             imageView.af_setImage(withURL: url) { (response) in
                 if let error = response.error {
                     dump(error)
-                    return
                 }
                 if let image = response.value {
-                    self.delegate.didLoad(image: image, at: self.indexPath)
+                    self.delegate.cell(self, didLoadImage: image)
                 } else {
                     self.setUpDetailsView(listing)
                 }

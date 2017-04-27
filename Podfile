@@ -18,7 +18,6 @@ target 'TUHub' do
   pod 'UPCarouselFlowLayout', '~> 1.1.0'
   pod 'TUSafariActivity', '~> 1.0.0'
   pod 'CHTCollectionViewWaterfallLayout', '~> 0.9.0'
-  pod 'TLIndexPathTools', '~> 0.4.4'
   pod 'Eureka', '~> 2.0.1'
   pod 'AWSS3', '~> 2.5.0'
   pod 'YelpAPI', :git => "https://github.com/ConnorDCrawford/yelp-ios.git"

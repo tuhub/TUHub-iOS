@@ -303,17 +303,17 @@
 		229CD2C31E9194F40039D88D /* Marketplace */ = {
 			isa = PBXGroup;
 			children = (
+				7DE27BD41E932D03004C2F83 /* ListingCollectionViewCell.swift */,
+				7D48E1271E92B826000981D8 /* TextFieldTableViewCell.swift */,
+				7D48E1251E92B802000981D8 /* TextViewTableViewCell.swift */,
+				7DE27BD61E932E1C004C2F83 /* BlurryListingDetailView.swift */,
+				7DE27BD81E932E3A004C2F83 /* ListingDetailView.swift */,
 				7D8D86B91EAF002B00704EC8 /* SubtitleTableViewCell.swift */,
 				7D8D86BA1EAF002B00704EC8 /* ContactDetailViewCell.swift */,
 				7D8A1A611E983959006401A1 /* ImagesRow.swift */,
 				7D8A1A6E1E984196006401A1 /* ImagesCell.xib */,
 				7D8A1A691E983B67006401A1 /* ImageCollectionViewCell.swift */,
 				7D8A1A6A1E983B67006401A1 /* ImageCollectionViewCell.xib */,
-				7DE27BD41E932D03004C2F83 /* ListingCollectionViewCell.swift */,
-				7D48E1271E92B826000981D8 /* TextFieldTableViewCell.swift */,
-				7D48E1251E92B802000981D8 /* TextViewTableViewCell.swift */,
-				7DE27BD61E932E1C004C2F83 /* BlurryListingDetailView.swift */,
-				7DE27BD81E932E3A004C2F83 /* ListingDetailView.swift */,
 			);
 			name = Marketplace;
 			sourceTree = "<group>";
@@ -490,8 +490,8 @@
 				7D79DB951EAD5ABB00B43F00 /* Sign In */,
 				7DA6D9351E7F6F6800CD5D02 /* Course */,
 				7D439E011E8D6F4400FF5538 /* Marketplace */,
-				7DA6D93C1E7F6F6800CD5D02 /* News */,
 				7D7FD0141E85ADEF00CE769F /* Maps */,
+				7DA6D93C1E7F6F6800CD5D02 /* News */,
 				222B8DB01EA8FE6F005503A8 /* More */,
 			);
 			path = Controllers;

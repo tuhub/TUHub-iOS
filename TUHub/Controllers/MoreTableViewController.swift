@@ -195,7 +195,12 @@ class MoreTableViewController: UITableViewController {
                     actionSheet.addAction(action)
                 }
             }
-            present(actionSheet, animated: true, completion: nil)
+            
+            if let frame = tableView.cellForRow(at: indexPath)?.frame {
+                actionSheet.popoverPresentationController?.sourceView = tableView
+                actionSheet.popoverPresentationController?.sourceRect = frame
+                present(actionSheet, animated: true, completion: nil)
+            }
         default:
             break
         }
@@ -266,10 +271,11 @@ class MoreTableViewController: UITableViewController {
                     let id = calendar.calendarIdentifier
                     defaults.set(id, forKey: calendarKey)
                     do {
-                        if let source = eventStore.sources.first(where: { $0.sourceType == .calDAV }) {
+                        if let source = eventStore.sources.first(where: { $0.sourceType == .calDAV }) ?? eventStore.sources.first(where: { $0.sourceType == .local }) {
                             calendar.source = source
                         } else {
-                            throw NSError()
+                            let error = NSError(domain: String(describing: MoreTableViewController.self), code: -1, userInfo: nil)
+                            throw error
                         }
                         try eventStore.saveCalendar(calendar, commit: true)
                     } catch {

@@ -86,17 +86,12 @@ class ListingDetailTableViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Make table view's separator insets equal on left and right
-        var separatorInsets = tableView.separatorInset
-        separatorInsets = UIEdgeInsets(top: separatorInsets.top, left: separatorInsets.left, bottom: separatorInsets.bottom, right: separatorInsets.left)
-        tableView.separatorInset = separatorInsets
-        
         // Make table view's content inset above the directions visual effect view
         var contentInsets = tableView.contentInset
         contentInsets = UIEdgeInsets(top: contentInsets.top, left: contentInsets.left, bottom: contentInsets.bottom + visualEffectView.frame.height, right: contentInsets.right)
         tableView.contentInset = contentInsets
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let id = segue.identifier else { return }
         switch id {

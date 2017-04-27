@@ -87,15 +87,14 @@ class Product: Listing {
     }
     
     private class func handle(response data: Data?, error: Error?, _ responseHandler: @escaping ([Product]?, Error?) -> Void) {
-        var products: [Product]?
-        
-        defer { responseHandler(products, error) }
         guard let data = data else { return }
         let json = JSON(data)
         
+        var products: [Product]?
         if let productsJSON = json["productList"].array {
             products = productsJSON.flatMap { Product(json: $0) }
         }
+        responseHandler(products, error)
     }
     
     class func retrieve(belongingTo userID: String, _ responseHandler: @escaping ([Product]?, Error?) -> Void) {

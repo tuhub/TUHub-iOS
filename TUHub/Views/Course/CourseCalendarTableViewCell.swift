@@ -31,7 +31,6 @@ class CourseCalendarTableViewCell: UITableViewCell {
     }
     
     func setUp(from courseMeeting: CourseMeeting) {
-        var courseMeeting = courseMeeting
         startTimeLabel.text = courseMeeting.firstMeetingStartDate.time
         endTimeLabel.text = courseMeeting.firstMeetingEndDate.time
         nameLabel.text = courseMeeting.course.title

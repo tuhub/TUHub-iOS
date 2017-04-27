@@ -12,4 +12,10 @@ class TextViewTableViewCell: UITableViewCell {
 
     @IBOutlet var textView: UITextView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        textView.textContainerInset = UIEdgeInsets.zero
+        textView.textContainer.lineFragmentPadding = 0
+    }
+    
 }

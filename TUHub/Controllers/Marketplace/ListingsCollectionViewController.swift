@@ -9,7 +9,6 @@
 import UIKit
 import CHTCollectionViewWaterfallLayout
 import AlamofireImage
-import TLIndexPathTools
 
 // MARK: - Segue IdentifierS
 private let listingDetailSegueID = "showListingDetail"
@@ -18,7 +17,7 @@ private let listingFilterSegueID = "presentListingFilter"
 // MARK: - Cell reuse identifiers
 private let reuseIdentifier = "marketplaceCell"
 
-class ListingsCollectionViewController: TLCollectionViewController {
+class ListingsCollectionViewController: UICollectionViewController {
     
     private lazy var lock = NSLock()
     
@@ -42,20 +41,16 @@ class ListingsCollectionViewController: TLCollectionViewController {
     fileprivate var lastProduct: Product?
     fileprivate var lastJob: Job?
     fileprivate var lastPersonal: Personal?
-    
     fileprivate lazy var selectedKinds: Set<Listing.Kind> = [.product, .job, .personal]
     
-    var imageSizes = [IndexPath : CGSize]()
+    lazy var listings = [Listing]()
+    lazy var imageSizes = [IndexPath : CGSize]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Clear selection between presentations
-        self.clearsSelectionOnViewWillAppear = true
-        
-        
-        // Initialize indexPathController's data model
-        indexPathController.dataModel = dataModel(for: [])
+        clearsSelectionOnViewWillAppear = true
         
         // Retrieve listings
         loadListings()
@@ -64,9 +59,7 @@ class ListingsCollectionViewController: TLCollectionViewController {
         definesPresentationContext = true
         searchController.searchResultsUpdater = self
         searchController.delegate = self
-        searchController.searchBar.frame = CGRect(origin: .zero,
-                                                  size: CGSize(width: collectionView!.frame.width,
-                                                               height: 44))
+        searchController.searchBar.frame = CGRect(origin: .zero, size: CGSize(width: collectionView!.frame.width, height: 44))
         
         // Compose and Me button should be disabled until we can authenticate the user
         composeButton.isEnabled = false
@@ -76,7 +69,10 @@ class ListingsCollectionViewController: TLCollectionViewController {
         collectionView!.addSubview(searchController.searchBar)
         
         if #available(iOS 10.0, *) {
-            collectionView?.refreshControl = UIRefreshControl()
+            let refreshControl = UIRefreshControl()
+            refreshControl.backgroundColor = .cherry
+            refreshControl.tintColor = .white
+            collectionView?.refreshControl = refreshControl
             collectionView?.refreshControl?.addTarget(self, action: #selector(refreshListings), for: .valueChanged)
         }
         
@@ -120,86 +116,74 @@ class ListingsCollectionViewController: TLCollectionViewController {
     }
     
     func refreshListings() {
-        loadListings(shouldClearResults: true)
+        loadListings(selection: selectedKinds, shouldClearResults: true)
     }
     
     func loadListings(selection: Set<Listing.Kind>? = nil, startIndex: Int = 0, shouldClearResults: Bool = false) {
+        let selection = selection ?? [.product, .job, .personal]
         
         if shouldClearResults {
             clearResults()
         }
         
-        let selection = selection ?? [.product, .job, .personal]
-        
+        // Wait for all download tasks to complete
+        let dispatchGroup = DispatchGroup()
         for kind in selection {
             switch kind {
             case .product:
+                dispatchGroup.enter()
                 Product.retrieveAll(startIndex: startIndex) { (products, error) in
-                    if #available(iOS 10.0, *) {
-                        self.collectionView?.refreshControl?.endRefreshing()
-                    }
                     if let products = products {
                         self.add(listings: products)
                         self.numRowsProducts += products.count
                         self.lastProduct = products.last
                     }
+                    dispatchGroup.leave()
                 }
             case .job:
+                dispatchGroup.enter()
                 Job.retrieveAll(startIndex: startIndex) { (jobs, error) in
-                    if #available(iOS 10.0, *) {
-                        self.collectionView?.refreshControl?.endRefreshing()
-                    }
                     if let jobs = jobs {
                         self.add(listings: jobs)
                         self.numRowsJobs +=  jobs.count
                         self.lastJob = jobs.last
                     }
+                    dispatchGroup.leave()
                 }
             case .personal:
+                dispatchGroup.enter()
                 Personal.retrieveAll(startIndex: startIndex) { (personals, error) in
-                    if #available(iOS 10.0, *) {
-                        self.collectionView?.refreshControl?.endRefreshing()
-                    }
                     if let personals = personals {
                         self.add(listings: personals)
                         self.numRowsPersonals += personals.count
                         self.lastPersonal = personals.last
                     }
+                    dispatchGroup.leave()
                 }
             }
-            
+        }
+        
+        dispatchGroup.notify(queue: .main) { 
+            // All done, reload the collection view!
+            self.collectionView?.reloadData()
         }
     }
     
     func clearResults() {
-        indexPathController.dataModel = nil
+        listings.removeAll()
         imageSizes.removeAll()
-        collectionView?.collectionViewLayout.invalidateLayout()
+        collectionView?.reloadData()
         self.numRowsProducts = 0
         self.numRowsJobs = 0
         self.numRowsPersonals = 0
-    }
-    
-    func dataModel(for listings: [Listing]) -> TLIndexPathDataModel {
-        return TLIndexPathDataModel(items: listings, sectionNameBlock: nil, identifierBlock: {
-            if let listing = $0 as? Listing {
-                let s = String(describing: type(of: listing)) + listing.id
-                return s
-            }
-            return nil
-        })
     }
     
     func add(listings: [Listing]) {
         // Entering critical section
         lock.lock()
         
-        var listings = listings
-        if let items = indexPathController.items as? [Listing] {
-            listings.append(contentsOf: items)
-            listings.sort { $0.datePosted > $1.datePosted }
-        }
-        indexPathController.dataModel = dataModel(for: listings)
+        self.listings.append(contentsOf: listings)
+        self.listings.sort { $0.datePosted > $1.datePosted }
         
         // Exiting critical section
         lock.unlock()
@@ -261,7 +245,7 @@ class ListingsCollectionViewController: TLCollectionViewController {
                 let listingDetailVC = segue.destination as? ListingDetailTableViewController
                 else { break }
             
-            listingDetailVC.listing = indexPathController.dataModel?.item(at: indexPath) as? Listing
+            listingDetailVC.listing = listings[indexPath.row]
             
         case listingFilterSegueID:
             guard let filterVC = (segue.destination as? UINavigationController)?
@@ -282,18 +266,19 @@ class ListingsCollectionViewController: TLCollectionViewController {
 extension ListingsCollectionViewController {
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return indexPathController.dataModel?.numberOfSections ?? 0
+        return listings.count > 0 ? 1 : 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return indexPathController.dataModel?.numberOfRows(inSection: section) ?? 0
+        return listings.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
-        if let cell = cell as? ListingCollectionViewCell, let listing = indexPathController.dataModel?.item(at: indexPath) as? Listing {
-            cell.setUp(listing, self, indexPath)
+        if let cell = cell as? ListingCollectionViewCell {
+            let listing = listings[indexPath.row]
+            cell.setUp(listing, self)
         }
         
         return cell
@@ -327,17 +312,21 @@ extension ListingsCollectionViewController {
 // MARK: - CHTCollectionViewDelegateWaterfallLayout
 extension ListingsCollectionViewController: CHTCollectionViewDelegateWaterfallLayout {
     func collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAt indexPath: IndexPath!) -> CGSize {
-        guard let imageSize = imageSizes[indexPath] ?? (collectionView.cellForItem(at: indexPath) as? ListingCollectionViewCell)?.imageView.image?.size
-            else { return CGSize(width: 30, height: 40) }
-        return imageSize
+//        let imageSize = (collectionView.cellForItem(at: indexPath) as? ListingCollectionViewCell)?.imageView?.image?.size
+        return imageSizes[indexPath] ?? CGSize(width: 30, height: 40)
     }
 }
 
 // MARK: - ImageLoadedDelegate
-extension ListingsCollectionViewController: ImageLoadedDelegate {
-    func didLoad(image: UIImage?, at indexPath: IndexPath) {
-        imageSizes[indexPath] = image?.size
-        collectionView?.collectionViewLayout.invalidateLayout()
+extension ListingsCollectionViewController: ListingCollectionViewCellDelegate {
+    func cell(_ cell: ListingCollectionViewCell, didLoadImage image: UIImage?) {
+        
+        if let indexPath = collectionView?.indexPathForItem(at: cell.center) {
+            if imageSizes[indexPath] != image?.size {
+                imageSizes[indexPath] = image?.size
+                collectionView?.reloadItems(at: [indexPath])
+            }
+        }
     }
 }
 
@@ -346,30 +335,48 @@ extension ListingsCollectionViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
         guard let text = searchController.searchBar.text, text.characters.count > 0 else { return }
-        clearResults()
         NetworkManager.shared.cancelAllRequests(for: .marketplace)
+        clearResults()
         
+        let dispatchGroup = DispatchGroup()
         for listingKind in selectedKinds {
             switch listingKind {
             case .product:
+                dispatchGroup.enter()
                 Product.search(for: text) { (results, error) in
                     if let results = results {
                         self.add(listings: results)
+                        self.numRowsProducts += results.count
+                        self.lastProduct = results.last
+                        dispatchGroup.leave()
                     }
                 }
             case .job:
+                dispatchGroup.enter()
                 Job.search(for: text) { (results, error) in
                     if let results = results {
                         self.add(listings: results)
+                        self.numRowsJobs += results.count
+                        self.lastJob = results.last
+                        dispatchGroup.leave()
                     }
                 }
             case .personal:
+                dispatchGroup.enter()
                 Personal.search(for: text) { (results, error) in
                     if let results = results {
                         self.add(listings: results)
+                        self.numRowsPersonals += results.count
+                        self.lastPersonal = results.last
+                        dispatchGroup.leave()
                     }
                 }
             }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            // All done, reload the collection view!
+            self.collectionView?.reloadData()
         }
     }
     

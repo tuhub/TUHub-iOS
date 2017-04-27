@@ -16,6 +16,12 @@ protocol TouchIDViewControllerDelegate {
 class TouchIDViewController: UIViewController {
 
     var delegate: TouchIDViewControllerDelegate?
+    private lazy var visualEffectView: UIVisualEffectView = {
+        // Add a blurry background
+        let visualEffect = UIBlurEffect(style: .light)
+        let visualEffectView = UIVisualEffectView(effect: visualEffect)
+        return visualEffectView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +37,12 @@ class TouchIDViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Add a blurry background
-        let visualEffect = UIBlurEffect(style: .light)
-        let visualEffectView = UIVisualEffectView(effect: visualEffect)
-        visualEffectView.frame = view.frame
         view.addSubview(visualEffectView)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        visualEffectView.frame = view.frame
     }
     
     func authenticateUser() {
