@@ -35,7 +35,7 @@ class Personal: Listing {
         super.init(title: title, desc: desc, ownerID: ownerID, photosDir: photosDir)
     }
     
-    override func post(_ responseHandler: @escaping (_ listingID: String?, Error?) -> Void) {
+    override func post(_ responseHandler: @escaping (Listing?, Error?) -> Void) {
         
         var qParams: [String : Any] = ["title" : title,
                                        "isActive" : "true",
@@ -59,9 +59,7 @@ class Personal: Listing {
             if errorStr == nil || errorStr!.characters.count == 0 {
                 // Successfully posted, now go get the post ID to get the photo directory
                 Personal.retrieve(belongingTo: self.ownerID) { (personals, error) in
-                    if let personal = personals?.first {
-                        responseHandler(personal.photosDirectory!, error)
-                    }
+                    responseHandler(personals?.first, error)
                 }
             } else {
                 responseHandler(nil, error)

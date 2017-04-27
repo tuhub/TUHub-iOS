@@ -101,6 +101,9 @@ class ListingCollectionViewCell: UICollectionViewCell {
         } else {
             self.detailsView.detailTextLabel.text = nil
         }
+        
+        // Tell the delegate that there's no image in this cell so it can be resized appropriately
+        self.delegate.cell(self, didLoadImage: nil)
     }
     
     override func prepareForReuse() {

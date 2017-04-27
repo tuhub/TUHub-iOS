@@ -119,7 +119,7 @@ class ListingDetailTableViewController: UIViewController {
         
     }
     
-    private func setTableViewAttributes() {
+    fileprivate func setTableViewAttributes() {
         if let product = listing as? Product {
             tableViewAttributes = product.tableViewAttributes
         } else if let job = listing as? Job {
@@ -276,6 +276,7 @@ extension ListingDetailTableViewController: ImageGalleryTableViewCellDelegate {
 extension ListingDetailTableViewController: EditListingViewControllerDelegate {
     func didUpdate(listing: Listing) {
         self.listing = listing
+        setTableViewAttributes()
         tableView.reloadData()
     }
 }

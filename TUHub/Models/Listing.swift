@@ -107,7 +107,7 @@ class Listing {
         }
     }
     
-    func post(_ responseHandler: @escaping (_ listingID: String?, Error?) -> Void) {
+    func post(_ responseHandler: @escaping (Listing?, Error?) -> Void) {
         fatalError("Function not implemented in Listing supertype")
     }
     

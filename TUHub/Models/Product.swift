@@ -35,7 +35,7 @@ class Product: Listing {
         super.init(title: title, desc: desc, ownerID: ownerID, photosDir: photosDir)
     }
     
-    override func post(_ responseHandler: @escaping (_ listingID: String?, Error?) -> Void) {
+    override func post(_ responseHandler: @escaping (Listing?, Error?) -> Void) {
         
         var qParams: [String : Any] = ["title" : title,
                                        "price" : price,
@@ -53,11 +53,9 @@ class Product: Listing {
             let json = JSON(data: data)
             let errorStr = json["error"].string
             if errorStr == nil || errorStr!.characters.count == 0 {
-                // Successfully posted, now go get the post ID to get the photo directory
+                // Successfully posted, now go get the new listing
                 Product.retrieve(belongingTo: self.ownerID) { (products, error) in
-                    if let product = products?.first {
-                        responseHandler(product.photosDirectory!, error)
-                    }
+                    responseHandler(products?.first, error)
                 }
             } else {
                 responseHandler(nil, error)

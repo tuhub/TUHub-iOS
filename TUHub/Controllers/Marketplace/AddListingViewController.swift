@@ -10,9 +10,15 @@ import UIKit
 import Eureka
 //import ImageRow
 
+protocol AddListingViewControllerDelegate {
+    func didAdd(listing: Listing)
+}
+
 class AddListingViewController: FormViewController {
     
     @IBOutlet weak var doneButton: UIBarButtonItem!
+    
+    var delegate: AddListingViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -201,9 +207,9 @@ class AddListingViewController: FormViewController {
         
         // Post the listing, then get its ID after it's posted to use for the S3 folder name
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        listing?.post { (listingID, error) in
+        listing?.post { (listing, error) in
             
-            if error != nil {
+            guard let listing = listing, error == nil else {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 // Notify user that their listing wasn't posted
                 let alertController = UIAlertController(title: "Unable to Post Listing",
@@ -219,8 +225,13 @@ class AddListingViewController: FormViewController {
                 return
             }
             
-            if let listingID = listingID, let photos = photos {
-                AWS.upload(folder: listingID, images: photos) { error in
+            
+            
+            if let dir = listing.photosDirectory, let photos = photos {
+                AWS.upload(folder: dir, images: photos) { error in
+                    
+                    defer { self.delegate?.didAdd(listing: listing)}
+                    
                     if error != nil {
                         // Notify user that their images weren't added
                         let alertController = UIAlertController(title: "Unable to Upload Images",
@@ -234,11 +245,14 @@ class AddListingViewController: FormViewController {
                         DispatchQueue.main.async {
                             self.present(alertController, animated: true, completion: nil)
                         }
-                        
-                        return
+                    } else {
+                        self.dismiss(animated: true, completion: nil)
                     }
-                    self.dismiss(animated: true, completion: nil)
+                    
                 }
+            } else {
+                self.delegate?.didAdd(listing: listing)
+                self.dismiss(animated: true, completion: nil)
             }
             
         }

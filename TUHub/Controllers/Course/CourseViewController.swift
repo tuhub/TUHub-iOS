@@ -162,8 +162,8 @@ class CourseViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        let isPortraitCompact = traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular
-        courseCalendarView.calendarView.pagingEnabled = isPortraitCompact
+//        let isPortraitCompact = traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular
+//        courseCalendarView.calendarView.pagingEnabled = isPortraitCompact
     }
     
     override func viewDidLayoutSubviews() {

@@ -59,7 +59,7 @@ class Job: Listing {
         super.init(title: title, desc: desc, ownerID: ownerID, photosDir: photosDir)
     }
     
-    override func post(_ responseHandler: @escaping (_ listingID: String?, Error?) -> Void) {
+    override func post(_ responseHandler: @escaping (Listing?, Error?) -> Void) {
         
         var qParams: [String : Any] = ["title" : title,
                                        "pay" : pay,
@@ -85,11 +85,7 @@ class Job: Listing {
             if errorStr == nil || errorStr!.characters.count == 0 {
                 // Successfully posted, now go get the post ID to get the photo directory
                 Job.retrieve(belongingTo: self.ownerID) { (jobs, error) in
-                    if let job = jobs?.first {
-                        responseHandler(job.photosDirectory!, error)
-                    } else {
-                        responseHandler(nil, error)
-                    }
+                    responseHandler(jobs?.first, error)
                 }
             } else {
                 responseHandler(nil, error)

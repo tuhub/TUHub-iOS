@@ -13,6 +13,7 @@ import AlamofireImage
 // MARK: - Segue IdentifierS
 private let listingDetailSegueID = "showListingDetail"
 private let listingFilterSegueID = "presentListingFilter"
+private let addListingSegueID = "presentAddListing"
 
 // MARK: - Cell reuse identifiers
 private let reuseIdentifier = "marketplaceCell"
@@ -165,6 +166,9 @@ class ListingsCollectionViewController: UICollectionViewController {
         
         dispatchGroup.notify(queue: .main) { 
             // All done, reload the collection view!
+            if #available(iOS 10.0, *) {
+                self.collectionView?.refreshControl?.endRefreshing()
+            }
             self.collectionView?.reloadData()
         }
     }
@@ -254,6 +258,12 @@ class ListingsCollectionViewController: UICollectionViewController {
             
             filterVC.selectedKinds = selectedKinds
             filterVC.delegate = self
+        case addListingSegueID:
+            guard let addVC = (segue.destination as? UINavigationController)?
+                .childViewControllers.first as? AddListingViewController
+                else { break }
+            
+            addVC.delegate = self
         default:
             break
         }
@@ -376,6 +386,9 @@ extension ListingsCollectionViewController: UISearchResultsUpdating {
         
         dispatchGroup.notify(queue: .main) {
             // All done, reload the collection view!
+            if #available(iOS 10.0, *) {
+                self.collectionView?.refreshControl?.endRefreshing()
+            }
             self.collectionView?.reloadData()
         }
     }
@@ -395,5 +408,13 @@ extension ListingsCollectionViewController: ListingsFilterDelegate {
             self.selectedKinds = listingKinds
             loadListings(selection: listingKinds, shouldClearResults: true)
         }
+    }
+}
+
+extension ListingsCollectionViewController: AddListingViewControllerDelegate {
+    func didAdd(listing: Listing) {
+        // Insert the listing at the top of the collection view
+        listings.insert(listing, at: 0)
+        collectionView?.reloadData()
     }
 }

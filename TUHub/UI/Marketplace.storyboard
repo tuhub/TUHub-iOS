@@ -330,9 +330,7 @@
                             <barButtonItem systemItem="compose" id="6t3-wp-X3b">
                                 <color key="tintColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <segue destination="tmY-LX-b1c" kind="showDetail" id="FXd-fp-gQY">
-                                        <nil key="action"/>
-                                    </segue>
+                                    <segue destination="tmY-LX-b1c" kind="presentation" identifier="presentAddListing" modalPresentationStyle="formSheet" id="FXd-fp-gQY"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="FilterIcon" id="neX-XP-S8p">
@@ -372,7 +370,7 @@
             </objects>
             <point key="canvasLocation" x="2913" y="-187"/>
         </scene>
-        <!--Add Listing View Controller-->
+        <!--Add Listing-->
         <scene sceneID="kLE-M9-uwK">
             <objects>
                 <viewController id="tEb-d6-50Y" customClass="AddListingViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
@@ -385,7 +383,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="p3L-O3-f8Q">
+                    <navigationItem key="navigationItem" title="Add Listing" id="p3L-O3-f8Q">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="qLk-9c-EHC">
                             <connections>
                                 <action selector="didPressCancel:" destination="tEb-d6-50Y" id="mi3-Iw-Y5p"/>
@@ -544,7 +542,7 @@
             </objects>
             <point key="canvasLocation" x="969" y="-897"/>
         </scene>
-        <!--Edit Listing View Controller-->
+        <!--Edit Listing-->
         <scene sceneID="z5F-56-NVH">
             <objects>
                 <viewController id="N1m-ou-jiC" customClass="EditListingViewController" customModule="TUHub" customModuleProvider="target" sceneMemberID="viewController">
@@ -557,7 +555,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="QX2-eq-Jva">
+                    <navigationItem key="navigationItem" title="Edit Listing" id="QX2-eq-Jva">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gfH-Sl-147">
                             <connections>
                                 <action selector="didPressCancel:" destination="N1m-ou-jiC" id="wXL-Vv-qbH"/>
@@ -603,7 +601,7 @@
         <image name="MeIcon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Bpa-ML-aaN"/>
+        <segue reference="O3t-pO-all"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>
