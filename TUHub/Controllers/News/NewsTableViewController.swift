@@ -25,16 +25,22 @@ class NewsTableViewController: UITableViewController {
     fileprivate var selectedFeeds: Set<NewsItem.Feed>?
     private var errorLabel: UILabel?
     
-    let searchController: UISearchController = {
+    lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.searchBarStyle = .minimal
         searchController.searchBar.tintColor = .cherry
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.placeholder = "Search for articles"
+        searchController.searchResultsUpdater = self
+        self.tableView.tableHeaderView = searchController.searchBar
+        searchController.searchBar.sizeToFit()
         return searchController
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        _ = searchController
         
         // Set the split view controller's delegate
         splitViewController?.delegate = self
@@ -49,11 +55,6 @@ class NewsTableViewController: UITableViewController {
         tableView.contentOffset = CGPoint(x: 0, y: -self.refreshControl!.frame.size.height) // Needed to fix refresh control bug
         refreshControl?.tintColor = UIColor.white
         refreshControl?.backgroundColor = UIColor.cherry
-        
-        // Set search bar as the table view's header
-        searchController.searchResultsUpdater = self
-        tableView.tableHeaderView = searchController.searchBar
-        searchController.searchBar.sizeToFit()
         
         load(feeds: nil)
     }

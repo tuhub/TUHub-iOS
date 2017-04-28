@@ -30,6 +30,13 @@ class ListingDetailTableViewController: UIViewController {
     
     // The current attributes to be displayed in the table view
     fileprivate lazy var tableViewAttributes: [TableViewAttributes] = []
+    
+    fileprivate lazy var adjustInset: Void = {
+        // Make table view's content inset above the directions visual effect view
+        var contentInsets = self.tableView.contentInset
+        contentInsets = UIEdgeInsets(top: contentInsets.top, left: contentInsets.left, bottom: contentInsets.bottom + self.visualEffectView.frame.height, right: contentInsets.right)
+        self.tableView.contentInset = contentInsets
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,13 +90,9 @@ class ListingDetailTableViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Make table view's content inset above the directions visual effect view
-        var contentInsets = tableView.contentInset
-        contentInsets = UIEdgeInsets(top: contentInsets.top, left: contentInsets.left, bottom: contentInsets.bottom + visualEffectView.frame.height, right: contentInsets.right)
-        tableView.contentInset = contentInsets
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        _ = adjustInset
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

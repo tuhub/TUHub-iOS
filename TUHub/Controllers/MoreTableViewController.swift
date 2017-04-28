@@ -218,6 +218,12 @@ class MoreTableViewController: UITableViewController {
     
     func exportCourses() {
         
+        func showUnableToExport() {
+            let alert = UIAlertController(title: "Unable to Export Courses", message: "TUHub was unable to export your courses. Please grant TUHub permission to use Calendars and try again.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
         guard let user = User.current else { return }
         
         func export(meetings: [CourseMeeting], eventStore: EKEventStore, calendar: EKCalendar) {
@@ -280,9 +286,7 @@ class MoreTableViewController: UITableViewController {
                         try eventStore.saveCalendar(calendar, commit: true)
                     } catch {
                         log.error("Unable to save calendar: " + error.localizedDescription)
-                        let alert = UIAlertController(title: "Unable to Create New Calendar", message: "TUHub was unable to create a new calendar for your courses. Please grant TUHub permission to use Calendars and try again.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
+                        showUnableToExport()
                         return
                     }
                 }
@@ -301,7 +305,9 @@ class MoreTableViewController: UITableViewController {
                 self.present(alert, animated: true, completion: nil)
             }
             
-            if authStatus == .notDetermined {
+            if authStatus == .denied || authStatus == .restricted {
+                showUnableToExport()
+            } else if authStatus == .notDetermined {
                 eventStore.requestAccess(to: .event) { (_, _) in
                     getCalendarAndExport(terms: terms)
                 }

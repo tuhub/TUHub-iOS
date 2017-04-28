@@ -115,6 +115,7 @@ class CourseViewController: UIViewController {
         // Change calendar scroll direction
         courseCalendarView.calendarView.scrollDirection = .vertical
         courseCalendarView.performSegueDelegate = self
+        courseCalendarView.calendarView.pagingEnabled = UI_USER_INTERFACE_IDIOM() != .pad
         
         // Load terms/courses
         if let user = User.current {
@@ -158,12 +159,6 @@ class CourseViewController: UIViewController {
         if let selectedRow = courseCalendarView.tableView.indexPathForSelectedRow {
             courseCalendarView.tableView.deselectRow(at: selectedRow, animated: true)
         }
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-//        let isPortraitCompact = traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular
-//        courseCalendarView.calendarView.pagingEnabled = isPortraitCompact
     }
     
     override func viewDidLayoutSubviews() {

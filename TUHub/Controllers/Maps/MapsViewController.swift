@@ -41,13 +41,13 @@ class MapsViewController: UIViewController {
     
     lazy var searchController: UISearchController = {
         let resultsController = self.storyboard!.instantiateViewController(withIdentifier: "MapsSearchResultsVC") as! MapsSearchResultsTableViewController
-        
         let searchController = UISearchController(searchResultsController: resultsController)
         searchController.searchResultsUpdater = resultsController
-        searchController.searchBar.searchBarStyle = .minimal
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.hidesBottomBarWhenPushed = true
         searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.placeholder = "Search for buildings or businesses"
         return searchController
     }()
     

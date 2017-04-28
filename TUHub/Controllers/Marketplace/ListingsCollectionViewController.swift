@@ -25,11 +25,16 @@ class ListingsCollectionViewController: UICollectionViewController {
     @IBOutlet weak var composeButton: UIBarButtonItem!
     @IBOutlet weak var meButton: UIBarButtonItem!
 
-    let searchController: UISearchController = {
+    lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.tintColor = .cherry
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = true
+        searchController.searchBar.tintColor = .cherry
+        searchController.searchBar.placeholder = "Search for listings by title"
+        searchController.searchBar.frame = CGRect(origin: .zero, size: CGSize(width: self.collectionView!.frame.width, height: 44))
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        self.definesPresentationContext = true
         return searchController
     }()
     
@@ -50,17 +55,13 @@ class ListingsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        _ = searchController
+        
         // Clear selection between presentations
         clearsSelectionOnViewWillAppear = true
         
         // Retrieve listings
         loadListings()
-        
-        // Set up search controller
-        definesPresentationContext = true
-        searchController.searchResultsUpdater = self
-        searchController.delegate = self
-        searchController.searchBar.frame = CGRect(origin: .zero, size: CGSize(width: collectionView!.frame.width, height: 44))
         
         // Compose and Me button should be disabled until we can authenticate the user
         composeButton.isEnabled = false

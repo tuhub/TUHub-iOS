@@ -126,8 +126,8 @@ extension CourseCalendarView: FSCalendarDelegate {
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
-//        calendarHeight.constant = bounds.height
-        layoutIfNeeded()
+        calendarHeight.constant = bounds.height
+        calendar.layoutIfNeeded()
     }
     
 }
