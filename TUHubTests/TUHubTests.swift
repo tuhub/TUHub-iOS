@@ -425,4 +425,37 @@ class TUHubTests: XCTestCase {
         }
     }
     
+// MARK: Campus
+    
+    func testRetrieveCampus() {
+        let asyncExpectation = expectation(description: "testRetrieveNewsFeed")
+        var kCampus:[Campus]?
+        
+        Campus.retrieveAll { (campus, error) in
+            
+            kCampus = campus
+            for campus in kCampus! {
+                debugPrint("Result: \(campus.name)")
+            }
+            
+            if let error = error {
+                log.error(error)
+            }
+            asyncExpectation.fulfill()
+        }
+        
+
+        
+        waitForExpectations(timeout: 30) { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            
+            XCTAssertNotNil(kCampus, "Failed to retrieve all the campus")
+        }
+
+    }
+
+
+
 }
