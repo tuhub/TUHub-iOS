@@ -39,7 +39,7 @@ class TUHubTests: XCTestCase {
                 })
             }
         }
-
+        
         waitForExpectations(timeout: 10) { (error) in
             if let error = error {
                 log.error(error)
@@ -73,7 +73,7 @@ class TUHubTests: XCTestCase {
             XCTAssertNotNil(kUser, "Failed to retrieve user.\nSign in if you have not already done so.")
             XCTAssertNotNil(kTerms, "Failed to retrieve course overview for user.")
         }
-
+        
     }
     
     func testCourseRoster() {
@@ -112,7 +112,7 @@ class TUHubTests: XCTestCase {
         
         var kResults: [CourseSearchResult]?
         
-        CourseSearchResult.search(for: "Project", pageNumber: 0) { (results, error) in
+        CourseSearchResult.search(for: "ios", pageNumber: 0) { (results, error) in
             kResults = results
             if let error = error {
                 log.error(error)
@@ -182,6 +182,7 @@ class TUHubTests: XCTestCase {
         
         MarketplaceUser.retrieve(user: "tue68553") { (user, error) in
             kMarketUser = user
+            
             if let error = error {
                 log.error(error)
             }
@@ -205,6 +206,11 @@ class TUHubTests: XCTestCase {
 
         Product.retrieveAll { (products, error) in
             kProduct = products
+            
+            for product in kProduct! {
+                debugPrint("Result: \(product.title)")
+            }
+            
             if let error = error {
                 log.error(error)
             }
@@ -250,11 +256,44 @@ class TUHubTests: XCTestCase {
         
         Personal.retrieveAll { (personal, error) in
             kPersonal = personal
+            
+            for personal in kPersonal! {
+                debugPrint("Result: \(personal.title)")
+            }
+            
             if let error = error {
                 log.error(error)
             }
             asyncExpectation.fulfill()
         }
+        
+        waitForExpectations(timeout: 30) { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            
+            XCTAssertNotNil(kPersonal, "Failed to retrieve personal for the user")
+        }
+        
+    }
+    
+    func testSearchPersonal() {
+        let asyncExpectation = expectation(description: "testSearchPersonal")
+        var kPersonal: [Personal]?
+        
+        Personal.search(for: "Study", startIndex: 0) { (result, error) in
+            kPersonal = result
+            
+            for personal in kPersonal! {
+                debugPrint("Result: \(personal.title)")
+            }
+            
+            if let error = error {
+                log.error(error)
+            }
+            asyncExpectation.fulfill()
+        }
+        
         
         waitForExpectations(timeout: 30) { (error) in
             if let error = error {
