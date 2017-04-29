@@ -9,9 +9,6 @@
 import UIKit
 import LocalAuthentication
 import SafariServices
-import EventKit
-
-fileprivate let calendarKey = "calendar"
 
 class MoreTableViewController: UITableViewController {
     
@@ -95,7 +92,7 @@ class MoreTableViewController: UITableViewController {
                 cell?.url = "https://tuportal4.temple.edu"
             case "esff":
                 cell?.textLabel?.text = "ESFF"
-                cell?.url = "https://esff.temple.edu"
+                cell?.url = "http://esff.temple.edu"
             case "blackboard":
                 cell?.textLabel?.text = "Blackboard"
                 cell?.url = "https://learn.temple.edu"
@@ -154,7 +151,7 @@ class MoreTableViewController: UITableViewController {
                 cell?.title = "Export Courses to Apple Calendar"
                 cell?.message = "Pressing \"Export\" will create a new calendar in the Calendar app that contains all of your courses to date. This action is irreversible. Do you wish to proceed?"
                 let export = UIAlertAction(title: "Export", style: .destructive) { _ in
-                    self.exportCourses()
+                    User.exportCoursesToCalendar(self)
                 }
                 let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                 cell?.actions = [export, cancel]
@@ -214,118 +211,6 @@ class MoreTableViewController: UITableViewController {
     func didToggleTouchID(_ sender: UISwitch) {
         log.info("Touch ID is now \(sender.isOn ? "enabled" : "disabled")")
         UserDefaults.standard.set(sender.isOn, forKey: touchIDKey)
-    }
-    
-    func exportCourses() {
-        
-        func showUnableToExport() {
-            let alert = UIAlertController(title: "Unable to Export Courses", message: "TUHub was unable to export your courses. Please grant TUHub permission to use Calendars and try again.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-        
-        guard let user = User.current else { return }
-        
-        func export(meetings: [CourseMeeting], eventStore: EKEventStore, calendar: EKCalendar) {
-            let event = EKEvent(eventStore: eventStore)
-            for meeting in meetings {
-                event.calendar = calendar
-                event.title = meeting.course.description ?? meeting.course.name
-                event.startDate = meeting.firstMeetingStartDate
-                event.endDate = meeting.firstMeetingEndDate
-                event.availability = .busy
-                event.location = "\(meeting.buildingName) \(meeting.room)"
-                
-                let daysOfWeek: [EKRecurrenceDayOfWeek] = meeting.daysOfWeek.flatMap {
-                    if let weekday = EKWeekday(rawValue: $0) {
-                        return EKRecurrenceDayOfWeek(weekday)
-                    }
-                    return nil
-                }
-                let end = EKRecurrenceEnd(end: meeting.lastMeetingEndDate)
-                let recurrenceRule = EKRecurrenceRule(recurrenceWith: .weekly,
-                                                      interval: 1,
-                                                      daysOfTheWeek: daysOfWeek,
-                                                      daysOfTheMonth: nil,
-                                                      monthsOfTheYear: nil,
-                                                      weeksOfTheYear: nil,
-                                                      daysOfTheYear: nil,
-                                                      setPositions: nil,
-                                                      end: end)
-                event.addRecurrenceRule(recurrenceRule)
-                
-                try? eventStore.save(event, span: .thisEvent)
-            }
-            try? eventStore.commit()
-        }
-        
-        func export(terms: [Term]) {
-            let eventStore = EKEventStore()
-            let authStatus = EKEventStore.authorizationStatus(for: .event)
-            
-            func getCalendarAndExport(terms: [Term]) {
-                var calendar: EKCalendar!
-                let defaults = UserDefaults.standard
-                if let id = defaults.string(forKey: calendarKey), let cal = eventStore.calendar(withIdentifier: id) {
-                    calendar = cal
-                } else {
-                    calendar = EKCalendar(for: .event, eventStore: eventStore)
-                    calendar.title = "My Classes"
-                    calendar.cgColor = UIColor.cherry.cgColor
-                    
-                    // Save the calendar's ID to user defaults
-                    let id = calendar.calendarIdentifier
-                    defaults.set(id, forKey: calendarKey)
-                    do {
-                        if let source = eventStore.sources.first(where: { $0.sourceType == .calDAV }) ?? eventStore.sources.first(where: { $0.sourceType == .local }) {
-                            calendar.source = source
-                        } else {
-                            let error = NSError(domain: String(describing: MoreTableViewController.self), code: -1, userInfo: nil)
-                            throw error
-                        }
-                        try eventStore.saveCalendar(calendar, commit: true)
-                    } catch {
-                        log.error("Unable to save calendar: " + error.localizedDescription)
-                        showUnableToExport()
-                        return
-                    }
-                }
-                
-                for term in terms {
-                    for course in term.courses {
-                        if let meetings = course.meetings {
-                            export(meetings: meetings, eventStore: eventStore, calendar: calendar)
-                        }
-                    }
-                }
-                
-                // All done!
-                let alert = UIAlertController(title: "Courses Exported", message: "Your courses have been exported to the Calendar app. Go check it out!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
-            
-            if authStatus == .denied || authStatus == .restricted {
-                showUnableToExport()
-            } else if authStatus == .notDetermined {
-                eventStore.requestAccess(to: .event) { (_, _) in
-                    getCalendarAndExport(terms: terms)
-                }
-            } else {
-                getCalendarAndExport(terms: terms)
-            }
-            
-        }
-        
-        if let terms = user.terms {
-            export(terms: terms)
-        } else {
-            user.retrieveCourses { (terms, error) in
-                if let terms = terms {
-                    export(terms: terms)
-                }
-            }
-        }
     }
 
 }

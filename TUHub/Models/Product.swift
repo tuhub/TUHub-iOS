@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-//private let pageSize = 15
+private let pageSize = 25
 
 class Product: Listing {
     
@@ -105,9 +105,9 @@ class Product: Listing {
     }
     
     class func retrieveAll(onlyActive: Bool = true, startIndex: Int = 0, _ responseHandler: @escaping ([Product]?, Error?) -> Void) {
-        let qParams: [String : Any] = ["activeOnly" : onlyActive ? "true" : "false"]
-//                                       "offset" : startIndex,
-//                                       "limit" : pageSize]
+        let qParams: [String : Any] = ["activeOnly" : onlyActive ? "true" : "false",
+                                       "offset" : startIndex,
+                                       "limit" : pageSize]
         NetworkManager.shared.request(fromEndpoint: .marketplace,
                                       pathParameters: ["select_all_products.jsp"],
                                       queryParameters: qParams)
@@ -117,9 +117,9 @@ class Product: Listing {
     }
     
     class func search(for searchTerms: String, startIndex: Int = 0, _ responseHandler: @escaping ([Product]?, Error?) -> Void) {
-        let qParams: [String : Any] = ["title" : searchTerms]
-//                                       "offset" : startIndex,
-//                                       "limit" : pageSize]
+        let qParams: [String : Any] = ["title" : searchTerms,
+                                       "offset" : startIndex,
+                                       "limit" : pageSize]
         NetworkManager.shared.request(fromEndpoint: .marketplace,
                                       pathParameters: ["search_active_product_titles.jsp"],
                                       queryParameters: qParams)

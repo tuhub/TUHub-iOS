@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-//private let pageSize = 15
+private let pageSize = 25
 
 private let dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
@@ -140,9 +140,9 @@ class Job: Listing {
     }
     
     class func retrieveAll(onlyActive: Bool = true, startIndex: Int = 0, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {
-        let qParams: [String : Any] = ["activeOnly" : onlyActive ? "true" : "false"]
-//                                      "offset" : startIndex,
-//                                      "limit" : pageSize]
+        let qParams: [String : Any] = ["activeOnly" : onlyActive ? "true" : "false",
+                                      "offset" : startIndex,
+                                      "limit" : pageSize]
         NetworkManager.shared.request(fromEndpoint: .marketplace,
                                       pathParameters: ["select_all_jobs.jsp"],
                                       queryParameters: qParams)
@@ -152,9 +152,9 @@ class Job: Listing {
     }
     
     class func search(for searchTerms: String, startIndex: Int = 0, _ responseHandler: @escaping ([Job]?, Error?) -> Void) {
-        let qParams: [String : Any] = ["title" : searchTerms]
-//                                       "offset" : startIndex,
-//                                       "limit" : pageSize]
+        let qParams: [String : Any] = ["title" : searchTerms,
+                                       "offset" : startIndex,
+                                       "limit" : pageSize]
         NetworkManager.shared.request(fromEndpoint: .marketplace,
                                       pathParameters: ["search_active_job_titles.jsp"],
                                       queryParameters: qParams)

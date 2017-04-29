@@ -24,25 +24,34 @@ class MyListingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let group = DispatchGroup()
+        
+        group.enter()
         Product.retrieve(belongingTo: MarketplaceUser.current!.userId) { (products, error) in
             if let products = products {
                 self.insert(listings: products)
-                self.tableView.reloadData()
+                group.leave()
             }
         }
         
+        group.enter()
         Job.retrieve(belongingTo: MarketplaceUser.current!.userId) { (jobs, error) in
             if let jobs = jobs {
                 self.insert(listings: jobs)
-                self.tableView.reloadData()
+                group.leave()
             }
         }
         
+        group.enter()
         Personal.retrieve(belongingTo: MarketplaceUser.current!.userId) { (personals, error) in
             if let personals = personals {
                 self.insert(listings: personals)
-                self.tableView.reloadData()
+                group.leave()
             }
+        }
+        
+        group.notify(queue: .main) { 
+            self.tableView.reloadData()
         }
         
     }

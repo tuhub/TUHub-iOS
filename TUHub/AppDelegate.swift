@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let console = ConsoleDestination()  // log to Xcode Console
         log.addDestination(console)
+        log.addDestination(FileDestination())
+        
         
         // Set the UIPageControl tint colors for CoursePageViewController (white by default, need to be darker)
         let pageControl: UIPageControl = UIPageControl.appearance(whenContainedInInstancesOf: [CoursePageViewController.self])

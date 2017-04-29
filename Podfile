@@ -14,7 +14,7 @@ target 'TUHub' do
   pod 'SwiftyBeaver', '~> 1.1.0'
   pod 'SKPhotoBrowser', '~> 4.0.0'
   pod 'AEXML', '~> 4.1.0'
-  pod 'Kanna', '~> 2.1.0'
+  pod 'Kanna', '~> 2.2.1'
   pod 'UPCarouselFlowLayout', '~> 1.1.0'
   pod 'TUSafariActivity', '~> 1.0.0'
   pod 'CHTCollectionViewWaterfallLayout', '~> 0.9.0'

@@ -295,35 +295,35 @@ extension ListingsCollectionViewController {
         return cell
     }
     
-//    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        
-//        guard !searchController.isActive else { return }
-//        
-//        if let listing = indexPathController.dataModel?.item(at: indexPath) {
-//            if let product = listing as? Product, let lastProduct = lastProduct  {
-//                if product.id == lastProduct.id {
-//                    loadListings(selection: [.product], startIndex: numRowsProducts)
-//                }
-//            }
-//            else if let job = listing as? Job, let lastJob = lastJob {
-//                if job.id == lastJob.id {
-//                    loadListings(selection: [.job], startIndex: numRowsJobs)
-//                }
-//            }
-//            else if let personal = listing as? Personal, let lastPersonal = lastPersonal {
-//                if personal.id == lastPersonal.id {
-//                    loadListings(selection: [.personal], startIndex: numRowsPersonals)
-//                }
-//            }
-//        }
-//    }
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard !searchController.isActive else { return }
+        
+        let listing = listings[indexPath.row]
+        if let product = listing as? Product, let lastProduct = lastProduct  {
+            if product.id == lastProduct.id {
+                self.lastProduct = nil
+                loadListings(selection: [.product], startIndex: numRowsProducts)
+            }
+        }
+        else if let job = listing as? Job, let lastJob = lastJob {
+            if job.id == lastJob.id {
+                self.lastJob = nil
+                loadListings(selection: [.job], startIndex: numRowsJobs)
+            }
+        }
+        else if let personal = listing as? Personal, let lastPersonal = lastPersonal {
+            if personal.id == lastPersonal.id {
+                self.lastPersonal = nil
+                loadListings(selection: [.personal], startIndex: numRowsPersonals)
+            }
+        }
+    }
     
 }
 
 // MARK: - CHTCollectionViewDelegateWaterfallLayout
 extension ListingsCollectionViewController: CHTCollectionViewDelegateWaterfallLayout {
     func collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAt indexPath: IndexPath!) -> CGSize {
-//        let imageSize = (collectionView.cellForItem(at: indexPath) as? ListingCollectionViewCell)?.imageView?.image?.size
         return imageSizes[indexPath] ?? CGSize(width: 30, height: 40)
     }
 }

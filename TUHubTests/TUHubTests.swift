@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import YelpAPI
 @testable import TUHub
 
 class TUHubTests: XCTestCase {
@@ -20,6 +21,8 @@ class TUHubTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+    
+    // MARK: - Temple API
     
     func testGrades() {
         let asyncExpectation = expectation(description: "testGrades")
@@ -129,16 +132,51 @@ class TUHubTests: XCTestCase {
         
     }
     
-//    func testJobsOfUser() {
-//        let asyncExpectation = expectation(description: "testCourseSearch")
-//        
-//        Job.retrieve
-//        
-//    }
+    func testRetrieveBuildings() {
+        let asyncExpectation = expectation(description: "testRetrieveBuildings")
+        var kCampuses: [Campus]?
+        
+        Campus.retrieveAll { (campuses, error) in
+            kCampuses = campuses
+            if let error = error {
+                log.error(error)
+            }
+            asyncExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 30) { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            
+            XCTAssertNotNil(kCampuses, "Failed to retrieve buildings")
+        }
+    }
     
-// MARK: MarketPlace
+    func testRetrieveNews() {
+        let asyncExpectation = expectation(description: "testRetrieveNews")
+        var kItems: [NewsItem]?
+        
+        NewsItem.retrieve(fromFeeds: NewsItem.Feed.allValues) { (items, error) in
+            if let error = error {
+                log.error(error)
+            }
+            kItems = items
+            asyncExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 30) { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            
+            XCTAssertNotNil(kItems, "Failed to retrieve news items")
+        }
+    }
 
-    func testMarketplaceUser() {
+    // MARK: Marketplace
+
+    func testRetrieveUser() {
         
         let asyncExpectation = expectation(description: "testMarketplaceUser")
         var kMarketUser: MarketplaceUser?
@@ -156,18 +194,17 @@ class TUHubTests: XCTestCase {
                 log.error(error)
             }
             
-            XCTAssertNotNil(kMarketUser, "Failed to retrieve user.\nSign in if you have not already done so.")
+            XCTAssertNotNil(kMarketUser, "Failed to retrieve user.")
         }
         
     }
     
-    // Don't know how to test this, it's always saying "Test Succed" even though I entered wrong user ID
     func testRetrieveProduct() {
         
         let asyncExpectation = expectation(description: "testRetrieveProduct")
         var kProduct: [Product]?
 
-        Product.retrieve(belongingTo: "123") { (products, error) in
+        Product.retrieveAll { (products, error) in
             kProduct = products
             if let error = error {
                 log.error(error)
@@ -180,17 +217,39 @@ class TUHubTests: XCTestCase {
                 log.error(error)
             }
             
-            XCTAssertNotNil(kProduct, "Failed to retrieve product for the user")
+            XCTAssertNotNil(kProduct, "Failed to retrieve products")
         }
         
     }
     
-    // Don't know how to test this, it's always saying "Test Succed" even though I entered wrong user ID
+    func testRetrieveJob() {
+        
+        let asyncExpectation = expectation(description: "testRetrieveJob")
+        var kJobs: [Job]?
+        
+        Job.retrieveAll { (jobs, error) in
+            kJobs = jobs
+            if let error = error {
+                log.error(error)
+            }
+            asyncExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 30) { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            
+            XCTAssertNotNil(kJobs, "Failed to retrieve jobs")
+        }
+        
+    }
+    
     func testRetrievePersonal() {
         let asyncExpectation = expectation(description: "testRetrievePersonal")
         var kPersonal: [Personal]?
         
-        Personal.retrieve(belongingTo: "123") { (personal, error) in
+        Personal.retrieveAll { (personal, error) in
             kPersonal = personal
             if let error = error {
                 log.error(error)
@@ -203,9 +262,9 @@ class TUHubTests: XCTestCase {
                 log.error(error)
             }
             
-            XCTAssertNotNil(kPersonal, "Failed to retrieve product for the user")
+            XCTAssertNotNil(kPersonal, "Failed to retrieve personals")
         }
         
     }
-
+    
 }
