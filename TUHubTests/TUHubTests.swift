@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import YelpAPI
 @testable import TUHub
 
 class TUHubTests: XCTestCase {
