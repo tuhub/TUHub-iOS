@@ -117,9 +117,11 @@ extension MapsSearchResultsTableViewController: UITableViewDelegate {
                     return
                 }
                 if let businesses = search?.businesses {
-                    DispatchQueue.main.async {
-                        self.businesses.append(contentsOf: businesses)
-                        self.tableView.reloadData()
+                    if businesses.count > 0 {
+                        DispatchQueue.main.async {
+                            self.businesses.append(contentsOf: businesses)
+                            self.tableView.reloadData()
+                        }
                     }
                 }
             }
@@ -149,7 +151,6 @@ extension MapsSearchResultsTableViewController: UISearchResultsUpdating {
         guard let searchText = searchController.searchBar.text?.lowercased() else { return }
         
         let group = DispatchGroup()
-        
         
         if let campuses = campuses {
             for campus in campuses {
