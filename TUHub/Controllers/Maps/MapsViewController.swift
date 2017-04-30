@@ -142,7 +142,6 @@ class MapsViewController: UIViewController {
         mapView.delegate = self
         
         // Location manager set up
-        //        locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.pausesLocationUpdatesAutomatically = true
         locationManager.startUpdatingLocation()
@@ -294,14 +293,6 @@ class MapsViewController: UIViewController {
         
         // Add our overlay
         mapView.add(route.polyline)
-        
-        // Zoom out to fit the route on the map
-        //        let top = (navigationController?.navigationBar.frame.height ?? 0) + 44
-        //        let bottom = (tabBarController?.tabBar.frame.height ?? 0) + 44
-        //        let x: CGFloat = 132
-        //        mapView.setVisibleMapRect(route.polyline.boundingMapRect,
-        //                                  edgePadding: UIEdgeInsets(top: top, left: x, bottom: bottom, right: x),
-        //                                  animated: true)
     }
     
     func didTapETAView() {
@@ -409,7 +400,6 @@ extension MapsViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        
         if view.annotation is Location {
             self.performSegue(withIdentifier: mapsDetailSegueID, sender: view.annotation)
         }
