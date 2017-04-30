@@ -151,36 +151,35 @@ extension MapsSearchResultsTableViewController: UISearchResultsUpdating {
         guard let searchText = searchController.searchBar.text?.lowercased() else { return }
         
         let group = DispatchGroup()
+        var results: [(building: Building, index: String.Index)] = []
         
         if let campuses = campuses {
-            for campus in campuses {
-                if let buildings = campus.buildings {
-                    
-                    // Add to dispatch group
-                    group.enter()
-                    DispatchQueue.global(qos: .userInteractive).async {
-                        var results: [(building: Building, index: String.Index)] = []
+            
+            // Add to dispatch group
+            group.enter()
+            DispatchQueue.global(qos: .userInteractive).async {
+                for campus in campuses {
+                    if let buildings = campus.buildings {
                         
                         for building in buildings {
                             if let minIndex = building.name.lowercased().index(of: searchText) {
                                 results.append((building: building, index: minIndex))
                             }
                         }
-                        
-                        results.sort {
-                            if $0.index == $1.index {
-                                return $0.building.name < $1.building.name
-                            }
-                            return $0.index < $1.index
-                        }
-                        
-                        self.buildingResults = results.map { $0.building }
-                        group.leave()
                     }
                 }
-
+                
+                results.sort {
+                    if $0.index == $1.index {
+                        return $0.building.name < $1.building.name
+                    }
+                    return $0.index < $1.index
+                }
+                self.buildingResults = results.map { $0.building }
+                group.leave()
             }
         }
+        
         
         if let region = region {
             let coordinate = YLPCoordinate(latitude: region.center.latitude, longitude: region.center.longitude)
