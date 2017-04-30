@@ -99,7 +99,6 @@
 		7DA6D9591E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9521E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift */; };
 		7DA6D95B1E7F6FC500CD5D02 /* NewsItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9541E7F6FC500CD5D02 /* NewsItemTableViewCell.swift */; };
 		7DA6D9651E7F6FFF00CD5D02 /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D95D1E7F6FFF00CD5D02 /* Date+String.swift */; };
-		7DA6D9661E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D95E1E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift */; };
 		7DA6D9671E7F6FFF00CD5D02 /* JSON+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D95F1E7F6FFF00CD5D02 /* JSON+Date.swift */; };
 		7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9601E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift */; };
 		7DA6D9691E7F6FFF00CD5D02 /* String+Boyer-Moore-Horspool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6D9611E7F6FFF00CD5D02 /* String+Boyer-Moore-Horspool.swift */; };
@@ -238,7 +237,6 @@
 		7DA6D9521E7F6FC500CD5D02 /* NewsHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		7DA6D9541E7F6FC500CD5D02 /* NewsItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsItemTableViewCell.swift; sourceTree = "<group>"; };
 		7DA6D95D1E7F6FFF00CD5D02 /* Date+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
-		7DA6D95E1E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Error+UIAlertViewController.swift"; sourceTree = "<group>"; };
 		7DA6D95F1E7F6FFF00CD5D02 /* JSON+Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSON+Date.swift"; sourceTree = "<group>"; };
 		7DA6D9601E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleAspectFitImageView.swift; sourceTree = "<group>"; };
 		7DA6D9611E7F6FFF00CD5D02 /* String+Boyer-Moore-Horspool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Boyer-Moore-Horspool.swift"; sourceTree = "<group>"; };
@@ -559,7 +557,6 @@
 			isa = PBXGroup;
 			children = (
 				7DA6D95D1E7F6FFF00CD5D02 /* Date+String.swift */,
-				7DA6D95E1E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift */,
 				7DA6D95F1E7F6FFF00CD5D02 /* JSON+Date.swift */,
 				7DA6D9601E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift */,
 				7DA6D9611E7F6FFF00CD5D02 /* String+Boyer-Moore-Horspool.swift */,
@@ -947,7 +944,6 @@
 				7DA6D9571E7F6FC500CD5D02 /* CourseDetailHeaderTableViewCell.swift in Sources */,
 				7DA6D9411E7F6F6800CD5D02 /* CourseDetailTableViewController.swift in Sources */,
 				7D95F8631EAC1E270006C943 /* LinkTableViewCell.swift in Sources */,
-				7DA6D9661E7F6FFF00CD5D02 /* Error+UIAlertViewController.swift in Sources */,
 				7DA6D9551E7F6FC500CD5D02 /* CourseCalendarTableViewCell.swift in Sources */,
 				7D439E031E8D6F4400FF5538 /* ListingsCollectionViewController.swift in Sources */,
 				7DE27BD91E932E3A004C2F83 /* ListingDetailView.swift in Sources */,

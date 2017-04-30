@@ -373,11 +373,6 @@ extension MapsViewController: MKMapViewDelegate {
         
         self.oldRegion = mapView.region
         
-        // Notify the resultsController of the region change
-        if let resultsController = searchController.searchResultsController as? MapsSearchResultsTableViewController {
-            resultsController.region = mapView.region
-        }
-        
         // Remove old annotations
         var businesses = self.businesses
         self.businesses.removeAll(keepingCapacity: false)
@@ -460,6 +455,10 @@ extension MapsViewController: MapsOptionsViewControllerDelegate {
     func didChangeCampus(to campus: Campus) {
         mapView.setRegion(campus.region, animated: true)
         loadBusiness(in: campus.region)
+        // Notify the resultsController of the region change
+        if let resultsController = searchController.searchResultsController as? MapsSearchResultsTableViewController {
+            resultsController.region = campus.region
+        }
     }
     
     func didChangeTransportType(to: MKDirectionsTransportType) {

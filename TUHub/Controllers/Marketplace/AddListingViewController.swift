@@ -8,7 +8,6 @@
 
 import UIKit
 import Eureka
-//import ImageRow
 
 protocol AddListingViewControllerDelegate {
     func didAdd(listing: Listing)
@@ -19,6 +18,7 @@ class AddListingViewController: FormViewController {
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
     var delegate: AddListingViewControllerDelegate?
+    private lazy var lock = NSLock()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -170,7 +170,11 @@ class AddListingViewController: FormViewController {
     }
     
     @IBAction func didPressDone(_ sender: UIBarButtonItem) {
-        // TODO: insert into DB
+        
+        // Prevent multiple posts when the user taps several times quickly
+        guard lock.try() else { return }
+        doneButton.isEnabled = false
+        
         let values = form.values(includeHidden: false)
         var listing: Listing?
         
@@ -257,6 +261,8 @@ class AddListingViewController: FormViewController {
             
         }
         
+        lock.unlock()
+        doneButton.isEnabled = true
         
     }
     

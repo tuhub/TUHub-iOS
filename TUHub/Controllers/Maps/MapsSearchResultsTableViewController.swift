@@ -110,7 +110,7 @@ extension MapsSearchResultsTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.section == 1, indexPath.row == businesses.count - 1, let query = yelpQuery {
             // Load next page of Yelp results
-            query.offset = UInt(indexPath.row)
+            query.offset = UInt(businesses.count)
             yelpClient?.search(with: query) { (search, error) in
                 if let error = error {
                     log.error(error)
@@ -148,7 +148,8 @@ extension MapsSearchResultsTableViewController: UISearchResultsUpdating {
     @available(iOS 8.0, *)
     public func updateSearchResults(for searchController: UISearchController) {
         
-        guard let searchText = searchController.searchBar.text?.lowercased() else { return }
+        guard let searchText = searchController.searchBar.text?.lowercased(), searchText.characters.count > 0 else { return }
+        
         
         let group = DispatchGroup()
         var results: [(building: Building, index: String.Index)] = []
@@ -185,7 +186,7 @@ extension MapsSearchResultsTableViewController: UISearchResultsUpdating {
             let coordinate = YLPCoordinate(latitude: region.center.latitude, longitude: region.center.longitude)
             let query = YLPQuery(coordinate: coordinate)
             query.radiusFilter = Double(Int(region.radius))
-            query.limit = 3
+            query.limit = 15
             query.sort = .bestMatched
             query.term = searchText
             self.yelpQuery = query

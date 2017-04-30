@@ -69,8 +69,14 @@ class SignInTableViewController: UITableViewController {
                 self.showUI()
             }
             
-            if let error = error {
-                error.displayAlertController(from: self)
+            if let error = error as? URLError {
+                let alertController = UIAlertController(title: "Unable to Sign In",
+                                                        message: "Unable to reach Temple's servers. ☹️ Please skip or try signing in again shortly.",
+                                                        preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss",
+                                                        style: .default,
+                                                        handler: nil))
+                self.present(alertController, animated: true, completion: nil)
             }
         }
         
@@ -103,13 +109,11 @@ class SignInTableViewController: UITableViewController {
         if let username = usernameField?.text, let password = passwordField?.text {
             
             User.signIn(username: username, password: password, { (user, error) in
-                
                 if user != nil {
                     self.performSegue(withIdentifier: segueIdentifier, sender: self)
                 } else {
                     self.presentInvalidCredentialsError()
                 }
-                
             })
             
         } else {
