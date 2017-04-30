@@ -18,7 +18,6 @@ class MapsSearchResultsTableViewController: UIViewController {
     var yelpClient: YLPClient?
     var campuses: [Campus]?
     var region: MKCoordinateRegion?
-    var insets: UIEdgeInsets?
     
     lazy var buildingResults: [Building] = []
     lazy var businessResults: [YLPBusiness] = []
@@ -32,18 +31,13 @@ class MapsSearchResultsTableViewController: UIViewController {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
-        
-        if let insets = insets {
-            tableView.contentInset = insets
-        }
     }
     
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        let bottom = presentingViewController?.bottomLayoutGuide.length ?? 0
+        let top = presentingViewController?.topLayoutGuide.length ?? 0
+        self.tableView.contentInset = UIEdgeInsets(top: top, left: 0, bottom: bottom, right: 0)
     }
 
 }

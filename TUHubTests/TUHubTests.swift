@@ -199,6 +199,8 @@ class TUHubTests: XCTestCase {
         
     }
     
+    // MARK: Product
+    
     func testRetrieveProduct() {
         
         let asyncExpectation = expectation(description: "testRetrieveProduct")
@@ -250,6 +252,30 @@ class TUHubTests: XCTestCase {
         
     }
     
+    func testPostProduct() {
+        let asyncExpectation = expectation(description: "testPostProduct")
+        var kListing: Listing?
+        
+        kListing = Product(title: "Product Unit Test", desc: "Test", ownerID: "tue68553", photosDir: nil, price: 2.00)
+        
+        kListing?.post({ (product, error) in
+            if let error = error {
+                log.error(error)
+            }
+            asyncExpectation.fulfill()
+        })
+        
+        waitForExpectations(timeout: 30) { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            
+            XCTAssertNotNil(kListing, "Failed to post listing")
+        }
+    }
+    
+    // MARK: Personal
+    
     func testRetrievePersonal() {
         let asyncExpectation = expectation(description: "testRetrievePersonal")
         var kPersonal: [Personal]?
@@ -272,7 +298,7 @@ class TUHubTests: XCTestCase {
                 log.error(error)
             }
             
-            XCTAssertNotNil(kPersonal, "Failed to retrieve personal for the user")
+            XCTAssertNotNil(kPersonal, "Failed to retrieve personals")
         }
         
     }
@@ -300,9 +326,176 @@ class TUHubTests: XCTestCase {
                 log.error(error)
             }
             
-            XCTAssertNotNil(kPersonal, "Failed to retrieve personals")
+            XCTAssertNotNil(kPersonal, "Failed to retrieve personal search result")
         }
         
     }
     
+    func testPostPersonal() {
+        let asyncExpectation = expectation(description: "testPostPersonal")
+        var kListing: Listing?
+        
+        kListing = Personal(title: "Personal Unit Test", desc: "Test", ownerID: "tue68553", photosDir: nil, location: nil)
+        
+        kListing?.post({ (product, error) in
+            if let error = error {
+                log.error(error)
+            }
+            asyncExpectation.fulfill()
+        })
+        
+        waitForExpectations(timeout: 30) { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            
+            XCTAssertNotNil(kListing, "Failed to post personal")
+        }
+    }
+    
+    
+    // MARK: Job
+    
+    func testJobsOfUser() {
+        let asyncExpectation = expectation(description: "testJobsOfUser")
+        
+        var kJobs: [Job]?
+        
+        Job.retrieve(belongingTo: "tue68553") { (jobs, error) in
+            kJobs = jobs
+            
+            for job in kJobs! {
+                debugPrint("Result: \(job.title)")
+            }
+            
+            if let error = error {
+                log.error(error)
+            }
+            asyncExpectation.fulfill()
+            
+        }
+        
+        waitForExpectations(timeout: 30) { (error) in
+            
+            XCTAssertNotNil(kJobs, "Failed to retrieve jobs.")
+            
+            if let error = error {
+                log.error(error)
+            }
+        }
+    }
+    
+    func testSearchJob() {
+        let asyncExpectation = expectation(description: "testSearchJob")
+        var kJob: [Job]?
+        
+        Job.search(for: "Window", startIndex: 0) { (result, error) in
+            kJob = result
+            
+            for job in kJob! {
+                debugPrint("Result: \(job.title)")
+            }
+            
+            if let error = error {
+                log.error(error)
+            }
+            asyncExpectation.fulfill()
+        }
+        
+        
+        waitForExpectations(timeout: 30) { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            
+            XCTAssertNotNil(kJob, "Failed to retrieve job search result")
+        }
+        
+    }
+    
+    func testPostJob() {
+        let asyncExpectation = expectation(description: "testPostJob")
+        var kListing: Listing?
+        let currentDate = Date()
+        
+        kListing = Job(title: "Job Unit Test", desc: "Test", ownerID: "tue68553", photosDir: nil, location: "Job", hours: 0, pay: 2.00, startDate: currentDate)
+
+        kListing?.post({ (job, error) in
+            if let error = error {
+                log.error(error)
+            }
+            asyncExpectation.fulfill()
+        })
+        
+        waitForExpectations(timeout: 30) { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            
+            XCTAssertNotNil(kListing, "Failed to post job")
+        }
+    }
+
+// MARK: NewsItem
+    
+    func testRetrieveNewsFeed() {
+        let asyncExpectation = expectation(description: "testRetrieveNewsFeed")
+
+        var kNewsItem: [NewsItem]?
+
+        NewsItem.retrieve(fromFeeds: [NewsItem.Feed.students]) { (newsFeed, error) in
+            
+            kNewsItem = newsFeed
+            for feed in kNewsItem! {
+                debugPrint("Result: \(feed.title)")
+            }
+            if let error = error {
+                log.error(error)
+            }
+            asyncExpectation.fulfill()
+
+        }
+        
+        waitForExpectations(timeout: 30) { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            
+            XCTAssertNotNil(kNewsItem, "Failed to retrieve news feed")
+        }
+    }
+    
+    // MARK: Campus
+    
+    func testRetrieveCampus() {
+        let asyncExpectation = expectation(description: "testRetrieveNewsFeed")
+        var kCampus:[Campus]?
+        
+        Campus.retrieveAll { (campus, error) in
+            
+            kCampus = campus
+            for campus in kCampus! {
+                debugPrint("Result: \(campus.name)")
+            }
+            
+            if let error = error {
+                log.error(error)
+            }
+            asyncExpectation.fulfill()
+        }
+        
+
+        
+        waitForExpectations(timeout: 30) { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            
+            XCTAssertNotNil(kCampus, "Failed to retrieve all the campus")
+        }
+
+    }
+
+
+
 }

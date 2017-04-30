@@ -48,6 +48,7 @@ class MapsViewController: UIViewController {
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.searchBarStyle = .minimal
         searchController.searchBar.placeholder = "Search for buildings or businesses"
+        resultsController.delegate = self
         return searchController
     }()
     
@@ -60,11 +61,6 @@ class MapsViewController: UIViewController {
     }()
     
     lazy var loadCampusesFirstTime: Void = {
-        let insets = UIEdgeInsets(top: self.topLayoutGuide.length, left: 0, bottom: self.bottomLayoutGuide.length, right: 0)
-        let resultsController = self.searchController.searchResultsController as? MapsSearchResultsTableViewController
-        resultsController?.insets = insets
-        resultsController?.delegate = self
-        
         // Retrieve campuses and their buildings
         Campus.retrieveAll { (campuses, error) in
             guard error == nil, let campuses = campuses else {
