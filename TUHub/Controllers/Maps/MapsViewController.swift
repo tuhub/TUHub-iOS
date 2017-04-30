@@ -232,25 +232,9 @@ class MapsViewController: UIViewController {
         }
         request.transportType = method
         
-        let directions = MKDirections(request: request)
-        directions.calculate { (response, error) in
-            if let error = error {
-                log.error(error)
-                return
-            }
-            guard let route = response?.routes.first else { return }
-            self.route = route
-            self.routeDestination = location
-            self.plotPolyline(of: route)
-            
-            let etaView = ETAView.instanceFromNib()
-            
-            var transportMethod: MKDirectionsTransportType = .walking
-            if let saved = UserDefaults.standard.object(forKey: defaultTransportMethodKey) as? Int {
-                transportMethod = MKDirectionsTransportType(rawValue: UInt(saved))
-            }
+        func accessoryView(forType transportType: MKDirectionsTransportType, travelTime: TimeInterval) -> UIView {
             var image: UIImage!
-            switch transportMethod {
+            switch transportType {
             case MKDirectionsTransportType.walking:
                 image = #imageLiteral(resourceName: "WalkIcon")
             case MKDirectionsTransportType.automobile:
@@ -260,15 +244,46 @@ class MapsViewController: UIViewController {
             default:
                 log.error("Invalid transportation method")
             }
+            
+            let etaView = ETAView.instanceFromNib()
             etaView.transportMethodImageView.image = image
-            etaView.estimateLabel.text = self.dateComponentsFormatter.string(from: route.expectedTravelTime)
+            etaView.estimateLabel.text = self.dateComponentsFormatter.string(from: travelTime)
             
             let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTapETAView))
             etaView.addGestureRecognizer(tapRecognizer)
             
-            let annotationView = self.mapView.view(for: location)
-            annotationView?.leftCalloutAccessoryView = etaView
+            return etaView
         }
+        
+        let directions = MKDirections(request: request)
+        
+        // Directions not available for transit yet, so just get the ETA for transit
+        if method == .transit {
+            directions.calculateETA { (response, error) in
+                if let error = error {
+                    log.error(error)
+                    return
+                }
+                
+                guard let time = response?.expectedTravelTime else { return }
+                let annotationView = self.mapView.view(for: location)
+                annotationView?.leftCalloutAccessoryView = accessoryView(forType: method, travelTime: time)
+            }
+        } else {
+            directions.calculate { (response, error) in
+                if let error = error {
+                    log.error(error)
+                    return
+                }
+                guard let route = response?.routes.first else { return }
+                self.route = route
+                self.routeDestination = location
+                self.plotPolyline(of: route)
+                let annotationView = self.mapView.view(for: location)
+                annotationView?.leftCalloutAccessoryView = accessoryView(forType: method, travelTime: route.expectedTravelTime)
+            }
+        }
+        
     }
     
     func plotPolyline(of route: MKRoute) {
