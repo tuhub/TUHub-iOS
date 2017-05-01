@@ -19,7 +19,6 @@ target 'TUHub' do
   pod 'TUSafariActivity', '~> 1.0.0'
   pod 'CHTCollectionViewWaterfallLayout', '~> 0.9.0'
   pod 'Eureka', '~> 2.0.1'
-  pod 'AWSS3', '~> 2.5.0'
   pod 'YelpAPI', :git => "https://github.com/ConnorDCrawford/yelp-ios.git"
   pod 'ISHHoverBar', '~> 1.0.1'
   pod 'Cosmos', '~> 9.0.0'

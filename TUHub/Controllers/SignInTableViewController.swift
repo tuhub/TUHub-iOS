@@ -69,7 +69,7 @@ class SignInTableViewController: UITableViewController {
                 self.showUI()
             }
             
-            if let error = error as? URLError {
+            if error is URLError {
                 let alertController = UIAlertController(title: "Unable to Sign In",
                                                         message: "Unable to reach Temple's servers. ☹️ Please skip or try signing in again shortly.",
                                                         preferredStyle: UIAlertControllerStyle.alert)

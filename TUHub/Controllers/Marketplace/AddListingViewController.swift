@@ -232,8 +232,7 @@ class AddListingViewController: FormViewController {
             
             
             if let dir = listing.photosDirectory, let photos = photos {
-                AWS.upload(folder: dir, images: photos) { error in
-                    
+                Listing.upload(images: photos, toFolder: dir) { (error) in
                     defer { self.delegate?.didAdd(listing: listing)}
                     
                     if error != nil {
@@ -252,7 +251,6 @@ class AddListingViewController: FormViewController {
                     } else {
                         self.dismiss(animated: true, completion: nil)
                     }
-                    
                 }
             } else {
                 self.delegate?.didAdd(listing: listing)

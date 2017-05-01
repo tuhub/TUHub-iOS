@@ -75,7 +75,9 @@ class Listing {
         let params: [String : Any] = ["list-type" : 2,
                                       "x-amz-date" : s3DateFormatter.string(from: Date()),
                                       "prefix" : prefix]
-        return Alamofire.request(AWS.bucketURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { (data) in
+        let bucketURL = NetworkManager.Endpoint.s3.rawValue
+        
+        return Alamofire.request(bucketURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { (data) in
             var filePaths: [String]?
             guard let xmlData = data.result.value else { return }
             defer { responseHandler(filePaths, data.error) }
@@ -87,7 +89,7 @@ class Listing {
                     if filePaths == nil {
                         filePaths = []
                     }
-                    filePaths!.append("\(AWS.bucketURL)/\(item["Key"].string)")
+                    filePaths!.append("\(bucketURL)/\(item["Key"].string)")
                 }
                 self.imageURLs = filePaths
             } catch {
@@ -113,6 +115,32 @@ class Listing {
     
     func update(_ responseHandler: @escaping (_ error: Error?) -> Void) {
         fatalError("Function not implemented in Listing supertype")
+    }
+    
+    class func upload(images: [UIImage], toFolder folderName: String, _ responseHandler: @escaping (Error?) -> Void) {
+        
+        guard images.count > 0 else { responseHandler(nil); return }
+        
+        let dispatchGroup = DispatchGroup()
+        var error: Error?
+        
+        for (i, image) in images.enumerated() {
+            if let data = UIImageJPEGRepresentation(image, 0.3), let url = URL(string: "\(NetworkManager.Endpoint.s3.rawValue)/\(folderName)/\(i).jpeg") {
+                
+                dispatchGroup.enter()
+                Alamofire.upload(data, to: url, method: .put, headers: ["Content-Type" : "image/jpeg"]).response { (response) in
+                    if let e = response.error {
+                        error = e
+                    }
+                    dispatchGroup.leave()
+                }
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) { 
+            responseHandler(error)
+        }
+        
     }
     
 }

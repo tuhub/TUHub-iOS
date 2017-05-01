@@ -20,7 +20,6 @@
 		7D043A671E5BF7EF0003A853 /* TUHubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A661E5BF7EF0003A853 /* TUHubTests.swift */; };
 		7D043A721E5BF7EF0003A853 /* TUHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D043A711E5BF7EF0003A853 /* TUHubUITests.swift */; };
 		7D33C2151E9974D300101751 /* ImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33C2141E9974D300101751 /* ImageCollection.swift */; };
-		7D33C2171E99754F00101751 /* AWS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33C2161E99754F00101751 /* AWS.swift */; };
 		7D439E031E8D6F4400FF5538 /* ListingsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D439E021E8D6F4400FF5538 /* ListingsCollectionViewController.swift */; };
 		7D48E1221E9212B6000981D8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48E1211E9212B6000981D8 /* Product.swift */; };
 		7D48E1261E92B802000981D8 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48E1251E92B802000981D8 /* TextViewTableViewCell.swift */; };
@@ -157,7 +156,6 @@
 		7D043A711E5BF7EF0003A853 /* TUHubUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TUHubUITests.swift; sourceTree = "<group>"; };
 		7D043A731E5BF7EF0003A853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D33C2141E9974D300101751 /* ImageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCollection.swift; path = Models/ImageCollection.swift; sourceTree = "<group>"; };
-		7D33C2161E99754F00101751 /* AWS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWS.swift; sourceTree = "<group>"; };
 		7D439E021E8D6F4400FF5538 /* ListingsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsCollectionViewController.swift; sourceTree = "<group>"; };
 		7D48E1211E9212B6000981D8 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Product.swift; path = Models/Product.swift; sourceTree = "<group>"; };
 		7D48E1251E92B802000981D8 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextViewTableViewCell.swift; path = Marketplace/TextViewTableViewCell.swift; sourceTree = "<group>"; };
@@ -567,7 +565,6 @@
 				7D9279FC1E836CCB00E8773F /* CarouselFlowLayout.swift */,
 				7DCC7F1A1E9454E900714100 /* UITableView+UIActivityIndicator.swift */,
 				7D8A1A5D1E982E01006401A1 /* CurrencyFormatter.swift */,
-				7D33C2161E99754F00101751 /* AWS.swift */,
 				7D7E0E421E9D9929007A1D16 /* YLPClient+Secret.swift */,
 				7DDB0BDF1EA8666A001B5DE5 /* TableViewDisplayable.swift */,
 				7D6E2E7F1EA917A100A7DBB2 /* StreetViewAPI.swift */,
@@ -901,7 +898,6 @@
 				7DA6D9581E7F6FC500CD5D02 /* NewsBodyTableViewCell.swift in Sources */,
 				7DA6D9681E7F6FFF00CD5D02 /* ScaleAspectFitImageView.swift in Sources */,
 				7D942B8C1EA003D400EEB312 /* MapsOptionsViewController.swift in Sources */,
-				7D33C2171E99754F00101751 /* AWS.swift in Sources */,
 				7DCC7F1B1E9454E900714100 /* UITableView+UIActivityIndicator.swift in Sources */,
 				225A66051E8EA7760063337A /* ListingDetailTableViewController.swift in Sources */,
 				7D4E57F61E9211AD000B7719 /* Personal.swift in Sources */,
@@ -1132,7 +1128,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CCFC4770C367EB96D432EF86 /* Pods-TUHub.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1147,10 +1143,6 @@
 					"$(inherited)",
 					"-framework",
 					"\"AEXML\"",
-					"-framework",
-					"\"AWSCore\"",
-					"-framework",
-					"\"AWSS3\"",
 					"-framework",
 					"\"Alamofire\"",
 					"-framework",
@@ -1194,7 +1186,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 806A184B82A477E750A74ED6 /* Pods-TUHub.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1209,10 +1201,6 @@
 					"$(inherited)",
 					"-framework",
 					"\"AEXML\"",
-					"-framework",
-					"\"AWSCore\"",
-					"-framework",
-					"\"AWSS3\"",
 					"-framework",
 					"\"Alamofire\"",
 					"-framework",

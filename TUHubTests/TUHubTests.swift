@@ -496,6 +496,26 @@ class TUHubTests: XCTestCase {
 
     }
 
-
+    func testImageUpload() {
+        let asyncExpectation = expectation(description: "uploadImage")
+        
+        let images: [UIImage] = [#imageLiteral(resourceName: "TransitIcon"), #imageLiteral(resourceName: "CarIcon")]
+        var kError: Error?
+        
+        Listing.upload(images: images, toFolder: "test123") { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            kError = error
+            asyncExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 30) { (error) in
+            if let error = error {
+                log.error(error)
+            }
+            XCTAssertNil(kError, "Image upload unsuccessful")
+        }
+    }
 
 }
