@@ -1,4 +1,4 @@
-![TUHUb - iOS]
+# TUHUb - iOS
 
 - [Features](#features)
 - [Requirements](#requirements)
@@ -13,7 +13,6 @@
 - [x] Export your courses to your calendar
 - [x] Find and post items, jobs, and more on the Marketplace
 - [x] Explore, search for, and get directions to Temple's buildings and businesses around campus
-- [x] cURL Command Output
 - [x] Explore and read the latest Temple news
 - [x] And much more!
 
@@ -33,7 +32,7 @@ $ gem install cocoapods
 
 > CocoaPods 1.2.0+ is required to build TUHub.
 
-After installing Cocoapods, run the following command:
+After installing Cocoapods, run the following command in TUHub's root directory:
 
 ```bash
 $ pod install
