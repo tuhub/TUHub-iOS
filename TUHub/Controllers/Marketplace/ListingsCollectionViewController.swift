@@ -24,6 +24,7 @@ class ListingsCollectionViewController: UICollectionViewController {
     
     @IBOutlet weak var composeButton: UIBarButtonItem!
     @IBOutlet weak var meButton: UIBarButtonItem!
+    @IBOutlet weak var filterButton: UIBarButtonItem!
 
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
@@ -115,6 +116,7 @@ class ListingsCollectionViewController: UICollectionViewController {
             self.composeButton.isEnabled = true
             self.meButton.isEnabled = true
         }
+        filterButton.image = #imageLiteral(resourceName: "FilterIcon")
     }
     
     func refreshListings() {

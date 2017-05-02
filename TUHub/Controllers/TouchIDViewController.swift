@@ -53,9 +53,8 @@ class TouchIDViewController: UIViewController {
             
             context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) {
                 (success, authenticationError) in
-                
                 if success {
-                    self.dismiss(animated: false, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
                 } else {
                     self.performSegue(withIdentifier: "unwindToSignIn", sender: self)
                 }

@@ -14,8 +14,8 @@ import SKPhotoBrowser
 
 class ListingDetailTableViewController: UIViewController {
     
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var visualEffectView: UIVisualEffectView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
     @IBOutlet weak var contactButton: UIButton!
     @IBOutlet weak var editButton: UIBarButtonItem!
     

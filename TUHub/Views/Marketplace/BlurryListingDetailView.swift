@@ -9,6 +9,6 @@
 import UIKit
 
 class BlurryListingDetailView: UIVisualEffectView {
-    @IBOutlet var textLabel: UILabel!
-    @IBOutlet var detailTextLabel: UILabel!
+    @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var detailTextLabel: UILabel!
 }

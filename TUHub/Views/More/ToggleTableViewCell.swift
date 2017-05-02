@@ -10,6 +10,6 @@ import UIKit
 
 class ToggleTableViewCell: UITableViewCell {
 
-    @IBOutlet var toggle: UISwitch!
+    @IBOutlet weak var toggle: UISwitch!
 
 }

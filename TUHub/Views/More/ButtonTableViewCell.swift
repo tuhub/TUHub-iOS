@@ -10,6 +10,6 @@ import UIKit
 
 class ButtonTableViewCell: UITableViewCell {
 
-    @IBOutlet var button: UIButton!
+    @IBOutlet weak var button: UIButton!
 
 }

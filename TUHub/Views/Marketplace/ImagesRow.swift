@@ -53,7 +53,7 @@ public protocol ImagesCellDelegate {
 
 public final class ImagesCell: Cell<ImageCollection>, CellType, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    @IBOutlet var collectionView: UICollectionView?
+    @IBOutlet weak var collectionView: UICollectionView?
     
     public fileprivate(set) var images: ImageCollection?
     var delegate: ImagesCellDelegate?

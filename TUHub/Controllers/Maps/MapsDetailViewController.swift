@@ -21,7 +21,7 @@ private let hoursCellID = "hoursCell"
 
 class MapsDetailViewController: UIViewController {
     
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     @IBOutlet weak var directionsButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!

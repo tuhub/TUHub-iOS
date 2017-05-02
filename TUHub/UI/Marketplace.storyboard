@@ -345,6 +345,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="composeButton" destination="6t3-wp-X3b" id="Wa0-CI-bCK"/>
+                        <outlet property="filterButton" destination="neX-XP-S8p" id="zaz-n1-dGo"/>
                         <outlet property="meButton" destination="Kqa-4o-BT3" id="V1D-Pr-tCl"/>
                     </connections>
                 </collectionViewController>
@@ -601,7 +602,7 @@
         <image name="MeIcon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="O3t-pO-all"/>
+        <segue reference="roX-It-gh3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61960784310000006" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>
