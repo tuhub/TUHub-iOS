@@ -1,4 +1,4 @@
-# TUHUb - iOS
+# TUHub - iOS
 
 - [Features](#features)
 - [Requirements](#requirements)
