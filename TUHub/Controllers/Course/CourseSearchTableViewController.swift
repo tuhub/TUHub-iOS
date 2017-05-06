@@ -50,7 +50,6 @@ class CourseSearchTableViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        
         searchBar.delegate = self
         
         if User.current != nil {
@@ -84,7 +83,6 @@ class CourseSearchTableViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        searchBar.becomeFirstResponder()
     }
     
     override func viewWillLayoutSubviews() {
@@ -291,7 +289,15 @@ extension CourseSearchTableViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         NetworkManager.shared.cancelAllRequests(for: .courseSearch)
-        navigationController?.dismiss(animated: true, completion: nil)
+        
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       options: .transitionFlipFromBottom,
+                       animations: { self.view.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height) },
+                       completion: { _ in
+                        self.navigationController?.dismiss(animated: true, completion: nil)
+        })
+        
     }
     
 }
