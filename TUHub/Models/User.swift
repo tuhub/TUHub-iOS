@@ -195,24 +195,24 @@ extension User {
             }
             
             // Retrieve grades and associate with their corresponding course
-            self.retrieveGrades() { (gradeTerms, error) in
+            self.retrieveGrades { (gradeTerms, error) in
                 guard var gradeTerms = gradeTerms else {
                         responseHandler?(courseTerms, error)
                         return
                 }
-                var courseTerms = courseTerms.sorted { $0.startDate > $1.startDate }
+                let courseTerms = courseTerms.sorted { $0.startDate > $1.startDate }
                 gradeTerms.sort(by: { $0.startDate > $1.startDate })
                 
-                for (index, gradeTerm) in gradeTerms.enumerated() {
+                for gradeTerm in gradeTerms {
+                    // Find the matching semester in the list of semesters
+                    guard let matchingTerm = courseTerms.first(where: { $0.id == gradeTerm.id }) else { continue }
                     
-                    // Get each corresponding term's courses
-                    
-                    let courses = courseTerms[index].courses.sorted(by: { $0.sectionID < $1.sectionID })
-                    let gradeCourses = gradeTerm.courses.sorted(by: { $0.sectionID < $1.sectionID })
-                    for (i, gradeCourse) in gradeCourses.enumerated() {
-                        courses[i].grades = gradeCourse.grades
+                    for gradeCourse in gradeTerm.courses {
+                        // Find the matching course in the semester's list of courses
+                        guard let matchingCourse = matchingTerm.courses.first(where: { $0.sectionID == gradeCourse.sectionID }) else { continue }
+                        matchingCourse.grades = gradeCourse.grades
                     }
-                    courseTerms[index].courses = courses
+                    
                 }
                 
                 self.terms = courseTerms
